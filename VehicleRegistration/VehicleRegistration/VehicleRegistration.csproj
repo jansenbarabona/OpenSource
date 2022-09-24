@@ -1,0 +1,2241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{99CD7F9E-E354-493B-AAE4-F12DBA18A157}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VehicleRegistration</RootNamespace>
+    <AssemblyName>VehicleRegistration</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ClosedXML, Version=0.94.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.94.2\lib\net40\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPPlus, Version=5.0.4.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.5.0.4\lib\net45\EPPlus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ExcelDataReader, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.3.6.0\lib\net45\ExcelDataReader.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.DataSet.3.6.0\lib\net35\ExcelDataReader.DataSet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.3.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.3\lib\net20\ExcelNumberFormat.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FastMember, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FastMember.1.3.0\lib\net45\FastMember.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.0.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.0.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.0.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.0.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.0.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.DataVisualization.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.Design.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.ProcessingObjectModel.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebDesign, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.WebDesign.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.WebForms.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.WinForms.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.11.0.1\lib\net20\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="ZohoMail, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>ReferenceObject\ZohoMail.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.1\nativeBinaries\x64\msvcr100.dll">
+      <Link>SqlServerTypes\x64\msvcr100.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.1\nativeBinaries\x64\SqlServerSpatial110.dll">
+      <Link>SqlServerTypes\x64\SqlServerSpatial110.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.1\nativeBinaries\x86\msvcr100.dll">
+      <Link>SqlServerTypes\x86\msvcr100.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.1\nativeBinaries\x86\SqlServerSpatial110.dll">
+      <Link>SqlServerTypes\x86\SqlServerSpatial110.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Logos\Charter_Ping_An_Logo.png" />
+    <Content Include="Logos\ford.png" />
+    <Content Include="Logos\Honda.png" />
+    <Content Include="Logos\LTOLogo.png" />
+    <Content Include="Logos\malayan-logo.png" />
+    <Content Include="Logos\Mitsubishi_Motors_logo.jpg" />
+    <Content Include="Logos\nissan-logo.png" />
+    <Content Include="Logos\ParamountLogo.png" />
+    <Content Include="Logos\plgic-app-logo.png" />
+    <Content Include="Logos\toyota-logo.png" />
+    <Content Include="Logos\toyota-logo2.png" />
+    <Content Include="Logos\Toyota.jpg" />
+    <Content Include="Logos\wheeltek.png" />
+    <Content Include="MailBody\WalletThreshold.html" />
+    <Content Include="MailBody\LTOPlateMailBody.html" />
+    <Content Include="MailBody\LTOStatus.html" />
+    <Content Include="MailBody\ForgotPassword.html" />
+    <Content Include="MailBody\PNPMailBody.html" />
+    <Content Include="Models\VRSystem.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>VRSystem.edmx</DependentUpon>
+      <LastGenOutput>VRSystem.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\VRSystem.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>VRSystem.edmx</DependentUpon>
+      <LastGenOutput>VRSystem.cs</LastGenOutput>
+    </Content>
+    <Content Include="ReferenceObject\ZohoMail.dll" />
+    <Content Include="scripts\Additional\css\_layout.css" />
+    <Content Include="scripts\Additional\css\_layout2.min.css" />
+    <Content Include="scripts\Additional\css\_layout.min.css" />
+    <Content Include="scripts\Additional\fancybox-master\dist\jquery.fancybox.css" />
+    <Content Include="scripts\Additional\fancybox-master\dist\jquery.fancybox.js" />
+    <Content Include="scripts\Additional\fancybox-master\dist\jquery.fancybox.min.css" />
+    <Content Include="scripts\Additional\fancybox-master\dist\jquery.fancybox.min.js" />
+    <Content Include="scripts\Additional\fancybox-master\docs\index.html" />
+    <Content Include="scripts\Additional\fancybox-master\src\css\core.css" />
+    <Content Include="scripts\Additional\fancybox-master\src\css\fullscreen.css" />
+    <Content Include="scripts\Additional\fancybox-master\src\css\share.css" />
+    <Content Include="scripts\Additional\fancybox-master\src\css\slideshow.css" />
+    <Content Include="scripts\Additional\fancybox-master\src\css\thumbs.css" />
+    <Content Include="scripts\Additional\fancybox-master\src\js\core.js" />
+    <Content Include="scripts\Additional\fancybox-master\src\js\fullscreen.js" />
+    <Content Include="scripts\Additional\fancybox-master\src\js\guestures.js" />
+    <Content Include="scripts\Additional\fancybox-master\src\js\hash.js" />
+    <Content Include="scripts\Additional\fancybox-master\src\js\media.js" />
+    <Content Include="scripts\Additional\fancybox-master\src\js\share.js" />
+    <Content Include="scripts\Additional\fancybox-master\src\js\slideshow.js" />
+    <Content Include="scripts\Additional\fancybox-master\src\js\thumbs.js" />
+    <Content Include="scripts\Additional\fancybox-master\src\js\wheel.js" />
+    <Content Include="scripts\Additional\jquery-ui-1.11.4\external\jquery\jquery.js" />
+    <Content Include="scripts\Additional\jquery-ui-1.11.4\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="scripts\Additional\jquery-ui-1.11.4\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="scripts\Additional\jquery-ui-1.11.4\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="scripts\Additional\jquery-ui-1.11.4\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="scripts\Additional\jquery-ui-1.11.4\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="scripts\Additional\jquery-ui-1.11.4\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="scripts\Additional\jquery-ui-1.11.4\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="scripts\Additional\jquery-ui-1.11.4\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="scripts\Additional\jquery-ui-1.11.4\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="scripts\Additional\jquery-ui-1.11.4\images\ui-icons_222222_256x240.png" />
+    <Content Include="scripts\Additional\jquery-ui-1.11.4\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="scripts\Additional\jquery-ui-1.11.4\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="scripts\Additional\jquery-ui-1.11.4\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="scripts\Additional\jquery-ui-1.11.4\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="scripts\Additional\jquery-ui-1.11.4\jquery-ui.css" />
+    <Content Include="scripts\Additional\jquery-ui-1.11.4\jquery-ui.js" />
+    <Content Include="scripts\Additional\jquery-ui-1.11.4\jquery-ui.min.css" />
+    <Content Include="scripts\Additional\jquery-ui-1.11.4\jquery-ui.min.js" />
+    <Content Include="scripts\Additional\jquery-ui-1.11.4\jquery-ui.structure.css" />
+    <Content Include="scripts\Additional\jquery-ui-1.11.4\jquery-ui.structure.min.css" />
+    <Content Include="scripts\Additional\jquery-ui-1.11.4\jquery-ui.theme.css" />
+    <Content Include="scripts\Additional\jquery-ui-1.11.4\jquery-ui.theme.min.css" />
+    <Content Include="scripts\Additional\js\popper.min.js" />
+    <Content Include="scripts\Additional\lightbox2\dist\css\lightbox.css" />
+    <Content Include="scripts\Additional\lightbox2\dist\css\lightbox.min.css" />
+    <Content Include="scripts\Additional\lightbox2\dist\images\close.png" />
+    <Content Include="scripts\Additional\lightbox2\dist\images\loading.gif" />
+    <Content Include="scripts\Additional\lightbox2\dist\images\next.png" />
+    <Content Include="scripts\Additional\lightbox2\dist\images\prev.png" />
+    <Content Include="scripts\Additional\lightbox2\dist\js\lightbox-plus-jquery.js" />
+    <Content Include="scripts\Additional\lightbox2\dist\js\lightbox-plus-jquery.min.js" />
+    <Content Include="scripts\Additional\lightbox2\dist\js\lightbox.js" />
+    <Content Include="scripts\Additional\lightbox2\dist\js\lightbox.min.js" />
+    <Content Include="scripts\Additional\lightbox2\examples\index.html" />
+    <Content Include="scripts\Additional\lightbox2\src\css\lightbox.css" />
+    <Content Include="scripts\Additional\lightbox2\src\images\close.png" />
+    <Content Include="scripts\Additional\lightbox2\src\images\loading.gif" />
+    <Content Include="scripts\Additional\lightbox2\src\images\next.png" />
+    <Content Include="scripts\Additional\lightbox2\src\images\prev.png" />
+    <Content Include="scripts\Additional\lightbox2\src\js\lightbox.js" />
+    <Content Include="scripts\Additional\progress-tracker\docs\scripts\site.js" />
+    <Content Include="scripts\Additional\progress-tracker\docs\styles\progress-tracker.css" />
+    <Content Include="scripts\Additional\progress-tracker\docs\styles\site.css" />
+    <Content Include="scripts\Admin_temp\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
+    <Content Include="scripts\Admin_temp\bootstrap-colorpicker\css\bootstrap-colorpicker.min.css" />
+    <Content Include="scripts\Admin_temp\bootstrap-colorpicker\js\bootstrap-colorpicker.js" />
+    <Content Include="scripts\Admin_temp\bootstrap-colorpicker\js\bootstrap-colorpicker.min.js" />
+    <Content Include="scripts\Admin_temp\bootstrap-slider\bootstrap-slider.js" />
+    <Content Include="scripts\Admin_temp\bootstrap-slider\bootstrap-slider.min.js" />
+    <Content Include="scripts\Admin_temp\bootstrap-slider\css\bootstrap-slider.css" />
+    <Content Include="scripts\Admin_temp\bootstrap-slider\css\bootstrap-slider.min.css" />
+    <Content Include="scripts\Admin_temp\bootstrap-switch\css\bootstrap2\bootstrap-switch.css" />
+    <Content Include="scripts\Admin_temp\bootstrap-switch\css\bootstrap2\bootstrap-switch.min.css" />
+    <Content Include="scripts\Admin_temp\bootstrap-switch\css\bootstrap3\bootstrap-switch.css" />
+    <Content Include="scripts\Admin_temp\bootstrap-switch\css\bootstrap3\bootstrap-switch.min.css" />
+    <Content Include="scripts\Admin_temp\bootstrap-switch\js\bootstrap-switch.js" />
+    <Content Include="scripts\Admin_temp\bootstrap-switch\js\bootstrap-switch.min.js" />
+    <Content Include="scripts\Admin_temp\bootstrap4-duallistbox\bootstrap-duallistbox.css" />
+    <Content Include="scripts\Admin_temp\bootstrap4-duallistbox\bootstrap-duallistbox.min.css" />
+    <Content Include="scripts\Admin_temp\bootstrap4-duallistbox\jquery.bootstrap-duallistbox.js" />
+    <Content Include="scripts\Admin_temp\bootstrap4-duallistbox\jquery.bootstrap-duallistbox.min.js" />
+    <Content Include="scripts\Admin_temp\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="scripts\Admin_temp\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="scripts\Admin_temp\bootstrap\js\bootstrap.js" />
+    <Content Include="scripts\Admin_temp\bootstrap\js\bootstrap.min.js" />
+    <Content Include="scripts\Admin_temp\bs-custom-file-input\bs-custom-file-input.js" />
+    <Content Include="scripts\Admin_temp\bs-custom-file-input\bs-custom-file-input.min.js" />
+    <Content Include="scripts\Admin_temp\chart.js\Chart.bundle.js" />
+    <Content Include="scripts\Admin_temp\chart.js\Chart.bundle.min.js" />
+    <Content Include="scripts\Admin_temp\chart.js\Chart.css" />
+    <Content Include="scripts\Admin_temp\chart.js\Chart.js" />
+    <Content Include="scripts\Admin_temp\chart.js\Chart.min.css" />
+    <Content Include="scripts\Admin_temp\chart.js\Chart.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-autofill\css\autoFill.bootstrap4.css" />
+    <Content Include="scripts\Admin_temp\datatables-autofill\css\autoFill.bootstrap4.min.css" />
+    <Content Include="scripts\Admin_temp\datatables-autofill\js\autoFill.bootstrap4.js" />
+    <Content Include="scripts\Admin_temp\datatables-autofill\js\autoFill.bootstrap4.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-autofill\js\dataTables.autoFill.js" />
+    <Content Include="scripts\Admin_temp\datatables-autofill\js\dataTables.autoFill.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-bs4\css\dataTables.bootstrap4.css" />
+    <Content Include="scripts\Admin_temp\datatables-bs4\css\dataTables.bootstrap4.min.css" />
+    <Content Include="scripts\Admin_temp\datatables-bs4\js\dataTables.bootstrap4.js" />
+    <Content Include="scripts\Admin_temp\datatables-bs4\js\dataTables.bootstrap4.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-buttons\css\buttons.bootstrap4.css" />
+    <Content Include="scripts\Admin_temp\datatables-buttons\css\buttons.bootstrap4.min.css" />
+    <Content Include="scripts\Admin_temp\datatables-buttons\js\buttons.bootstrap4.js" />
+    <Content Include="scripts\Admin_temp\datatables-buttons\js\buttons.bootstrap4.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-buttons\js\buttons.colVis.js" />
+    <Content Include="scripts\Admin_temp\datatables-buttons\js\buttons.colVis.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-buttons\js\buttons.flash.js" />
+    <Content Include="scripts\Admin_temp\datatables-buttons\js\buttons.flash.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-buttons\js\buttons.html5.js" />
+    <Content Include="scripts\Admin_temp\datatables-buttons\js\buttons.html5.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-buttons\js\buttons.print.js" />
+    <Content Include="scripts\Admin_temp\datatables-buttons\js\buttons.print.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-buttons\js\dataTables.buttons.js" />
+    <Content Include="scripts\Admin_temp\datatables-buttons\js\dataTables.buttons.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-colreorder\css\colReorder.bootstrap4.css" />
+    <Content Include="scripts\Admin_temp\datatables-colreorder\css\colReorder.bootstrap4.min.css" />
+    <Content Include="scripts\Admin_temp\datatables-colreorder\js\colReorder.bootstrap4.js" />
+    <Content Include="scripts\Admin_temp\datatables-colreorder\js\colReorder.bootstrap4.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-colreorder\js\dataTables.colReorder.js" />
+    <Content Include="scripts\Admin_temp\datatables-colreorder\js\dataTables.colReorder.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-fixedcolumns\css\fixedColumns.bootstrap4.css" />
+    <Content Include="scripts\Admin_temp\datatables-fixedcolumns\css\fixedColumns.bootstrap4.min.css" />
+    <Content Include="scripts\Admin_temp\datatables-fixedcolumns\js\dataTables.fixedColumns.js" />
+    <Content Include="scripts\Admin_temp\datatables-fixedcolumns\js\dataTables.fixedColumns.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-fixedcolumns\js\fixedColumns.bootstrap4.js" />
+    <Content Include="scripts\Admin_temp\datatables-fixedcolumns\js\fixedColumns.bootstrap4.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-fixedheader\css\fixedHeader.bootstrap4.css" />
+    <Content Include="scripts\Admin_temp\datatables-fixedheader\css\fixedHeader.bootstrap4.min.css" />
+    <Content Include="scripts\Admin_temp\datatables-fixedheader\js\dataTables.fixedHeader.js" />
+    <Content Include="scripts\Admin_temp\datatables-fixedheader\js\dataTables.fixedHeader.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-fixedheader\js\fixedHeader.bootstrap4.js" />
+    <Content Include="scripts\Admin_temp\datatables-fixedheader\js\fixedHeader.bootstrap4.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-keytable\css\keyTable.bootstrap4.css" />
+    <Content Include="scripts\Admin_temp\datatables-keytable\css\keyTable.bootstrap4.min.css" />
+    <Content Include="scripts\Admin_temp\datatables-keytable\js\dataTables.keyTable.js" />
+    <Content Include="scripts\Admin_temp\datatables-keytable\js\dataTables.keyTable.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-keytable\js\keyTable.bootstrap4.js" />
+    <Content Include="scripts\Admin_temp\datatables-keytable\js\keyTable.bootstrap4.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-responsive\css\responsive.bootstrap4.css" />
+    <Content Include="scripts\Admin_temp\datatables-responsive\css\responsive.bootstrap4.min.css" />
+    <Content Include="scripts\Admin_temp\datatables-responsive\js\dataTables.responsive.js" />
+    <Content Include="scripts\Admin_temp\datatables-responsive\js\dataTables.responsive.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-responsive\js\responsive.bootstrap4.js" />
+    <Content Include="scripts\Admin_temp\datatables-responsive\js\responsive.bootstrap4.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-rowgroup\css\rowGroup.bootstrap4.css" />
+    <Content Include="scripts\Admin_temp\datatables-rowgroup\css\rowGroup.bootstrap4.min.css" />
+    <Content Include="scripts\Admin_temp\datatables-rowgroup\js\dataTables.rowGroup.js" />
+    <Content Include="scripts\Admin_temp\datatables-rowgroup\js\dataTables.rowGroup.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-rowgroup\js\rowGroup.bootstrap4.js" />
+    <Content Include="scripts\Admin_temp\datatables-rowgroup\js\rowGroup.bootstrap4.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-rowreorder\css\rowReorder.bootstrap4.css" />
+    <Content Include="scripts\Admin_temp\datatables-rowreorder\css\rowReorder.bootstrap4.min.css" />
+    <Content Include="scripts\Admin_temp\datatables-rowreorder\js\dataTables.rowReorder.js" />
+    <Content Include="scripts\Admin_temp\datatables-rowreorder\js\dataTables.rowReorder.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-rowreorder\js\rowReorder.bootstrap4.js" />
+    <Content Include="scripts\Admin_temp\datatables-rowreorder\js\rowReorder.bootstrap4.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-scroller\css\scroller.bootstrap4.css" />
+    <Content Include="scripts\Admin_temp\datatables-scroller\css\scroller.bootstrap4.min.css" />
+    <Content Include="scripts\Admin_temp\datatables-scroller\js\dataTables.scroller.js" />
+    <Content Include="scripts\Admin_temp\datatables-scroller\js\dataTables.scroller.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-scroller\js\scroller.bootstrap4.js" />
+    <Content Include="scripts\Admin_temp\datatables-scroller\js\scroller.bootstrap4.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-select\css\select.bootstrap4.css" />
+    <Content Include="scripts\Admin_temp\datatables-select\css\select.bootstrap4.min.css" />
+    <Content Include="scripts\Admin_temp\datatables-select\js\dataTables.select.js" />
+    <Content Include="scripts\Admin_temp\datatables-select\js\dataTables.select.min.js" />
+    <Content Include="scripts\Admin_temp\datatables-select\js\select.bootstrap4.js" />
+    <Content Include="scripts\Admin_temp\datatables-select\js\select.bootstrap4.min.js" />
+    <Content Include="scripts\Admin_temp\datatables\jquery.dataTables.js" />
+    <Content Include="scripts\Admin_temp\datatables\jquery.dataTables.min.js" />
+    <Content Include="scripts\Admin_temp\daterangepicker\daterangepicker.css" />
+    <Content Include="scripts\Admin_temp\daterangepicker\daterangepicker.js" />
+    <Content Include="scripts\Admin_temp\daterangepicker\drp.png" />
+    <Content Include="scripts\Admin_temp\daterangepicker\example\amd\index.html" />
+    <Content Include="scripts\Admin_temp\daterangepicker\example\amd\main.js" />
+    <Content Include="scripts\Admin_temp\daterangepicker\example\amd\require.js" />
+    <Content Include="scripts\Admin_temp\daterangepicker\example\browserify\bundle.js" />
+    <Content Include="scripts\Admin_temp\daterangepicker\example\browserify\index.html" />
+    <Content Include="scripts\Admin_temp\daterangepicker\example\browserify\main.js" />
+    <Content Include="scripts\Admin_temp\daterangepicker\moment.min.js" />
+    <Content Include="scripts\Admin_temp\daterangepicker\package.js" />
+    <Content Include="scripts\Admin_temp\daterangepicker\website.css" />
+    <Content Include="scripts\Admin_temp\daterangepicker\website.js" />
+    <Content Include="scripts\Admin_temp\daterangepicker\website\index.html" />
+    <Content Include="scripts\Admin_temp\daterangepicker\website\website.css" />
+    <Content Include="scripts\Admin_temp\daterangepicker\website\website.js" />
+    <Content Include="scripts\Admin_temp\dist\css\adminlte.css" />
+    <Content Include="scripts\Admin_temp\dist\css\adminlte.min.css" />
+    <Content Include="scripts\Admin_temp\dist\css\alt\adminlte.components.css" />
+    <Content Include="scripts\Admin_temp\dist\css\alt\adminlte.components.min.css" />
+    <Content Include="scripts\Admin_temp\dist\css\alt\adminlte.core.css" />
+    <Content Include="scripts\Admin_temp\dist\css\alt\adminlte.core.min.css" />
+    <Content Include="scripts\Admin_temp\dist\css\alt\adminlte.extra-components.css" />
+    <Content Include="scripts\Admin_temp\dist\css\alt\adminlte.extra-components.min.css" />
+    <Content Include="scripts\Admin_temp\dist\css\alt\adminlte.pages.css" />
+    <Content Include="scripts\Admin_temp\dist\css\alt\adminlte.pages.min.css" />
+    <Content Include="scripts\Admin_temp\dist\css\alt\adminlte.plugins.css" />
+    <Content Include="scripts\Admin_temp\dist\css\alt\adminlte.plugins.min.css" />
+    <Content Include="scripts\Admin_temp\dist\img\AdminLTE Logo.png" />
+    <Content Include="scripts\Admin_temp\dist\img\avatar.png" />
+    <Content Include="scripts\Admin_temp\dist\img\avatar04.png" />
+    <Content Include="scripts\Admin_temp\dist\img\avatar2.png" />
+    <Content Include="scripts\Admin_temp\dist\img\avatar3.png" />
+    <Content Include="scripts\Admin_temp\dist\img\avatar5.png" />
+    <Content Include="scripts\Admin_temp\dist\img\boxed-bg.jpg" />
+    <Content Include="scripts\Admin_temp\dist\img\boxed-bg.png" />
+    <Content Include="scripts\Admin_temp\dist\img\credit\american-express.png" />
+    <Content Include="scripts\Admin_temp\dist\img\credit\cirrus.png" />
+    <Content Include="scripts\Admin_temp\dist\img\credit\mastercard.png" />
+    <Content Include="scripts\Admin_temp\dist\img\credit\mestro.png" />
+    <Content Include="scripts\Admin_temp\dist\img\credit\paypal.png" />
+    <Content Include="scripts\Admin_temp\dist\img\credit\paypal2.png" />
+    <Content Include="scripts\Admin_temp\dist\img\credit\visa.png" />
+    <Content Include="scripts\Admin_temp\dist\img\default-150x150.png" />
+    <Content Include="scripts\Admin_temp\dist\img\icons.png" />
+    <Content Include="scripts\Admin_temp\dist\img\logo.jpg" />
+    <Content Include="scripts\Admin_temp\dist\img\photo1.png" />
+    <Content Include="scripts\Admin_temp\dist\img\photo2.png" />
+    <Content Include="scripts\Admin_temp\dist\img\photo3.jpg" />
+    <Content Include="scripts\Admin_temp\dist\img\photo4.jpg" />
+    <Content Include="scripts\Admin_temp\dist\img\prod-1.jpg" />
+    <Content Include="scripts\Admin_temp\dist\img\prod-2.jpg" />
+    <Content Include="scripts\Admin_temp\dist\img\prod-3.jpg" />
+    <Content Include="scripts\Admin_temp\dist\img\prod-4.jpg" />
+    <Content Include="scripts\Admin_temp\dist\img\prod-5.jpg" />
+    <Content Include="scripts\Admin_temp\dist\img\user1-128x128.jpg" />
+    <Content Include="scripts\Admin_temp\dist\img\user2-160x160.jpg" />
+    <Content Include="scripts\Admin_temp\dist\img\user3-128x128.jpg" />
+    <Content Include="scripts\Admin_temp\dist\img\user4-128x128.jpg" />
+    <Content Include="scripts\Admin_temp\dist\img\user5-128x128.jpg" />
+    <Content Include="scripts\Admin_temp\dist\img\user6-128x128.jpg" />
+    <Content Include="scripts\Admin_temp\dist\img\user7-128x128.jpg" />
+    <Content Include="scripts\Admin_temp\dist\img\user8-128x128.jpg" />
+    <Content Include="scripts\Admin_temp\dist\js\adminlte.js" />
+    <Content Include="scripts\Admin_temp\dist\js\adminlte.min.js" />
+    <Content Include="scripts\Admin_temp\dist\js\demo.js" />
+    <Content Include="scripts\Admin_temp\dist\js\pages\dashboard.js" />
+    <Content Include="scripts\Admin_temp\dist\js\pages\dashboard2.js" />
+    <Content Include="scripts\Admin_temp\dist\js\pages\dashboard3.js" />
+    <Content Include="scripts\Admin_temp\ekko-lightbox\ekko-lightbox.css" />
+    <Content Include="scripts\Admin_temp\ekko-lightbox\ekko-lightbox.js" />
+    <Content Include="scripts\Admin_temp\ekko-lightbox\ekko-lightbox.min.js" />
+    <Content Include="scripts\Admin_temp\fastclick\fastclick.js" />
+    <Content Include="scripts\Admin_temp\filterizr\filterizr.min.js" />
+    <Content Include="scripts\Admin_temp\filterizr\jquery.filterizr.min.js" />
+    <Content Include="scripts\Admin_temp\filterizr\vanilla.filterizr.min.js" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\css\flag-icon.css" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\css\flag-icon.min.css" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ad.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ae.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\af.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ag.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ai.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\al.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\am.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ao.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\aq.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ar.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\as.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\at.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\au.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\aw.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ax.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\az.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ba.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\bb.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\bd.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\be.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\bf.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\bg.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\bh.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\bi.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\bj.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\bl.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\bm.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\bn.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\bo.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\bq.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\br.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\bs.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\bt.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\bv.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\bw.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\by.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\bz.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ca.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\cc.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\cd.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\cf.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\cg.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ch.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ci.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ck.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\cl.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\cm.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\cn.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\co.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\cr.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\cu.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\cv.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\cw.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\cx.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\cy.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\cz.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\de.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\dj.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\dk.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\dm.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\do.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\dz.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ec.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ee.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\eg.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\eh.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\er.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\es-ca.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\es.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\et.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\eu.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\fi.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\fj.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\fk.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\fm.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\fo.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\fr.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ga.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\gb-eng.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\gb-nir.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\gb-sct.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\gb-wls.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\gb.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\gd.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ge.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\gf.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\gg.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\gh.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\gi.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\gl.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\gm.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\gn.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\gp.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\gq.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\gr.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\gs.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\gt.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\gu.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\gw.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\gy.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\hk.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\hm.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\hn.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\hr.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ht.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\hu.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\id.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ie.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\il.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\im.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\in.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\io.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\iq.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ir.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\is.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\it.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\je.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\jm.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\jo.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\jp.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ke.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\kg.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\kh.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ki.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\km.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\kn.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\kp.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\kr.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\kw.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ky.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\kz.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\la.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\lb.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\lc.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\li.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\lk.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\lr.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ls.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\lt.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\lu.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\lv.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ly.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ma.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\mc.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\md.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\me.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\mf.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\mg.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\mh.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\mk.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ml.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\mm.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\mn.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\mo.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\mp.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\mq.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\mr.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ms.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\mt.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\mu.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\mv.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\mw.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\mx.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\my.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\mz.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\na.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\nc.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ne.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\nf.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ng.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ni.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\nl.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\no.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\np.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\nr.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\nu.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\nz.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\om.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\pa.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\pe.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\pf.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\pg.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ph.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\pk.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\pl.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\pm.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\pn.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\pr.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ps.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\pt.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\pw.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\py.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\qa.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\re.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ro.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\rs.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ru.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\rw.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\sa.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\sb.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\sc.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\sd.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\se.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\sg.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\sh.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\si.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\sj.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\sk.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\sl.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\sm.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\sn.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\so.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\sr.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ss.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\st.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\sv.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\sx.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\sy.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\sz.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\tc.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\td.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\tf.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\tg.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\th.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\tj.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\tk.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\tl.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\tm.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\tn.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\to.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\tr.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\tt.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\tv.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\tw.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\tz.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ua.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ug.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\um.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\un.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\us.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\uy.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\uz.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\va.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\vc.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ve.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\vg.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\vi.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\vn.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\vu.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\wf.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ws.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\xk.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\ye.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\yt.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\za.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\zm.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\1x1\zw.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ad.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ae.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\af.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ag.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ai.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\al.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\am.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ao.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\aq.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ar.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\as.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\at.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\au.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\aw.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ax.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\az.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ba.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\bb.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\bd.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\be.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\bf.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\bg.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\bh.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\bi.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\bj.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\bl.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\bm.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\bn.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\bo.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\bq.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\br.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\bs.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\bt.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\bv.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\bw.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\by.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\bz.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ca.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\cc.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\cd.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\cf.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\cg.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ch.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ci.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ck.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\cl.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\cm.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\cn.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\co.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\cr.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\cu.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\cv.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\cw.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\cx.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\cy.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\cz.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\de.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\dj.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\dk.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\dm.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\do.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\dz.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ec.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ee.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\eg.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\eh.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\er.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\es-ca.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\es.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\et.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\eu.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\fi.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\fj.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\fk.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\fm.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\fo.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\fr.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ga.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\gb-eng.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\gb-nir.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\gb-sct.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\gb-wls.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\gb.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\gd.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ge.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\gf.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\gg.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\gh.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\gi.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\gl.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\gm.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\gn.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\gp.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\gq.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\gr.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\gs.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\gt.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\gu.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\gw.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\gy.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\hk.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\hm.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\hn.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\hr.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ht.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\hu.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\id.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ie.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\il.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\im.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\in.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\io.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\iq.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ir.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\is.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\it.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\je.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\jm.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\jo.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\jp.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ke.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\kg.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\kh.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ki.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\km.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\kn.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\kp.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\kr.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\kw.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ky.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\kz.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\la.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\lb.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\lc.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\li.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\lk.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\lr.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ls.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\lt.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\lu.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\lv.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ly.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ma.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\mc.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\md.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\me.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\mf.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\mg.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\mh.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\mk.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ml.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\mm.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\mn.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\mo.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\mp.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\mq.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\mr.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ms.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\mt.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\mu.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\mv.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\mw.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\mx.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\my.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\mz.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\na.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\nc.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ne.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\nf.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ng.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ni.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\nl.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\no.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\np.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\nr.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\nu.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\nz.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\om.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\pa.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\pe.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\pf.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\pg.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ph.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\pk.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\pl.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\pm.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\pn.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\pr.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ps.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\pt.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\pw.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\py.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\qa.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\re.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ro.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\rs.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ru.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\rw.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\sa.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\sb.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\sc.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\sd.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\se.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\sg.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\sh.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\si.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\sj.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\sk.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\sl.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\sm.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\sn.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\so.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\sr.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ss.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\st.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\sv.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\sx.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\sy.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\sz.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\tc.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\td.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\tf.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\tg.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\th.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\tj.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\tk.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\tl.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\tm.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\tn.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\to.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\tr.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\tt.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\tv.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\tw.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\tz.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ua.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ug.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\um.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\un.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\us.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\uy.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\uz.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\va.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\vc.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ve.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\vg.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\vi.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\vn.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\vu.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\wf.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ws.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\xk.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\ye.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\yt.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\za.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\zm.svg" />
+    <Content Include="scripts\Admin_temp\flag-icon-css\flags\4x3\zw.svg" />
+    <Content Include="scripts\Admin_temp\flot-old\excanvas.js" />
+    <Content Include="scripts\Admin_temp\flot-old\excanvas.min.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.colorhelpers.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.colorhelpers.min.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.canvas.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.canvas.min.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.categories.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.categories.min.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.crosshair.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.crosshair.min.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.errorbars.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.errorbars.min.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.fillbetween.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.fillbetween.min.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.image.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.image.min.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.min.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.navigate.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.navigate.min.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.pie.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.pie.min.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.resize.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.resize.min.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.selection.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.selection.min.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.stack.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.stack.min.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.symbol.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.symbol.min.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.threshold.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.threshold.min.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.time.js" />
+    <Content Include="scripts\Admin_temp\flot-old\jquery.flot.time.min.js" />
+    <Content Include="scripts\Admin_temp\flot\jquery.flot.js" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\css\all.css" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\css\all.min.css" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\css\brands.css" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\css\brands.min.css" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\css\fontawesome.css" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\css\fontawesome.min.css" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\css\regular.css" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\css\regular.min.css" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\css\solid.css" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\css\solid.min.css" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\css\svg-with-js.css" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\css\svg-with-js.min.css" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\css\v4-shims.css" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\css\v4-shims.min.css" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\webfonts\fa-brands-400.svg" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\webfonts\fa-regular-400.svg" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\webfonts\fa-solid-900.svg" />
+    <Content Include="scripts\Admin_temp\fullcalendar-bootstrap\LICENSE.txt" />
+    <Content Include="scripts\Admin_temp\fullcalendar-bootstrap\main.css" />
+    <Content Include="scripts\Admin_temp\fullcalendar-bootstrap\main.esm.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar-bootstrap\main.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar-bootstrap\main.min.css" />
+    <Content Include="scripts\Admin_temp\fullcalendar-bootstrap\main.min.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\LICENSE.txt" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales-all.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales-all.min.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\af.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\ar-dz.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\ar-kw.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\ar-ly.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\ar-ma.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\ar-sa.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\ar-tn.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\ar.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\bg.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\bs.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\ca.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\cs.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\da.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\de.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\el.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\en-au.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\en-gb.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\en-nz.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\es-us.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\es.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\et.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\eu.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\fa.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\fi.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\fr-ca.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\fr-ch.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\fr.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\gl.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\he.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\hi.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\hr.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\hu.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\id.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\is.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\it.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\ja.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\ka.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\kk.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\ko.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\lb.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\lt.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\lv.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\mk.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\ms.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\nb.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\nl.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\nn.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\pl.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\pt-br.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\pt.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\ro.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\ru.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\sk.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\sl.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\sq.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\sr-cyrl.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\sr.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\sv.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\th.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\tr.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\uk.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\vi.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\zh-cn.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\locales\zh-tw.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\main.css" />
+    <Content Include="scripts\Admin_temp\fullcalendar\main.esm.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\main.js" />
+    <Content Include="scripts\Admin_temp\fullcalendar\main.min.css" />
+    <Content Include="scripts\Admin_temp\fullcalendar\main.min.js" />
+    <Content Include="scripts\Admin_temp\jquery-ui\jquery-ui.min.js" />
+    <Content Include="scripts\Admin_temp\jquery\core.js" />
+    <Content Include="scripts\Admin_temp\jquery\jquery.js" />
+    <Content Include="scripts\Admin_temp\jquery\jquery.min.js" />
+    <Content Include="scripts\Admin_temp\jquery\jquery.slim.js" />
+    <Content Include="scripts\Admin_temp\jquery\jquery.slim.min.js" />
+    <Content Include="scripts\Admin_temp\login\css\bootstrap-grid.css" />
+    <Content Include="scripts\Admin_temp\login\css\bootstrap-grid.min.css" />
+    <Content Include="scripts\Admin_temp\login\css\bootstrap-reboot.css" />
+    <Content Include="scripts\Admin_temp\login\css\bootstrap-reboot.min.css" />
+    <Content Include="scripts\Admin_temp\login\css\bootstrap.css" />
+    <Content Include="scripts\Admin_temp\login\css\bootstrap.min.css" />
+    <Content Include="scripts\Admin_temp\login\js\bootstrap.bundle.js" />
+    <Content Include="scripts\Admin_temp\login\js\bootstrap.bundle.min.js" />
+    <Content Include="scripts\Admin_temp\login\js\bootstrap.js" />
+    <Content Include="scripts\Admin_temp\login\js\bootstrap.min.js" />
+    <Content Include="scripts\Admin_temp\overlayScrollbars\css\OverlayScrollbars.css" />
+    <Content Include="scripts\Admin_temp\overlayScrollbars\css\OverlayScrollbars.min.css" />
+    <Content Include="scripts\Admin_temp\overlayScrollbars\js\jquery.overlayScrollbars.js" />
+    <Content Include="scripts\Admin_temp\overlayScrollbars\js\jquery.overlayScrollbars.min.js" />
+    <Content Include="scripts\Admin_temp\overlayScrollbars\js\OverlayScrollbars.js" />
+    <Content Include="scripts\Admin_temp\overlayScrollbars\js\OverlayScrollbars.min.js" />
+    <Content Include="scripts\ai.0.22.9-build00167.js" />
+    <Content Include="scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="scripts\bootstrap.js" />
+    <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="scripts\Admin_temp\.npmignore" />
+    <Content Include="scripts\Admin_temp\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="scripts\Admin_temp\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="scripts\Admin_temp\bootstrap\js\bootstrap.js.map" />
+    <Content Include="scripts\Admin_temp\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="scripts\Admin_temp\bootstrap-colorpicker\css\bootstrap-colorpicker.css.map" />
+    <Content Include="scripts\Admin_temp\bootstrap-colorpicker\css\bootstrap-colorpicker.min.css.map" />
+    <Content Include="scripts\Admin_temp\bootstrap-colorpicker\js\bootstrap-colorpicker.js.map" />
+    <Content Include="scripts\Admin_temp\bootstrap-colorpicker\js\bootstrap-colorpicker.min.js.map" />
+    <Content Include="scripts\Admin_temp\bs-custom-file-input\bs-custom-file-input.js.map" />
+    <Content Include="scripts\Admin_temp\bs-custom-file-input\bs-custom-file-input.min.js.map" />
+    <Content Include="scripts\Admin_temp\daterangepicker\bower.json" />
+    <Content Include="scripts\Admin_temp\daterangepicker\example\browserify\README.md" />
+    <Content Include="scripts\Admin_temp\dist\css\adminlte.css.map" />
+    <Content Include="scripts\Admin_temp\dist\css\adminlte.min.css.map" />
+    <Content Include="scripts\Admin_temp\dist\css\alt\adminlte.components.css.map" />
+    <Content Include="scripts\Admin_temp\dist\css\alt\adminlte.components.min.css.map" />
+    <Content Include="scripts\Admin_temp\dist\css\alt\adminlte.core.css.map" />
+    <Content Include="scripts\Admin_temp\dist\css\alt\adminlte.core.min.css.map" />
+    <Content Include="scripts\Admin_temp\dist\css\alt\adminlte.extra-components.css.map" />
+    <Content Include="scripts\Admin_temp\dist\css\alt\adminlte.extra-components.min.css.map" />
+    <Content Include="scripts\Admin_temp\dist\css\alt\adminlte.pages.css.map" />
+    <Content Include="scripts\Admin_temp\dist\css\alt\adminlte.pages.min.css.map" />
+    <Content Include="scripts\Admin_temp\dist\css\alt\adminlte.plugins.css.map" />
+    <Content Include="scripts\Admin_temp\dist\css\alt\adminlte.plugins.min.css.map" />
+    <Content Include="scripts\Admin_temp\dist\js\adminlte.js.map" />
+    <Content Include="scripts\Admin_temp\dist\js\adminlte.min.js.map" />
+    <Content Include="scripts\Admin_temp\ekko-lightbox\ekko-lightbox.js.map" />
+    <Content Include="scripts\Admin_temp\ekko-lightbox\ekko-lightbox.min.js.map" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\webfonts\fa-brands-400.eot" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\webfonts\fa-brands-400.ttf" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\webfonts\fa-brands-400.woff" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\webfonts\fa-brands-400.woff2" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\webfonts\fa-regular-400.eot" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\webfonts\fa-regular-400.ttf" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\webfonts\fa-regular-400.woff" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\webfonts\fa-regular-400.woff2" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\webfonts\fa-solid-900.eot" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\webfonts\fa-solid-900.ttf" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\webfonts\fa-solid-900.woff" />
+    <Content Include="scripts\Admin_temp\fontawesome-free\webfonts\fa-solid-900.woff2" />
+    <Content Include="scripts\Admin_temp\jquery\jquery.min.map" />
+    <Content Include="scripts\Admin_temp\jquery\jquery.slim.min.map" />
+    <Content Include="scripts\Admin_temp\login\css\bootstrap-grid.css.map" />
+    <Content Include="scripts\Admin_temp\login\css\bootstrap-grid.min.css.map" />
+    <Content Include="scripts\Admin_temp\login\css\bootstrap-reboot.css.map" />
+    <Content Include="scripts\Admin_temp\login\css\bootstrap-reboot.min.css.map" />
+    <Content Include="scripts\Admin_temp\login\css\bootstrap.css.map" />
+    <Content Include="scripts\Admin_temp\login\css\bootstrap.min.css.map" />
+    <Content Include="scripts\Admin_temp\login\js\bootstrap.bundle.js.map" />
+    <Content Include="scripts\Admin_temp\login\js\bootstrap.bundle.min.js.map" />
+    <Content Include="scripts\Admin_temp\login\js\bootstrap.js.map" />
+    <Content Include="scripts\Admin_temp\login\js\bootstrap.min.js.map" />
+    <EntityDeploy Include="Models\VRSystem.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>VRSystem.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\VRSystem.edmx.diagram">
+      <DependentUpon>VRSystem.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\Test.pubxml" />
+    <Content Include="scripts\Dashboard\img\credit\american-express.png" />
+    <Content Include="scripts\Dashboard\img\credit\cirrus.png" />
+    <Content Include="scripts\Dashboard\img\credit\mastercard.png" />
+    <Content Include="scripts\Dashboard\img\credit\mestro.png" />
+    <Content Include="scripts\Dashboard\img\credit\paypal.png" />
+    <Content Include="scripts\Dashboard\img\credit\paypal2.png" />
+    <Content Include="scripts\Dashboard\img\credit\visa.png" />
+    <Content Include="scripts\Error\SomethingWrong.css" />
+    <Content Include="scripts\Front-Index-Theme\css\index-theme.min.css" />
+    <Content Include="scripts\Front-Index-Theme\img\AboutUs.jpg" />
+    <Content Include="scripts\Front-Index-Theme\img\CompanyLogo\aws.png" />
+    <Content Include="scripts\Front-Index-Theme\img\CompanyLogo\DataBridgeLogo.png" />
+    <Content Include="scripts\Front-Index-Theme\img\CompanyLogo\DOTR.png" />
+    <Content Include="scripts\Front-Index-Theme\img\CompanyLogo\landbank.jpg" />
+    <Content Include="scripts\Front-Index-Theme\img\CompanyLogo\LTO.png" />
+    <Content Include="scripts\Front-Index-Theme\img\CompanyLogo\pnplogo.png" />
+    <Content Include="scripts\Front-Index-Theme\img\CompanyLogo\pnp.png" />
+    <Content Include="scripts\Front-Index-Theme\img\CompanyLogo\stripe.png" />
+    <Content Include="scripts\Front-Index-Theme\img\svg\3327591 1.svg" />
+    <Content Include="scripts\Front-Index-Theme\img\svg\databridge_front.svg" />
+    <Content Include="scripts\Front-Index-Theme\img\svg\electric_car_motor_v2.svg" />
+    <Content Include="scripts\Front-Index-Theme\js\all.min.js" />
+    <Content Include="scripts\Front-Index-Theme\js\contactform.js" />
+    <Content Include="scripts\Front-Index-Theme\js\custom-tinyslider.js" />
+    <Content Include="scripts\Front-Index-Theme\js\highlight.min.js" />
+    <Content Include="scripts\Front-Index-Theme\js\jquery.validate.min.js" />
+    <Content Include="scripts\Front-Index-Theme\js\main.js" />
+    <Content Include="scripts\Front-Index-Theme\js\popper.min.js" />
+    <Content Include="scripts\Front-Index-Theme\js\pricing.min.js" />
+    <Content Include="scripts\Front-Index-Theme\js\tiny-slider.js" />
+    <Content Include="scripts\Home_temp\img\car-dealer.jpg" />
+    <Content Include="scripts\Home_temp\img\car-insurance.png" />
+    <Content Include="scripts\Home_temp\img\car-insurances.jpg" />
+    <Content Include="scripts\Home_temp\js\particlesjs-config.json" />
+    <Content Include="scripts\Home_temp\lib\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="scripts\Home_temp\lib\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="scripts\Home_temp\lib\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="scripts\Home_temp\lib\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="scripts\Home_temp\lib\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="scripts\Home_temp\lib\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="scripts\Home_temp\lib\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="scripts\Home_temp\lib\ionicons\fonts\ionicons.eot" />
+    <Content Include="scripts\Home_temp\lib\ionicons\fonts\ionicons.ttf" />
+    <Content Include="scripts\Home_temp\lib\ionicons\fonts\ionicons.woff" />
+    <Content Include="scripts\Home_temp\lib\lightbox\links.php" />
+    <Content Include="scripts\Home_temp\lib\owlcarousel\LICENSE" />
+    <Content Include="scripts\Home_temp\lib\popper\popper.min.js.map.json" />
+    <Content Include="scripts\Home_temp\lib\typed\typed.min.js.map" />
+    <Content Include="scripts\Additional\lightbox2\dist\js\lightbox-plus-jquery.min.map" />
+    <Content Include="scripts\Additional\lightbox2\dist\js\lightbox.min.map" />
+    <Content Include="Reports\Excel\ForCSR-Report.xls" />
+    <Content Include="Reports\Excel\ForCSR-Report.xlsx" />
+    <Content Include="Reports\DataSet\PullOutDataSet.xsc">
+      <DependentUpon>PullOutDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\DataSet\CompletedVehicleDetails.xsc">
+      <DependentUpon>CompletedVehicleDetails.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\DataSet\CompanyListDataSet.xsc">
+      <DependentUpon>CompanyListDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\DataSet\BranchDataSet.xsc">
+      <DependentUpon>BranchDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\DataSet\BranchDataSet.xsd" />
+    <Content Include="Reports\DataSet\BranchDataSet.xss">
+      <DependentUpon>BranchDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\DataSet\CompanyListDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CompanyListDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\DataSet\CompanyListDataSet.xss">
+      <DependentUpon>CompanyListDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\DataSet\CompletedVehicleDetails.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CompletedVehicleDetails.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\DataSet\CompletedVehicleDetails.xss">
+      <DependentUpon>CompletedVehicleDetails.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\DataSet\PlateSectionDataSet.xsc">
+      <DependentUpon>PlateSectionDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\DataSet\PlateSectionDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PlateSectionDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\DataSet\PlateSectionDataSet.xss">
+      <DependentUpon>PlateSectionDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\DataSet\PNPEmailReport.xsc">
+      <DependentUpon>PNPEmailReport.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\DataSet\PNPEmailReport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PNPEmailReport.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\DataSet\PNPEmailReport.xss">
+      <DependentUpon>PNPEmailReport.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\DataSet\PullOutDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PullOutDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\DataSet\PullOutDataSet.xss">
+      <DependentUpon>PullOutDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\Excel\LTO_DIY_TEMPLATE.xls" />
+    <Content Include="Reports\Excel\LTO_DIY_TEMPLATE.xlsx" />
+    <Content Include="Reports\DataSet\TimelineProgressReportDataSet.xsc">
+      <DependentUpon>TimelineProgressReportDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\DataSet\VRRDataSet.xsc">
+      <DependentUpon>VRRDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\DataSet\SOADataSet.xsc">
+      <DependentUpon>SOADataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\DataSet\SOADataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SOADataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\DataSet\SOADataSet.xss">
+      <DependentUpon>SOADataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\DataSet\VRRDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>VRRDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\DataSet\VRRDataSet.xss">
+      <DependentUpon>VRRDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\DataSet\TimelineProgressReportDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TimelineProgressReportDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Reports\DataSet\TimelineProgressReportDataSet.xss">
+      <DependentUpon>TimelineProgressReportDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\Excel\LTO_DIY_MAI_TEMPLATE.xlsx" />
+    <Content Include="Reports\Excel\CTPL UPLOAD DATA_OLD.xlsx" />
+    <Content Include="Reports\DataSet\VehicleModelReports.xsc">
+      <DependentUpon>VehicleModelReports.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\DataSet\VehicleModelReports.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>VehicleModelReports.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\DataSet\VehicleModelReports.xss">
+      <DependentUpon>VehicleModelReports.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\DataSet\WalletDataset.xsc">
+      <DependentUpon>WalletDataset.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\DataSet\WalletDataset.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>WalletDataset.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\DataSet\WalletDataset.xss">
+      <DependentUpon>WalletDataset.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\Excel\CTPL UPLOAD DATA.xlsx" />
+    <None Include="scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="scripts\Home_temp\contactform\contactform.js" />
+    <Content Include="scripts\Home_temp\contactform\Readme.txt" />
+    <Content Include="scripts\Home_temp\css\scss-files.txt" />
+    <Content Include="scripts\Home_temp\css\style-green.css" />
+    <Content Include="scripts\Home_temp\css\style-orange.css" />
+    <Content Include="scripts\Home_temp\css\style-purple.css" />
+    <Content Include="scripts\Home_temp\css\style-red.css" />
+    <Content Include="scripts\Home_temp\css\style-sky-blue.css" />
+    <Content Include="scripts\Home_temp\css\style.min.css" />
+    <Content Include="scripts\Home_temp\img\apple-touch-icon.png" />
+    <Content Include="scripts\Home_temp\img\car.jpg" />
+    <Content Include="scripts\Home_temp\img\car1.jpg" />
+    <Content Include="scripts\Home_temp\img\car1.png" />
+    <Content Include="scripts\Home_temp\img\car2.jpg" />
+    <Content Include="scripts\Home_temp\img\favicon.png" />
+    <Content Include="scripts\Home_temp\img\homepage_Logo.png" />
+    <Content Include="scripts\Home_temp\img\intro-bg - Copy.jpg" />
+    <Content Include="scripts\Home_temp\img\overlay-bg.jpg" />
+    <Content Include="scripts\Home_temp\img\post-1.jpg" />
+    <Content Include="scripts\Home_temp\img\post-3.jpg" />
+    <Content Include="scripts\Home_temp\img\testimonial-2.jpg" />
+    <Content Include="scripts\Home_temp\img\testimonial-4.jpg" />
+    <Content Include="scripts\Home_temp\img\work-1.jpg" />
+    <Content Include="scripts\Home_temp\img\work-2.jpg" />
+    <Content Include="scripts\Home_temp\img\work-3.jpg" />
+    <Content Include="scripts\Home_temp\img\work-4.jpg" />
+    <Content Include="scripts\Home_temp\img\work-5.jpg" />
+    <Content Include="scripts\Home_temp\img\work-6.jpg" />
+    <Content Include="scripts\Home_temp\js\main.js" />
+    <Content Include="scripts\Home_temp\lib\animate\animate.css" />
+    <Content Include="scripts\Home_temp\lib\animate\animate.min.css" />
+    <Content Include="scripts\Home_temp\lib\bootstrap\css\bootstrap.css" />
+    <Content Include="scripts\Home_temp\lib\bootstrap\css\bootstrap.min.css" />
+    <Content Include="scripts\Home_temp\lib\bootstrap\js\bootstrap.js" />
+    <Content Include="scripts\Home_temp\lib\bootstrap\js\bootstrap.min.js" />
+    <Content Include="scripts\Home_temp\lib\counterup\jquery.counterup.js" />
+    <Content Include="scripts\Home_temp\lib\counterup\jquery.counterup.min.js" />
+    <Content Include="scripts\Home_temp\lib\counterup\jquery.waypoints.min.js" />
+    <Content Include="scripts\Home_temp\lib\easing\easing.js" />
+    <Content Include="scripts\Home_temp\lib\easing\easing.min.js" />
+    <Content Include="scripts\Home_temp\lib\font-awesome\css\font-awesome.css" />
+    <Content Include="scripts\Home_temp\lib\font-awesome\css\font-awesome.min.css" />
+    <Content Include="scripts\Home_temp\lib\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="scripts\Home_temp\lib\ionicons\css\ionicons.css" />
+    <Content Include="scripts\Home_temp\lib\ionicons\css\ionicons.min.css" />
+    <Content Include="scripts\Home_temp\lib\ionicons\fonts\ionicons.svg" />
+    <Content Include="scripts\Home_temp\lib\jquery\jquery-migrate.min.js" />
+    <Content Include="scripts\Home_temp\lib\jquery\jquery.min.js" />
+    <Content Include="scripts\Home_temp\lib\lightbox\css\lightbox.css" />
+    <Content Include="scripts\Home_temp\lib\lightbox\css\lightbox.min.css" />
+    <Content Include="scripts\Home_temp\lib\lightbox\images\close.png" />
+    <Content Include="scripts\Home_temp\lib\lightbox\images\loading.gif" />
+    <Content Include="scripts\Home_temp\lib\lightbox\images\next.png" />
+    <Content Include="scripts\Home_temp\lib\lightbox\images\prev.png" />
+    <Content Include="scripts\Home_temp\lib\lightbox\js\lightbox.js" />
+    <Content Include="scripts\Home_temp\lib\lightbox\js\lightbox.min.js" />
+    <Content Include="scripts\Home_temp\lib\owlcarousel\assets\ajax-loader.gif" />
+    <Content Include="scripts\Home_temp\lib\owlcarousel\assets\owl.carousel.css" />
+    <Content Include="scripts\Home_temp\lib\owlcarousel\assets\owl.carousel.min.css" />
+    <Content Include="scripts\Home_temp\lib\owlcarousel\assets\owl.theme.default.css" />
+    <Content Include="scripts\Home_temp\lib\owlcarousel\assets\owl.theme.default.min.css" />
+    <Content Include="scripts\Home_temp\lib\owlcarousel\assets\owl.theme.green.css" />
+    <Content Include="scripts\Home_temp\lib\owlcarousel\assets\owl.theme.green.min.css" />
+    <Content Include="scripts\Home_temp\lib\owlcarousel\assets\owl.video.play.png" />
+    <Content Include="scripts\Home_temp\lib\owlcarousel\owl.carousel.js" />
+    <Content Include="scripts\Home_temp\lib\owlcarousel\owl.carousel.min.js" />
+    <Content Include="scripts\Home_temp\lib\popper\popper.min.js" />
+    <Content Include="scripts\Home_temp\lib\typed\typed.js" />
+    <Content Include="scripts\Home_temp\lib\typed\typed.min.js" />
+    <Content Include="scripts\Img\AboutUs-1.jpg" />
+    <Content Include="scripts\Img\AboutUs.jpg" />
+    <Content Include="scripts\Img\brainsparks new logo.png" />
+    <Content Include="scripts\Img\csr.jpg" />
+    <Content Include="scripts\Img\DataBridge Asia Inc Logo-01.jpg" />
+    <Content Include="scripts\Img\DataBridge Asia Inc Logo-01.png" />
+    <Content Include="scripts\Img\pnp_logo.png" />
+    <Content Include="scripts\Img\pnp_logo2.png" />
+    <Content Include="scripts\Img\Revised BITSPACE Logo.png" />
+    <Content Include="scripts\Img\Revised TFA Logo.png" />
+    <Content Include="scripts\Img\src\undraw_electric_car_b7hl.png" />
+    <Content Include="scripts\Img\svg sample\add_file_4gfw.svg" />
+    <Content Include="scripts\Img\svg sample\attached_file_n4wm.svg" />
+    <Content Include="scripts\Img\svg\Dealer_car_motor.svg" />
+    <Content Include="scripts\Img\svg\Insurance_car.svg" />
+    <Content Include="scripts\Img\svg\LTO.svg" />
+    <Content Include="scripts\Img\svg\MAI_car_b7hl.svg" />
+    <Content Include="scripts\Img\svg sample\towing_6yy4.svg" />
+    <Content Include="scripts\Img\svg\Dealer_car_Motor v2.svg" />
+    <Content Include="scripts\Img\svg\MAI_electric_car.svg" />
+    <Content Include="scripts\Img\svg\No File Upload.svg" />
+    <Content Include="scripts\Img\svg\add_file_4gfw.svg" />
+    <Content Include="scripts\Img\svg\No_file_4gfw.svg" />
+    <Content Include="scripts\Img\svg\programming.svg" />
+    <Content Include="scripts\Img\svg\proud.svg" />
+    <Content Include="scripts\Introjs\css\introjs-dark.css" />
+    <Content Include="scripts\Introjs\css\introjs.css" />
+    <Content Include="scripts\Introjs\js\intro.js" />
+    <Content Include="scripts\Introjs\js\intro.min.js" />
+    <Content Include="scripts\jquery-1.10.2.js" />
+    <Content Include="scripts\jquery-1.10.2.min.js" />
+    <None Include="scripts\jquery.validate-vsdoc.js" />
+    <Content Include="scripts\jquery.validate.js" />
+    <Content Include="scripts\jquery.validate.min.js" />
+    <Content Include="scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="scripts\Dashboard\css\main.min.css" />
+    <Content Include="scripts\Dashboard\js\app.min.js" />
+    <Content Include="scripts\Dashboard\particles.min.js" />
+    <Content Include="scripts\Login_temp\css\bootstrap.min.css" />
+    <Content Include="scripts\Login_temp\css\style.min.css" />
+    <Content Include="scripts\Login_temp\js\app.min.js" />
+    <Content Include="scripts\Login_temp\particles.min.js" />
+    <Content Include="scripts\modernizr-2.6.2.js" />
+    <Content Include="scripts\respond.js" />
+    <Content Include="scripts\respond.min.js" />
+    <Content Include="scripts\Shared_layout\style.css.map" />
+    <Content Include="scripts\Shared_layout\style.scss" />
+    <None Include="scripts\_references.js" />
+    <Content Include="scripts\Shared_layout\style.css" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AirconTypeController.cs" />
+    <Compile Include="Controllers\BarangayController.cs" />
+    <Compile Include="Controllers\BatchController.cs" />
+    <Compile Include="Controllers\CTPLController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\LTOBranchController.cs" />
+    <Compile Include="Controllers\LTOController.cs" />
+    <Compile Include="Controllers\MVPremiumController.cs" />
+    <Compile Include="Controllers\MyAccountController.cs" />
+    <Compile Include="Controllers\PNPController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
+    <Compile Include="Controllers\RPCController.cs" />
+    <Compile Include="Controllers\TitleController.cs" />
+    <Compile Include="Controllers\DealerController.cs" />
+    <Compile Include="Controllers\GetDataController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InsuranceController.cs" />
+    <Compile Include="Controllers\MAIController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\VehicleClassificationController.cs" />
+    <Compile Include="Controllers\VehicleColorController.cs" />
+    <Compile Include="Controllers\VehicleFuelTypeController.cs" />
+    <Compile Include="Controllers\VehicleMakeController.cs" />
+    <Compile Include="Controllers\VehicleModelController.cs" />
+    <Compile Include="Controllers\VehicleInfoController.cs" />
+    <Compile Include="Controllers\VehicleTypeController.cs" />
+    <Compile Include="Controllers\WalletController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AirconType.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AirconTypeModel.cs" />
+    <Compile Include="Models\AuditLogin.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Barangay.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BarangayModel.cs" />
+    <Compile Include="Models\BatchDetails.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BatchMaster.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BatchModel.cs" />
+    <Compile Include="Models\BatchType.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\City.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CivilStatus.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CTPL.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CTPLModel.cs" />
+    <Compile Include="Models\CTPLTaxType.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CTPLTerm.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerModel.cs" />
+    <Compile Include="Models\LTO.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LTOBranch.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LTOBranchModel.cs" />
+    <Compile Include="Models\LTOListModel.cs" />
+    <Compile Include="Models\LTOUserType.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReportsModel.cs" />
+    <Compile Include="Models\TransactionEntityBranch.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vwLTOList.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vwTransactionEntityBranchList.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DataSet\CompanyListDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CompanyListDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DataSet\PlateSectionDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlateSectionDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DataSet\PNPEmailReport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PNPEmailReport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DataSet\SOADataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SOADataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DataSet\VRRDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VRRDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DataSet\TimelineProgressReportDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TimelineProgressReportDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DataSet\VehicleModelReports.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VehicleModelReports.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DataSet\WalletDataset.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WalletDataset.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\DateRangeAttribute.cs" />
+    <Compile Include="Models\Dealer.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DealerBranch.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DealerInsurance.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DealerInvoice.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DealerModel.cs" />
+    <Compile Include="Models\DealerVehicleMake.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DealerVehicleMakeModel.cs" />
+    <Compile Include="Models\Insurance.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InsuranceBranch.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InsuranceCOCSeries.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LTOModels.cs" />
+    <Compile Include="Models\MAI.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MAIDealer.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MAIType.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MAIVehicleMake.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MVPremium.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MVPremiumModel.cs" />
+    <Compile Include="Models\PNPModel.cs" />
+    <Compile Include="Models\Province.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Region.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RPCModel.cs" />
+    <Compile Include="Models\IModel.cs" />
+    <Compile Include="Models\InsuranceBranchModel.cs" />
+    <Compile Include="Models\InsuranceModel.cs" />
+    <Compile Include="Models\MAIModel.cs" />
+    <Compile Include="Models\MAIUploadModel.cs" />
+    <Compile Include="Models\MAIVehicleMakeModel.cs" />
+    <Compile Include="Models\Sex.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spEntityWallet_Result.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spInsuranceDealer_Result.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Title.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TitleModel.cs" />
+    <Compile Include="Models\TitleType.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Transaction.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TransactionEntity.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TransactionEntityModel.cs" />
+    <Compile Include="Models\TransactionEntityType.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TransactionEntryType.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TransactionModel.cs" />
+    <Compile Include="Models\TransactionType.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TransactionTypeModel.cs" />
+    <Compile Include="Models\User.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserEntity.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\UserRole.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VehicleBodyType.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VehicleClassification.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VehicleClassificationModel.cs" />
+    <Compile Include="Models\VehicleColor.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VehicleColorModel.cs" />
+    <Compile Include="Models\VehicleFuelType.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VehicleFuelTypeModel.cs" />
+    <Compile Include="Models\VehicleInfo.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VehicleInfoModel.cs" />
+    <Compile Include="Models\VehicleMake.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VehicleMakeModel.cs" />
+    <Compile Include="Models\VehicleModel.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VehicleType.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VehicleTypeModel.cs" />
+    <Compile Include="Models\VRSystem.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VRSystem.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VRSystem.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VRSystem.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VRSystem.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vwCustomerList.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vwDealerBranchList.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vwDealerInvoice.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vwDealerList.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vwDealerVehicleMake.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vwDivisionsList.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vwMAIList.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vwMAIVehicleMake.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vwMAIVehicleMakeModel.cs" />
+    <Compile Include="Models\vwProvinceCity.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vwTransactionEntityList.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vwTransactionEntityType.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vwTransactionTypeList.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vwUserList.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vwUserListModel.cs" />
+    <Compile Include="Models\vwVehicleList.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vwVehicleListModel.cs" />
+    <Compile Include="Models\vwVehicleModel.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Wallet.cs">
+      <DependentUpon>VRSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WalletModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\DataSet\CompletedVehicleDetails.cs">
+      <DependentUpon>CompletedVehicleDetails.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DataSet\CompletedVehicleDetails.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CompletedVehicleDetails.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DataSet\PullOutDataSet.cs">
+      <DependentUpon>PullOutDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DataSet\PullOutDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PullOutDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="Tools\AuthorizeUserAttribute.cs" />
+    <Compile Include="Tools\CurrentUser.cs" />
+    <Compile Include="Tools\Extensions.cs" />
+    <Compile Include="Tools\Functions.cs" />
+    <Compile Include="Tools\PublicEnum.cs" />
+    <Compile Include="Tools\SessionExpireAttribute.cs" />
+    <Compile Include="Tools\ZohoEmail.cs" />
+    <Compile Include="VRSystemDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VRSystemDataSet.xsd</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="packages.config" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Old-Index.cshtml" />
+    <Content Include="Views\Dealer\Index.cshtml" />
+    <Content Include="scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\MAI\Index.cshtml" />
+    <Content Include="Views\MAI\MAI_Register.cshtml" />
+    <Content Include="Views\Shared\_Confirmation.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Dealer\DealerForm.cshtml" />
+    <Content Include="Views\User\User_Register.cshtml" />
+    <Content Include="Views\VehicleMake\Index.cshtml" />
+    <Content Include="Views\VehicleMake\Vehicle_Register.cshtml" />
+    <Content Include="Views\VehicleModel\Index.cshtml" />
+    <Content Include="Views\Insurance\Index.cshtml" />
+    <Content Include="Views\VehicleModel\VehicleModel_Register.cshtml" />
+    <Content Include="Views\Dealer\DealerBranch.cshtml" />
+    <Content Include="Views\Dealer\DealerBranchForm.cshtml" />
+    <Content Include="Views\MAI\MAIVehicleMake.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\VehicleInfo\Index.cshtml" />
+    <Content Include="Views\VehicleInfo\Vehicle.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\Customer.cshtml" />
+    <Content Include="Views\Dealer\DealerVehicleMake.cshtml" />
+    <Content Include="Views\Shared\_Error.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Insurance\Insurance_Register.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Views\Title\Index.cshtml" />
+    <Content Include="Views\Title\Title.cshtml" />
+    <Content Include="Views\MAI\UploadMAI.cshtml" />
+    <Content Include="Views\MAI\UploadMAITest.cshtml" />
+    <Content Include="Views\VehicleInfo\ForCSR.cshtml" />
+    <Content Include="Views\Shared\_VehicleList.cshtml" />
+    <Content Include="Views\VehicleInfo\ForCOP.cshtml" />
+    <Content Include="Views\Dealer\InvoiceList.cshtml" />
+    <Content Include="Views\Dealer\Invoice.cshtml" />
+    <Content Include="Views\MyAccount\Index.cshtml" />
+    <Content Include="Views\Shared\_ForgotPassword.cshtml" />
+    <Content Include="Views\VehicleInfo\ForBOC.cshtml" />
+    <Content Include="Views\Dealer\DealerInsurance.cshtml" />
+    <Content Include="Views\MAI\MAI_Dealer.cshtml" />
+    <Content Include="Views\Insurance\InsuranceBranchList.cshtml" />
+    <Content Include="Views\Insurance\InsuranceBranch.cshtml" />
+    <Content Include="Views\RPC\RPCList.cshtml" />
+    <Content Include="Views\VehicleMake\VehicleInfo.cshtml" />
+    <Content Include="Views\RPC\RPC.cshtml" />
+    <Content Include="Views\Dealer\DealerInsuranceList.cshtml" />
+    <Content Include="Views\Insurance\InsuranceDealer.cshtml" />
+    <Content Include="Views\Insurance\InsuranceDealerList.cshtml" />
+    <Content Include="Views\Wallet\TransactionTypeList.cshtml" />
+    <Content Include="Views\Wallet\TransactionType.cshtml" />
+    <Content Include="Views\Wallet\MyWallet.cshtml" />
+    <Content Include="UploadTemplate\MAI-Template.xlsx" />
+    <Content Include="Views\VehicleInfo\UploadVehicleInfo.cshtml" />
+    <Content Include="Views\Wallet\NewTransaction.cshtml" />
+    <Content Include="Views\VehicleInfo\VehicleBodyList.cshtml" />
+    <Content Include="Views\VehicleInfo\VehicleBody.cshtml" />
+    <Content Include="UploadTemplate\Dealer-Vehicle-Template.xlsx" />
+    <Content Include="UploadTemplate\MAI-Vehicle-Template.xlsx" />
+    <Content Include="Views\Shared\_TransactionHistory.cshtml" />
+    <Content Include="Views\VehicleColor\Vehicle_Color_List.cshtml" />
+    <Content Include="Views\VehicleColor\Vehicle_Color.cshtml" />
+    <Content Include="Views\VehicleFuelType\Index.cshtml" />
+    <Content Include="Views\VehicleFuelType\Vehicle_Fuel_Registration.cshtml" />
+    <Content Include="Views\Insurance\InsuranceCOCSeries.cshtml" />
+    <Content Include="Views\CTPL\Index.cshtml" />
+    <Content Include="Views\CTPL\CTPL.cshtml" />
+    <Content Include="Views\CTPL\CTPLTermList.cshtml" />
+    <Content Include="Views\CTPL\CTPLTerm.cshtml" />
+    <Content Include="Views\Insurance\InsuranceCOCSeriesList.cshtml" />
+    <Content Include="Views\VehicleClassification\Index.cshtml" />
+    <Content Include="Views\VehicleClassification\Vehicle_Classification_Registration.cshtml" />
+    <Content Include="Views\VehicleInfo\VehicleInfo.cshtml" />
+    <Content Include="Views\Wallet\EntityTypeChargeList.cshtml" />
+    <Content Include="Views\Wallet\EntityTypeCharge.cshtml" />
+    <Content Include="Views\Wallet\EntityCharge.cshtml" />
+    <Content Include="Views\Wallet\EntityChargeList.cshtml" />
+    <Content Include="Views\Shared\_EntityChargeList.cshtml" />
+    <Content Include="Views\VehicleInfo\ForDealers.cshtml" />
+    <Content Include="Views\Shared\_DealerInvoice.cshtml" />
+    <Content Include="Views\VehicleInfo\_Modal_BOC.cshtml" />
+    <Content Include="Views\VehicleInfo\_Modal_CSR.cshtml" />
+    <Content Include="Views\VehicleInfo\_Modal_Dealer.cshtml" />
+    <Content Include="UploadTemplate\VehicleInfo-Template_OLD_2.xlsx" />
+    <Content Include="Views\VehicleInfo\ForSOE.cshtml" />
+    <Content Include="Views\VehicleInfo\UploadForSOE.cshtml" />
+    <Content Include="Views\MAI\MaiInfo.cshtml" />
+    <Content Include="Views\VehicleInfo\ForSOC.cshtml" />
+    <Content Include="Views\VehicleInfo\UploadForSOC.cshtml" />
+    <Content Include="Views\VehicleInfo\ForPNP.cshtml" />
+    <Content Include="Views\VehicleInfo\UploadForPNP.cshtml" />
+    <Content Include="Views\VehicleInfo\ForLTO.cshtml" />
+    <Content Include="Views\VehicleInfo\ForCOC.cshtml" />
+    <Content Include="Views\VehicleInfo\_Modal_COC.cshtml" />
+    <Content Include="Views\Dealer\DealerInfo.cshtml" />
+    <Content Include="Views\VehicleInfo\ForAllocate.cshtml" />
+    <Content Include="Views\VehicleInfo\AllocatedVehicle.cshtml" />
+    <Content Include="Views\Insurance\InsuranceInfo.cshtml" />
+    <Content Include="Views\VehicleInfo\ReAllocatedVehicle.cshtml" />
+    <Content Include="Views\VehicleInfo\ForLTO_Submitted.cshtml" />
+    <Content Include="Views\VehicleInfo\ForLTO_Processed.cshtml" />
+    <Content Include="Views\Shared\_DealerInvoiceInfo.cshtml" />
+    <Content Include="Views\Shared\_LayoutTopNavBar.cshtml" />
+    <Content Include="VRSystemDataSet.xsc">
+      <DependentUpon>VRSystemDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="Views\VehicleInfo\ForPullOut.cshtml" />
+    <Content Include="Views\VehicleInfo\_Modal_PullOut.cshtml" />
+    <Content Include="Views\Batch\Index.cshtml" />
+    <Content Include="Views\Batch\_BatchDetails.cshtml" />
+    <Content Include="Views\Shared\_BatchHeader.cshtml" />
+    <Content Include="Views\Shared\_BatchFilter.cshtml" />
+    <Content Include="Views\LTO\SubmittedBatch.cshtml" />
+    <Content Include="Views\Shared\_BatchList.cshtml" />
+    <Content Include="Views\VehicleInfo\_Modal_LTO.cshtml" />
+    <Content Include="Views\Shared\_BatchDetails.cshtml" />
+    <Content Include="Views\LTO\AssessBatch.cshtml" />
+    <Content Include="Views\Shared\_AssessBatchDetails.cshtml" />
+    <Content Include="Views\VehicleType\Vehicle_Type_Registration.cshtml" />
+    <Content Include="Views\Shared\_PaymentBatchDetails.cshtml" />
+    <Content Include="Views\Shared\_PaymentBatchList.cshtml" />
+    <Content Include="Views\VehicleInfo\ForLTO_Payment.cshtml" />
+    <Content Include="Views\LTO\PaymentBatch.cshtml" />
+    <Content Include="Views\Shared\_PaymentInfo.cshtml" />
+    <Content Include="Views\Shared\_ProcessBatchDetails.cshtml" />
+    <Content Include="Views\LTO\CompletedBatch.cshtml" />
+    <Content Include="Views\VehicleInfo\ForLTO_Completed.cshtml" />
+    <Content Include="Views\Barangay\Barangay_Registration.cshtml" />
+    <Content Include="Views\Barangay\Index.cshtml" />
+    <Content Include="Views\VehicleType\Index.cshtml" />
+    <Content Include="Views\VehicleInfo\_Modal_PNP.cshtml" />
+    <Content Include="Views\MVPremium\Index.cshtml" />
+    <Content Include="Views\MVPremium\_addVehicleClassification.cshtml" />
+    <Content Include="Views\MVPremium\_deleteVehicleClassification.cshtml" />
+    <Content Include="Views\LTO\ForPickUpBatch.cshtml" />
+    <Content Include="Views\VehicleInfo\ForLTO_ForPickUp.cshtml" />
+    <Content Include="Views\VehicleInfo\ForLTO_Rejected.cshtml" />
+    <Content Include="Views\VehicleInfo\ForLTO_Received.cshtml" />
+    <Content Include="Views\VehicleInfo\ForInvoice.cshtml" />
+    <Content Include="Views\PNP\ApprovalList.cshtml" />
+    <Content Include="Views\PNP\CompletedList.cshtml" />
+    <Content Include="Views\PNP\_PNPVehicleList.cshtml" />
+    <Content Include="Views\Dealer\DealerTimelineReport.cshtml" />
+    <Content Include="Views\Reports\LTOStatusReport.cshtml" />
+    <Content Include="Views\Reports\_LTOStatusReportTable.cshtml" />
+    <Content Include="Views\Reports\DealerStatusReport.cshtml" />
+    <Content Include="Views\Reports\_DealerStatusReportTable.cshtml" />
+    <Content Include="Views\Reports\DealerVehicleStatusReport.cshtml" />
+    <Content Include="Views\Reports\_DealerVehicleStatusReportTable.cshtml" />
+    <Content Include="Views\LTO\Index.cshtml" />
+    <Content Include="Views\LTO\LTORegistration.cshtml" />
+    <Content Include="Views\VehicleInfo\Upload.cshtml" />
+    <Content Include="Views\AirconType\Index.cshtml" />
+    <Content Include="Views\AirconType\AirconTypeRegistration.cshtml" />
+    <Content Include="Views\VehicleInfo\ForLTO_CSR.cshtml" />
+    <Content Include="Views\LTO\CSRSubmittedBatch.cshtml" />
+    <Content Include="Views\VehicleInfo\ForCSR_Submitted.cshtml" />
+    <Content Include="Views\LTO\CSRAssessBatch.cshtml" />
+    <Content Include="Views\LTO\CSRPaymentBatch.cshtml" />
+    <Content Include="Views\LTO\CSRCompletedBatch.cshtml" />
+    <Content Include="UploadTemplate\VehicleInfo-Template_OLD_1.xlsx" />
+    <Content Include="UploadTemplate\VehicleInfo-Template-MAI.xlsx" />
+    <Content Include="UploadTemplate\VehicleInfo-Template-Dealer_OLD.xlsx" />
+    <Content Include="Views\Reports\PlateSection.cshtml" />
+    <Content Include="Views\Insurance\CTPL.cshtml" />
+    <Content Include="Views\VehicleModel\VehicleModel_Reports.cshtml" />
+    <Content Include="Views\Reports\CompanyListReport.cshtml" />
+    <Content Include="Views\Reports\WalletReport.cshtml" />
+    <Content Include="Views\VehicleInfo\ForLTO_DIY_Rejected.cshtml" />
+    <Content Include="UploadTemplate\VehicleInfo-Template-Dealer.xlsx" />
+    <Content Include="Views\VehicleInfo\UploadForCSR.cshtml" />
+    <Content Include="Views\Dealer\VehicleRegistrationReport.cshtml" />
+    <Content Include="Views\LTOBranch\Index.cshtml" />
+    <Content Include="Views\VehicleInfo\UploadVehicleInfoV2.cshtml" />
+    <Content Include="UploadTemplate\UploadInfo-Template.xlsx" />
+    <Content Include="Views\Dealer\_VehicleMakeList.cshtml" />
+    <Content Include="Views\Dealer\_VehicleMakeSelectedList.cshtml" />
+    <Content Include="Views\Reports\StatementOfAccount.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Pricing.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <None Include="VRSystemDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>VRSystemDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="VRSystemDataSet.xss">
+      <DependentUpon>VRSystemDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Reports\VRTempFiles\" />
+    <Folder Include="scripts\Admin_temp\fullcalendar-daygrid\" />
+    <Folder Include="scripts\Admin_temp\fullcalendar-interaction\" />
+    <Folder Include="scripts\Admin_temp\fullcalendar-timegrid\" />
+    <Folder Include="scripts\Admin_temp\icheck-bootstrap\" />
+    <Folder Include="scripts\Admin_temp\inputmask\" />
+    <Folder Include="scripts\Admin_temp\ion-rangeslider\" />
+    <Folder Include="scripts\Admin_temp\jquery-knob\" />
+    <Folder Include="scripts\Admin_temp\jquery-mapael\" />
+    <Folder Include="scripts\Admin_temp\jquery-mousewheel\" />
+    <Folder Include="scripts\Admin_temp\jquery-validation\" />
+    <Folder Include="scripts\Admin_temp\jqvmap\" />
+    <Folder Include="scripts\Admin_temp\jsgrid\" />
+    <Folder Include="scripts\Admin_temp\jszip\" />
+    <Folder Include="scripts\Admin_temp\moment\" />
+    <Folder Include="scripts\Admin_temp\pace-progress\" />
+    <Folder Include="scripts\Admin_temp\pdfmake\" />
+    <Folder Include="scripts\Admin_temp\popper\" />
+    <Folder Include="scripts\Admin_temp\raphael\" />
+    <Folder Include="scripts\Admin_temp\select2-bootstrap4-theme\" />
+    <Folder Include="scripts\Admin_temp\select2\" />
+    <Folder Include="scripts\Admin_temp\sparklines\" />
+    <Folder Include="scripts\Admin_temp\summernote\" />
+    <Folder Include="scripts\Admin_temp\sweetalert2-theme-bootstrap-4\" />
+    <Folder Include="scripts\Admin_temp\sweetalert2\" />
+    <Folder Include="scripts\Admin_temp\tempusdominus-bootstrap-4\" />
+    <Folder Include="scripts\Admin_temp\toastr\" />
+    <Folder Include="scripts\Dashboard\img\mai\" />
+    <Folder Include="scripts\Front-Index-Theme\logo\" />
+    <Folder Include="Views\GetList\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\RDLC\CoCReport.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\RDLC\PNPEmailReport.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\RDLC\LTOCompletedReport.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\RDLC\PlateSectionReport.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\RDLC\PullOutReport.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\RDLC\Timeline and Progress Report.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\RDLC\Wallet Report.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Reports\RDLC\LTOBranch.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\VRReport.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\VehicleModelReports.rdlc" />
+    <Content Include="Reports\RDLC\Company List Report.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\RDLC\SOAReport.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>52361</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:52361/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

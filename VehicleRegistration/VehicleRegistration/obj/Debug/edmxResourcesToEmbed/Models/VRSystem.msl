@@ -1,0 +1,1434 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="VRSystemModelStoreContainer" CdmEntityContainer="VRSystemEntities">
+    <EntitySetMapping Name="City">
+      <EntityTypeMapping TypeName="VRSystemModel.City">
+        <MappingFragment StoreEntitySet="City">
+          <ScalarProperty Name="CityNumber" ColumnName="CityNumber" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="ProvinceID" ColumnName="ProvinceID" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CivilStatus">
+      <EntityTypeMapping TypeName="VRSystemModel.CivilStatus">
+        <MappingFragment StoreEntitySet="CivilStatus">
+          <ScalarProperty Name="CivilStatusCode" ColumnName="CivilStatusCode" />
+          <ScalarProperty Name="CivilStatusName" ColumnName="CivilStatusName" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CTPL">
+      <EntityTypeMapping TypeName="VRSystemModel.CTPL">
+        <MappingFragment StoreEntitySet="CTPL">
+          <ScalarProperty Name="LGT" ColumnName="LGT" />
+          <ScalarProperty Name="DST" ColumnName="DST" />
+          <ScalarProperty Name="VAT" ColumnName="VAT" />
+          <ScalarProperty Name="CTPLID" ColumnName="CTPLID" />
+          <ScalarProperty Name="CTPLTermID" ColumnName="CTPLTermID" />
+          <ScalarProperty Name="VehicleClassificationID" ColumnName="VehicleClassificationID" />
+          <ScalarProperty Name="BasicPremium" ColumnName="BasicPremium" />
+          <ScalarProperty Name="Taxes" ColumnName="Taxes" />
+          <ScalarProperty Name="AuthenticationFee" ColumnName="AuthenticationFee" />
+          <ScalarProperty Name="GrossPremium" ColumnName="GrossPremium" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CTPLTerm">
+      <EntityTypeMapping TypeName="VRSystemModel.CTPLTerm">
+        <MappingFragment StoreEntitySet="CTPLTerm">
+          <ScalarProperty Name="CPTLTermID" ColumnName="CPTLTermID" />
+          <ScalarProperty Name="CoverageYear" ColumnName="CoverageYear" />
+          <ScalarProperty Name="TermDescription" ColumnName="TermDescription" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customer">
+      <EntityTypeMapping TypeName="VRSystemModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="DealerID" ColumnName="DealerID" />
+          <ScalarProperty Name="TitleID" ColumnName="TitleID" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="CorpName" ColumnName="CorpName" />
+          <ScalarProperty Name="FathersName" ColumnName="FathersName" />
+          <ScalarProperty Name="MothersName" ColumnName="MothersName" />
+          <ScalarProperty Name="SexCode" ColumnName="SexCode" />
+          <ScalarProperty Name="CivilStatusCode" ColumnName="CivilStatusCode" />
+          <ScalarProperty Name="Citizenship" ColumnName="Citizenship" />
+          <ScalarProperty Name="HouseBldgNumber" ColumnName="HouseBldgNumber" />
+          <ScalarProperty Name="StreetSubdivision" ColumnName="StreetSubdivision" />
+          <ScalarProperty Name="Barangay" ColumnName="Barangay" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+          <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+          <ScalarProperty Name="Birthplace" ColumnName="Birthplace" />
+          <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="TIN" ColumnName="TIN" />
+          <ScalarProperty Name="AdditionalAddress" ColumnName="AdditionalAddress" />
+          <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+          <ScalarProperty Name="OrganizationAddress" ColumnName="OrganizationAddress" />
+          <ScalarProperty Name="OrganizationTIN" ColumnName="OrganizationTIN" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="ContactPersonNumber" ColumnName="ContactPersonNumber" />
+          <ScalarProperty Name="ClientReferenceNumber" ColumnName="ClientReferenceNumber" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dealer">
+      <EntityTypeMapping TypeName="VRSystemModel.Dealer">
+        <MappingFragment StoreEntitySet="Dealer">
+          <ScalarProperty Name="BarangayID" ColumnName="BarangayID" />
+          <ScalarProperty Name="TIN" ColumnName="TIN" />
+          <ScalarProperty Name="EmailAddress2" ColumnName="EmailAddress2" />
+          <ScalarProperty Name="DealerID" ColumnName="DealerID" />
+          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="BusinessPhone" ColumnName="BusinessPhone" />
+          <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+          <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="LogoByte" ColumnName="LogoByte" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DealerBranch">
+      <EntityTypeMapping TypeName="VRSystemModel.DealerBranch">
+        <MappingFragment StoreEntitySet="DealerBranch">
+          <ScalarProperty Name="UploadVersion" ColumnName="UploadVersion" />
+          <ScalarProperty Name="BarangayID" ColumnName="BarangayID" />
+          <ScalarProperty Name="DealerBranchID" ColumnName="DealerBranchID" />
+          <ScalarProperty Name="DealerID" ColumnName="DealerID" />
+          <ScalarProperty Name="DealerBranchName" ColumnName="DealerBranchName" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="BusinessPhone" ColumnName="BusinessPhone" />
+          <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+          <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+          <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="AccreditationNumber" ColumnName="AccreditationNumber" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="IsMain" ColumnName="IsMain" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DealerInsurance">
+      <EntityTypeMapping TypeName="VRSystemModel.DealerInsurance">
+        <MappingFragment StoreEntitySet="DealerInsurance">
+          <ScalarProperty Name="DealerInsuranceID" ColumnName="DealerInsuranceID" />
+          <ScalarProperty Name="DealerID" ColumnName="DealerID" />
+          <ScalarProperty Name="InsuranceID" ColumnName="InsuranceID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DealerVehicleMake">
+      <EntityTypeMapping TypeName="VRSystemModel.DealerVehicleMake">
+        <MappingFragment StoreEntitySet="DealerVehicleMake">
+          <ScalarProperty Name="DealerVehicleMakeID" ColumnName="DealerVehicleMakeID" />
+          <ScalarProperty Name="DealerID" ColumnName="DealerID" />
+          <ScalarProperty Name="VehicleMakeID" ColumnName="VehicleMakeID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Insurance">
+      <EntityTypeMapping TypeName="VRSystemModel.Insurance">
+        <MappingFragment StoreEntitySet="Insurance">
+          <ScalarProperty Name="COCPrefix" ColumnName="COCPrefix" />
+          <ScalarProperty Name="AutoGenerateCOC" ColumnName="AutoGenerateCOC" />
+          <ScalarProperty Name="BarangayID" ColumnName="BarangayID" />
+          <ScalarProperty Name="TIN" ColumnName="TIN" />
+          <ScalarProperty Name="EmailAddress2" ColumnName="EmailAddress2" />
+          <ScalarProperty Name="InsuranceID" ColumnName="InsuranceID" />
+          <ScalarProperty Name="InsuranceName" ColumnName="InsuranceName" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="BusinessPhone" ColumnName="BusinessPhone" />
+          <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+          <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ProvinceID" ColumnName="ProvinceID" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="LogoByte" ColumnName="LogoByte" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InsuranceBranch">
+      <EntityTypeMapping TypeName="VRSystemModel.InsuranceBranch">
+        <MappingFragment StoreEntitySet="InsuranceBranch">
+          <ScalarProperty Name="BarangayID" ColumnName="BarangayID" />
+          <ScalarProperty Name="InsuranceBranchID" ColumnName="InsuranceBranchID" />
+          <ScalarProperty Name="InsuranceID" ColumnName="InsuranceID" />
+          <ScalarProperty Name="InsuranceBranchName" ColumnName="InsuranceBranchName" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="BusinessPhone" ColumnName="BusinessPhone" />
+          <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+          <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+          <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ProvinceID" ColumnName="ProvinceID" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="IsMain" ColumnName="IsMain" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InsuranceCOCSeries">
+      <EntityTypeMapping TypeName="VRSystemModel.InsuranceCOCSeries">
+        <MappingFragment StoreEntitySet="InsuranceCOCSeries">
+          <ScalarProperty Name="InsuranceCOCSeriesID" ColumnName="InsuranceCOCSeriesID" />
+          <ScalarProperty Name="InsuranceID" ColumnName="InsuranceID" />
+          <ScalarProperty Name="EffectiveDate" ColumnName="EffectiveDate" />
+          <ScalarProperty Name="SeriesFrom" ColumnName="SeriesFrom" />
+          <ScalarProperty Name="SeriesTo" ColumnName="SeriesTo" />
+          <ScalarProperty Name="CurrentSeries" ColumnName="CurrentSeries" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="MasterPolicy" ColumnName="MasterPolicy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MAI">
+      <EntityTypeMapping TypeName="VRSystemModel.MAI">
+        <MappingFragment StoreEntitySet="MAI">
+          <ScalarProperty Name="BarangayID" ColumnName="BarangayID" />
+          <ScalarProperty Name="TIN" ColumnName="TIN" />
+          <ScalarProperty Name="EmailAddress2" ColumnName="EmailAddress2" />
+          <ScalarProperty Name="MAIID" ColumnName="MAIID" />
+          <ScalarProperty Name="MAITypeID" ColumnName="MAITypeID" />
+          <ScalarProperty Name="MAIName" ColumnName="MAIName" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="BusinessPhone" ColumnName="BusinessPhone" />
+          <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+          <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ProvinceID" ColumnName="ProvinceID" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="LogoByte" ColumnName="LogoByte" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="AccreditationNumber" ColumnName="AccreditationNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MAIDealer">
+      <EntityTypeMapping TypeName="VRSystemModel.MAIDealer">
+        <MappingFragment StoreEntitySet="MAIDealer">
+          <ScalarProperty Name="MAIDealerID" ColumnName="MAIDealerID" />
+          <ScalarProperty Name="MAIID" ColumnName="MAIID" />
+          <ScalarProperty Name="DealerID" ColumnName="DealerID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MAIType">
+      <EntityTypeMapping TypeName="VRSystemModel.MAIType">
+        <MappingFragment StoreEntitySet="MAIType">
+          <ScalarProperty Name="MAITypeID" ColumnName="MAITypeID" />
+          <ScalarProperty Name="MAITypeName" ColumnName="MAITypeName" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MAIVehicleMake">
+      <EntityTypeMapping TypeName="VRSystemModel.MAIVehicleMake">
+        <MappingFragment StoreEntitySet="MAIVehicleMake">
+          <ScalarProperty Name="MAIVehicleMakeID" ColumnName="MAIVehicleMakeID" />
+          <ScalarProperty Name="MAIID" ColumnName="MAIID" />
+          <ScalarProperty Name="VehicleMakeID" ColumnName="VehicleMakeID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Province">
+      <EntityTypeMapping TypeName="VRSystemModel.Province">
+        <MappingFragment StoreEntitySet="Province">
+          <ScalarProperty Name="ProvinceNumber" ColumnName="ProvinceNumber" />
+          <ScalarProperty Name="ProvinceID" ColumnName="ProvinceID" />
+          <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+          <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Region">
+      <EntityTypeMapping TypeName="VRSystemModel.Region">
+        <MappingFragment StoreEntitySet="Region">
+          <ScalarProperty Name="RegionNumber" ColumnName="RegionNumber" />
+          <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+          <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sex">
+      <EntityTypeMapping TypeName="VRSystemModel.Sex">
+        <MappingFragment StoreEntitySet="Sex">
+          <ScalarProperty Name="SexCode" ColumnName="SexCode" />
+          <ScalarProperty Name="SexName" ColumnName="SexName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Title">
+      <EntityTypeMapping TypeName="VRSystemModel.Title">
+        <MappingFragment StoreEntitySet="Title">
+          <ScalarProperty Name="TitleID" ColumnName="TitleID" />
+          <ScalarProperty Name="TitleTypeID" ColumnName="TitleTypeID" />
+          <ScalarProperty Name="TitleName" ColumnName="TitleName" />
+          <ScalarProperty Name="TitleAbbreviation" ColumnName="TitleAbbreviation" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TitleType">
+      <EntityTypeMapping TypeName="VRSystemModel.TitleType">
+        <MappingFragment StoreEntitySet="TitleType">
+          <ScalarProperty Name="TitleTypeID" ColumnName="TitleTypeID" />
+          <ScalarProperty Name="TitleTypeName" ColumnName="TitleTypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transaction">
+      <EntityTypeMapping TypeName="VRSystemModel.Transaction">
+        <MappingFragment StoreEntitySet="Transaction">
+          <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+          <ScalarProperty Name="WalletID" ColumnName="WalletID" />
+          <ScalarProperty Name="TransactionTypeID" ColumnName="TransactionTypeID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="IsCancelled" ColumnName="IsCancelled" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="VehicleID" ColumnName="VehicleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionEntity">
+      <EntityTypeMapping TypeName="VRSystemModel.TransactionEntity">
+        <MappingFragment StoreEntitySet="TransactionEntity">
+          <ScalarProperty Name="TransactionEntityTypeID" ColumnName="TransactionEntityTypeID" />
+          <ScalarProperty Name="UserEntityID" ColumnName="UserEntityID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="TransactionTypeID" ColumnName="TransactionTypeID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="EffectivityDate" ColumnName="EffectivityDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionEntityType">
+      <EntityTypeMapping TypeName="VRSystemModel.TransactionEntityType">
+        <MappingFragment StoreEntitySet="TransactionEntityType">
+          <ScalarProperty Name="TransactionEntityTypeID" ColumnName="TransactionEntityTypeID" />
+          <ScalarProperty Name="UserEntityID" ColumnName="UserEntityID" />
+          <ScalarProperty Name="TransactionTypeID" ColumnName="TransactionTypeID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="EffectivityDate" ColumnName="EffectivityDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionEntryType">
+      <EntityTypeMapping TypeName="VRSystemModel.TransactionEntryType">
+        <MappingFragment StoreEntitySet="TransactionEntryType">
+          <ScalarProperty Name="TransactionEntryTypeID" ColumnName="TransactionEntryTypeID" />
+          <ScalarProperty Name="TransactionEntryTypeName" ColumnName="TransactionEntryTypeName" />
+          <ScalarProperty Name="TransactionEntryMultiplier" ColumnName="TransactionEntryMultiplier" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Updatedy" ColumnName="Updatedy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionType">
+      <EntityTypeMapping TypeName="VRSystemModel.TransactionType">
+        <MappingFragment StoreEntitySet="TransactionType">
+          <ScalarProperty Name="TransactionTypeID" ColumnName="TransactionTypeID" />
+          <ScalarProperty Name="TransactionName" ColumnName="TransactionName" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="TransactionEntryTypeID" ColumnName="TransactionEntryTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="VRSystemModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="LTOUserTypeID" ColumnName="LTOUserTypeID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserEntityID" ColumnName="UserEntityID" />
+          <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+          <ScalarProperty Name="SubReferenceID" ColumnName="SubReferenceID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserEntity">
+      <EntityTypeMapping TypeName="VRSystemModel.UserEntity">
+        <MappingFragment StoreEntitySet="UserEntity">
+          <ScalarProperty Name="UserEntityID" ColumnName="UserEntityID" />
+          <ScalarProperty Name="UserEntityName" ColumnName="UserEntityName" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRole">
+      <EntityTypeMapping TypeName="VRSystemModel.UserRole">
+        <MappingFragment StoreEntitySet="UserRole">
+          <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
+          <ScalarProperty Name="UserRoleName" ColumnName="UserRoleName" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VehicleBodyType">
+      <EntityTypeMapping TypeName="VRSystemModel.VehicleBodyType">
+        <MappingFragment StoreEntitySet="VehicleBodyType">
+          <ScalarProperty Name="VehicleBodyTypeID" ColumnName="VehicleBodyTypeID" />
+          <ScalarProperty Name="VehicleBodyTypeName" ColumnName="VehicleBodyTypeName" />
+          <ScalarProperty Name="VehicleBodyAbbr" ColumnName="VehicleBodyAbbr" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VehicleClassification">
+      <EntityTypeMapping TypeName="VRSystemModel.VehicleClassification">
+        <MappingFragment StoreEntitySet="VehicleClassification">
+          <ScalarProperty Name="VehicleClassificationID" ColumnName="VehicleClassificationID" />
+          <ScalarProperty Name="VehicleClassificationName" ColumnName="VehicleClassificationName" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VehicleColor">
+      <EntityTypeMapping TypeName="VRSystemModel.VehicleColor">
+        <MappingFragment StoreEntitySet="VehicleColor">
+          <ScalarProperty Name="VehicleColorID" ColumnName="VehicleColorID" />
+          <ScalarProperty Name="VehicleColorName" ColumnName="VehicleColorName" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VehicleFuelType">
+      <EntityTypeMapping TypeName="VRSystemModel.VehicleFuelType">
+        <MappingFragment StoreEntitySet="VehicleFuelType">
+          <ScalarProperty Name="VehicleFuelTypeID" ColumnName="VehicleFuelTypeID" />
+          <ScalarProperty Name="VehicleFuelTypeName" ColumnName="VehicleFuelTypeName" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VehicleInfo">
+      <EntityTypeMapping TypeName="VRSystemModel.VehicleInfo">
+        <MappingFragment StoreEntitySet="VehicleInfo">
+          <ScalarProperty Name="CSRSubmitted" ColumnName="CSRSubmitted" />
+          <ScalarProperty Name="InformalEntryNumberChassis" ColumnName="InformalEntryNumberChassis" />
+          <ScalarProperty Name="InformalEntryNumberEngine" ColumnName="InformalEntryNumberEngine" />
+          <ScalarProperty Name="AirconTypeID" ColumnName="AirconTypeID" />
+          <ScalarProperty Name="PNPReceiptContentType" ColumnName="PNPReceiptContentType" />
+          <ScalarProperty Name="PNPReceipt" ColumnName="PNPReceipt" />
+          <ScalarProperty Name="PNPReceiptReferenceNumber" ColumnName="PNPReceiptReferenceNumber" />
+          <ScalarProperty Name="AutoPNP" ColumnName="AutoPNP" />
+          <ScalarProperty Name="HPGControlNumber" ColumnName="HPGControlNumber" />
+          <ScalarProperty Name="CoCVerified" ColumnName="CoCVerified" />
+          <ScalarProperty Name="VehicleID" ColumnName="VehicleID" />
+          <ScalarProperty Name="MAIID" ColumnName="MAIID" />
+          <ScalarProperty Name="DealerID" ColumnName="DealerID" />
+          <ScalarProperty Name="DealerBranchID" ColumnName="DealerBranchID" />
+          <ScalarProperty Name="VehicleMakeID" ColumnName="VehicleMakeID" />
+          <ScalarProperty Name="VehicleModelID" ColumnName="VehicleModelID" />
+          <ScalarProperty Name="EngineNumber" ColumnName="EngineNumber" />
+          <ScalarProperty Name="CPNumber" ColumnName="CPNumber" />
+          <ScalarProperty Name="DateIssued1" ColumnName="DateIssued1" />
+          <ScalarProperty Name="ChassisNumber" ColumnName="ChassisNumber" />
+          <ScalarProperty Name="CPNumber2" ColumnName="CPNumber2" />
+          <ScalarProperty Name="DateIssued2" ColumnName="DateIssued2" />
+          <ScalarProperty Name="BodyIDNumber" ColumnName="BodyIDNumber" />
+          <ScalarProperty Name="BIRCCMV" ColumnName="BIRCCMV" />
+          <ScalarProperty Name="DateIssued3" ColumnName="DateIssued3" />
+          <ScalarProperty Name="VehicleColorID" ColumnName="VehicleColorID" />
+          <ScalarProperty Name="PistonDisplacement" ColumnName="PistonDisplacement" />
+          <ScalarProperty Name="VehicleFuelTypeID" ColumnName="VehicleFuelTypeID" />
+          <ScalarProperty Name="Cylinders" ColumnName="Cylinders" />
+          <ScalarProperty Name="Series" ColumnName="Series" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="GrossVehicleWeight" ColumnName="GrossVehicleWeight" />
+          <ScalarProperty Name="FrontTiresNumber" ColumnName="FrontTiresNumber" />
+          <ScalarProperty Name="RearTiresNumber" ColumnName="RearTiresNumber" />
+          <ScalarProperty Name="TaxType" ColumnName="TaxType" />
+          <ScalarProperty Name="TaxAmount" ColumnName="TaxAmount" />
+          <ScalarProperty Name="AirconType" ColumnName="AirconType" />
+          <ScalarProperty Name="ConductionSticker" ColumnName="ConductionSticker" />
+          <ScalarProperty Name="COCNo" ColumnName="COCNo" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="DatePrepared" ColumnName="DatePrepared" />
+          <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+          <ScalarProperty Name="CSRNumber" ColumnName="CSRNumber" />
+          <ScalarProperty Name="ReportEntryID" ColumnName="ReportEntryID" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ReportDate" ColumnName="ReportDate" />
+          <ScalarProperty Name="AccreditationNumber" ColumnName="AccreditationNumber" />
+          <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+          <ScalarProperty Name="BOCCertificateOfPayment" ColumnName="BOCCertificateOfPayment" />
+          <ScalarProperty Name="CertificateOfStockReport" ColumnName="CertificateOfStockReport" />
+          <ScalarProperty Name="CertificateOfConformity" ColumnName="CertificateOfConformity" />
+          <ScalarProperty Name="StencilOfEngine" ColumnName="StencilOfEngine" />
+          <ScalarProperty Name="StencilOfChasis" ColumnName="StencilOfChasis" />
+          <ScalarProperty Name="PNPClearance" ColumnName="PNPClearance" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="VehicleBodyTypeID" ColumnName="VehicleBodyTypeID" />
+          <ScalarProperty Name="BOCContentType" ColumnName="BOCContentType" />
+          <ScalarProperty Name="CSRContentType" ColumnName="CSRContentType" />
+          <ScalarProperty Name="COCContentType" ColumnName="COCContentType" />
+          <ScalarProperty Name="SOEContentType" ColumnName="SOEContentType" />
+          <ScalarProperty Name="SOCContentType" ColumnName="SOCContentType" />
+          <ScalarProperty Name="PNPContentType" ColumnName="PNPContentType" />
+          <ScalarProperty Name="BOCCertificateOfPayment2" ColumnName="BOCCertificateOfPayment2" />
+          <ScalarProperty Name="BOCContentType2" ColumnName="BOCContentType2" />
+          <ScalarProperty Name="LTOSubmitted" ColumnName="LTOSubmitted" />
+          <ScalarProperty Name="Assigned" ColumnName="Assigned" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VehicleMake">
+      <EntityTypeMapping TypeName="VRSystemModel.VehicleMake">
+        <MappingFragment StoreEntitySet="VehicleMake">
+          <ScalarProperty Name="VehicleMakeID" ColumnName="VehicleMakeID" />
+          <ScalarProperty Name="VehicleMakeName" ColumnName="VehicleMakeName" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VehicleModel">
+      <EntityTypeMapping TypeName="VRSystemModel.VehicleModel">
+        <MappingFragment StoreEntitySet="VehicleModel">
+          <ScalarProperty Name="VehicleModelID" ColumnName="VehicleModelID" />
+          <ScalarProperty Name="VehicleMakeID" ColumnName="VehicleMakeID" />
+          <ScalarProperty Name="VehicleModelName" ColumnName="VehicleModelName" />
+          <ScalarProperty Name="Variant" ColumnName="Variant" />
+          <ScalarProperty Name="YearOfMake" ColumnName="YearOfMake" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="VehicleClassificationID" ColumnName="VehicleClassificationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wallet">
+      <EntityTypeMapping TypeName="VRSystemModel.Wallet">
+        <MappingFragment StoreEntitySet="Wallet">
+          <ScalarProperty Name="Threshold" ColumnName="Threshold" />
+          <ScalarProperty Name="WalletID" ColumnName="WalletID" />
+          <ScalarProperty Name="UserEntityID" ColumnName="UserEntityID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwDealerBranchList">
+      <EntityTypeMapping TypeName="VRSystemModel.vwDealerBranchList">
+        <MappingFragment StoreEntitySet="vwDealerBranchList">
+          <ScalarProperty Name="BarangayName" ColumnName="BarangayName" />
+          <ScalarProperty Name="BarangayID" ColumnName="BarangayID" />
+          <ScalarProperty Name="DealerBranchID" ColumnName="DealerBranchID" />
+          <ScalarProperty Name="DealerID" ColumnName="DealerID" />
+          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+          <ScalarProperty Name="DealerBranchName" ColumnName="DealerBranchName" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="BusinessPhone" ColumnName="BusinessPhone" />
+          <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+          <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+          <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="AccreditationNumber" ColumnName="AccreditationNumber" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwDealerInvoice">
+      <EntityTypeMapping TypeName="VRSystemModel.vwDealerInvoice">
+        <MappingFragment StoreEntitySet="vwDealerInvoice">
+          <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+          <ScalarProperty Name="DealerBranchID" ColumnName="DealerBranchID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+          <ScalarProperty Name="InvoiceByte" ColumnName="InvoiceByte" />
+          <ScalarProperty Name="COC" ColumnName="COC" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="TitleID" ColumnName="TitleID" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="CorpName" ColumnName="CorpName" />
+          <ScalarProperty Name="TitleName" ColumnName="TitleName" />
+          <ScalarProperty Name="TitleAbbreviation" ColumnName="TitleAbbreviation" />
+          <ScalarProperty Name="DealerBranchName" ColumnName="DealerBranchName" />
+          <ScalarProperty Name="DealerID" ColumnName="DealerID" />
+          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+          <ScalarProperty Name="COCByte" ColumnName="COCByte" />
+          <ScalarProperty Name="InsuranceID" ColumnName="InsuranceID" />
+          <ScalarProperty Name="InsuranceName" ColumnName="InsuranceName" />
+          <ScalarProperty Name="VehicleID" ColumnName="VehicleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwDealerList">
+      <EntityTypeMapping TypeName="VRSystemModel.vwDealerList">
+        <MappingFragment StoreEntitySet="vwDealerList">
+          <ScalarProperty Name="BarangayName" ColumnName="BarangayName" />
+          <ScalarProperty Name="BarangayID" ColumnName="BarangayID" />
+          <ScalarProperty Name="DealerID" ColumnName="DealerID" />
+          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="BusinessPhone" ColumnName="BusinessPhone" />
+          <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+          <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="LogoByte" ColumnName="LogoByte" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwDealerVehicleMake">
+      <EntityTypeMapping TypeName="VRSystemModel.vwDealerVehicleMake">
+        <MappingFragment StoreEntitySet="vwDealerVehicleMake">
+          <ScalarProperty Name="DealerVehicleMakeID" ColumnName="DealerVehicleMakeID" />
+          <ScalarProperty Name="DealerID" ColumnName="DealerID" />
+          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+          <ScalarProperty Name="VehicleMakeID" ColumnName="VehicleMakeID" />
+          <ScalarProperty Name="VehicleMakeName" ColumnName="VehicleMakeName" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwMAIList">
+      <EntityTypeMapping TypeName="VRSystemModel.vwMAIList">
+        <MappingFragment StoreEntitySet="vwMAIList">
+          <ScalarProperty Name="BarangayName" ColumnName="BarangayName" />
+          <ScalarProperty Name="BarangayID" ColumnName="BarangayID" />
+          <ScalarProperty Name="MAIID" ColumnName="MAIID" />
+          <ScalarProperty Name="MAITypeName" ColumnName="MAITypeName" />
+          <ScalarProperty Name="MAIName" ColumnName="MAIName" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="BusinessPhone" ColumnName="BusinessPhone" />
+          <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+          <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="LogoByte" ColumnName="LogoByte" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="AccreditationNumber" ColumnName="AccreditationNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwMAIVehicleMake">
+      <EntityTypeMapping TypeName="VRSystemModel.vwMAIVehicleMake">
+        <MappingFragment StoreEntitySet="vwMAIVehicleMake">
+          <ScalarProperty Name="MAIID" ColumnName="MAIID" />
+          <ScalarProperty Name="MAIName" ColumnName="MAIName" />
+          <ScalarProperty Name="VehicleMakeID" ColumnName="VehicleMakeID" />
+          <ScalarProperty Name="VehicleMakeName" ColumnName="VehicleMakeName" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="MAIVehicleMakeID" ColumnName="MAIVehicleMakeID" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwProvinceCity">
+      <EntityTypeMapping TypeName="VRSystemModel.vwProvinceCity">
+        <MappingFragment StoreEntitySet="vwProvinceCity">
+          <ScalarProperty Name="CityNumber" ColumnName="CityNumber" />
+          <ScalarProperty Name="ProvinceNumber" ColumnName="ProvinceNumber" />
+          <ScalarProperty Name="ProvinceID" ColumnName="ProvinceID" />
+          <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwTransactionEntityList">
+      <EntityTypeMapping TypeName="VRSystemModel.vwTransactionEntityList">
+        <MappingFragment StoreEntitySet="vwTransactionEntityList">
+          <ScalarProperty Name="TransactionEntityTypeID" ColumnName="TransactionEntityTypeID" />
+          <ScalarProperty Name="UserEntityID" ColumnName="UserEntityID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="TransactionTypeID" ColumnName="TransactionTypeID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="EffectivityDate" ColumnName="EffectivityDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="TransactionName" ColumnName="TransactionName" />
+          <ScalarProperty Name="UserEntityName" ColumnName="UserEntityName" />
+          <ScalarProperty Name="EntityName" ColumnName="EntityName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwTransactionEntityType">
+      <EntityTypeMapping TypeName="VRSystemModel.vwTransactionEntityType">
+        <MappingFragment StoreEntitySet="vwTransactionEntityType">
+          <ScalarProperty Name="TransactionEntityTypeID" ColumnName="TransactionEntityTypeID" />
+          <ScalarProperty Name="UserEntityID" ColumnName="UserEntityID" />
+          <ScalarProperty Name="TransactionTypeID" ColumnName="TransactionTypeID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="EffectivityDate" ColumnName="EffectivityDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UserEntityName" ColumnName="UserEntityName" />
+          <ScalarProperty Name="TransactionName" ColumnName="TransactionName" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwTransactionTypeList">
+      <EntityTypeMapping TypeName="VRSystemModel.vwTransactionTypeList">
+        <MappingFragment StoreEntitySet="vwTransactionTypeList">
+          <ScalarProperty Name="TransactionTypeID" ColumnName="TransactionTypeID" />
+          <ScalarProperty Name="TransactionName" ColumnName="TransactionName" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="TransactionEntryTypeID" ColumnName="TransactionEntryTypeID" />
+          <ScalarProperty Name="TransactionEntryTypeName" ColumnName="TransactionEntryTypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwUserList">
+      <EntityTypeMapping TypeName="VRSystemModel.vwUserList">
+        <MappingFragment StoreEntitySet="vwUserList">
+          <ScalarProperty Name="LTOUserTypeID" ColumnName="LTOUserTypeID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserEntityID" ColumnName="UserEntityID" />
+          <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+          <ScalarProperty Name="SubReferenceID" ColumnName="SubReferenceID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="UserEntityName" ColumnName="UserEntityName" />
+          <ScalarProperty Name="UserRoleName" ColumnName="UserRoleName" />
+          <ScalarProperty Name="IsMain" ColumnName="IsMain" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwVehicleModel">
+      <EntityTypeMapping TypeName="VRSystemModel.vwVehicleModel">
+        <MappingFragment StoreEntitySet="vwVehicleModel">
+          <ScalarProperty Name="VehicleModelID" ColumnName="VehicleModelID" />
+          <ScalarProperty Name="VehicleMakeID" ColumnName="VehicleMakeID" />
+          <ScalarProperty Name="VehicleModelName" ColumnName="VehicleModelName" />
+          <ScalarProperty Name="Variant" ColumnName="Variant" />
+          <ScalarProperty Name="YearOfMake" ColumnName="YearOfMake" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="VehicleMakeName" ColumnName="VehicleMakeName" />
+          <ScalarProperty Name="VehicleClassificationID" ColumnName="VehicleClassificationID" />
+          <ScalarProperty Name="VehicleClassificationName" ColumnName="VehicleClassificationName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="spEntityWallet" FunctionName="VRSystemModel.Store.spEntityWallet">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="VRSystemModel.spEntityWallet_Result">
+          <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+          <ScalarProperty Name="TransactionName" ColumnName="TransactionName" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="TransactionEntryTypeName" ColumnName="TransactionEntryTypeName" />
+          <ScalarProperty Name="TransactionEntryMultiplier" ColumnName="TransactionEntryMultiplier" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="VehicleID" ColumnName="VehicleID" />
+          <ScalarProperty Name="ComputedAmount" ColumnName="ComputedAmount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spInsuranceDealer" FunctionName="VRSystemModel.Store.spInsuranceDealer">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="VRSystemModel.spInsuranceDealer_Result">
+          <ScalarProperty Name="InsuranceID" ColumnName="InsuranceID" />
+          <ScalarProperty Name="InsuranceName" ColumnName="InsuranceName" />
+          <ScalarProperty Name="DealerID" ColumnName="DealerID" />
+          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="BusinessPhone" ColumnName="BusinessPhone" />
+          <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+          <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="LogoByte" ColumnName="LogoByte" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="BatchDetails">
+      <EntityTypeMapping TypeName="VRSystemModel.BatchDetails">
+        <MappingFragment StoreEntitySet="BatchDetails">
+          <ScalarProperty Name="RejectedRemarks" ColumnName="RejectedRemarks" />
+          <ScalarProperty Name="RejectedDate" ColumnName="RejectedDate" />
+          <ScalarProperty Name="RejectedBy" ColumnName="RejectedBy" />
+          <ScalarProperty Name="Rejected" ColumnName="Rejected" />
+          <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+          <ScalarProperty Name="CompletedBy" ColumnName="CompletedBy" />
+          <ScalarProperty Name="Completed" ColumnName="Completed" />
+          <ScalarProperty Name="AssessedDate" ColumnName="AssessedDate" />
+          <ScalarProperty Name="AssessedBy" ColumnName="AssessedBy" />
+          <ScalarProperty Name="AssessedAmount" ColumnName="AssessedAmount" />
+          <ScalarProperty Name="Assessed" ColumnName="Assessed" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+          <ScalarProperty Name="VehicleID" ColumnName="VehicleID" />
+          <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+          <ScalarProperty Name="BatchDetailID" ColumnName="BatchDetailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BatchType">
+      <EntityTypeMapping TypeName="VRSystemModel.BatchType">
+        <MappingFragment StoreEntitySet="BatchType">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="BatchTypeDescription" ColumnName="BatchTypeDescription" />
+          <ScalarProperty Name="BatchTypeID" ColumnName="BatchTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BatchMaster">
+      <EntityTypeMapping TypeName="VRSystemModel.BatchMaster">
+        <MappingFragment StoreEntitySet="BatchMaster">
+          <ScalarProperty Name="LTOBranchID" ColumnName="LTOBranchID" />
+          <ScalarProperty Name="PaymentEPATFileType" ColumnName="PaymentEPATFileType" />
+          <ScalarProperty Name="PaymentEPATFileByte" ColumnName="PaymentEPATFileByte" />
+          <ScalarProperty Name="ReprocessedRemarks" ColumnName="ReprocessedRemarks" />
+          <ScalarProperty Name="ReprocessedDate" ColumnName="ReprocessedDate" />
+          <ScalarProperty Name="ReprocessedBy" ColumnName="ReprocessedBy" />
+          <ScalarProperty Name="Reprocessed" ColumnName="Reprocessed" />
+          <ScalarProperty Name="CancelledRemarks" ColumnName="CancelledRemarks" />
+          <ScalarProperty Name="CancelledDate" ColumnName="CancelledDate" />
+          <ScalarProperty Name="CancelledBy" ColumnName="CancelledBy" />
+          <ScalarProperty Name="Cancelled" ColumnName="Cancelled" />
+          <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+          <ScalarProperty Name="ReceivedBy" ColumnName="ReceivedBy" />
+          <ScalarProperty Name="Received" ColumnName="Received" />
+          <ScalarProperty Name="RejectedRemarks" ColumnName="RejectedRemarks" />
+          <ScalarProperty Name="RejectedDate" ColumnName="RejectedDate" />
+          <ScalarProperty Name="RejectedBy" ColumnName="RejectedBy" />
+          <ScalarProperty Name="Rejected" ColumnName="Rejected" />
+          <ScalarProperty Name="ForPickUpDate" ColumnName="ForPickUpDate" />
+          <ScalarProperty Name="ForPickUpBy" ColumnName="ForPickUpBy" />
+          <ScalarProperty Name="ForPickUp" ColumnName="ForPickUp" />
+          <ScalarProperty Name="DownloadedDate" ColumnName="DownloadedDate" />
+          <ScalarProperty Name="DownloadedBy" ColumnName="DownloadedBy" />
+          <ScalarProperty Name="Downloaded" ColumnName="Downloaded" />
+          <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+          <ScalarProperty Name="CompletedBy" ColumnName="CompletedBy" />
+          <ScalarProperty Name="Completed" ColumnName="Completed" />
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+          <ScalarProperty Name="PaymentBy" ColumnName="PaymentBy" />
+          <ScalarProperty Name="PaymentFileType" ColumnName="PaymentFileType" />
+          <ScalarProperty Name="PaymentFileByte" ColumnName="PaymentFileByte" />
+          <ScalarProperty Name="PaymentRef" ColumnName="PaymentRef" />
+          <ScalarProperty Name="AssessedDate" ColumnName="AssessedDate" />
+          <ScalarProperty Name="AssessedBy" ColumnName="AssessedBy" />
+          <ScalarProperty Name="AssessedAmount" ColumnName="AssessedAmount" />
+          <ScalarProperty Name="Assessed" ColumnName="Assessed" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserSubRef" ColumnName="UserSubRef" />
+          <ScalarProperty Name="UserReference" ColumnName="UserReference" />
+          <ScalarProperty Name="EntityTypeID" ColumnName="EntityTypeID" />
+          <ScalarProperty Name="BatchAmount" ColumnName="BatchAmount" />
+          <ScalarProperty Name="BatchCount" ColumnName="BatchCount" />
+          <ScalarProperty Name="DateSubmitted" ColumnName="DateSubmitted" />
+          <ScalarProperty Name="BatchDescription" ColumnName="BatchDescription" />
+          <ScalarProperty Name="ReferenceNo" ColumnName="ReferenceNo" />
+          <ScalarProperty Name="BatchTypeID" ColumnName="BatchTypeID" />
+          <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VehicleType">
+      <EntityTypeMapping TypeName="VRSystemModel.VehicleType">
+        <MappingFragment StoreEntitySet="VehicleType">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="VehicleTypeDescription" ColumnName="VehicleTypeDescription" />
+          <ScalarProperty Name="VehicleCode" ColumnName="VehicleCode" />
+          <ScalarProperty Name="VehicleTypeID" ColumnName="VehicleTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Barangay">
+      <EntityTypeMapping TypeName="VRSystemModel.Barangay">
+        <MappingFragment StoreEntitySet="Barangay">
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="BarangayName" ColumnName="BarangayName" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="BarangayID" ColumnName="BarangayID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MVPremium">
+      <EntityTypeMapping TypeName="VRSystemModel.MVPremium">
+        <MappingFragment StoreEntitySet="MVPremium">
+          <ScalarProperty Name="VehicleClassificationID" ColumnName="VehicleClassificationID" />
+          <ScalarProperty Name="VehicleTypeID" ColumnName="VehicleTypeID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CTPLTaxType">
+      <EntityTypeMapping TypeName="VRSystemModel.CTPLTaxType">
+        <MappingFragment StoreEntitySet="CTPLTaxType">
+          <ScalarProperty Name="CTPLTaxType1" ColumnName="CTPLTaxType" />
+          <ScalarProperty Name="CTPLTaxTypeID" ColumnName="CTPLTaxTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwDivisionsList">
+      <EntityTypeMapping TypeName="VRSystemModel.vwDivisionsList">
+        <MappingFragment StoreEntitySet="vwDivisionsList">
+          <ScalarProperty Name="BarangayName" ColumnName="BarangayName" />
+          <ScalarProperty Name="BarangayID" ColumnName="BarangayID" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="CityNumber" ColumnName="CityNumber" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
+          <ScalarProperty Name="ProvinceNumber" ColumnName="ProvinceNumber" />
+          <ScalarProperty Name="ProvinceID" ColumnName="ProvinceID" />
+          <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+          <ScalarProperty Name="RegionNumber" ColumnName="RegionNumber" />
+          <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwCustomerList">
+      <EntityTypeMapping TypeName="VRSystemModel.vwCustomerList">
+        <MappingFragment StoreEntitySet="vwCustomerList">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+          <ScalarProperty Name="RegionNumber" ColumnName="RegionNumber" />
+          <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+          <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+          <ScalarProperty Name="BarangayName" ColumnName="BarangayName" />
+          <ScalarProperty Name="TitleTypeID" ColumnName="TitleTypeID" />
+          <ScalarProperty Name="TitleID" ColumnName="TitleID" />
+          <ScalarProperty Name="ClientReferenceNumber" ColumnName="ClientReferenceNumber" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+          <ScalarProperty Name="CivilStatusName" ColumnName="CivilStatusName" />
+          <ScalarProperty Name="ProvinceNumber" ColumnName="ProvinceNumber" />
+          <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
+          <ScalarProperty Name="ProvinceID" ColumnName="ProvinceID" />
+          <ScalarProperty Name="CityNumber" ColumnName="CityNumber" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="SexName" ColumnName="SexName" />
+          <ScalarProperty Name="ContactPersonNumber" ColumnName="ContactPersonNumber" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="OrganizationTIN" ColumnName="OrganizationTIN" />
+          <ScalarProperty Name="OrganizationAddress" ColumnName="OrganizationAddress" />
+          <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+          <ScalarProperty Name="AdditionalAddress" ColumnName="AdditionalAddress" />
+          <ScalarProperty Name="TIN" ColumnName="TIN" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+          <ScalarProperty Name="Birthplace" ColumnName="Birthplace" />
+          <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="Barangay" ColumnName="Barangay" />
+          <ScalarProperty Name="StreetSubdivision" ColumnName="StreetSubdivision" />
+          <ScalarProperty Name="HouseBldgNumber" ColumnName="HouseBldgNumber" />
+          <ScalarProperty Name="Citizenship" ColumnName="Citizenship" />
+          <ScalarProperty Name="CivilStatusCode" ColumnName="CivilStatusCode" />
+          <ScalarProperty Name="SexCode" ColumnName="SexCode" />
+          <ScalarProperty Name="MothersName" ColumnName="MothersName" />
+          <ScalarProperty Name="FathersName" ColumnName="FathersName" />
+          <ScalarProperty Name="CorpName" ColumnName="CorpName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="DealerID" ColumnName="DealerID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LTO">
+      <EntityTypeMapping TypeName="VRSystemModel.LTO">
+        <MappingFragment StoreEntitySet="LTO">
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="LogoByte" ColumnName="LogoByte" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="BarangayID" ColumnName="BarangayID" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="ProvinceID" ColumnName="ProvinceID" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="TIN" ColumnName="TIN" />
+          <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+          <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+          <ScalarProperty Name="BusinessPhone" ColumnName="BusinessPhone" />
+          <ScalarProperty Name="EmailAddress2" ColumnName="EmailAddress2" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="LTOName" ColumnName="LTOName" />
+          <ScalarProperty Name="LTOID" ColumnName="LTOID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LTOBranch">
+      <EntityTypeMapping TypeName="VRSystemModel.LTOBranch">
+        <MappingFragment StoreEntitySet="LTOBranch">
+          <ScalarProperty Name="PNPEmail" ColumnName="PNPEmail" />
+          <ScalarProperty Name="PlateEmail" ColumnName="PlateEmail" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="IsMain" ColumnName="IsMain" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="BarangayID" ColumnName="BarangayID" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="ProvinceID" ColumnName="ProvinceID" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+          <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+          <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+          <ScalarProperty Name="BusinessPhone" ColumnName="BusinessPhone" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="LTOBranchName" ColumnName="LTOBranchName" />
+          <ScalarProperty Name="LTOID" ColumnName="LTOID" />
+          <ScalarProperty Name="LTOBranchID" ColumnName="LTOBranchID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwLTOList">
+      <EntityTypeMapping TypeName="VRSystemModel.vwLTOList">
+        <MappingFragment StoreEntitySet="vwLTOList">
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="LogoByte" ColumnName="LogoByte" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="BarangayID" ColumnName="BarangayID" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="ProvinceID" ColumnName="ProvinceID" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="TIN" ColumnName="TIN" />
+          <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+          <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+          <ScalarProperty Name="BusinessPhone" ColumnName="BusinessPhone" />
+          <ScalarProperty Name="EmailAddress2" ColumnName="EmailAddress2" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="LTOName" ColumnName="LTOName" />
+          <ScalarProperty Name="LTOID" ColumnName="LTOID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AirconType">
+      <EntityTypeMapping TypeName="VRSystemModel.AirconType">
+        <MappingFragment StoreEntitySet="AirconType">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="CreatedByDate" ColumnName="CreatedByDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="AirconTypeDescription" ColumnName="AirconTypeDescription" />
+          <ScalarProperty Name="AirconTypeReference" ColumnName="AirconTypeReference" />
+          <ScalarProperty Name="AirconTypeID" ColumnName="AirconTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AuditLogin">
+      <EntityTypeMapping TypeName="VRSystemModel.AuditLogin">
+        <MappingFragment StoreEntitySet="AuditLogin">
+          <ScalarProperty Name="LoginDate" ColumnName="LoginDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="AuditLoginID" ColumnName="AuditLoginID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DealerInvoice">
+      <EntityTypeMapping TypeName="VRSystemModel.DealerInvoice">
+        <MappingFragment StoreEntitySet="DealerInvoice">
+          <ScalarProperty Name="COCLGT" ColumnName="COCLGT" />
+          <ScalarProperty Name="COCDST" ColumnName="COCDST" />
+          <ScalarProperty Name="COCVAT" ColumnName="COCVAT" />
+          <ScalarProperty Name="COCBasicPremium" ColumnName="COCBasicPremium" />
+          <ScalarProperty Name="COCAuthenticationFee" ColumnName="COCAuthenticationFee" />
+          <ScalarProperty Name="COCTaxes" ColumnName="COCTaxes" />
+          <ScalarProperty Name="AutoGenerateCOC" ColumnName="AutoGenerateCOC" />
+          <ScalarProperty Name="FinancialInstitution" ColumnName="FinancialInstitution" />
+          <ScalarProperty Name="Encumbered" ColumnName="Encumbered" />
+          <ScalarProperty Name="AffidavitOfConversionByte" ColumnName="AffidavitOfConversionByte" />
+          <ScalarProperty Name="AffidavitOfConversionContentType" ColumnName="AffidavitOfConversionContentType" />
+          <ScalarProperty Name="AffidavitOfConversion" ColumnName="AffidavitOfConversion" />
+          <ScalarProperty Name="COCPremium" ColumnName="COCPremium" />
+          <ScalarProperty Name="COCExpirationDate" ColumnName="COCExpirationDate" />
+          <ScalarProperty Name="COCInceptionDate" ColumnName="COCInceptionDate" />
+          <ScalarProperty Name="TaxTypeID" ColumnName="TaxTypeID" />
+          <ScalarProperty Name="VehicleClassificationID" ColumnName="VehicleClassificationID" />
+          <ScalarProperty Name="VehicleTypeID" ColumnName="VehicleTypeID" />
+          <ScalarProperty Name="COCPolicyNumber" ColumnName="COCPolicyNumber" />
+          <ScalarProperty Name="COCContentType" ColumnName="COCContentType" />
+          <ScalarProperty Name="InvoiceContentType" ColumnName="InvoiceContentType" />
+          <ScalarProperty Name="InsuranceID" ColumnName="InsuranceID" />
+          <ScalarProperty Name="PreferredEndingPlateNumber" ColumnName="PreferredEndingPlateNumber" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="VehicleCost" ColumnName="VehicleCost" />
+          <ScalarProperty Name="VehicleID" ColumnName="VehicleID" />
+          <ScalarProperty Name="COCAuthenticationCode" ColumnName="COCAuthenticationCode" />
+          <ScalarProperty Name="COCByte" ColumnName="COCByte" />
+          <ScalarProperty Name="COC" ColumnName="COC" />
+          <ScalarProperty Name="InvoiceByte" ColumnName="InvoiceByte" />
+          <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+          <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="DealerBranchID" ColumnName="DealerBranchID" />
+          <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LTOUserType">
+      <EntityTypeMapping TypeName="VRSystemModel.LTOUserType">
+        <MappingFragment StoreEntitySet="LTOUserType">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="LTOUserTypeName" ColumnName="LTOUserTypeName" />
+          <ScalarProperty Name="LTOUserTypeID" ColumnName="LTOUserTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionEntityBranch">
+      <EntityTypeMapping TypeName="VRSystemModel.TransactionEntityBranch">
+        <MappingFragment StoreEntitySet="TransactionEntityBranch">
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="EffectivityDate" ColumnName="EffectivityDate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="TransactionTypeID" ColumnName="TransactionTypeID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="UserEntityID" ColumnName="UserEntityID" />
+          <ScalarProperty Name="TransactionEntityBranchID" ColumnName="TransactionEntityBranchID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwTransactionEntityBranchList">
+      <EntityTypeMapping TypeName="VRSystemModel.vwTransactionEntityBranchList">
+        <MappingFragment StoreEntitySet="vwTransactionEntityBranchList">
+          <ScalarProperty Name="EntityBranchName" ColumnName="EntityBranchName" />
+          <ScalarProperty Name="EntityName" ColumnName="EntityName" />
+          <ScalarProperty Name="UserEntityName" ColumnName="UserEntityName" />
+          <ScalarProperty Name="TransactionName" ColumnName="TransactionName" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="EffectivityDate" ColumnName="EffectivityDate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="TransactionTypeID" ColumnName="TransactionTypeID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="UserEntityID" ColumnName="UserEntityID" />
+          <ScalarProperty Name="TransactionEntityBranchID" ColumnName="TransactionEntityBranchID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwVehicleList">
+      <EntityTypeMapping TypeName="VRSystemModel.vwVehicleList">
+        <MappingFragment StoreEntitySet="vwVehicleList">
+          <ScalarProperty Name="CSRSubmitted" ColumnName="CSRSubmitted" />
+          <ScalarProperty Name="PNPReceiptReferenceNumber" ColumnName="PNPReceiptReferenceNumber" />
+          <ScalarProperty Name="AutoPNP" ColumnName="AutoPNP" />
+          <ScalarProperty Name="HPGControlNumber" ColumnName="HPGControlNumber" />
+          <ScalarProperty Name="Assigned" ColumnName="Assigned" />
+          <ScalarProperty Name="LTOSubmitted" ColumnName="LTOSubmitted" />
+          <ScalarProperty Name="PNPClearance" ColumnName="PNPClearance" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="VehicleBodyAbbr" ColumnName="VehicleBodyAbbr" />
+          <ScalarProperty Name="VehicleBodyTypeName" ColumnName="VehicleBodyTypeName" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="VehicleFuelTypeName" ColumnName="VehicleFuelTypeName" />
+          <ScalarProperty Name="VehicleColorName" ColumnName="VehicleColorName" />
+          <ScalarProperty Name="YearOfMake" ColumnName="YearOfMake" />
+          <ScalarProperty Name="Variant" ColumnName="Variant" />
+          <ScalarProperty Name="VehicleModelName" ColumnName="VehicleModelName" />
+          <ScalarProperty Name="VehicleMakeName" ColumnName="VehicleMakeName" />
+          <ScalarProperty Name="DealerBranchName" ColumnName="DealerBranchName" />
+          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+          <ScalarProperty Name="MAIName" ColumnName="MAIName" />
+          <ScalarProperty Name="StencilOfChasis" ColumnName="StencilOfChasis" />
+          <ScalarProperty Name="StencilOfEngine" ColumnName="StencilOfEngine" />
+          <ScalarProperty Name="CertificateOfConformity" ColumnName="CertificateOfConformity" />
+          <ScalarProperty Name="CertificateOfStockReport" ColumnName="CertificateOfStockReport" />
+          <ScalarProperty Name="BOCCertificateOfPayment" ColumnName="BOCCertificateOfPayment" />
+          <ScalarProperty Name="CSRNumber" ColumnName="CSRNumber" />
+          <ScalarProperty Name="DatePrepared" ColumnName="DatePrepared" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="COCNo" ColumnName="COCNo" />
+          <ScalarProperty Name="ConductionSticker" ColumnName="ConductionSticker" />
+          <ScalarProperty Name="AirconType" ColumnName="AirconType" />
+          <ScalarProperty Name="TaxAmount" ColumnName="TaxAmount" />
+          <ScalarProperty Name="TaxType" ColumnName="TaxType" />
+          <ScalarProperty Name="RearTiresNumber" ColumnName="RearTiresNumber" />
+          <ScalarProperty Name="FrontTiresNumber" ColumnName="FrontTiresNumber" />
+          <ScalarProperty Name="GrossVehicleWeight" ColumnName="GrossVehicleWeight" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Series" ColumnName="Series" />
+          <ScalarProperty Name="Cylinders" ColumnName="Cylinders" />
+          <ScalarProperty Name="VehicleFuelTypeID" ColumnName="VehicleFuelTypeID" />
+          <ScalarProperty Name="PistonDisplacement" ColumnName="PistonDisplacement" />
+          <ScalarProperty Name="VehicleColorID" ColumnName="VehicleColorID" />
+          <ScalarProperty Name="DateIssued3" ColumnName="DateIssued3" />
+          <ScalarProperty Name="BIRCCMV" ColumnName="BIRCCMV" />
+          <ScalarProperty Name="BodyIDNumber" ColumnName="BodyIDNumber" />
+          <ScalarProperty Name="DateIssued2" ColumnName="DateIssued2" />
+          <ScalarProperty Name="CPNumber2" ColumnName="CPNumber2" />
+          <ScalarProperty Name="ChassisNumber" ColumnName="ChassisNumber" />
+          <ScalarProperty Name="DateIssued1" ColumnName="DateIssued1" />
+          <ScalarProperty Name="CPNumber" ColumnName="CPNumber" />
+          <ScalarProperty Name="EngineNumber" ColumnName="EngineNumber" />
+          <ScalarProperty Name="VehicleModelID" ColumnName="VehicleModelID" />
+          <ScalarProperty Name="VehicleMakeID" ColumnName="VehicleMakeID" />
+          <ScalarProperty Name="DealerBranchID" ColumnName="DealerBranchID" />
+          <ScalarProperty Name="DealerID" ColumnName="DealerID" />
+          <ScalarProperty Name="MAIID" ColumnName="MAIID" />
+          <ScalarProperty Name="VehicleID" ColumnName="VehicleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

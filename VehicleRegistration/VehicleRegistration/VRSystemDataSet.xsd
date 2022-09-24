@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="VRSystemDataSet" targetNamespace="http://tempuri.org/VRSystemDataSet.xsd" xmlns:mstns="http://tempuri.org/VRSystemDataSet.xsd" xmlns="http://tempuri.org/VRSystemDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="VRSystemConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="VRSystemConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.VRSystemConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vwVehicleListTableAdapter" GeneratorDataComponentClassName="vwVehicleListTableAdapter" Name="vwVehicleList" UserDataComponentName="vwVehicleListTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="VRSystemConnectionString (Web.config)" DbObjectName="VRSystem.dbo.vwVehicleList" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT VehicleID, MAIID, DealerID, DealerBranchID, VehicleMakeID, VehicleModelID, EngineNumber, CPNumber, DateIssued1, ChassisNumber, CPNumber2, DateIssued2, BodyIDNumber, BIRCCMV, DateIssued3, VehicleColorID, PistonDisplacement, VehicleFuelTypeID, Cylinders, Series, Year, GrossVehicleWeight, FrontTiresNumber, RearTiresNumber, TaxType, TaxAmount, AirconType, ConductionSticker, COCNo, Remarks, DatePrepared, CSRNumber, BOCCertificateOfPayment, CertificateOfStockReport, CertificateOfConformity, StencilOfEngine, StencilOfChasis, MAIName, DealerName, DealerBranchName, VehicleMakeName, VehicleModelName, Variant, YearOfMake, VehicleColorName, VehicleFuelTypeName, Active, CreatedBy, VehicleBodyTypeName, VehicleBodyAbbr, CreatedDate, PNPClearance, LTOSubmitted, Assigned FROM dbo.vwVehicleList</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="VehicleID" DataSetColumn="VehicleID" />
+              <Mapping SourceColumn="MAIID" DataSetColumn="MAIID" />
+              <Mapping SourceColumn="DealerID" DataSetColumn="DealerID" />
+              <Mapping SourceColumn="DealerBranchID" DataSetColumn="DealerBranchID" />
+              <Mapping SourceColumn="VehicleMakeID" DataSetColumn="VehicleMakeID" />
+              <Mapping SourceColumn="VehicleModelID" DataSetColumn="VehicleModelID" />
+              <Mapping SourceColumn="EngineNumber" DataSetColumn="EngineNumber" />
+              <Mapping SourceColumn="CPNumber" DataSetColumn="CPNumber" />
+              <Mapping SourceColumn="DateIssued1" DataSetColumn="DateIssued1" />
+              <Mapping SourceColumn="ChassisNumber" DataSetColumn="ChassisNumber" />
+              <Mapping SourceColumn="CPNumber2" DataSetColumn="CPNumber2" />
+              <Mapping SourceColumn="DateIssued2" DataSetColumn="DateIssued2" />
+              <Mapping SourceColumn="BodyIDNumber" DataSetColumn="BodyIDNumber" />
+              <Mapping SourceColumn="BIRCCMV" DataSetColumn="BIRCCMV" />
+              <Mapping SourceColumn="DateIssued3" DataSetColumn="DateIssued3" />
+              <Mapping SourceColumn="VehicleColorID" DataSetColumn="VehicleColorID" />
+              <Mapping SourceColumn="PistonDisplacement" DataSetColumn="PistonDisplacement" />
+              <Mapping SourceColumn="VehicleFuelTypeID" DataSetColumn="VehicleFuelTypeID" />
+              <Mapping SourceColumn="Cylinders" DataSetColumn="Cylinders" />
+              <Mapping SourceColumn="Series" DataSetColumn="Series" />
+              <Mapping SourceColumn="Year" DataSetColumn="Year" />
+              <Mapping SourceColumn="GrossVehicleWeight" DataSetColumn="GrossVehicleWeight" />
+              <Mapping SourceColumn="FrontTiresNumber" DataSetColumn="FrontTiresNumber" />
+              <Mapping SourceColumn="RearTiresNumber" DataSetColumn="RearTiresNumber" />
+              <Mapping SourceColumn="TaxType" DataSetColumn="TaxType" />
+              <Mapping SourceColumn="TaxAmount" DataSetColumn="TaxAmount" />
+              <Mapping SourceColumn="AirconType" DataSetColumn="AirconType" />
+              <Mapping SourceColumn="ConductionSticker" DataSetColumn="ConductionSticker" />
+              <Mapping SourceColumn="COCNo" DataSetColumn="COCNo" />
+              <Mapping SourceColumn="Remarks" DataSetColumn="Remarks" />
+              <Mapping SourceColumn="DatePrepared" DataSetColumn="DatePrepared" />
+              <Mapping SourceColumn="CSRNumber" DataSetColumn="CSRNumber" />
+              <Mapping SourceColumn="BOCCertificateOfPayment" DataSetColumn="BOCCertificateOfPayment" />
+              <Mapping SourceColumn="CertificateOfStockReport" DataSetColumn="CertificateOfStockReport" />
+              <Mapping SourceColumn="CertificateOfConformity" DataSetColumn="CertificateOfConformity" />
+              <Mapping SourceColumn="StencilOfEngine" DataSetColumn="StencilOfEngine" />
+              <Mapping SourceColumn="StencilOfChasis" DataSetColumn="StencilOfChasis" />
+              <Mapping SourceColumn="MAIName" DataSetColumn="MAIName" />
+              <Mapping SourceColumn="DealerName" DataSetColumn="DealerName" />
+              <Mapping SourceColumn="DealerBranchName" DataSetColumn="DealerBranchName" />
+              <Mapping SourceColumn="VehicleMakeName" DataSetColumn="VehicleMakeName" />
+              <Mapping SourceColumn="VehicleModelName" DataSetColumn="VehicleModelName" />
+              <Mapping SourceColumn="Variant" DataSetColumn="Variant" />
+              <Mapping SourceColumn="YearOfMake" DataSetColumn="YearOfMake" />
+              <Mapping SourceColumn="VehicleColorName" DataSetColumn="VehicleColorName" />
+              <Mapping SourceColumn="VehicleFuelTypeName" DataSetColumn="VehicleFuelTypeName" />
+              <Mapping SourceColumn="Active" DataSetColumn="Active" />
+              <Mapping SourceColumn="CreatedBy" DataSetColumn="CreatedBy" />
+              <Mapping SourceColumn="VehicleBodyTypeName" DataSetColumn="VehicleBodyTypeName" />
+              <Mapping SourceColumn="VehicleBodyAbbr" DataSetColumn="VehicleBodyAbbr" />
+              <Mapping SourceColumn="CreatedDate" DataSetColumn="CreatedDate" />
+              <Mapping SourceColumn="PNPClearance" DataSetColumn="PNPClearance" />
+              <Mapping SourceColumn="LTOSubmitted" DataSetColumn="LTOSubmitted" />
+              <Mapping SourceColumn="Assigned" DataSetColumn="Assigned" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="VRSystemDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="VRSystemDataSet" msprop:Generator_UserDSName="VRSystemDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="vwVehicleList" msprop:Generator_TableClassName="vwVehicleListDataTable" msprop:Generator_TableVarName="tablevwVehicleList" msprop:Generator_TablePropName="vwVehicleList" msprop:Generator_RowDeletingName="vwVehicleListRowDeleting" msprop:Generator_RowChangingName="vwVehicleListRowChanging" msprop:Generator_RowEvHandlerName="vwVehicleListRowChangeEventHandler" msprop:Generator_RowDeletedName="vwVehicleListRowDeleted" msprop:Generator_UserTableName="vwVehicleList" msprop:Generator_RowChangedName="vwVehicleListRowChanged" msprop:Generator_RowEvArgName="vwVehicleListRowChangeEvent" msprop:Generator_RowClassName="vwVehicleListRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="VehicleID" msprop:Generator_ColumnVarNameInTable="columnVehicleID" msprop:Generator_ColumnPropNameInRow="VehicleID" msprop:Generator_ColumnPropNameInTable="VehicleIDColumn" msprop:Generator_UserColumnName="VehicleID" type="xs:int" />
+              <xs:element name="MAIID" msprop:Generator_ColumnVarNameInTable="columnMAIID" msprop:Generator_ColumnPropNameInRow="MAIID" msprop:Generator_ColumnPropNameInTable="MAIIDColumn" msprop:Generator_UserColumnName="MAIID" type="xs:int" />
+              <xs:element name="DealerID" msprop:Generator_ColumnVarNameInTable="columnDealerID" msprop:Generator_ColumnPropNameInRow="DealerID" msprop:Generator_ColumnPropNameInTable="DealerIDColumn" msprop:Generator_UserColumnName="DealerID" type="xs:int" minOccurs="0" />
+              <xs:element name="DealerBranchID" msprop:Generator_ColumnVarNameInTable="columnDealerBranchID" msprop:Generator_ColumnPropNameInRow="DealerBranchID" msprop:Generator_ColumnPropNameInTable="DealerBranchIDColumn" msprop:Generator_UserColumnName="DealerBranchID" type="xs:int" minOccurs="0" />
+              <xs:element name="VehicleMakeID" msprop:Generator_ColumnVarNameInTable="columnVehicleMakeID" msprop:Generator_ColumnPropNameInRow="VehicleMakeID" msprop:Generator_ColumnPropNameInTable="VehicleMakeIDColumn" msprop:Generator_UserColumnName="VehicleMakeID" type="xs:int" />
+              <xs:element name="VehicleModelID" msprop:Generator_ColumnVarNameInTable="columnVehicleModelID" msprop:Generator_ColumnPropNameInRow="VehicleModelID" msprop:Generator_ColumnPropNameInTable="VehicleModelIDColumn" msprop:Generator_UserColumnName="VehicleModelID" type="xs:int" minOccurs="0" />
+              <xs:element name="EngineNumber" msprop:Generator_ColumnVarNameInTable="columnEngineNumber" msprop:Generator_ColumnPropNameInRow="EngineNumber" msprop:Generator_ColumnPropNameInTable="EngineNumberColumn" msprop:Generator_UserColumnName="EngineNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CPNumber" msprop:Generator_ColumnVarNameInTable="columnCPNumber" msprop:Generator_ColumnPropNameInRow="CPNumber" msprop:Generator_ColumnPropNameInTable="CPNumberColumn" msprop:Generator_UserColumnName="CPNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DateIssued1" msprop:Generator_ColumnVarNameInTable="columnDateIssued1" msprop:Generator_ColumnPropNameInRow="DateIssued1" msprop:Generator_ColumnPropNameInTable="DateIssued1Column" msprop:Generator_UserColumnName="DateIssued1" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ChassisNumber" msprop:Generator_ColumnVarNameInTable="columnChassisNumber" msprop:Generator_ColumnPropNameInRow="ChassisNumber" msprop:Generator_ColumnPropNameInTable="ChassisNumberColumn" msprop:Generator_UserColumnName="ChassisNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CPNumber2" msprop:Generator_ColumnVarNameInTable="columnCPNumber2" msprop:Generator_ColumnPropNameInRow="CPNumber2" msprop:Generator_ColumnPropNameInTable="CPNumber2Column" msprop:Generator_UserColumnName="CPNumber2" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DateIssued2" msprop:Generator_ColumnVarNameInTable="columnDateIssued2" msprop:Generator_ColumnPropNameInRow="DateIssued2" msprop:Generator_ColumnPropNameInTable="DateIssued2Column" msprop:Generator_UserColumnName="DateIssued2" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="BodyIDNumber" msprop:Generator_ColumnVarNameInTable="columnBodyIDNumber" msprop:Generator_ColumnPropNameInRow="BodyIDNumber" msprop:Generator_ColumnPropNameInTable="BodyIDNumberColumn" msprop:Generator_UserColumnName="BodyIDNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BIRCCMV" msprop:Generator_ColumnVarNameInTable="columnBIRCCMV" msprop:Generator_ColumnPropNameInRow="BIRCCMV" msprop:Generator_ColumnPropNameInTable="BIRCCMVColumn" msprop:Generator_UserColumnName="BIRCCMV" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DateIssued3" msprop:Generator_ColumnVarNameInTable="columnDateIssued3" msprop:Generator_ColumnPropNameInRow="DateIssued3" msprop:Generator_ColumnPropNameInTable="DateIssued3Column" msprop:Generator_UserColumnName="DateIssued3" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="VehicleColorID" msprop:Generator_ColumnVarNameInTable="columnVehicleColorID" msprop:Generator_ColumnPropNameInRow="VehicleColorID" msprop:Generator_ColumnPropNameInTable="VehicleColorIDColumn" msprop:Generator_UserColumnName="VehicleColorID" type="xs:int" />
+              <xs:element name="PistonDisplacement" msprop:Generator_ColumnVarNameInTable="columnPistonDisplacement" msprop:Generator_ColumnPropNameInRow="PistonDisplacement" msprop:Generator_ColumnPropNameInTable="PistonDisplacementColumn" msprop:Generator_UserColumnName="PistonDisplacement" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VehicleFuelTypeID" msprop:Generator_ColumnVarNameInTable="columnVehicleFuelTypeID" msprop:Generator_ColumnPropNameInRow="VehicleFuelTypeID" msprop:Generator_ColumnPropNameInTable="VehicleFuelTypeIDColumn" msprop:Generator_UserColumnName="VehicleFuelTypeID" type="xs:int" />
+              <xs:element name="Cylinders" msprop:Generator_ColumnVarNameInTable="columnCylinders" msprop:Generator_ColumnPropNameInRow="Cylinders" msprop:Generator_ColumnPropNameInTable="CylindersColumn" msprop:Generator_UserColumnName="Cylinders" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Series" msprop:Generator_ColumnVarNameInTable="columnSeries" msprop:Generator_ColumnPropNameInRow="Series" msprop:Generator_ColumnPropNameInTable="SeriesColumn" msprop:Generator_UserColumnName="Series" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Year" msprop:Generator_ColumnVarNameInTable="columnYear" msprop:Generator_ColumnPropNameInRow="Year" msprop:Generator_ColumnPropNameInTable="YearColumn" msprop:Generator_UserColumnName="Year" type="xs:int" minOccurs="0" />
+              <xs:element name="GrossVehicleWeight" msprop:Generator_ColumnVarNameInTable="columnGrossVehicleWeight" msprop:Generator_ColumnPropNameInRow="GrossVehicleWeight" msprop:Generator_ColumnPropNameInTable="GrossVehicleWeightColumn" msprop:Generator_UserColumnName="GrossVehicleWeight" type="xs:decimal" minOccurs="0" />
+              <xs:element name="FrontTiresNumber" msprop:Generator_ColumnVarNameInTable="columnFrontTiresNumber" msprop:Generator_ColumnPropNameInRow="FrontTiresNumber" msprop:Generator_ColumnPropNameInTable="FrontTiresNumberColumn" msprop:Generator_UserColumnName="FrontTiresNumber" type="xs:int" minOccurs="0" />
+              <xs:element name="RearTiresNumber" msprop:Generator_ColumnVarNameInTable="columnRearTiresNumber" msprop:Generator_ColumnPropNameInRow="RearTiresNumber" msprop:Generator_ColumnPropNameInTable="RearTiresNumberColumn" msprop:Generator_UserColumnName="RearTiresNumber" type="xs:int" minOccurs="0" />
+              <xs:element name="TaxType" msprop:Generator_ColumnVarNameInTable="columnTaxType" msprop:Generator_ColumnPropNameInRow="TaxType" msprop:Generator_ColumnPropNameInTable="TaxTypeColumn" msprop:Generator_UserColumnName="TaxType" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TaxAmount" msprop:Generator_ColumnVarNameInTable="columnTaxAmount" msprop:Generator_ColumnPropNameInRow="TaxAmount" msprop:Generator_ColumnPropNameInTable="TaxAmountColumn" msprop:Generator_UserColumnName="TaxAmount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="AirconType" msprop:Generator_ColumnVarNameInTable="columnAirconType" msprop:Generator_ColumnPropNameInRow="AirconType" msprop:Generator_ColumnPropNameInTable="AirconTypeColumn" msprop:Generator_UserColumnName="AirconType" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ConductionSticker" msprop:Generator_ColumnVarNameInTable="columnConductionSticker" msprop:Generator_ColumnPropNameInRow="ConductionSticker" msprop:Generator_ColumnPropNameInTable="ConductionStickerColumn" msprop:Generator_UserColumnName="ConductionSticker" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COCNo" msprop:Generator_ColumnVarNameInTable="columnCOCNo" msprop:Generator_ColumnPropNameInRow="COCNo" msprop:Generator_ColumnPropNameInTable="COCNoColumn" msprop:Generator_UserColumnName="COCNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Remarks" msprop:Generator_ColumnVarNameInTable="columnRemarks" msprop:Generator_ColumnPropNameInRow="Remarks" msprop:Generator_ColumnPropNameInTable="RemarksColumn" msprop:Generator_UserColumnName="Remarks" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DatePrepared" msprop:Generator_ColumnVarNameInTable="columnDatePrepared" msprop:Generator_ColumnPropNameInRow="DatePrepared" msprop:Generator_ColumnPropNameInTable="DatePreparedColumn" msprop:Generator_UserColumnName="DatePrepared" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CSRNumber" msprop:Generator_ColumnVarNameInTable="columnCSRNumber" msprop:Generator_ColumnPropNameInRow="CSRNumber" msprop:Generator_ColumnPropNameInTable="CSRNumberColumn" msprop:Generator_UserColumnName="CSRNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BOCCertificateOfPayment" msprop:Generator_ColumnVarNameInTable="columnBOCCertificateOfPayment" msprop:Generator_ColumnPropNameInRow="BOCCertificateOfPayment" msprop:Generator_ColumnPropNameInTable="BOCCertificateOfPaymentColumn" msprop:Generator_UserColumnName="BOCCertificateOfPayment" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="CertificateOfStockReport" msprop:Generator_ColumnVarNameInTable="columnCertificateOfStockReport" msprop:Generator_ColumnPropNameInRow="CertificateOfStockReport" msprop:Generator_ColumnPropNameInTable="CertificateOfStockReportColumn" msprop:Generator_UserColumnName="CertificateOfStockReport" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="CertificateOfConformity" msprop:Generator_ColumnVarNameInTable="columnCertificateOfConformity" msprop:Generator_ColumnPropNameInRow="CertificateOfConformity" msprop:Generator_ColumnPropNameInTable="CertificateOfConformityColumn" msprop:Generator_UserColumnName="CertificateOfConformity" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="StencilOfEngine" msprop:Generator_ColumnVarNameInTable="columnStencilOfEngine" msprop:Generator_ColumnPropNameInRow="StencilOfEngine" msprop:Generator_ColumnPropNameInTable="StencilOfEngineColumn" msprop:Generator_UserColumnName="StencilOfEngine" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="StencilOfChasis" msprop:Generator_ColumnVarNameInTable="columnStencilOfChasis" msprop:Generator_ColumnPropNameInRow="StencilOfChasis" msprop:Generator_ColumnPropNameInTable="StencilOfChasisColumn" msprop:Generator_UserColumnName="StencilOfChasis" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="MAIName" msprop:Generator_ColumnVarNameInTable="columnMAIName" msprop:Generator_ColumnPropNameInRow="MAIName" msprop:Generator_ColumnPropNameInTable="MAINameColumn" msprop:Generator_UserColumnName="MAIName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DealerName" msprop:Generator_ColumnVarNameInTable="columnDealerName" msprop:Generator_ColumnPropNameInRow="DealerName" msprop:Generator_ColumnPropNameInTable="DealerNameColumn" msprop:Generator_UserColumnName="DealerName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DealerBranchName" msprop:Generator_ColumnVarNameInTable="columnDealerBranchName" msprop:Generator_ColumnPropNameInRow="DealerBranchName" msprop:Generator_ColumnPropNameInTable="DealerBranchNameColumn" msprop:Generator_UserColumnName="DealerBranchName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VehicleMakeName" msprop:Generator_ColumnVarNameInTable="columnVehicleMakeName" msprop:Generator_ColumnPropNameInRow="VehicleMakeName" msprop:Generator_ColumnPropNameInTable="VehicleMakeNameColumn" msprop:Generator_UserColumnName="VehicleMakeName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VehicleModelName" msprop:Generator_ColumnVarNameInTable="columnVehicleModelName" msprop:Generator_ColumnPropNameInRow="VehicleModelName" msprop:Generator_ColumnPropNameInTable="VehicleModelNameColumn" msprop:Generator_UserColumnName="VehicleModelName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Variant" msprop:Generator_ColumnVarNameInTable="columnVariant" msprop:Generator_ColumnPropNameInRow="Variant" msprop:Generator_ColumnPropNameInTable="VariantColumn" msprop:Generator_UserColumnName="Variant" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="YearOfMake" msprop:Generator_ColumnVarNameInTable="columnYearOfMake" msprop:Generator_ColumnPropNameInRow="YearOfMake" msprop:Generator_ColumnPropNameInTable="YearOfMakeColumn" msprop:Generator_UserColumnName="YearOfMake" type="xs:int" minOccurs="0" />
+              <xs:element name="VehicleColorName" msprop:Generator_ColumnVarNameInTable="columnVehicleColorName" msprop:Generator_ColumnPropNameInRow="VehicleColorName" msprop:Generator_ColumnPropNameInTable="VehicleColorNameColumn" msprop:Generator_UserColumnName="VehicleColorName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VehicleFuelTypeName" msprop:Generator_ColumnVarNameInTable="columnVehicleFuelTypeName" msprop:Generator_ColumnPropNameInRow="VehicleFuelTypeName" msprop:Generator_ColumnPropNameInTable="VehicleFuelTypeNameColumn" msprop:Generator_UserColumnName="VehicleFuelTypeName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Active" msprop:Generator_ColumnVarNameInTable="columnActive" msprop:Generator_ColumnPropNameInRow="Active" msprop:Generator_ColumnPropNameInTable="ActiveColumn" msprop:Generator_UserColumnName="Active" type="xs:boolean" />
+              <xs:element name="CreatedBy" msprop:Generator_ColumnVarNameInTable="columnCreatedBy" msprop:Generator_ColumnPropNameInRow="CreatedBy" msprop:Generator_ColumnPropNameInTable="CreatedByColumn" msprop:Generator_UserColumnName="CreatedBy" type="xs:int" />
+              <xs:element name="VehicleBodyTypeName" msprop:Generator_ColumnVarNameInTable="columnVehicleBodyTypeName" msprop:Generator_ColumnPropNameInRow="VehicleBodyTypeName" msprop:Generator_ColumnPropNameInTable="VehicleBodyTypeNameColumn" msprop:Generator_UserColumnName="VehicleBodyTypeName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VehicleBodyAbbr" msprop:Generator_ColumnVarNameInTable="columnVehicleBodyAbbr" msprop:Generator_ColumnPropNameInRow="VehicleBodyAbbr" msprop:Generator_ColumnPropNameInTable="VehicleBodyAbbrColumn" msprop:Generator_UserColumnName="VehicleBodyAbbr">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CreatedDate" msprop:Generator_ColumnVarNameInTable="columnCreatedDate" msprop:Generator_ColumnPropNameInRow="CreatedDate" msprop:Generator_ColumnPropNameInTable="CreatedDateColumn" msprop:Generator_UserColumnName="CreatedDate" type="xs:dateTime" />
+              <xs:element name="PNPClearance" msprop:Generator_ColumnVarNameInTable="columnPNPClearance" msprop:Generator_ColumnPropNameInRow="PNPClearance" msprop:Generator_ColumnPropNameInTable="PNPClearanceColumn" msprop:Generator_UserColumnName="PNPClearance" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="LTOSubmitted" msprop:Generator_ColumnVarNameInTable="columnLTOSubmitted" msprop:Generator_ColumnPropNameInRow="LTOSubmitted" msprop:Generator_ColumnPropNameInTable="LTOSubmittedColumn" msprop:Generator_UserColumnName="LTOSubmitted" type="xs:boolean" />
+              <xs:element name="Assigned" msprop:Generator_ColumnVarNameInTable="columnAssigned" msprop:Generator_ColumnPropNameInRow="Assigned" msprop:Generator_ColumnPropNameInTable="AssignedColumn" msprop:Generator_UserColumnName="Assigned" type="xs:boolean" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:vwVehicleList" />
+      <xs:field xpath="mstns:VehicleID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

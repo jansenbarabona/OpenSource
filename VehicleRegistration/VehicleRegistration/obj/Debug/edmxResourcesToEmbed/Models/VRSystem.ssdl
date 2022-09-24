@@ -1,0 +1,1935 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VRSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AirconType">
+    <Key>
+      <PropertyRef Name="AirconTypeID" />
+    </Key>
+    <Property Name="AirconTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AirconTypeReference" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AirconTypeDescription" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedByDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="nchar" MaxLength="10" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AuditLogin">
+    <Key>
+      <PropertyRef Name="AuditLoginID" />
+    </Key>
+    <Property Name="AuditLoginID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="LoginDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Barangay">
+    <Key>
+      <PropertyRef Name="BarangayID" />
+    </Key>
+    <Property Name="BarangayID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="BarangayName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="BatchDetails">
+    <Key>
+      <PropertyRef Name="BatchDetailID" />
+    </Key>
+    <Property Name="BatchDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BatchID" Type="int" Nullable="false" />
+    <Property Name="VehicleID" Type="int" Nullable="false" />
+    <Property Name="TransactionID" Type="int" />
+    <Property Name="Assessed" Type="bit" Nullable="false" />
+    <Property Name="AssessedAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AssessedBy" Type="int" />
+    <Property Name="AssessedDate" Type="datetime" />
+    <Property Name="Completed" Type="bit" Nullable="false" />
+    <Property Name="CompletedBy" Type="int" />
+    <Property Name="CompletedDate" Type="datetime" />
+    <Property Name="Rejected" Type="bit" Nullable="false" />
+    <Property Name="RejectedBy" Type="int" />
+    <Property Name="RejectedDate" Type="datetime" />
+    <Property Name="RejectedRemarks" Type="nvarchar" MaxLength="100" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BatchMaster">
+    <Key>
+      <PropertyRef Name="BatchID" />
+    </Key>
+    <Property Name="BatchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BatchTypeID" Type="int" Nullable="false" />
+    <Property Name="ReferenceNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="BatchDescription" Type="nvarchar" MaxLength="255" />
+    <Property Name="DateSubmitted" Type="datetime" />
+    <Property Name="BatchCount" Type="int" />
+    <Property Name="BatchAmount" Type="decimal" Precision="18" Scale="4" />
+    <Property Name="EntityTypeID" Type="int" Nullable="false" />
+    <Property Name="UserReference" Type="int" Nullable="false" />
+    <Property Name="UserSubRef" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="Assessed" Type="bit" Nullable="false" />
+    <Property Name="AssessedAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AssessedBy" Type="int" />
+    <Property Name="AssessedDate" Type="datetime" />
+    <Property Name="PaymentRef" Type="nvarchar" MaxLength="50" />
+    <Property Name="PaymentFileByte" Type="varbinary(max)" />
+    <Property Name="PaymentFileType" Type="nvarchar" MaxLength="50" />
+    <Property Name="PaymentBy" Type="int" />
+    <Property Name="PaymentDate" Type="datetime" />
+    <Property Name="PaymentEPATFileByte" Type="varbinary(max)" />
+    <Property Name="PaymentEPATFileType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Completed" Type="bit" Nullable="false" />
+    <Property Name="CompletedBy" Type="int" />
+    <Property Name="CompletedDate" Type="datetime" />
+    <Property Name="Downloaded" Type="bit" Nullable="false" />
+    <Property Name="DownloadedBy" Type="int" />
+    <Property Name="DownloadedDate" Type="datetime" />
+    <Property Name="ForPickUp" Type="bit" Nullable="false" />
+    <Property Name="ForPickUpBy" Type="int" />
+    <Property Name="ForPickUpDate" Type="datetime" />
+    <Property Name="Received" Type="bit" Nullable="false" />
+    <Property Name="ReceivedBy" Type="int" />
+    <Property Name="ReceivedDate" Type="datetime" />
+    <Property Name="Rejected" Type="bit" Nullable="false" />
+    <Property Name="RejectedBy" Type="int" />
+    <Property Name="RejectedDate" Type="datetime" />
+    <Property Name="RejectedRemarks" Type="nvarchar" MaxLength="100" />
+    <Property Name="Cancelled" Type="bit" Nullable="false" />
+    <Property Name="CancelledBy" Type="int" />
+    <Property Name="CancelledDate" Type="datetime" />
+    <Property Name="CancelledRemarks" Type="nvarchar" MaxLength="100" />
+    <Property Name="Reprocessed" Type="bit" Nullable="false" />
+    <Property Name="ReprocessedBy" Type="int" />
+    <Property Name="ReprocessedDate" Type="datetime" />
+    <Property Name="ReprocessedRemarks" Type="nvarchar" MaxLength="100" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="LTOBranchID" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'VRSystemTest.dbo.BatchType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="BatchType">
+    <Key>
+      <PropertyRef Name="BatchTypeID" />
+      <PropertyRef Name="BatchTypeDescription" />
+      <PropertyRef Name="Active" />
+    </Key>
+    <Property Name="BatchTypeID" Type="int" Nullable="false" />
+    <Property Name="BatchTypeDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityID" />
+    </Key>
+    <Property Name="CityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProvinceID" Type="int" Nullable="false" />
+    <Property Name="CityNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CityName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CivilStatus">
+    <Key>
+      <PropertyRef Name="CivilStatusCode" />
+    </Key>
+    <Property Name="CivilStatusCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="CivilStatusName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CTPL">
+    <Key>
+      <PropertyRef Name="CTPLID" />
+    </Key>
+    <Property Name="CTPLID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CTPLTermID" Type="int" Nullable="false" />
+    <Property Name="VehicleClassificationID" Type="int" Nullable="false" />
+    <Property Name="BasicPremium" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="VAT" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="DST" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="LGT" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="Taxes" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="AuthenticationFee" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="GrossPremium" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CTPLTaxType">
+    <Key>
+      <PropertyRef Name="CTPLTaxTypeID" />
+    </Key>
+    <Property Name="CTPLTaxTypeID" Type="int" Nullable="false" />
+    <Property Name="CTPLTaxType" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CTPLTerm">
+    <Key>
+      <PropertyRef Name="CPTLTermID" />
+    </Key>
+    <Property Name="CPTLTermID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CoverageYear" Type="int" Nullable="false" />
+    <Property Name="TermDescription" Type="nvarchar" MaxLength="100" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DealerID" Type="int" Nullable="false" />
+    <Property Name="TitleID" Type="int" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CorpName" Type="nvarchar" MaxLength="150" />
+    <Property Name="FathersName" Type="nvarchar" MaxLength="150" />
+    <Property Name="MothersName" Type="nvarchar" MaxLength="150" />
+    <Property Name="SexCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="CivilStatusCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="Citizenship" Type="nvarchar" MaxLength="100" />
+    <Property Name="HouseBldgNumber" Type="nvarchar" MaxLength="100" />
+    <Property Name="StreetSubdivision" Type="nvarchar" MaxLength="100" />
+    <Property Name="Barangay" Type="nvarchar" MaxLength="100" />
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Height" Type="nvarchar" MaxLength="50" />
+    <Property Name="Weight" Type="nvarchar" MaxLength="50" />
+    <Property Name="Birthdate" Type="datetime" Nullable="false" />
+    <Property Name="Birthplace" Type="nvarchar" MaxLength="100" />
+    <Property Name="ContactNumber" Type="nvarchar" MaxLength="100" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="100" />
+    <Property Name="TIN" Type="nvarchar" MaxLength="100" />
+    <Property Name="AdditionalAddress" Type="nvarchar" MaxLength="200" />
+    <Property Name="OrganizationName" Type="nvarchar" MaxLength="150" />
+    <Property Name="OrganizationAddress" Type="nvarchar" MaxLength="200" />
+    <Property Name="OrganizationTIN" Type="nvarchar" MaxLength="100" />
+    <Property Name="ContactPerson" Type="nvarchar" MaxLength="100" />
+    <Property Name="ContactPersonNumber" Type="nvarchar" MaxLength="100" />
+    <Property Name="ClientReferenceNumber" Type="nvarchar" MaxLength="100" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="Alias" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Dealer">
+    <Key>
+      <PropertyRef Name="DealerID" />
+    </Key>
+    <Property Name="DealerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DealerName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="EmailAddress2" Type="nvarchar" MaxLength="50" />
+    <Property Name="BusinessPhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="FaxNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="TIN" Type="nvarchar" MaxLength="50" />
+    <Property Name="Website" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="300" />
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="BarangayID" Type="int" Nullable="false" />
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Logo" Type="nvarchar" MaxLength="200" />
+    <Property Name="LogoByte" Type="varbinary(max)" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="DealerBranch">
+    <Key>
+      <PropertyRef Name="DealerBranchID" />
+    </Key>
+    <Property Name="DealerBranchID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DealerID" Type="int" Nullable="false" />
+    <Property Name="DealerBranchName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BusinessPhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="FaxNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="WebSite" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="BarangayID" Type="int" Nullable="false" />
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="AccreditationNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="UploadVersion" Type="int" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="IsMain" Type="bit" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="DealerInsurance">
+    <Key>
+      <PropertyRef Name="DealerInsuranceID" />
+    </Key>
+    <Property Name="DealerInsuranceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DealerID" Type="int" Nullable="false" />
+    <Property Name="InsuranceID" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="DealerInvoice">
+    <Key>
+      <PropertyRef Name="InvoiceID" />
+    </Key>
+    <Property Name="InvoiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DealerBranchID" Type="int" Nullable="false" />
+    <Property Name="CustomerID" Type="int" Nullable="false" />
+    <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="100" />
+    <Property Name="InvoiceDate" Type="date" Nullable="false" />
+    <Property Name="InvoiceByte" Type="varbinary(max)" />
+    <Property Name="COC" Type="nvarchar" MaxLength="100" />
+    <Property Name="COCByte" Type="varbinary(max)" />
+    <Property Name="COCAuthenticationCode" Type="nvarchar" MaxLength="20" />
+    <Property Name="VehicleID" Type="int" Nullable="false" />
+    <Property Name="VehicleCost" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="PreferredEndingPlateNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="InsuranceID" Type="int" />
+    <Property Name="InvoiceContentType" Type="nvarchar" MaxLength="50" />
+    <Property Name="COCContentType" Type="nvarchar" MaxLength="50" />
+    <Property Name="COCPolicyNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="VehicleTypeID" Type="int" Nullable="false" />
+    <Property Name="VehicleClassificationID" Type="int" Nullable="false" />
+    <Property Name="TaxTypeID" Type="int" Nullable="false" />
+    <Property Name="COCInceptionDate" Type="date" />
+    <Property Name="COCExpirationDate" Type="date" />
+    <Property Name="COCBasicPremium" Type="decimal" Precision="18" Scale="4" />
+    <Property Name="COCVAT" Type="decimal" Precision="18" Scale="4" />
+    <Property Name="COCDST" Type="decimal" Precision="18" Scale="4" />
+    <Property Name="COCLGT" Type="decimal" Precision="18" Scale="4" />
+    <Property Name="COCTaxes" Type="decimal" Precision="18" Scale="4" />
+    <Property Name="COCAuthenticationFee" Type="decimal" Precision="18" Scale="4" />
+    <Property Name="COCPremium" Type="decimal" Precision="18" Scale="4" />
+    <Property Name="AffidavitOfConversion" Type="nvarchar" MaxLength="100" />
+    <Property Name="AffidavitOfConversionContentType" Type="nvarchar" MaxLength="100" />
+    <Property Name="AffidavitOfConversionByte" Type="varbinary(max)" />
+    <Property Name="Encumbered" Type="bit" Nullable="false" />
+    <Property Name="FinancialInstitution" Type="nvarchar" MaxLength="100" />
+    <Property Name="AutoGenerateCOC" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DealerVehicleMake">
+    <Key>
+      <PropertyRef Name="DealerVehicleMakeID" />
+    </Key>
+    <Property Name="DealerVehicleMakeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DealerID" Type="int" Nullable="false" />
+    <Property Name="VehicleMakeID" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Insurance">
+    <Key>
+      <PropertyRef Name="InsuranceID" />
+    </Key>
+    <Property Name="InsuranceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InsuranceName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="EmailAddress2" Type="nvarchar" MaxLength="50" />
+    <Property Name="BusinessPhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="FaxNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="TIN" Type="nvarchar" MaxLength="50" />
+    <Property Name="Website" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="ProvinceID" Type="int" Nullable="false" />
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="BarangayID" Type="int" Nullable="false" />
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Logo" Type="nvarchar" MaxLength="200" />
+    <Property Name="LogoByte" Type="varbinary(max)" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="AutoGenerateCOC" Type="bit" Nullable="false" />
+    <Property Name="COCPrefix" Type="nvarchar" MaxLength="3" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="InsuranceBranch">
+    <Key>
+      <PropertyRef Name="InsuranceBranchID" />
+    </Key>
+    <Property Name="InsuranceBranchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InsuranceID" Type="int" Nullable="false" />
+    <Property Name="InsuranceBranchName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BusinessPhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="FaxNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="WebSite" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="ProvinceID" Type="int" Nullable="false" />
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="BarangayID" Type="int" Nullable="false" />
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="IsMain" Type="bit" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="InsuranceCOCSeries">
+    <Key>
+      <PropertyRef Name="InsuranceCOCSeriesID" />
+    </Key>
+    <Property Name="InsuranceCOCSeriesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InsuranceID" Type="int" Nullable="false" />
+    <Property Name="EffectiveDate" Type="datetime" Nullable="false" />
+    <Property Name="SeriesFrom" Type="int" Nullable="false" />
+    <Property Name="SeriesTo" Type="int" Nullable="false" />
+    <Property Name="CurrentSeries" Type="int" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="MasterPolicy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="LTO">
+    <Key>
+      <PropertyRef Name="LTOID" />
+    </Key>
+    <Property Name="LTOID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LTOName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="EmailAddress2" Type="nvarchar" MaxLength="50" />
+    <Property Name="BusinessPhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="FaxNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="TIN" Type="nvarchar" MaxLength="50" />
+    <Property Name="Website" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="ProvinceID" Type="int" Nullable="false" />
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="BarangayID" Type="int" Nullable="false" />
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Logo" Type="nvarchar" MaxLength="200" />
+    <Property Name="LogoByte" Type="varbinary(max)" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="LTOBranch">
+    <Key>
+      <PropertyRef Name="LTOBranchID" />
+    </Key>
+    <Property Name="LTOBranchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LTOID" Type="int" Nullable="false" />
+    <Property Name="LTOBranchName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BusinessPhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="FaxNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="WebSite" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="ProvinceID" Type="int" Nullable="false" />
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="BarangayID" Type="int" Nullable="false" />
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="IsMain" Type="bit" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="PlateEmail" Type="nvarchar" MaxLength="100" />
+    <Property Name="PNPEmail" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="LTOUserType">
+    <Key>
+      <PropertyRef Name="LTOUserTypeID" />
+    </Key>
+    <Property Name="LTOUserTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LTOUserTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MAI">
+    <Key>
+      <PropertyRef Name="MAIID" />
+    </Key>
+    <Property Name="MAIID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MAITypeID" Type="int" Nullable="false" />
+    <Property Name="MAIName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="EmailAddress2" Type="nvarchar" MaxLength="50" />
+    <Property Name="BusinessPhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="FaxNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="TIN" Type="nvarchar" MaxLength="50" />
+    <Property Name="Website" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="300" />
+    <Property Name="ProvinceID" Type="int" Nullable="false" />
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="BarangayID" Type="int" Nullable="false" />
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Logo" Type="nvarchar" MaxLength="100" />
+    <Property Name="LogoByte" Type="varbinary(max)" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="AccreditationNumber" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="MAIDealer">
+    <Key>
+      <PropertyRef Name="MAIDealerID" />
+    </Key>
+    <Property Name="MAIDealerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MAIID" Type="int" Nullable="false" />
+    <Property Name="DealerID" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MAIType">
+    <Key>
+      <PropertyRef Name="MAITypeID" />
+    </Key>
+    <Property Name="MAITypeID" Type="int" Nullable="false" />
+    <Property Name="MAITypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MAIVehicleMake">
+    <Key>
+      <PropertyRef Name="MAIVehicleMakeID" />
+    </Key>
+    <Property Name="MAIVehicleMakeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MAIID" Type="int" Nullable="false" />
+    <Property Name="VehicleMakeID" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MVPremium">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VehicleTypeID" Type="int" Nullable="false" />
+    <Property Name="VehicleClassificationID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Province">
+    <Key>
+      <PropertyRef Name="ProvinceID" />
+    </Key>
+    <Property Name="ProvinceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RegionID" Type="int" Nullable="false" />
+    <Property Name="ProvinceNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProvinceName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Region">
+    <Key>
+      <PropertyRef Name="RegionID" />
+    </Key>
+    <Property Name="RegionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RegionNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="RegionName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Sex">
+    <Key>
+      <PropertyRef Name="SexCode" />
+    </Key>
+    <Property Name="SexCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="SexName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Title">
+    <Key>
+      <PropertyRef Name="TitleID" />
+    </Key>
+    <Property Name="TitleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TitleTypeID" Type="int" Nullable="false" />
+    <Property Name="TitleName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="TitleAbbreviation" Type="nvarchar" MaxLength="10" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TitleType">
+    <Key>
+      <PropertyRef Name="TitleTypeID" />
+    </Key>
+    <Property Name="TitleTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TitleTypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Transaction">
+    <Key>
+      <PropertyRef Name="TransactionID" />
+    </Key>
+    <Property Name="TransactionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WalletID" Type="int" Nullable="false" />
+    <Property Name="TransactionTypeID" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="IsCancelled" Type="bit" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+    <Property Name="VehicleID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TransactionEntity">
+    <Key>
+      <PropertyRef Name="TransactionEntityTypeID" />
+    </Key>
+    <Property Name="TransactionEntityTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserEntityID" Type="int" Nullable="false" />
+    <Property Name="EntityID" Type="int" Nullable="false" />
+    <Property Name="TransactionTypeID" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="EffectivityDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TransactionEntityBranch">
+    <Key>
+      <PropertyRef Name="TransactionEntityBranchID" />
+    </Key>
+    <Property Name="TransactionEntityBranchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserEntityID" Type="int" Nullable="false" />
+    <Property Name="EntityID" Type="int" Nullable="false" />
+    <Property Name="BranchID" Type="int" Nullable="false" />
+    <Property Name="TransactionTypeID" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="EffectivityDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TransactionEntityType">
+    <Key>
+      <PropertyRef Name="TransactionEntityTypeID" />
+    </Key>
+    <Property Name="TransactionEntityTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserEntityID" Type="int" Nullable="false" />
+    <Property Name="TransactionTypeID" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="EffectivityDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TransactionEntryType">
+    <Key>
+      <PropertyRef Name="TransactionEntryTypeID" />
+    </Key>
+    <Property Name="TransactionEntryTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TransactionEntryTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TransactionEntryMultiplier" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Updatedy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TransactionType">
+    <Key>
+      <PropertyRef Name="TransactionTypeID" />
+    </Key>
+    <Property Name="TransactionTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TransactionName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="TransactionEntryTypeID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserEntityID" Type="int" Nullable="false" />
+    <Property Name="UserRoleID" Type="int" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="100" />
+    <Property Name="Password" Type="nvarchar" MaxLength="100" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+    <Property Name="ReferenceID" Type="int" />
+    <Property Name="SubReferenceID" Type="int" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="LTOUserTypeID" Type="int" />
+  </EntityType>
+  <EntityType Name="UserEntity">
+    <Key>
+      <PropertyRef Name="UserEntityID" />
+    </Key>
+    <Property Name="UserEntityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserEntityName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="UserRoleID" />
+    </Key>
+    <Property Name="UserRoleID" Type="int" Nullable="false" />
+    <Property Name="UserRoleName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VehicleBodyType">
+    <Key>
+      <PropertyRef Name="VehicleBodyTypeID" />
+    </Key>
+    <Property Name="VehicleBodyTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VehicleBodyTypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="VehicleBodyAbbr" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VehicleClassification">
+    <Key>
+      <PropertyRef Name="VehicleClassificationID" />
+    </Key>
+    <Property Name="VehicleClassificationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VehicleClassificationName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="VehicleColor">
+    <Key>
+      <PropertyRef Name="VehicleColorID" />
+    </Key>
+    <Property Name="VehicleColorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VehicleColorName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="VehicleFuelType">
+    <Key>
+      <PropertyRef Name="VehicleFuelTypeID" />
+    </Key>
+    <Property Name="VehicleFuelTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VehicleFuelTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="VehicleInfo">
+    <Key>
+      <PropertyRef Name="VehicleID" />
+    </Key>
+    <Property Name="VehicleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MAIID" Type="int" Nullable="false" />
+    <Property Name="DealerID" Type="int" />
+    <Property Name="DealerBranchID" Type="int" />
+    <Property Name="VehicleMakeID" Type="int" />
+    <Property Name="VehicleModelID" Type="int" />
+    <Property Name="EngineNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="CPNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateIssued1" Type="datetime" />
+    <Property Name="ChassisNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="CPNumber2" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateIssued2" Type="datetime" />
+    <Property Name="BodyIDNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="BIRCCMV" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateIssued3" Type="datetime" />
+    <Property Name="VehicleColorID" Type="int" />
+    <Property Name="PistonDisplacement" Type="nvarchar" MaxLength="50" />
+    <Property Name="VehicleFuelTypeID" Type="int" />
+    <Property Name="Cylinders" Type="nvarchar" MaxLength="50" />
+    <Property Name="Series" Type="nvarchar" MaxLength="50" />
+    <Property Name="Year" Type="int" />
+    <Property Name="GrossVehicleWeight" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="FrontTiresNumber" Type="int" />
+    <Property Name="RearTiresNumber" Type="int" />
+    <Property Name="TaxType" Type="nvarchar" MaxLength="50" />
+    <Property Name="TaxAmount" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="AirconType" Type="nvarchar" MaxLength="50" />
+    <Property Name="ConductionSticker" Type="nvarchar" MaxLength="50" />
+    <Property Name="COCNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="50" />
+    <Property Name="DatePrepared" Type="datetime" />
+    <Property Name="TransactionID" Type="nvarchar" MaxLength="50" />
+    <Property Name="CSRNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="ReportEntryID" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+    <Property Name="ReportDate" Type="datetime" />
+    <Property Name="AccreditationNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="ItemType" Type="nvarchar" MaxLength="100" />
+    <Property Name="BOCCertificateOfPayment" Type="varbinary(max)" />
+    <Property Name="CertificateOfStockReport" Type="varbinary(max)" />
+    <Property Name="CertificateOfConformity" Type="varbinary(max)" />
+    <Property Name="StencilOfEngine" Type="varbinary(max)" />
+    <Property Name="StencilOfChasis" Type="varbinary(max)" />
+    <Property Name="PNPClearance" Type="varbinary(max)" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="VehicleBodyTypeID" Type="int" />
+    <Property Name="BOCContentType" Type="nvarchar" MaxLength="50" />
+    <Property Name="CSRContentType" Type="nvarchar" MaxLength="50" />
+    <Property Name="COCContentType" Type="nvarchar" MaxLength="50" />
+    <Property Name="SOEContentType" Type="nvarchar" MaxLength="50" />
+    <Property Name="SOCContentType" Type="nvarchar" MaxLength="50" />
+    <Property Name="PNPContentType" Type="nvarchar" MaxLength="50" />
+    <Property Name="BOCCertificateOfPayment2" Type="varbinary(max)" />
+    <Property Name="BOCContentType2" Type="nvarchar" MaxLength="50" />
+    <Property Name="LTOSubmitted" Type="bit" Nullable="false" />
+    <Property Name="Assigned" Type="bit" Nullable="false" />
+    <Property Name="CoCVerified" Type="bit" Nullable="false" />
+    <Property Name="HPGControlNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="AutoPNP" Type="bit" Nullable="false" />
+    <Property Name="PNPReceiptReferenceNumber" Type="nvarchar" MaxLength="100" />
+    <Property Name="PNPReceipt" Type="varbinary(max)" />
+    <Property Name="PNPReceiptContentType" Type="nvarchar" MaxLength="50" />
+    <Property Name="AirconTypeID" Type="int" />
+    <Property Name="InformalEntryNumberEngine" Type="nvarchar" MaxLength="50" />
+    <Property Name="InformalEntryNumberChassis" Type="nvarchar" MaxLength="50" />
+    <Property Name="CSRSubmitted" Type="bit" />
+  </EntityType>
+  <EntityType Name="VehicleMake">
+    <Key>
+      <PropertyRef Name="VehicleMakeID" />
+    </Key>
+    <Property Name="VehicleMakeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VehicleMakeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="VehicleModel">
+    <Key>
+      <PropertyRef Name="VehicleModelID" />
+    </Key>
+    <Property Name="VehicleModelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VehicleMakeID" Type="int" Nullable="false" />
+    <Property Name="VehicleModelName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Variant" Type="nvarchar" MaxLength="100" />
+    <Property Name="YearOfMake" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="VehicleClassificationID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VehicleType">
+    <Key>
+      <PropertyRef Name="VehicleTypeID" />
+    </Key>
+    <Property Name="VehicleTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VehicleCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="VehicleTypeDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Wallet">
+    <Key>
+      <PropertyRef Name="WalletID" />
+    </Key>
+    <Property Name="WalletID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserEntityID" Type="int" Nullable="false" />
+    <Property Name="EntityID" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Threshold" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'VRSystemTest.dbo.vwCustomerList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwCustomerList">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+      <PropertyRef Name="DealerID" />
+      <PropertyRef Name="CityID" />
+      <PropertyRef Name="Birthdate" />
+      <PropertyRef Name="TitleID" />
+      <PropertyRef Name="Active" />
+    </Key>
+    <Property Name="CustomerID" Type="int" Nullable="false" />
+    <Property Name="DealerID" Type="int" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CorpName" Type="nvarchar" MaxLength="100" />
+    <Property Name="FathersName" Type="nvarchar" MaxLength="150" />
+    <Property Name="MothersName" Type="nvarchar" MaxLength="150" />
+    <Property Name="SexCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="CivilStatusCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="Citizenship" Type="nvarchar" MaxLength="100" />
+    <Property Name="HouseBldgNumber" Type="nvarchar" MaxLength="100" />
+    <Property Name="StreetSubdivision" Type="nvarchar" MaxLength="100" />
+    <Property Name="Barangay" Type="nvarchar" MaxLength="100" />
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Height" Type="nvarchar" MaxLength="50" />
+    <Property Name="Birthdate" Type="datetime" Nullable="false" />
+    <Property Name="Birthplace" Type="nvarchar" MaxLength="100" />
+    <Property Name="ContactNumber" Type="nvarchar" MaxLength="100" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="100" />
+    <Property Name="TIN" Type="nvarchar" MaxLength="100" />
+    <Property Name="AdditionalAddress" Type="nvarchar" MaxLength="200" />
+    <Property Name="OrganizationName" Type="nvarchar" MaxLength="150" />
+    <Property Name="OrganizationAddress" Type="nvarchar" MaxLength="200" />
+    <Property Name="OrganizationTIN" Type="nvarchar" MaxLength="100" />
+    <Property Name="ContactPerson" Type="nvarchar" MaxLength="100" />
+    <Property Name="ContactPersonNumber" Type="nvarchar" MaxLength="100" />
+    <Property Name="SexName" Type="nvarchar" MaxLength="50" />
+    <Property Name="CityName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CityNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProvinceID" Type="int" />
+    <Property Name="ProvinceName" Type="nvarchar" MaxLength="100" />
+    <Property Name="ProvinceNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="CivilStatusName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DealerName" Type="nvarchar" MaxLength="200" />
+    <Property Name="Weight" Type="nvarchar" MaxLength="50" />
+    <Property Name="ClientReferenceNumber" Type="nvarchar" MaxLength="100" />
+    <Property Name="TitleID" Type="int" Nullable="false" />
+    <Property Name="TitleTypeID" Type="int" />
+    <Property Name="BarangayName" Type="nvarchar" MaxLength="100" />
+    <Property Name="RegionID" Type="int" />
+    <Property Name="RegionName" Type="nvarchar" MaxLength="100" />
+    <Property Name="RegionNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="Alias" Type="nvarchar" MaxLength="100" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'VRSystemTest.dbo.vwDealerBranchList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwDealerBranchList">
+    <Key>
+      <PropertyRef Name="DealerBranchID" />
+      <PropertyRef Name="DealerID" />
+      <PropertyRef Name="DealerBranchName" />
+      <PropertyRef Name="EmailAddress" />
+      <PropertyRef Name="Address" />
+      <PropertyRef Name="CityID" />
+      <PropertyRef Name="BarangayID" />
+      <PropertyRef Name="CreatedBy" />
+      <PropertyRef Name="CreatedDate" />
+      <PropertyRef Name="Active" />
+    </Key>
+    <Property Name="DealerBranchID" Type="int" Nullable="false" />
+    <Property Name="DealerID" Type="int" Nullable="false" />
+    <Property Name="DealerName" Type="nvarchar" MaxLength="200" />
+    <Property Name="DealerBranchName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BusinessPhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="FaxNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="WebSite" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="CityName" Type="nvarchar" MaxLength="100" />
+    <Property Name="BarangayID" Type="int" Nullable="false" />
+    <Property Name="BarangayName" Type="nvarchar" MaxLength="100" />
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="AccreditationNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'VRSystemTest.dbo.vwDealerInvoice' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwDealerInvoice">
+    <Key>
+      <PropertyRef Name="InvoiceID" />
+      <PropertyRef Name="DealerBranchID" />
+      <PropertyRef Name="CustomerID" />
+      <PropertyRef Name="Active" />
+      <PropertyRef Name="CreatedBy" />
+      <PropertyRef Name="CreatedDate" />
+      <PropertyRef Name="TitleID" />
+      <PropertyRef Name="TitleName" />
+      <PropertyRef Name="DealerBranchName" />
+      <PropertyRef Name="DealerID" />
+      <PropertyRef Name="DealerName" />
+      <PropertyRef Name="VehicleID" />
+    </Key>
+    <Property Name="InvoiceID" Type="int" Nullable="false" />
+    <Property Name="DealerBranchID" Type="int" Nullable="false" />
+    <Property Name="CustomerID" Type="int" Nullable="false" />
+    <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="100" />
+    <Property Name="InvoiceByte" Type="varbinary(max)" />
+    <Property Name="COC" Type="nvarchar" MaxLength="100" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="TitleID" Type="int" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CorpName" Type="nvarchar" MaxLength="100" />
+    <Property Name="TitleName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="TitleAbbreviation" Type="nvarchar" MaxLength="10" />
+    <Property Name="DealerBranchName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="DealerID" Type="int" Nullable="false" />
+    <Property Name="DealerName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="COCByte" Type="varbinary(max)" />
+    <Property Name="InsuranceID" Type="int" />
+    <Property Name="InsuranceName" Type="nvarchar" MaxLength="200" />
+    <Property Name="VehicleID" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'VRSystemTest.dbo.vwDealerList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwDealerList">
+    <Key>
+      <PropertyRef Name="DealerID" />
+      <PropertyRef Name="DealerName" />
+      <PropertyRef Name="CityID" />
+      <PropertyRef Name="BarangayID" />
+      <PropertyRef Name="CreatedBy" />
+      <PropertyRef Name="CreatedDate" />
+      <PropertyRef Name="Active" />
+    </Key>
+    <Property Name="DealerID" Type="int" Nullable="false" />
+    <Property Name="DealerName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="BusinessPhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="FaxNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="Website" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="300" />
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="CityName" Type="nvarchar" MaxLength="100" />
+    <Property Name="BarangayID" Type="int" Nullable="false" />
+    <Property Name="BarangayName" Type="nvarchar" MaxLength="100" />
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Logo" Type="nvarchar" MaxLength="200" />
+    <Property Name="LogoByte" Type="varbinary(max)" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'VRSystemTest.dbo.vwDealerVehicleMake' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwDealerVehicleMake">
+    <Key>
+      <PropertyRef Name="DealerVehicleMakeID" />
+      <PropertyRef Name="DealerID" />
+      <PropertyRef Name="VehicleMakeID" />
+      <PropertyRef Name="CreatedBy" />
+      <PropertyRef Name="CreatedDate" />
+      <PropertyRef Name="Active" />
+    </Key>
+    <Property Name="DealerVehicleMakeID" Type="int" Nullable="false" />
+    <Property Name="DealerID" Type="int" Nullable="false" />
+    <Property Name="DealerName" Type="nvarchar" MaxLength="200" />
+    <Property Name="VehicleMakeID" Type="int" Nullable="false" />
+    <Property Name="VehicleMakeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'VRSystemTest.dbo.vwDivisionsList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwDivisionsList">
+    <Key>
+      <PropertyRef Name="RegionID" />
+      <PropertyRef Name="RegionNumber" />
+      <PropertyRef Name="RegionName" />
+      <PropertyRef Name="ProvinceID" />
+      <PropertyRef Name="ProvinceNumber" />
+      <PropertyRef Name="ProvinceName" />
+      <PropertyRef Name="CityID" />
+      <PropertyRef Name="CityNumber" />
+      <PropertyRef Name="CityName" />
+      <PropertyRef Name="BarangayID" />
+    </Key>
+    <Property Name="RegionID" Type="int" Nullable="false" />
+    <Property Name="RegionNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="RegionName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ProvinceID" Type="int" Nullable="false" />
+    <Property Name="ProvinceNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProvinceName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="CityNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CityName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="BarangayID" Type="int" Nullable="false" />
+    <Property Name="BarangayName" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'VRSystemTest.dbo.vwLTOList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwLTOList">
+    <Key>
+      <PropertyRef Name="LTOID" />
+      <PropertyRef Name="LTOName" />
+      <PropertyRef Name="Address" />
+      <PropertyRef Name="ProvinceID" />
+      <PropertyRef Name="CityID" />
+      <PropertyRef Name="BarangayID" />
+      <PropertyRef Name="CreatedBy" />
+      <PropertyRef Name="CreatedDate" />
+      <PropertyRef Name="Active" />
+      <PropertyRef Name="ProvinceName" />
+      <PropertyRef Name="CityName" />
+    </Key>
+    <Property Name="LTOID" Type="int" Nullable="false" />
+    <Property Name="LTOName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="EmailAddress2" Type="nvarchar" MaxLength="50" />
+    <Property Name="BusinessPhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="FaxNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="TIN" Type="nvarchar" MaxLength="50" />
+    <Property Name="Website" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="ProvinceID" Type="int" Nullable="false" />
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="BarangayID" Type="int" Nullable="false" />
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Logo" Type="nvarchar" MaxLength="200" />
+    <Property Name="LogoByte" Type="varbinary(max)" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="ProvinceName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CityName" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'VRSystemTest.dbo.vwMAIList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwMAIList">
+    <Key>
+      <PropertyRef Name="MAIID" />
+      <PropertyRef Name="MAIName" />
+      <PropertyRef Name="BarangayID" />
+      <PropertyRef Name="CreatedBy" />
+      <PropertyRef Name="Active" />
+    </Key>
+    <Property Name="MAIID" Type="int" Nullable="false" />
+    <Property Name="MAITypeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="MAIName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="BusinessPhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="FaxNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="Website" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="300" />
+    <Property Name="ProvinceName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CityName" Type="nvarchar" MaxLength="100" />
+    <Property Name="BarangayID" Type="int" Nullable="false" />
+    <Property Name="BarangayName" Type="nvarchar" MaxLength="100" />
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Logo" Type="nvarchar" MaxLength="100" />
+    <Property Name="LogoByte" Type="varbinary(max)" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="AccreditationNumber" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'VRSystemTest.dbo.vwMAIVehicleMake' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwMAIVehicleMake">
+    <Key>
+      <PropertyRef Name="MAIID" />
+      <PropertyRef Name="VehicleMakeID" />
+      <PropertyRef Name="CreatedBy" />
+      <PropertyRef Name="CreatedDate" />
+      <PropertyRef Name="MAIVehicleMakeID" />
+      <PropertyRef Name="Active" />
+    </Key>
+    <Property Name="MAIID" Type="int" Nullable="false" />
+    <Property Name="MAIName" Type="nvarchar" MaxLength="200" />
+    <Property Name="VehicleMakeID" Type="int" Nullable="false" />
+    <Property Name="VehicleMakeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="MAIVehicleMakeID" Type="int" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'VRSystemTest.dbo.vwProvinceCity' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwProvinceCity">
+    <Key>
+      <PropertyRef Name="ProvinceID" />
+      <PropertyRef Name="CityID" />
+      <PropertyRef Name="CityName" />
+      <PropertyRef Name="ProvinceNumber" />
+      <PropertyRef Name="CityNumber" />
+    </Key>
+    <Property Name="ProvinceID" Type="int" Nullable="false" />
+    <Property Name="ProvinceName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="CityName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ProvinceNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CityNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'VRSystemTest.dbo.vwTransactionEntityBranchList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwTransactionEntityBranchList">
+    <Key>
+      <PropertyRef Name="TransactionEntityBranchID" />
+      <PropertyRef Name="UserEntityID" />
+      <PropertyRef Name="EntityID" />
+      <PropertyRef Name="TransactionTypeID" />
+      <PropertyRef Name="Amount" />
+      <PropertyRef Name="EffectivityDate" />
+      <PropertyRef Name="Active" />
+      <PropertyRef Name="CreatedBy" />
+      <PropertyRef Name="CreatedDate" />
+      <PropertyRef Name="TransactionName" />
+      <PropertyRef Name="UserEntityName" />
+    </Key>
+    <Property Name="TransactionEntityBranchID" Type="int" Nullable="false" />
+    <Property Name="UserEntityID" Type="int" Nullable="false" />
+    <Property Name="EntityID" Type="int" Nullable="false" />
+    <Property Name="TransactionTypeID" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="EffectivityDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="TransactionName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="UserEntityName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="EntityName" Type="nvarchar" MaxLength="200" />
+    <Property Name="EntityBranchName" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'VRSystemTest.dbo.vwTransactionEntityList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwTransactionEntityList">
+    <Key>
+      <PropertyRef Name="TransactionEntityTypeID" />
+      <PropertyRef Name="UserEntityID" />
+      <PropertyRef Name="EntityID" />
+      <PropertyRef Name="TransactionTypeID" />
+      <PropertyRef Name="Amount" />
+      <PropertyRef Name="EffectivityDate" />
+      <PropertyRef Name="Active" />
+      <PropertyRef Name="CreatedBy" />
+      <PropertyRef Name="CreatedDate" />
+      <PropertyRef Name="TransactionName" />
+      <PropertyRef Name="UserEntityName" />
+    </Key>
+    <Property Name="TransactionEntityTypeID" Type="int" Nullable="false" />
+    <Property Name="UserEntityID" Type="int" Nullable="false" />
+    <Property Name="EntityID" Type="int" Nullable="false" />
+    <Property Name="TransactionTypeID" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="EffectivityDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="TransactionName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="UserEntityName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="EntityName" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'VRSystemTest.dbo.vwTransactionEntityType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwTransactionEntityType">
+    <Key>
+      <PropertyRef Name="TransactionEntityTypeID" />
+      <PropertyRef Name="UserEntityID" />
+      <PropertyRef Name="TransactionTypeID" />
+      <PropertyRef Name="Amount" />
+      <PropertyRef Name="EffectivityDate" />
+      <PropertyRef Name="Active" />
+      <PropertyRef Name="CreatedBy" />
+      <PropertyRef Name="CreatedDate" />
+      <PropertyRef Name="UserEntityName" />
+      <PropertyRef Name="TransactionName" />
+    </Key>
+    <Property Name="TransactionEntityTypeID" Type="int" Nullable="false" />
+    <Property Name="UserEntityID" Type="int" Nullable="false" />
+    <Property Name="TransactionTypeID" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="EffectivityDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="UserEntityName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="TransactionName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'VRSystemTest.dbo.vwTransactionTypeList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwTransactionTypeList">
+    <Key>
+      <PropertyRef Name="TransactionTypeID" />
+      <PropertyRef Name="TransactionName" />
+      <PropertyRef Name="Active" />
+      <PropertyRef Name="TransactionEntryTypeID" />
+      <PropertyRef Name="TransactionEntryTypeName" />
+    </Key>
+    <Property Name="TransactionTypeID" Type="int" Nullable="false" />
+    <Property Name="TransactionName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="TransactionEntryTypeID" Type="int" Nullable="false" />
+    <Property Name="TransactionEntryTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'VRSystemTest.dbo.vwUserList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwUserList">
+    <Key>
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="UserEntityID" />
+      <PropertyRef Name="UserRoleID" />
+      <PropertyRef Name="CreatedBy" />
+      <PropertyRef Name="CreatedDate" />
+      <PropertyRef Name="Active" />
+      <PropertyRef Name="UserEntityName" />
+      <PropertyRef Name="UserRoleName" />
+    </Key>
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="UserEntityID" Type="int" Nullable="false" />
+    <Property Name="UserRoleID" Type="int" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="100" />
+    <Property Name="Password" Type="nvarchar" MaxLength="100" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+    <Property Name="ReferenceID" Type="int" />
+    <Property Name="SubReferenceID" Type="int" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="UserEntityName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="UserRoleName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="IsMain" Type="bit" />
+    <Property Name="CompanyName" Type="nvarchar" MaxLength="200" />
+    <Property Name="BranchName" Type="nvarchar" MaxLength="200" />
+    <Property Name="LTOUserTypeID" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'VRSystemTest.dbo.vwVehicleList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwVehicleList">
+    <Key>
+      <PropertyRef Name="VehicleID" />
+      <PropertyRef Name="MAIID" />
+      <PropertyRef Name="Active" />
+      <PropertyRef Name="CreatedBy" />
+      <PropertyRef Name="CreatedDate" />
+      <PropertyRef Name="LTOSubmitted" />
+      <PropertyRef Name="Assigned" />
+      <PropertyRef Name="AutoPNP" />
+    </Key>
+    <Property Name="VehicleID" Type="int" Nullable="false" />
+    <Property Name="MAIID" Type="int" Nullable="false" />
+    <Property Name="DealerID" Type="int" />
+    <Property Name="DealerBranchID" Type="int" />
+    <Property Name="VehicleMakeID" Type="int" />
+    <Property Name="VehicleModelID" Type="int" />
+    <Property Name="EngineNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="CPNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateIssued1" Type="datetime" />
+    <Property Name="ChassisNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="CPNumber2" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateIssued2" Type="datetime" />
+    <Property Name="BodyIDNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="BIRCCMV" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateIssued3" Type="datetime" />
+    <Property Name="VehicleColorID" Type="int" />
+    <Property Name="PistonDisplacement" Type="nvarchar" MaxLength="50" />
+    <Property Name="VehicleFuelTypeID" Type="int" />
+    <Property Name="Cylinders" Type="nvarchar" MaxLength="50" />
+    <Property Name="Series" Type="nvarchar" MaxLength="50" />
+    <Property Name="Year" Type="int" />
+    <Property Name="GrossVehicleWeight" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="FrontTiresNumber" Type="int" />
+    <Property Name="RearTiresNumber" Type="int" />
+    <Property Name="TaxType" Type="nvarchar" MaxLength="50" />
+    <Property Name="TaxAmount" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="AirconType" Type="nvarchar" MaxLength="50" />
+    <Property Name="ConductionSticker" Type="nvarchar" MaxLength="50" />
+    <Property Name="COCNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="50" />
+    <Property Name="DatePrepared" Type="datetime" />
+    <Property Name="CSRNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="BOCCertificateOfPayment" Type="varbinary(max)" />
+    <Property Name="CertificateOfStockReport" Type="varbinary(max)" />
+    <Property Name="CertificateOfConformity" Type="varbinary(max)" />
+    <Property Name="StencilOfEngine" Type="varbinary(max)" />
+    <Property Name="StencilOfChasis" Type="varbinary(max)" />
+    <Property Name="MAIName" Type="nvarchar" MaxLength="200" />
+    <Property Name="DealerName" Type="nvarchar" MaxLength="200" />
+    <Property Name="DealerBranchName" Type="nvarchar" MaxLength="200" />
+    <Property Name="VehicleMakeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="VehicleModelName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Variant" Type="nvarchar" MaxLength="100" />
+    <Property Name="YearOfMake" Type="int" />
+    <Property Name="VehicleColorName" Type="nvarchar" MaxLength="100" />
+    <Property Name="VehicleFuelTypeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="VehicleBodyTypeName" Type="nvarchar" MaxLength="100" />
+    <Property Name="VehicleBodyAbbr" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="PNPClearance" Type="varbinary(max)" />
+    <Property Name="LTOSubmitted" Type="bit" Nullable="false" />
+    <Property Name="Assigned" Type="bit" Nullable="false" />
+    <Property Name="HPGControlNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="AutoPNP" Type="bit" Nullable="false" />
+    <Property Name="PNPReceiptReferenceNumber" Type="nvarchar" MaxLength="100" />
+    <Property Name="CSRSubmitted" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'VRSystemTest.dbo.vwVehicleModel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwVehicleModel">
+    <Key>
+      <PropertyRef Name="VehicleModelID" />
+      <PropertyRef Name="VehicleMakeID" />
+      <PropertyRef Name="VehicleModelName" />
+      <PropertyRef Name="YearOfMake" />
+      <PropertyRef Name="CreatedBy" />
+      <PropertyRef Name="CreatedDate" />
+      <PropertyRef Name="Active" />
+      <PropertyRef Name="VehicleMakeName" />
+      <PropertyRef Name="VehicleClassificationID" />
+    </Key>
+    <Property Name="VehicleModelID" Type="int" Nullable="false" />
+    <Property Name="VehicleMakeID" Type="int" Nullable="false" />
+    <Property Name="VehicleModelName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Variant" Type="nvarchar" MaxLength="50" />
+    <Property Name="YearOfMake" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="VehicleMakeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="VehicleClassificationID" Type="int" Nullable="false" />
+    <Property Name="VehicleClassificationName" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <Function Name="spEntityWallet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserEntityID" Type="int" Mode="In" />
+    <Parameter Name="EntityID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spInsuranceDealer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="InsuranceID" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="VRSystemModelStoreContainer">
+    <EntitySet Name="AirconType" EntityType="Self.AirconType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AuditLogin" EntityType="Self.AuditLogin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Barangay" EntityType="Self.Barangay" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BatchDetails" EntityType="Self.BatchDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BatchMaster" EntityType="Self.BatchMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CivilStatus" EntityType="Self.CivilStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CTPL" EntityType="Self.CTPL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CTPLTaxType" EntityType="Self.CTPLTaxType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CTPLTerm" EntityType="Self.CTPLTerm" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Dealer" EntityType="Self.Dealer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DealerBranch" EntityType="Self.DealerBranch" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DealerInsurance" EntityType="Self.DealerInsurance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DealerInvoice" EntityType="Self.DealerInvoice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DealerVehicleMake" EntityType="Self.DealerVehicleMake" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Insurance" EntityType="Self.Insurance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InsuranceBranch" EntityType="Self.InsuranceBranch" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InsuranceCOCSeries" EntityType="Self.InsuranceCOCSeries" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LTO" EntityType="Self.LTO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LTOBranch" EntityType="Self.LTOBranch" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LTOUserType" EntityType="Self.LTOUserType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MAI" EntityType="Self.MAI" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MAIDealer" EntityType="Self.MAIDealer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MAIType" EntityType="Self.MAIType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MAIVehicleMake" EntityType="Self.MAIVehicleMake" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MVPremium" EntityType="Self.MVPremium" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Province" EntityType="Self.Province" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sex" EntityType="Self.Sex" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Title" EntityType="Self.Title" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TitleType" EntityType="Self.TitleType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TransactionEntity" EntityType="Self.TransactionEntity" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TransactionEntityBranch" EntityType="Self.TransactionEntityBranch" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TransactionEntityType" EntityType="Self.TransactionEntityType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TransactionEntryType" EntityType="Self.TransactionEntryType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TransactionType" EntityType="Self.TransactionType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserEntity" EntityType="Self.UserEntity" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VehicleBodyType" EntityType="Self.VehicleBodyType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VehicleClassification" EntityType="Self.VehicleClassification" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VehicleColor" EntityType="Self.VehicleColor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VehicleFuelType" EntityType="Self.VehicleFuelType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VehicleInfo" EntityType="Self.VehicleInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VehicleMake" EntityType="Self.VehicleMake" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VehicleModel" EntityType="Self.VehicleModel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VehicleType" EntityType="Self.VehicleType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Wallet" EntityType="Self.Wallet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BatchType" EntityType="Self.BatchType" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [BatchType].[BatchTypeID] AS [BatchTypeID], 
+    [BatchType].[BatchTypeDescription] AS [BatchTypeDescription], 
+    [BatchType].[Active] AS [Active]
+    FROM [dbo].[BatchType] AS [BatchType]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwCustomerList" EntityType="Self.vwCustomerList" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vwCustomerList].[CustomerID] AS [CustomerID], 
+    [vwCustomerList].[DealerID] AS [DealerID], 
+    [vwCustomerList].[LastName] AS [LastName], 
+    [vwCustomerList].[FirstName] AS [FirstName], 
+    [vwCustomerList].[MiddleName] AS [MiddleName], 
+    [vwCustomerList].[CorpName] AS [CorpName], 
+    [vwCustomerList].[FathersName] AS [FathersName], 
+    [vwCustomerList].[MothersName] AS [MothersName], 
+    [vwCustomerList].[SexCode] AS [SexCode], 
+    [vwCustomerList].[CivilStatusCode] AS [CivilStatusCode], 
+    [vwCustomerList].[Citizenship] AS [Citizenship], 
+    [vwCustomerList].[HouseBldgNumber] AS [HouseBldgNumber], 
+    [vwCustomerList].[StreetSubdivision] AS [StreetSubdivision], 
+    [vwCustomerList].[Barangay] AS [Barangay], 
+    [vwCustomerList].[CityID] AS [CityID], 
+    [vwCustomerList].[ZipCode] AS [ZipCode], 
+    [vwCustomerList].[Height] AS [Height], 
+    [vwCustomerList].[Birthdate] AS [Birthdate], 
+    [vwCustomerList].[Birthplace] AS [Birthplace], 
+    [vwCustomerList].[ContactNumber] AS [ContactNumber], 
+    [vwCustomerList].[EmailAddress] AS [EmailAddress], 
+    [vwCustomerList].[TIN] AS [TIN], 
+    [vwCustomerList].[AdditionalAddress] AS [AdditionalAddress], 
+    [vwCustomerList].[OrganizationName] AS [OrganizationName], 
+    [vwCustomerList].[OrganizationAddress] AS [OrganizationAddress], 
+    [vwCustomerList].[OrganizationTIN] AS [OrganizationTIN], 
+    [vwCustomerList].[ContactPerson] AS [ContactPerson], 
+    [vwCustomerList].[ContactPersonNumber] AS [ContactPersonNumber], 
+    [vwCustomerList].[SexName] AS [SexName], 
+    [vwCustomerList].[CityName] AS [CityName], 
+    [vwCustomerList].[CityNumber] AS [CityNumber], 
+    [vwCustomerList].[ProvinceID] AS [ProvinceID], 
+    [vwCustomerList].[ProvinceName] AS [ProvinceName], 
+    [vwCustomerList].[ProvinceNumber] AS [ProvinceNumber], 
+    [vwCustomerList].[CivilStatusName] AS [CivilStatusName], 
+    [vwCustomerList].[DealerName] AS [DealerName], 
+    [vwCustomerList].[Weight] AS [Weight], 
+    [vwCustomerList].[ClientReferenceNumber] AS [ClientReferenceNumber], 
+    [vwCustomerList].[TitleID] AS [TitleID], 
+    [vwCustomerList].[TitleTypeID] AS [TitleTypeID], 
+    [vwCustomerList].[BarangayName] AS [BarangayName], 
+    [vwCustomerList].[RegionID] AS [RegionID], 
+    [vwCustomerList].[RegionName] AS [RegionName], 
+    [vwCustomerList].[RegionNumber] AS [RegionNumber], 
+    [vwCustomerList].[Alias] AS [Alias], 
+    [vwCustomerList].[Active] AS [Active]
+    FROM [dbo].[vwCustomerList] AS [vwCustomerList]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwDealerBranchList" EntityType="Self.vwDealerBranchList" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vwDealerBranchList].[DealerBranchID] AS [DealerBranchID], 
+    [vwDealerBranchList].[DealerID] AS [DealerID], 
+    [vwDealerBranchList].[DealerName] AS [DealerName], 
+    [vwDealerBranchList].[DealerBranchName] AS [DealerBranchName], 
+    [vwDealerBranchList].[EmailAddress] AS [EmailAddress], 
+    [vwDealerBranchList].[BusinessPhone] AS [BusinessPhone], 
+    [vwDealerBranchList].[MobilePhone] AS [MobilePhone], 
+    [vwDealerBranchList].[FaxNumber] AS [FaxNumber], 
+    [vwDealerBranchList].[WebSite] AS [WebSite], 
+    [vwDealerBranchList].[Address] AS [Address], 
+    [vwDealerBranchList].[CityID] AS [CityID], 
+    [vwDealerBranchList].[CityName] AS [CityName], 
+    [vwDealerBranchList].[BarangayID] AS [BarangayID], 
+    [vwDealerBranchList].[BarangayName] AS [BarangayName], 
+    [vwDealerBranchList].[ZipCode] AS [ZipCode], 
+    [vwDealerBranchList].[AccreditationNumber] AS [AccreditationNumber], 
+    [vwDealerBranchList].[CreatedBy] AS [CreatedBy], 
+    [vwDealerBranchList].[CreatedDate] AS [CreatedDate], 
+    [vwDealerBranchList].[Active] AS [Active]
+    FROM [dbo].[vwDealerBranchList] AS [vwDealerBranchList]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwDealerInvoice" EntityType="Self.vwDealerInvoice" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vwDealerInvoice].[InvoiceID] AS [InvoiceID], 
+    [vwDealerInvoice].[DealerBranchID] AS [DealerBranchID], 
+    [vwDealerInvoice].[CustomerID] AS [CustomerID], 
+    [vwDealerInvoice].[InvoiceNumber] AS [InvoiceNumber], 
+    [vwDealerInvoice].[InvoiceByte] AS [InvoiceByte], 
+    [vwDealerInvoice].[COC] AS [COC], 
+    [vwDealerInvoice].[Active] AS [Active], 
+    [vwDealerInvoice].[CreatedBy] AS [CreatedBy], 
+    [vwDealerInvoice].[CreatedDate] AS [CreatedDate], 
+    [vwDealerInvoice].[TitleID] AS [TitleID], 
+    [vwDealerInvoice].[LastName] AS [LastName], 
+    [vwDealerInvoice].[FirstName] AS [FirstName], 
+    [vwDealerInvoice].[MiddleName] AS [MiddleName], 
+    [vwDealerInvoice].[CorpName] AS [CorpName], 
+    [vwDealerInvoice].[TitleName] AS [TitleName], 
+    [vwDealerInvoice].[TitleAbbreviation] AS [TitleAbbreviation], 
+    [vwDealerInvoice].[DealerBranchName] AS [DealerBranchName], 
+    [vwDealerInvoice].[DealerID] AS [DealerID], 
+    [vwDealerInvoice].[DealerName] AS [DealerName], 
+    [vwDealerInvoice].[COCByte] AS [COCByte], 
+    [vwDealerInvoice].[InsuranceID] AS [InsuranceID], 
+    [vwDealerInvoice].[InsuranceName] AS [InsuranceName], 
+    [vwDealerInvoice].[VehicleID] AS [VehicleID]
+    FROM [dbo].[vwDealerInvoice] AS [vwDealerInvoice]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwDealerList" EntityType="Self.vwDealerList" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vwDealerList].[DealerID] AS [DealerID], 
+    [vwDealerList].[DealerName] AS [DealerName], 
+    [vwDealerList].[EmailAddress] AS [EmailAddress], 
+    [vwDealerList].[BusinessPhone] AS [BusinessPhone], 
+    [vwDealerList].[MobilePhone] AS [MobilePhone], 
+    [vwDealerList].[FaxNumber] AS [FaxNumber], 
+    [vwDealerList].[Website] AS [Website], 
+    [vwDealerList].[Address] AS [Address], 
+    [vwDealerList].[CityID] AS [CityID], 
+    [vwDealerList].[CityName] AS [CityName], 
+    [vwDealerList].[BarangayID] AS [BarangayID], 
+    [vwDealerList].[BarangayName] AS [BarangayName], 
+    [vwDealerList].[ZipCode] AS [ZipCode], 
+    [vwDealerList].[Logo] AS [Logo], 
+    [vwDealerList].[LogoByte] AS [LogoByte], 
+    [vwDealerList].[Notes] AS [Notes], 
+    [vwDealerList].[CreatedBy] AS [CreatedBy], 
+    [vwDealerList].[CreatedDate] AS [CreatedDate], 
+    [vwDealerList].[Active] AS [Active]
+    FROM [dbo].[vwDealerList] AS [vwDealerList]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwDealerVehicleMake" EntityType="Self.vwDealerVehicleMake" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vwDealerVehicleMake].[DealerVehicleMakeID] AS [DealerVehicleMakeID], 
+    [vwDealerVehicleMake].[DealerID] AS [DealerID], 
+    [vwDealerVehicleMake].[DealerName] AS [DealerName], 
+    [vwDealerVehicleMake].[VehicleMakeID] AS [VehicleMakeID], 
+    [vwDealerVehicleMake].[VehicleMakeName] AS [VehicleMakeName], 
+    [vwDealerVehicleMake].[CreatedBy] AS [CreatedBy], 
+    [vwDealerVehicleMake].[CreatedDate] AS [CreatedDate], 
+    [vwDealerVehicleMake].[Active] AS [Active]
+    FROM [dbo].[vwDealerVehicleMake] AS [vwDealerVehicleMake]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwDivisionsList" EntityType="Self.vwDivisionsList" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vwDivisionsList].[RegionID] AS [RegionID], 
+    [vwDivisionsList].[RegionNumber] AS [RegionNumber], 
+    [vwDivisionsList].[RegionName] AS [RegionName], 
+    [vwDivisionsList].[ProvinceID] AS [ProvinceID], 
+    [vwDivisionsList].[ProvinceNumber] AS [ProvinceNumber], 
+    [vwDivisionsList].[ProvinceName] AS [ProvinceName], 
+    [vwDivisionsList].[CityID] AS [CityID], 
+    [vwDivisionsList].[CityNumber] AS [CityNumber], 
+    [vwDivisionsList].[CityName] AS [CityName], 
+    [vwDivisionsList].[BarangayID] AS [BarangayID], 
+    [vwDivisionsList].[BarangayName] AS [BarangayName]
+    FROM [dbo].[vwDivisionsList] AS [vwDivisionsList]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwLTOList" EntityType="Self.vwLTOList" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vwLTOList].[LTOID] AS [LTOID], 
+    [vwLTOList].[LTOName] AS [LTOName], 
+    [vwLTOList].[EmailAddress] AS [EmailAddress], 
+    [vwLTOList].[EmailAddress2] AS [EmailAddress2], 
+    [vwLTOList].[BusinessPhone] AS [BusinessPhone], 
+    [vwLTOList].[MobilePhone] AS [MobilePhone], 
+    [vwLTOList].[FaxNumber] AS [FaxNumber], 
+    [vwLTOList].[TIN] AS [TIN], 
+    [vwLTOList].[Website] AS [Website], 
+    [vwLTOList].[Address] AS [Address], 
+    [vwLTOList].[ProvinceID] AS [ProvinceID], 
+    [vwLTOList].[CityID] AS [CityID], 
+    [vwLTOList].[BarangayID] AS [BarangayID], 
+    [vwLTOList].[ZipCode] AS [ZipCode], 
+    [vwLTOList].[Logo] AS [Logo], 
+    [vwLTOList].[LogoByte] AS [LogoByte], 
+    [vwLTOList].[Notes] AS [Notes], 
+    [vwLTOList].[CreatedBy] AS [CreatedBy], 
+    [vwLTOList].[CreatedDate] AS [CreatedDate], 
+    [vwLTOList].[Active] AS [Active], 
+    [vwLTOList].[UpdatedBy] AS [UpdatedBy], 
+    [vwLTOList].[UpdatedDate] AS [UpdatedDate], 
+    [vwLTOList].[ProvinceName] AS [ProvinceName], 
+    [vwLTOList].[CityName] AS [CityName]
+    FROM [dbo].[vwLTOList] AS [vwLTOList]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwMAIList" EntityType="Self.vwMAIList" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vwMAIList].[MAIID] AS [MAIID], 
+    [vwMAIList].[MAITypeName] AS [MAITypeName], 
+    [vwMAIList].[MAIName] AS [MAIName], 
+    [vwMAIList].[EmailAddress] AS [EmailAddress], 
+    [vwMAIList].[BusinessPhone] AS [BusinessPhone], 
+    [vwMAIList].[MobilePhone] AS [MobilePhone], 
+    [vwMAIList].[FaxNumber] AS [FaxNumber], 
+    [vwMAIList].[Website] AS [Website], 
+    [vwMAIList].[Address] AS [Address], 
+    [vwMAIList].[ProvinceName] AS [ProvinceName], 
+    [vwMAIList].[CityName] AS [CityName], 
+    [vwMAIList].[BarangayID] AS [BarangayID], 
+    [vwMAIList].[BarangayName] AS [BarangayName], 
+    [vwMAIList].[ZipCode] AS [ZipCode], 
+    [vwMAIList].[Logo] AS [Logo], 
+    [vwMAIList].[LogoByte] AS [LogoByte], 
+    [vwMAIList].[Notes] AS [Notes], 
+    [vwMAIList].[CreatedBy] AS [CreatedBy], 
+    [vwMAIList].[CreatedDate] AS [CreatedDate], 
+    [vwMAIList].[Active] AS [Active], 
+    [vwMAIList].[AccreditationNumber] AS [AccreditationNumber]
+    FROM [dbo].[vwMAIList] AS [vwMAIList]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwMAIVehicleMake" EntityType="Self.vwMAIVehicleMake" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vwMAIVehicleMake].[MAIID] AS [MAIID], 
+    [vwMAIVehicleMake].[MAIName] AS [MAIName], 
+    [vwMAIVehicleMake].[VehicleMakeID] AS [VehicleMakeID], 
+    [vwMAIVehicleMake].[VehicleMakeName] AS [VehicleMakeName], 
+    [vwMAIVehicleMake].[CreatedBy] AS [CreatedBy], 
+    [vwMAIVehicleMake].[CreatedDate] AS [CreatedDate], 
+    [vwMAIVehicleMake].[MAIVehicleMakeID] AS [MAIVehicleMakeID], 
+    [vwMAIVehicleMake].[Active] AS [Active]
+    FROM [dbo].[vwMAIVehicleMake] AS [vwMAIVehicleMake]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwProvinceCity" EntityType="Self.vwProvinceCity" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vwProvinceCity].[ProvinceID] AS [ProvinceID], 
+    [vwProvinceCity].[ProvinceName] AS [ProvinceName], 
+    [vwProvinceCity].[CityID] AS [CityID], 
+    [vwProvinceCity].[CityName] AS [CityName], 
+    [vwProvinceCity].[ProvinceNumber] AS [ProvinceNumber], 
+    [vwProvinceCity].[CityNumber] AS [CityNumber]
+    FROM [dbo].[vwProvinceCity] AS [vwProvinceCity]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwTransactionEntityBranchList" EntityType="Self.vwTransactionEntityBranchList" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vwTransactionEntityBranchList].[TransactionEntityBranchID] AS [TransactionEntityBranchID], 
+    [vwTransactionEntityBranchList].[UserEntityID] AS [UserEntityID], 
+    [vwTransactionEntityBranchList].[EntityID] AS [EntityID], 
+    [vwTransactionEntityBranchList].[TransactionTypeID] AS [TransactionTypeID], 
+    [vwTransactionEntityBranchList].[Amount] AS [Amount], 
+    [vwTransactionEntityBranchList].[EffectivityDate] AS [EffectivityDate], 
+    [vwTransactionEntityBranchList].[Active] AS [Active], 
+    [vwTransactionEntityBranchList].[CreatedBy] AS [CreatedBy], 
+    [vwTransactionEntityBranchList].[CreatedDate] AS [CreatedDate], 
+    [vwTransactionEntityBranchList].[UpdatedBy] AS [UpdatedBy], 
+    [vwTransactionEntityBranchList].[UpdatedDate] AS [UpdatedDate], 
+    [vwTransactionEntityBranchList].[TransactionName] AS [TransactionName], 
+    [vwTransactionEntityBranchList].[UserEntityName] AS [UserEntityName], 
+    [vwTransactionEntityBranchList].[EntityName] AS [EntityName], 
+    [vwTransactionEntityBranchList].[EntityBranchName] AS [EntityBranchName]
+    FROM [dbo].[vwTransactionEntityBranchList] AS [vwTransactionEntityBranchList]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwTransactionEntityList" EntityType="Self.vwTransactionEntityList" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vwTransactionEntityList].[TransactionEntityTypeID] AS [TransactionEntityTypeID], 
+    [vwTransactionEntityList].[UserEntityID] AS [UserEntityID], 
+    [vwTransactionEntityList].[EntityID] AS [EntityID], 
+    [vwTransactionEntityList].[TransactionTypeID] AS [TransactionTypeID], 
+    [vwTransactionEntityList].[Amount] AS [Amount], 
+    [vwTransactionEntityList].[EffectivityDate] AS [EffectivityDate], 
+    [vwTransactionEntityList].[Active] AS [Active], 
+    [vwTransactionEntityList].[CreatedBy] AS [CreatedBy], 
+    [vwTransactionEntityList].[CreatedDate] AS [CreatedDate], 
+    [vwTransactionEntityList].[UpdatedBy] AS [UpdatedBy], 
+    [vwTransactionEntityList].[UpdatedDate] AS [UpdatedDate], 
+    [vwTransactionEntityList].[TransactionName] AS [TransactionName], 
+    [vwTransactionEntityList].[UserEntityName] AS [UserEntityName], 
+    [vwTransactionEntityList].[EntityName] AS [EntityName]
+    FROM [dbo].[vwTransactionEntityList] AS [vwTransactionEntityList]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwTransactionEntityType" EntityType="Self.vwTransactionEntityType" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vwTransactionEntityType].[TransactionEntityTypeID] AS [TransactionEntityTypeID], 
+    [vwTransactionEntityType].[UserEntityID] AS [UserEntityID], 
+    [vwTransactionEntityType].[TransactionTypeID] AS [TransactionTypeID], 
+    [vwTransactionEntityType].[Amount] AS [Amount], 
+    [vwTransactionEntityType].[EffectivityDate] AS [EffectivityDate], 
+    [vwTransactionEntityType].[Active] AS [Active], 
+    [vwTransactionEntityType].[CreatedBy] AS [CreatedBy], 
+    [vwTransactionEntityType].[CreatedDate] AS [CreatedDate], 
+    [vwTransactionEntityType].[UpdatedDate] AS [UpdatedDate], 
+    [vwTransactionEntityType].[UserEntityName] AS [UserEntityName], 
+    [vwTransactionEntityType].[TransactionName] AS [TransactionName], 
+    [vwTransactionEntityType].[UpdatedBy] AS [UpdatedBy]
+    FROM [dbo].[vwTransactionEntityType] AS [vwTransactionEntityType]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwTransactionTypeList" EntityType="Self.vwTransactionTypeList" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vwTransactionTypeList].[TransactionTypeID] AS [TransactionTypeID], 
+    [vwTransactionTypeList].[TransactionName] AS [TransactionName], 
+    [vwTransactionTypeList].[Active] AS [Active], 
+    [vwTransactionTypeList].[TransactionEntryTypeID] AS [TransactionEntryTypeID], 
+    [vwTransactionTypeList].[TransactionEntryTypeName] AS [TransactionEntryTypeName]
+    FROM [dbo].[vwTransactionTypeList] AS [vwTransactionTypeList]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwUserList" EntityType="Self.vwUserList" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vwUserList].[UserID] AS [UserID], 
+    [vwUserList].[UserEntityID] AS [UserEntityID], 
+    [vwUserList].[UserRoleID] AS [UserRoleID], 
+    [vwUserList].[EmailAddress] AS [EmailAddress], 
+    [vwUserList].[Password] AS [Password], 
+    [vwUserList].[LastName] AS [LastName], 
+    [vwUserList].[FirstName] AS [FirstName], 
+    [vwUserList].[ReferenceID] AS [ReferenceID], 
+    [vwUserList].[SubReferenceID] AS [SubReferenceID], 
+    [vwUserList].[CreatedBy] AS [CreatedBy], 
+    [vwUserList].[CreatedDate] AS [CreatedDate], 
+    [vwUserList].[UpdatedBy] AS [UpdatedBy], 
+    [vwUserList].[UpdatedDate] AS [UpdatedDate], 
+    [vwUserList].[Active] AS [Active], 
+    [vwUserList].[UserEntityName] AS [UserEntityName], 
+    [vwUserList].[UserRoleName] AS [UserRoleName], 
+    [vwUserList].[IsMain] AS [IsMain], 
+    [vwUserList].[CompanyName] AS [CompanyName], 
+    [vwUserList].[BranchName] AS [BranchName], 
+    [vwUserList].[LTOUserTypeID] AS [LTOUserTypeID]
+    FROM [dbo].[vwUserList] AS [vwUserList]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwVehicleList" EntityType="Self.vwVehicleList" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vwVehicleList].[VehicleID] AS [VehicleID], 
+    [vwVehicleList].[MAIID] AS [MAIID], 
+    [vwVehicleList].[DealerID] AS [DealerID], 
+    [vwVehicleList].[DealerBranchID] AS [DealerBranchID], 
+    [vwVehicleList].[VehicleMakeID] AS [VehicleMakeID], 
+    [vwVehicleList].[VehicleModelID] AS [VehicleModelID], 
+    [vwVehicleList].[EngineNumber] AS [EngineNumber], 
+    [vwVehicleList].[CPNumber] AS [CPNumber], 
+    [vwVehicleList].[DateIssued1] AS [DateIssued1], 
+    [vwVehicleList].[ChassisNumber] AS [ChassisNumber], 
+    [vwVehicleList].[CPNumber2] AS [CPNumber2], 
+    [vwVehicleList].[DateIssued2] AS [DateIssued2], 
+    [vwVehicleList].[BodyIDNumber] AS [BodyIDNumber], 
+    [vwVehicleList].[BIRCCMV] AS [BIRCCMV], 
+    [vwVehicleList].[DateIssued3] AS [DateIssued3], 
+    [vwVehicleList].[VehicleColorID] AS [VehicleColorID], 
+    [vwVehicleList].[PistonDisplacement] AS [PistonDisplacement], 
+    [vwVehicleList].[VehicleFuelTypeID] AS [VehicleFuelTypeID], 
+    [vwVehicleList].[Cylinders] AS [Cylinders], 
+    [vwVehicleList].[Series] AS [Series], 
+    [vwVehicleList].[Year] AS [Year], 
+    [vwVehicleList].[GrossVehicleWeight] AS [GrossVehicleWeight], 
+    [vwVehicleList].[FrontTiresNumber] AS [FrontTiresNumber], 
+    [vwVehicleList].[RearTiresNumber] AS [RearTiresNumber], 
+    [vwVehicleList].[TaxType] AS [TaxType], 
+    [vwVehicleList].[TaxAmount] AS [TaxAmount], 
+    [vwVehicleList].[AirconType] AS [AirconType], 
+    [vwVehicleList].[ConductionSticker] AS [ConductionSticker], 
+    [vwVehicleList].[COCNo] AS [COCNo], 
+    [vwVehicleList].[Remarks] AS [Remarks], 
+    [vwVehicleList].[DatePrepared] AS [DatePrepared], 
+    [vwVehicleList].[CSRNumber] AS [CSRNumber], 
+    [vwVehicleList].[BOCCertificateOfPayment] AS [BOCCertificateOfPayment], 
+    [vwVehicleList].[CertificateOfStockReport] AS [CertificateOfStockReport], 
+    [vwVehicleList].[CertificateOfConformity] AS [CertificateOfConformity], 
+    [vwVehicleList].[StencilOfEngine] AS [StencilOfEngine], 
+    [vwVehicleList].[StencilOfChasis] AS [StencilOfChasis], 
+    [vwVehicleList].[MAIName] AS [MAIName], 
+    [vwVehicleList].[DealerName] AS [DealerName], 
+    [vwVehicleList].[DealerBranchName] AS [DealerBranchName], 
+    [vwVehicleList].[VehicleMakeName] AS [VehicleMakeName], 
+    [vwVehicleList].[VehicleModelName] AS [VehicleModelName], 
+    [vwVehicleList].[Variant] AS [Variant], 
+    [vwVehicleList].[YearOfMake] AS [YearOfMake], 
+    [vwVehicleList].[VehicleColorName] AS [VehicleColorName], 
+    [vwVehicleList].[VehicleFuelTypeName] AS [VehicleFuelTypeName], 
+    [vwVehicleList].[Active] AS [Active], 
+    [vwVehicleList].[CreatedBy] AS [CreatedBy], 
+    [vwVehicleList].[VehicleBodyTypeName] AS [VehicleBodyTypeName], 
+    [vwVehicleList].[VehicleBodyAbbr] AS [VehicleBodyAbbr], 
+    [vwVehicleList].[CreatedDate] AS [CreatedDate], 
+    [vwVehicleList].[PNPClearance] AS [PNPClearance], 
+    [vwVehicleList].[LTOSubmitted] AS [LTOSubmitted], 
+    [vwVehicleList].[Assigned] AS [Assigned], 
+    [vwVehicleList].[HPGControlNumber] AS [HPGControlNumber], 
+    [vwVehicleList].[AutoPNP] AS [AutoPNP], 
+    [vwVehicleList].[PNPReceiptReferenceNumber] AS [PNPReceiptReferenceNumber], 
+    [vwVehicleList].[CSRSubmitted] AS [CSRSubmitted]
+    FROM [dbo].[vwVehicleList] AS [vwVehicleList]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwVehicleModel" EntityType="Self.vwVehicleModel" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vwVehicleModel].[VehicleModelID] AS [VehicleModelID], 
+    [vwVehicleModel].[VehicleMakeID] AS [VehicleMakeID], 
+    [vwVehicleModel].[VehicleModelName] AS [VehicleModelName], 
+    [vwVehicleModel].[Variant] AS [Variant], 
+    [vwVehicleModel].[YearOfMake] AS [YearOfMake], 
+    [vwVehicleModel].[CreatedBy] AS [CreatedBy], 
+    [vwVehicleModel].[CreatedDate] AS [CreatedDate], 
+    [vwVehicleModel].[Active] AS [Active], 
+    [vwVehicleModel].[VehicleMakeName] AS [VehicleMakeName], 
+    [vwVehicleModel].[VehicleClassificationID] AS [VehicleClassificationID], 
+    [vwVehicleModel].[VehicleClassificationName] AS [VehicleClassificationName]
+    FROM [dbo].[vwVehicleModel] AS [vwVehicleModel]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
