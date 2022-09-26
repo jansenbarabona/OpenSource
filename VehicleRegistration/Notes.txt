@@ -1,0 +1,10 @@
+https://www.codexworld.com/embed-pdf-document-file-in-html-web-page/
+https://www.geeksforgeeks.org/how-to-embed-pdf-file-using-html/
+https://stackoverflow.com/questions/3982422/full-screen-iframe
+
+https://codereview.stackexchange.com/questions/92072/local-report-rdlc-to-pdf
+https://www.aspsnippets.com/Articles/Export-RDLC-Report-to-PDF-without-using-ReportViewer-in-ASPNet-with-C-and-VBNet.aspx
+https://social.msdn.microsoft.com/Forums/en-US/02b77f3c-4d33-4749-b972-9d56733332e0/how-to-set-save-path-of-rdlc-report-pdf?forum=aspgettingstarted
+https://stackoverflow.com/questions/25909721/how-can-i-save-rdlc-report-in-a-folder-using-c-sharp
+
+https://stackoverflow.com/questions/1652203/save-rdlc-reports-as-pdf-programmatically
