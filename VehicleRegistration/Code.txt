@@ -1,0 +1,107 @@
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Text;
+
+using System.Threading.Tasks;
+
+using System.IO;
+
+
+
+namespace ConsoleApplication25
+
+{
+
+    class Program
+
+    {
+
+        static void Main(string[] args)
+
+        {
+
+
+
+            l1:
+
+            Console.WriteLine("Enter the folder name :");
+
+            string n = Console.ReadLine();
+
+            DirectoryInfo DIR = new DirectoryInfo(@"C:\Users\salman\Desktop\FILE\"+n);
+
+
+
+
+
+            try
+
+            {
+
+
+
+                if (DIR.Exists)
+
+                {
+
+                    Console.WriteLine("THIS FOLDER ALREADY EXIST......\nPress any key to go back");
+
+                    Console.ReadLine();
+
+                    Console.Clear();
+
+                    goto l1;
+
+                }
+
+                else
+
+                {
+
+                    DIR.Create();
+
+                    Console.Write("fOLDER CREATED.....");
+
+                }
+
+
+
+
+
+            }
+
+            catch (Exception E)
+
+            {
+
+                Console.ForegroundColor = System.ConsoleColor.Red;
+
+                Console.WriteLine("Folder couldnot be created due to " + E);
+
+            }
+
+
+
+            Console.WriteLine("Enter the folder that u want to delete.......");
+
+            n = Console.ReadLine();
+
+            new DirectoryInfo(@"C:\Users\salman\Desktop\FILE\" + n);
+
+            DIR.Delete();
+
+            Console.WriteLine("Folder deleted.....");
+
+            Console.ReadLine();
+
+
+
+        }
+
+    }
+
+}
