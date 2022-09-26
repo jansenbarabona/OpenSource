@@ -1,0 +1,185 @@
+﻿@using VehicleRegistration.Models
+@model  DealerInsuranceModel
+@{
+    ViewBag.Title = "Dealer Insurance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="nav-icon fas fa-hand-holding-heart"></i> Dealer Insurance List<small> </small></h6>
+                </div>
+                <!-- /.card-header -->
+
+                <article class="card-body mx-auto">
+                    <div class="row">
+                        <div class="form-group col-lg-12">
+                            @Html.LabelFor(m => m.DealerName)
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fas fa-car-side"></i> </span>
+                                </div>
+                                @Html.TextBoxFor(m => m.DealerName, new { placeholder = "Region Name", @class = "form-control", @readonly = "readonly" })
+                            </div>
+                        </div> <!-- form-group// -->
+                    </div>
+                </article>
+
+
+                @using (Html.BeginForm("DealerInsurance", "Dealer", new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="fab" type="button" data-toggle="modal" data-target="#modal-insurance_list" name="btnSubmit" title="Create New"> + </div>
+                    <div class="card-body">
+                        <table id="InsuranceDealer_list_tbl" class="table table-bordered table-striped table-hover" style="max-width:100%;width:100%;">
+                            <thead>
+                                <tr>
+                                    <th style="width:100%;">Insurance Name</th>
+                                    <th style="width:50px;"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.vwDealerInsuranceModeList.Count > 0)
+                                {
+
+                                    foreach (var item in Model.vwDealerInsuranceModeList)
+                                    {
+                                        <tr>
+                                            <td style="max-width:100%;" id="insurancedealer" data-insuranceid="@item.InsuranceID">@item.InsuranceName</td>
+                                            <td style="text-align:center;">
+                                                <button type="button" class="delete_item btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-delete"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    @Html.HiddenFor(m => m.DealerID)
+                    @Html.HiddenFor(o => o.InsuranceID)
+                    @Html.Partial("_Confirmation")
+                }
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+
+@*Dealer List*@
+<div class="modal fade" id="modal-insurance_list">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @using (Html.BeginForm("DealerInsurance", "Dealer", new { enctype = "multipart/form-data", @id = "DealerInsuranceForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-header">
+                    <h4 class="modal-title" style="text-align:center">List of Dealer's</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table id="Insurance_list_tbl" class="table table-bordered table-striped table-hover" style="table-layout:auto;width:100%;">
+                        <thead>
+                            <tr>
+                                <th style="width:20%"><div data-toggle="tooltip" title="Check all" class="icheck-success d-inline">
+                                    @Html.CheckBox("check_all", false)
+                                    <label for="check_all"></label>
+                                    </div>
+                                </th>
+                                <th style="width:80%;">Insurance Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.DealerInsuranceModelList.Count() > 0)
+                            {
+                                for (int i = 0; i < Model.DealerInsuranceModelList.Count(); i++)
+                                {
+                                    <tr>
+                                        <td style="width:25px;">
+                                            <div class="icheck-success d-inline">
+                                                @Html.CheckBoxFor(o => o.DealerInsuranceModelList[i].isChecked, new { id = i, @class = "checkbox_all" })
+                                                <label for="@i"></label>
+                                            </div>
+                                        </td>
+                                        <td style="width:100%;" id="dealer_name">
+                                            @Html.DisplayFor(o => o.DealerInsuranceModelList[i].InsuranceName)
+                                            @Html.HiddenFor(o => o.DealerInsuranceModelList[i].InsuranceID)
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                    @Html.HiddenFor(m => m.DealerID)
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" name="submit" value="Save" class="btn btn-primary">Add</button>
+                </div>
+            }
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script>
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_ul_dealer").css("display", "block");
+    $("#left_nav_dealer").toggleClass("menu-open");
+    $("#dealer_insurance").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+    $(".delete_item").on("click", function () {
+        $("#InsuranceID").val($(this).closest("tr").find("#insurancedealer").attr("data-insuranceid"));
+    });
+
+    $("#check_all").on("click", function () {
+        if ($(this).is(":checked")) {
+            $(".checkbox_all").prop("checked", true);
+        }
+        else {
+            $(".checkbox_all").prop("checked", false);
+        }
+    });
+
+    // Handle form submission event
+    $('form').on('submit', function (e) {
+        var form = this;
+
+        // Encode a set of form elements from all pages as an array of names and values
+        var params = all_table.$('input,select,textarea').serializeArray();
+
+        // Iterate over all form elements
+        $.each(params, function () {
+            // If element doesn't exist in DOM
+            if (!$.contains(document, form[this.name])) {
+                // Create a hidden element
+                $(form).append(
+                    $('<input>')
+                        .attr('type', 'hidden')
+                        .attr('name', this.name)
+                        .val(this.value)
+                );
+            }
+        });
+    });
+</script>
+<style>
+    div#Insurance_list_tbl_info.dataTables_info {
+        display: flex;
+        justify-content: flex-end;
+        padding-top:45px;
+    }
+</style>

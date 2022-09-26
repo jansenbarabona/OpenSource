@@ -1,0 +1,57 @@
+﻿@using VehicleRegistration.Models
+@model CTPLTermModel
+@{
+    ViewBag.Title = "CTPLTermList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="fas fa-users nav-icon"></i> CTPL Term List</h6>
+                </div>
+                <div class="fab" type="button" name="btnSubmit" data-toggle="tooltip" title="Create New" onclick="location.href='@Url.Action("CTPLTerm", "CTPL")'"> + </div>
+                <div class="card-body">
+                    <table id="CTPL_term_list_tbl" class="table table-bordered table-striped table-hover" style="width:100%; max-width:100%;">
+                        <thead>
+                            <tr>
+                                <th style="width:200px;">CTPL Term Code</th>
+                                <th style="width:200px;">Coverage Year</th>
+                                <th style="width:300px;">Term Description</th>
+                                <th style="width:50px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.CTPLTermList)
+                            {
+                                <tr>
+                                    <td style="max-width:250px;">@item.CPTLTermID</td>
+                                    <td style="max-width:250px;">@item.CoverageYear</td>
+                                    <td style="max-width:350px;">@item.TermDescription</td>
+                                    <td style="max-width:50px;">
+                                        <div class="row" style="align-items:center">
+                                            <a href="@Url.Action("CTPLTerm", new { id = item.CPTLTermID })">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#ctpl_term").toggleClass("active");
+  
+</script>
+
+
+
+

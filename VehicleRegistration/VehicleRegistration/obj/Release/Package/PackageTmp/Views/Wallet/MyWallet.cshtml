@@ -1,0 +1,49 @@
+﻿@using VehicleRegistration.Models
+@model WalletModel
+@{
+    ViewBag.Title = "DataBridge User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    /*margin:0px;
+        height:10px;*/
+    /*max-height:10px;*/
+</style>
+
+<!-- Main content -->
+<section class="content">
+
+    <div class="row">
+        <div class="col-12">
+            @{
+                Html.RenderPartial("_TransactionHistory", Model);
+            }
+        </div>  
+    </div>
+</section>
+
+<!-- /.content -->
+<!-- ./wrapper -->
+<script>
+
+    $("#left_nav_mai").toggleClass("menu-open");
+
+    $("#left_nav_dlr").toggleClass("menu-open");
+    //$("#all_user").toggleClass("active");
+    $("#mywallet").toggleClass("active");
+
+    $("#left_nav_admin").toggleClass("active");
+    $("#all_user").toggleClass("active");
+
+
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#all_user").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+    //$("#content_header").attr("class", "nav-icon fas fa-users-cog");
+    //$("#content_header").text(" User Admins");
+</script>

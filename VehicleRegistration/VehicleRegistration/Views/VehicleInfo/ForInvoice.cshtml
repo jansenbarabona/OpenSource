@@ -1,0 +1,40 @@
+﻿@using VehicleRegistration.Models
+@model VehicleListModel
+
+@{
+    ViewBag.Title = "For Invoice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("ForInvoice", "VehicleInfo", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6><i class="nav-icon fas fa-file-signature"></i> Vehicles to be sold  <small> </small></h6>
+                    </div>
+                    <div class="card-body">
+                        @*<div class="check btn-info" style="cursor:pointer;" id="btn_assign" name="btnSubmit" onclick="location.href='@Url.Action("UploadForPNP", "VehicleInfo")'" title="PNP Information"><i class="fas fa-car"></i></div>*@
+
+                        @{
+                            Html.RenderPartial("_VehicleList");
+                        }
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+}
+
+<script>
+
+    //$("table thead").find("th:eq(0)").remove();
+    //$("table tbody tr").find("td:eq(0)").remove();
+</script>

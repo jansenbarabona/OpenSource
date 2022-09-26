@@ -1,0 +1,29 @@
+﻿@using VehicleRegistration.Models
+﻿@using VehicleRegistration.Tools
+@model BatchHeaderModel
+
+<style>
+    
+    div#ui-datepicker-div.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all {
+        z-index: 2051 !important;
+    }
+</style>
+
+<div class="modal fade" id="modal-LTO">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><label id="lblModalTitle">Are you sure you want to submit this to LTO?</label></h4>
+            </div>
+            <div id="modal-body-lto" class="modal-body">
+                @{
+                    Html.RenderPartial("_BatchHeader", Model, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "BatchHeader" } });
+                }
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" id="btn_lto" name="submit" value="LTO" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

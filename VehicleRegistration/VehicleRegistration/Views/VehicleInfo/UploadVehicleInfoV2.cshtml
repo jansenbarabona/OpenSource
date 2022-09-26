@@ -1,0 +1,684 @@
+﻿@{
+    ViewBag.Title = "Vehicle Upload";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using System.Data;
+@using VehicleRegistration.Models
+﻿@using VehicleRegistration.Tools
+@model UploadVehicleInfoModelV2
+
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+
+<script>
+    function bs_input_file() {
+        $(".input-file").before(
+            function () {
+                if (!$(this).prev().hasClass('input-ghost')) {
+                    var element = $("<input type='file' id='dataFile' name='upload' class='input-ghost' style='visibility:hidden; height:0'>");
+                    element.attr("name", $(this).attr("name"));
+                    element.change(function () {
+                        element.next(element).find('input').val((element.val()).split('\\').pop());
+                    });
+                    $(this).find("button.btn-choose").click(function () {
+                        element.click();
+                    });
+                    $(this).find("button.btn-reset").click(function () {
+                        element.val(null);
+                        $(this).parents(".input-file").find('input').val('');
+                    });
+                    $(this).find('input').css("cursor", "pointer");
+                    $(this).find('input').mousedown(function () {
+                        $(this).parents('.input-file').prev().click();
+                        return false;
+                    });
+                    return element;
+                }
+            }
+        );
+    }
+
+    function clear() {
+        var input = $("#dataFile").val('');
+    };
+    $(function () {
+        clear();
+        bs_input_file();
+    });
+</script>
+
+<section class="content">
+    <div class="card">
+        <div class="info2">
+
+
+            @using (Html.BeginForm("VehicleInfo_templateV2", "VehicleInfo", FormMethod.Post))
+            {
+                <h2>
+                    Browse File for Uploading vehicles
+                    <button type="button" class="btn btn-tool" title="Back" style="float:right" onclick="location.href='@Url.Action("Index", "VehicleInfo")'">
+                        <i class="far fa-times-circle"></i>
+                    </button>
+                    <button class="fab-excel" type="submit" name="btnSubmit" title="Excel Template">
+                        <i class="far fa-file-excel"></i>
+                    </button>
+                </h2>
+
+            }
+
+            @using (Html.BeginForm("UploadVehicleInfoV2", "VehicleInfo", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group" name="Fichier1">
+                    <!-- COMPONENT START -->
+                    <div class="form-group">
+                        <div class="input-group input-file">
+                            <span class="input-group-btn">
+                                @*<button class="btn btn-default btn-choose" type="button">Browse...</button>*@
+                                <button class="btn btn-choose" type="button"><i class="fas fa-folder-open"></i> Browse..</button>
+                            </span>
+                            <input type="text" style="margin:3px;" class="form-control" placeholder='Choose a file...' accept=".xls,.xlsx" />
+                            <button type="submit" name="submit" value="Upload" id="btn_sbmt" data-toggle="tooltip" title="Upload file" class="btn btn-upload"><i class="fas fa-cloud-upload-alt"></i></button>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @using (Html.BeginForm("UploadVehicleInfoV2", "VehicleInfo", null, FormMethod.Post, new { id = "save_form", enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                if (Model.VehicleTableV2.Count() > 0)
+                {
+                    <div class="card">
+                        <div class="card-header">
+                            <h6>Batch Header</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row" style="text-align:center">
+                                <div class="form-group col-lg-6">
+                                    @Html.LabelFor(m => m.BatchHeader.ReferenceNo)
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fa fa-barcode"></i> </span>
+                                        </div>
+                                        @Html.TextBoxFor(m => m.BatchHeader.ReferenceNo,
+                                       new
+                                       {
+                                           placeholder = "Reference Number",
+                                           @class = "form-control"
+                                       })
+                                    </div>
+                                    @Html.ValidationMessageFor(m => m.BatchHeader.ReferenceNo, "", new { @class = "" })
+                                </div>
+
+                                <div class="form-group col-lg-6">
+                                    @Html.LabelFor(m => m.BatchHeader.BatchDescription)
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fa fa-keyboard"></i> </span>
+                                        </div>
+                                        @Html.TextBoxFor(m => m.BatchHeader.BatchDescription,
+                                       new
+                                       {
+                                           placeholder = "Desciption...",
+                                           @class = "form-control"
+                                       })
+                                    </div>
+                                    @Html.ValidationMessageFor(m => m.BatchHeader.BatchDescription, "", new { @class = "" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="body-content">
+                        <table id="upload_tbl" class="table table-bordered table-striped table-hover" style="margin-top: 5px; max-width:100%;">
+                            <thead>
+                                <tr>
+                                    @*<th style="width:250px;">Make</th>
+                                        <th style="width:250px;">Model</th>
+                                        <th style="width:250px;">Body Type</th>*@
+                                    <th style="width:250px;">Engine Number</th>
+                                    <th style="width:250px;">Chasis Number</th>
+                                    @*<th style="width:250px;">Color</th>
+                                        <th style="width:250px;">Gross Vehicle Weight</th>*@
+                                    <th style="width:250px;">CSR Number</th>
+                                    <th style="width:250px;">HPG Control Number</th>
+                                    <th style="width:250px;">Invoice Number</th>
+                                    <th style="width:250px;">Invoice Date</th>
+                                    <th style="width:250px;">Invoice Amount</th>
+
+                                    <th style="width:250px;">Title</th>
+
+                                    <th style="width:250px;">Last Name</th>
+                                    <th style="width:250px;">First Name</th>
+                                    <th style="width:250px;">Middle Name</th>
+                                    <th style="width:250px;">Birthdate</th>
+                                    <th style="width:250px;">Civil Status</th>
+                                    <th style="width:250px;">Sex</th>
+                                    <th style="width:250px;">Mobile No.</th>
+                                    <th style="width:250px;">Email Address</th>
+                                    <th style="width:250px;">Tax ID No.</th>
+
+                                    <th style="width:250px;">Organization Name</th>
+                                    <th style="width:250px;">Org Mneomonic</th>
+                                    <th style="width:250px;">Primary Contact</th>
+                                    <th style="width:250px;">Contact Details</th>
+                                    <th style="width:250px;">Email Address</th>
+                                    <th style="width:250px;">Phone No.</th>
+                                    <th style="width:250px;">Org Tax ID No.</th>
+
+                                    <th style="width:250px;">Province</th>
+                                    <th style="width:250px;">City</th>
+                                    <th style="width:250px;">Barangay</th>
+                                    <th style="width:250px;">House Bldg No.</th>
+                                    <th style="width:250px;">Street</th>
+                                    <th style="width:250px;">Zip Code</th>
+                                    <th style="width:50px;">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody id="upload_tbdy">
+                                @{
+                                    int cnt = 0;
+                                    foreach (var itm in Model.VehicleTableV2)
+                                    {
+                                        <tr>
+                                            @*<td style="max-width:250px;">
+                                                    @Html.DropDownListFor(m => m.VehicleTableV2[cnt].SelectedVehicleMakeID, new SelectList(Model.VehicleMakeList, "VehicleMakeID", "VehicleMakeName", Model.VehicleTableV2[cnt].SelectedVehicleMakeID), "Select Vehicle Make", new { @class = "vehiclemake form-control select2", @style = "width:100%" })
+                                                    @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].SelectedVehicleMakeID, "", new { @class = "" })
+                                                </td>
+                                                <td style="max-width:250px;">
+                                                    @Html.DropDownListFor(m => m.VehicleTableV2[cnt].SelectedVehicleModelID, new SelectList(Model.VehicleTableV2[cnt].VehicleModelList, "VehicleModelID", "VehicleModelName", Model.VehicleTableV2[cnt].SelectedVehicleModelID), "Select Vehicle Model", new { @class = "vehiclemodel form-control select2", @style = "width:100%" })
+                                                    @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].SelectedVehicleModelID, "", new { @class = "" })
+                                                </td>
+                                                <td style="max-width:250px;">
+                                                    @Html.DropDownListFor(m => m.VehicleTableV2[cnt].SelectedVehicleBodyTypeID, new SelectList(Model.VehicleBodyTypeList, "VehicleBodyTypeID", "VehicleBodyTypeName", Model.VehicleTableV2[cnt].SelectedVehicleBodyTypeID), "Select Vehicle Body Type", new { @class = "form-control select2", @style = "width:100%" })
+                                                    @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].SelectedVehicleBodyTypeID, "", new { @class = "" })
+                                                </td>*@
+                                            <td style="max-width:250px;">
+                                                @Html.TextBoxFor(m => m.VehicleTableV2[cnt].EngineNumber, new { placeholder = "Engine Number", @class = "form-control", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].EngineNumber, "", new { @class = "" })
+                                            </td>
+                                            <td style="max-width:250px;">
+                                                @Html.TextBoxFor(m => m.VehicleTableV2[cnt].ChassisNumber, new { placeholder = "Chassis Number", @class = "form-control", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].ChassisNumber, "", new { @class = "" })
+                                            </td>
+                                            @*<td style="max-width:250px;">
+                                                    @Html.DropDownListFor(m => m.VehicleTableV2[cnt].SelectedVehicleColorID, new SelectList(Model.VehicleColorList, "VehicleColorID", "VehicleColorName", Model.VehicleTableV2[cnt].SelectedVehicleColorID), "Select Vehicle Color", new { @class = "form-control select2", @style = "width:100%", data_val = "false" })
+                                                    @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].SelectedVehicleColorID, "", new { @class = "" })
+                                                </td>
+                                                <td style="max-width:250px;">
+                                                    @Html.TextBoxFor(m => m.VehicleTableV2[cnt].GrossVehicleWeight, new { placeholder = "Gross Vehicle Weight", @class = "form-control GrossVehicleWeight", @style = "width:100%", data_val = "false" })
+                                                    @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].GrossVehicleWeight, "", new { @class = "" })
+                                                </td>*@
+                                            <td style="max-width:250px;">
+                                                @Html.TextBoxFor(m => m.VehicleTableV2[cnt].CSRNumber, new { placeholder = "CSR Number", @class = "form-control", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].CSRNumber, "", new { @class = "" })
+                                            </td>
+                                            <td style="max-width:250px;">
+                                                @Html.TextBoxFor(m => m.VehicleTableV2[cnt].HPGNumber, new { placeholder = "HPG Control Number", @class = "form-control", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].HPGNumber, "", new { @class = "" })
+                                            </td>
+
+                                            <td style="max-width:250px;">
+                                                @Html.TextBoxFor(m => m.VehicleTableV2[cnt].InvoiceNumber, new { placeholder = "Invoice  Number", @class = "form-control", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].InvoiceNumber, "", new { @class = "" })
+                                            </td>
+                                            <td style="max-width:250px;">
+                                                @Html.EditorFor(m => m.VehicleTableV2[cnt].InvoiceDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].InvoiceDate, "", new { @class = "" })
+                                            </td>
+                                            <td style="max-width:250px;">
+                                                @Html.TextBoxFor(m => m.VehicleTableV2[cnt].InvoiceAmount, new { placeholder = "Invoice Amount", @class = "form-control", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].InvoiceAmount, "", new { @class = "" })
+                                            </td>
+
+                                            <td style="max-width:250px;">
+                                                @Html.DropDownListFor(m => m.VehicleTableV2[cnt].TitleID, new SelectList(Model.TitleList, "TitleID", "TitleName", Model.VehicleTableV2[cnt].TitleID), "Select Title", new { @class = "title form-control select2", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].TitleID, "", new { @class = "" })
+                                            </td>
+
+                                            <td style="max-width:250px;">
+                                                @Html.TextBoxFor(m => m.VehicleTableV2[cnt].LastName, new { placeholder = "Last Name", @class = "lastname form-control", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].LastName, "", new { @class = "" })
+                                            </td>
+                                            <td style="max-width:250px;">
+                                                @Html.TextBoxFor(m => m.VehicleTableV2[cnt].FirstName, new { placeholder = "First Name", @class = "firstname form-control", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].FirstName, "", new { @class = "" })
+                                            </td>
+                                            <td style="max-width:250px;">
+                                                @Html.TextBoxFor(m => m.VehicleTableV2[cnt].MiddleName, new { placeholder = "Middle Name", @class = "middlename form-control", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].MiddleName, "", new { @class = "" })
+                                            </td>
+                                            <td style="max-width:250px;">
+                                                @Html.EditorFor(m => m.VehicleTableV2[cnt].Birthdate, new { htmlAttributes = new { @class = "birthdate form-control", @type = "date" } })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].Birthdate, "", new { @class = "" })
+                                            </td>
+                                            <td style="max-width:250px;">
+                                                @Html.DropDownListFor(m => m.VehicleTableV2[cnt].CivilStatusCode, new SelectList(Model.CivilStatusList, "CivilStatusCode", "CivilStatusName", Model.VehicleTableV2[cnt].CivilStatusCode), "Select Civil Status", new { @class = "civilstatus form-control select2", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].CivilStatusCode, "", new { @class = "" })
+                                            </td>
+                                            <td style="max-width:250px;">
+                                                @Html.DropDownListFor(m => m.VehicleTableV2[cnt].SexCode, new SelectList(Model.SexList, "SexCode", "SexName", Model.VehicleTableV2[cnt].SexCode), "Select Gender", new { @class = "sex form-control select2", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].SexCode, "", new { @class = "" })
+                                            </td>
+                                            <td style="max-width:250px;">
+                                                @Html.TextBoxFor(m => m.VehicleTableV2[cnt].ContactNumber, new { placeholder = "Contact Number", @class = "contactno form-control", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].ContactNumber, "", new { @class = "" })
+                                            </td>
+                                            <td style="max-width:250px;">
+                                                @Html.TextBoxFor(m => m.VehicleTableV2[cnt].EmailAddress, new { placeholder = "Email Address", @class = "emailaddress form-control", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].EmailAddress, "", new { @class = "" })
+                                            </td>
+                                            <td style="max-width:250px;">
+                                                @Html.TextBoxFor(m => m.VehicleTableV2[cnt].TIN, new { placeholder = "Tax ID No.", @class = "tin form-control", maxlength = "15", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].TIN, "", new { @class = "" })
+                                            </td>
+
+                                            <td style="max-width:250px;">
+                                                @Html.TextBoxFor(m => m.VehicleTableV2[cnt].OrgName, new { placeholder = "Organization Name", @class = "orgname form-control", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].OrgName, "", new { @class = "" })
+                                            </td>
+                                            <td style="max-width:250px;">
+                                                @Html.TextBoxFor(m => m.VehicleTableV2[cnt].OrgMnemonic, new { data_rule_Required = "false", placeholder = "Organization Mnemonic", @class = "orgmnemonic form-control", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].OrgMnemonic, "", new { @class = "" })
+                                            </td>
+                                            <td style="max-width:250px;">
+                                                @Html.TextBoxFor(m => m.VehicleTableV2[cnt].PrimaryContact, new { placeholder = "Primary Contact", @class = "primarycontact form-control", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].PrimaryContact, "", new { @class = "" })
+                                            </td>
+                                            <td style="max-width:250px;">
+                                                @Html.TextBoxFor(m => m.VehicleTableV2[cnt].ContactDetails, new { placeholder = "Contact Details", @class = "contactdetails form-control", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].ContactDetails, "", new { @class = "" })
+                                            </td>
+                                            <td style="max-width:250px;">
+                                                @Html.TextBoxFor(m => m.VehicleTableV2[cnt].EmailAddressOrg, new { placeholder = "Email Address", @class = "emailaddressorg form-control", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].EmailAddressOrg, "", new { @class = "" })
+                                            </td>
+                                            <td style="max-width:250px;">
+                                                @Html.TextBoxFor(m => m.VehicleTableV2[cnt].PhoneNo, new { placeholder = "Phone No.", @class = "phoneno form-control", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].PhoneNo, "", new { @class = "" })
+                                            </td>
+                                            <td style="max-width:250px;">
+                                                @Html.TextBoxFor(m => m.VehicleTableV2[cnt].TINOrg, new { placeholder = "Tax ID No.", @class = "tinorg form-control", maxlength = "15", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].TINOrg, "", new { @class = "" })
+                                            </td>
+
+                                            <td style="max-width:250px;">
+                                                @Html.DropDownListFor(m => m.VehicleTableV2[cnt].ProvinceID, new SelectList(Model.ProvinceList, "ProvinceID", "ProvinceName", Model.VehicleTableV2[cnt].ProvinceID), "Select Province", new { @class = "province form-control select2", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].ProvinceID, "", new { @class = "" })
+                                            </td>
+                                            <td style="max-width:250px;">
+                                                @Html.DropDownListFor(m => m.VehicleTableV2[cnt].CityID, new SelectList(Model.VehicleTableV2[cnt].Citylist, "CityID", "CityName", Model.VehicleTableV2[cnt].CityID), "Select City", new { @class = "city form-control select2", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].CityID, "", new { @class = "" })
+                                            </td>
+                                            <td style="max-width:250px;">
+                                                @Html.DropDownListFor(m => m.VehicleTableV2[cnt].BarangayID, new SelectList(Model.VehicleTableV2[cnt].Barangaylist, "BarangayID", "BarangayName", Model.VehicleTableV2[cnt].BarangayID), "Select Barangay", new { @class = "barangay form-control select2", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].BarangayID, "", new { @class = "" })
+                                            </td>
+                                            <td style="max-width:250px;">
+                                                @Html.TextBoxFor(m => m.VehicleTableV2[cnt].HouseBldgNumber, new { placeholder = "House Bldg Number", maxlength = "30", @class = "form-control", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].HouseBldgNumber, "", new { @class = "" })
+                                            </td>
+                                            <td style="max-width:250px;">
+                                                @Html.TextBoxFor(m => m.VehicleTableV2[cnt].Street, new { placeholder = "Street", maxlength = "30", @class = "form-control", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].Street, "", new { @class = "" })
+                                            </td>
+                                            <td style="max-width:250px;">
+                                                @Html.TextBoxFor(m => m.VehicleTableV2[cnt].ZipCode, new { placeholder = "Zip Code", @class = "form-control", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(m => m.VehicleTableV2[cnt].ZipCode, "", new { @class = "" })
+                                            </td>
+
+                                            <td style="max-width:50px;">
+                                                <center>
+                                                    <button class="remove btn-danger">
+                                                        <i class="fa fa-trash" title="Remove"></i>
+                                                    </button>
+                                                </center>
+                                            </td>
+                                        </tr>
+                                        cnt++;
+                                    }
+                                }
+                            </tbody>
+                        </table>
+
+                        <center>
+                            <div class="form-group">
+                                <center>
+                                    <button type="submit" name="submit" value="Save" id="save_btn" class="btn btn-primary btn-block" style="width:250px;"> Save </button>
+                                </center>
+                            </div>
+                        </center>
+                    </div>
+                }
+                @*<div class="alert alert-danger">
+                        @Html.ValidationSummary()
+                    </div>*@
+            }
+
+        </div>
+        @*@if (Model.Table != null)
+                {
+                <table id="table1" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            @foreach (DataColumn col in Model.Table.Columns)
+                            {
+                                <th>@col.ColumnName</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (DataRow row in Model.Table.Rows)
+                        {
+                            <tr>
+                                @foreach (DataColumn col in Model.Table.Columns)
+                                {
+                                    <td>@row[col.ColumnName]</td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }*@
+    </div>
+</section>
+
+<script>
+    $(document).ready(function () {
+        @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Dealer)
+        {
+            <text>
+        $(".SelectedVehicleColorID").attr('data-val', false);
+        $(".GrossVehicleWeight").attr('data-val', false);
+            </text>
+        }
+        all_table.destroy();
+        var table = jQuery(".table").DataTable({
+            "scrollX": true,
+            "scrollY": true,
+            "info": true,
+            "lengthChange": false,
+            "searching": false,
+            "paging": false,
+            "order": [],
+            "dom":
+                "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+        });
+
+        $("#content_header").text("Vehicle Upload Excel File");
+        $("#mai_users").toggleClass("active");
+
+        $("#btn_sbmt").on("click", function (e) {
+            if ($("#dataFile").val().length == 0) {
+                toastr.error("Please upload your vehicle file!");
+                e.stopPropagation;
+            }
+        });
+
+        $("#upload_tbl .remove").on("click", function () {
+            table.row($(this).parents('tr'))
+                .remove().draw(false);
+
+            var cnt = 0;
+            $('#upload_tbdy tr').each(function () {
+                $(this).find("td:not(:last-child)").each(function () {
+                    $(this).find('input[type=text],select').attr("name", $(this).find('input[type=text],select').attr("name").replace($(this).find('input[type=text],select').attr("name").split(".")[0], "VehicleTableV2[" + cnt + "]"));
+                    $(this).find('input[type=text],select').attr("id", $(this).find('input[type=text],select').attr("id").replace($(this).find('input[type=text],select').attr("id").split("__")[0], "VehicleTableV2_" + cnt));
+                    if ($(this).find('select').attr("data-select2-id") != undefined)
+                        $(this).find('select').attr("data-select2-id", $(this).find('select').attr("data-select2-id").replace($(this).find('select').attr("data-select2-id").split("__")[0], "VehicleTableV2_" + cnt));
+                    if ($(this).find('span > span').attr("data-valmsg-for") != undefined)
+                        $(this).find('span > span').attr("data-valmsg-for", $(this).find('span > span').attr("data-valmsg-for").replace($(this).find('span > span').attr("data-valmsg-for").split(".")[0], "VehicleTableV2[" + cnt + "]"));
+                    if ($(this).find('span').attr("data-valmsg-for") != undefined)
+                        $(this).find('span').attr("data-valmsg-for", $(this).find('span').attr("data-valmsg-for").replace($(this).find('span').attr("data-valmsg-for").split(".")[0], "VehicleTableV2[" + cnt + "]"));
+                });
+                cnt++;
+            });
+        });
+
+    });
+
+    $('.vehiclemake').on('change', function () {
+        var tr = $(this).closest("tr");
+        $.ajax({
+            url: '@Url.Action("GetVehicleModel", "GetData")',
+            type: "GET",
+            dataType: "JSON",
+            cache: false,
+            data: { "VehicleMakeID": this.value },
+            success: function (response) {
+                tr.find(".vehiclemodel").find("option:gt(0)").remove();
+                $.each(response, function (index, value) {
+                    var o = new Option(value.VehicleModelName + " - " + value.Variant, value.VehicleModelID);
+                    tr.find(".vehiclemodel").append($(o));
+                });
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+    });
+
+    $(".province").on("change", function () {
+        var tr = $(this).closest("tr");
+        $.ajax({
+            url: '@Url.Action("GetProvinceCity", "GetData")',
+            type: "GET",
+            dataType: "JSON",
+            cache: false,
+            data: { "ProviceCode": this.value },
+            success: function (response) {
+                tr.find(".city").find("option:gt(0)").remove();
+                $.each(response, function (index, value) {
+                    var o = new Option(value.CityName, value.CityID);
+                    tr.find(".city").append($(o));
+                });
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+    });
+
+
+    $('.city').on('change', function () {
+        var tr = $(this).closest("tr");
+        $.ajax({
+            url: '@Url.Action("GetCityBarangay", "GetData")',
+            type: "GET",
+            dataType: "JSON",
+            cache: false,
+            data: { "CityCode": this.value },
+            success: function (response) {
+                tr.find(".barangay").find("option:gt(0)").remove();
+                $.each(response, function (index, value) {
+                    var o = new Option(value.BarangayName, value.BarangayID);
+                    tr.find(".barangay").append($(o));
+                });
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+    });
+
+    $(".tin").on("keypress", function (e) {
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+            return false;
+        }
+
+        var value = $(this).val();
+        if (value.length == 3 || value.length == 7 || value.length == 11) {
+            $(this).val(value + "-")
+        }
+    });
+    $(".tinorg").on("keypress", function (e) {
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+            return false;
+        }
+
+        var value = $(this).val();
+        if (value.length == 3 || value.length == 7 || value.length == 11) {
+            $(this).val(value + "-")
+        }
+    });
+
+    $("#save_btn").on("click", function () {
+        $('#upload_tbdy tr').each(function () {
+            var tr = $(this).closest("tr");
+
+            if (tr.find(".title option:selected").text() == "Corporation") {
+                tr.find(".lastname").rules('remove', 'required');
+                tr.find(".firstname").rules('remove', 'required');
+                tr.find(".middlename").rules('remove', 'required');
+                tr.find(".birthdate").rules('remove', 'required');
+                tr.find(".civilstatus").rules('remove', 'required');
+                tr.find(".sex").rules('remove', 'required');
+                tr.find(".contactno").rules('remove', 'required');
+                tr.find(".emailaddress").rules('remove', 'required');
+                tr.find(".tin").rules('remove', 'required');
+
+                tr.find(".orgname").rules('add', { required: true, messages: { required: "The Organization Name field is required." } });
+                tr.find(".orgmnemonic").rules('add', { required: true, messages: { required: "The Organization MNEMONIC field is required. Put - if not applicable" } });
+                tr.find(".primarycontact").rules('add', { required: true, messages: { required: "The Primary Contact field is required. Put - if not applicable" } });
+                tr.find(".contactdetails").rules('add', { required: true, messages: { required: "The Contact Details field is required. Put - if not applicable" } });
+                tr.find(".emailaddressorg").rules('add', { required: true, messages: { required: "The Email Address field is required. Put - if not applicable" } });
+                tr.find(".phoneno").rules('add', { required: true, messages: { required: "The Phone Number field is required. Put - if not applicable" } });
+                tr.find(".tinorg").rules('add', { required: true, messages: { required: "The TIN field is required." } });
+            }
+            else {
+                tr.find(".lastname").rules('add', { required: true, messages: { required: "The Last Name field is required." } });
+                tr.find(".firstname").rules('add', { required: true, messages: { required: "The First Name field is required." } });
+                tr.find(".middlename").rules('add', { required: true, messages: { required: "The Middle Name field is required. Put - if not applicable" } });
+                tr.find(".birthdate").rules('add', { required: true, messages: { required: "The Birthdate field is required." } });
+                tr.find(".civilstatus").rules('add', { required: true, messages: { required: "The Civil Status field is required." } });
+                tr.find(".sex").rules('add', { required: true, messages: { required: "The Gender field is required." } });
+                tr.find(".contactno").rules('add', { required: true, messages: { required: "The Contact Number field is required. Put - if not applicable" } });
+                tr.find(".emailaddress").rules('add', { required: true, messages: { required: "The Email Address field is required. Put - if not applicable" } });
+                tr.find(".tin").rules('add', { required: true, messages: { required: "The TIN field is required." } });
+
+                tr.find(".orgname").rules('remove', 'required');
+                tr.find(".orgmnemonic").rules('remove', 'required');
+                tr.find(".primarycontact").rules('remove', 'required');
+                tr.find(".contactdetails").rules('remove', 'required');
+                tr.find(".emailaddressorg").rules('remove', 'required');
+                tr.find(".phoneno").rules('remove', 'required');
+                tr.find(".tinorg").rules('remove', 'required');
+            }
+        });
+    });
+</script>
+<style>
+    button.fab-excel {
+        z-index: 1;
+        width: 56px;
+        height: 56px;
+        background: -webkit-linear-gradient(left,#498C66,#227446);
+        border-radius: 50%;
+        box-shadow: 0 6px 10px 0 #666;
+        font-size: 28px;
+        /*font-weight:800;*/
+        line-height: 50px;
+        color: white;
+        text-align: center;
+        position: fixed;
+        right: 25px;
+        bottom: 25px;
+        border: 0px;
+        transition: all 0.1s ease-in-out;
+    }
+
+    button.fab-edit:hover {
+        box-shadow: 0 6px 14px 0 #666;
+        transform: scale(1.05);
+    }
+
+    form {
+        padding: 10px 20px;
+        /*margin:20px;*/
+    }
+
+    div.card-header {
+        color: seagreen;
+    }
+
+    h2 {
+        color: #4E4E4E;
+    }
+
+    .btn-choose {
+        background-color: DodgerBlue;
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 2px;
+    }
+
+        /* Darker background on mouse-over */
+        .btn-choose:hover {
+            background-color: RoyalBlue;
+            color: white;
+        }
+
+    button.btn-info {
+        background-color: seagreen;
+        color: #4E4E4E;
+        border-radius: 50%;
+        /*border: 1px solid #4E4E4E;*/
+        color: white;
+        width: 45px;
+        height: 45px;
+        /*padding: 6px 16px;*/
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    input.btn.btn-upload, button.btn.btn-upload {
+        background-color: #DC3545;
+        color: #4E4E4E;
+        border-radius: 50%;
+        /*border: 1px solid #4E4E4E;*/
+        color: white;
+        width: 45px;
+        height: 45px;
+        /*padding: 6px 6px;
+         font-size: 18px;*/
+        cursor: pointer;
+    }
+
+        input.btn.btn-upload:hover, button.btn.btn-upload:hover {
+            background-color: #D9534F;
+            color: #4E4E4E;
+            border-radius: 50%;
+            /*border: 1px solid #4E4E4E;*/
+            color: white;
+            width: 45px;
+            height: 45px;
+            /*padding: 6px 6px;
+         font-size: 18px;*/
+            cursor: pointer;
+        }
+
+    .form-control {
+        margin: 0px;
+    }
+
+    i.far.fa-times-circle {
+        color: #D9534F;
+    }
+
+        i.far.fa-times-circle:hover {
+            color: #DC3545;
+        }
+
+    div.alert.alert-danger {
+        background: #007BFF;
+        border: 0px;
+    }
+</style>

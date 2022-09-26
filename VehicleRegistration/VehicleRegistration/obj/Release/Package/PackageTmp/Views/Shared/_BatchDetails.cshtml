@@ -1,0 +1,112 @@
+﻿@using VehicleRegistration.Models
+@model List<LTOBatchDetailVehicle>
+
+<table id="tbl_VehicleList" class="table table-bordered table-striped table-hover" style="width:100%; table-layout:auto;">
+    <thead>
+        <tr>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Variant</th>
+            <th>Year</th>
+            <th style="min-width:100px">Engine #</th>
+            <th style="min-width:100px">Chassis #</th>
+            <th>Remarks</th>
+            @*<th style="max-width:50px;">Action</th>*@
+        </tr>
+    </thead>
+    <tbody id="vehiclelist_tbody">
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+        <tr class="rowclick" style="cursor: pointer" target="_blank" data-href="@Url.Action("VehicleInfo","VehicleInfo", new { id = Model[i].VehicleID })">
+            @*<td style="max-width:40px; width:40px">
+            <center>
+                <div class="icheck-success d-inline">
+                    @Html.CheckBoxFor(o => Model[i].isChecked, new { id = i, @class = "checkbox_all" })
+                    <label for="@i"></label>
+                </div>
+            </center>
+        </td>*@
+            <td style="width:20%">
+                @Html.DisplayFor(o => Model[i].VehicleMakeName)
+                @Html.HiddenFor(o => Model[i].VehicleID,
+                new
+                {
+                    Name = "VehicleList[" + i + "].VehicleID"
+                })
+                @Html.HiddenFor(o => Model[i].VehicleMakeName,
+                new
+                {
+                    Name = "VehicleList[" + i + "].VehicleMakeName"
+                })
+            </td>
+            <td style="width: 20%">
+                @Html.DisplayFor(o => Model[i].VehicleModelName)
+                @Html.HiddenFor(o => Model[i].VehicleModelName,
+                new
+                {
+                    Name = "VehicleList[" + i + "].VehicleModelName"
+                })
+            </td>
+            <td>
+                @Html.DisplayFor(o => Model[i].Variant)
+                @Html.HiddenFor(o => Model[i].Variant,
+                new
+                {
+                    Name = "VehicleList[" + i + "].Variant"
+                })
+            </td>
+            <td>
+                @Html.DisplayFor(o => Model[i].YearOfMake)
+                @Html.HiddenFor(o => Model[i].YearOfMake,
+                new
+                {
+                    Name = "VehicleList[" + i + "].YearOfMake"
+                })
+            </td>
+            <td style="min-width:100px">
+                @Html.DisplayFor(o => Model[i].EngineNumber)
+                @Html.HiddenFor(o => Model[i].EngineNumber,
+                new
+                {
+                    Name = "VehicleList[" + i + "].EngineNumber"
+                })
+            </td>
+            <td style="min-width:100px">
+                @Html.DisplayFor(o => Model[i].ChassisNumber)
+                @Html.HiddenFor(o => Model[i].ChassisNumber,
+                new
+                {
+                    Name = "VehicleList[" + i + "].ChassisNumber"
+                })
+            </td>
+            <td style="min-width:100px">
+                @Html.DisplayFor(o => Model[i].Remarks)
+                @Html.HiddenFor(o => Model[i].Remarks,
+                new
+                {
+                    Name = "VehicleList[" + i + "].Remarks"
+                })
+            </td>
+            @*<td style="max-width:50px;">
+            <div class="row" style="align-items:center">
+                <a href="@Url.Action("Vehicle", new { id = Model[i].VehicleID })">
+                    <i class="fa fa-edit" title="Edit"></i>
+                </a>
+            </div>
+        </td>*@
+        </tr>
+        }
+    </tbody>
+</table>
+<script>
+    $(".rowclick").click(function () {
+        var win = window.open($(this).data("href"), '_blank');
+        if (win) {
+            //Browser has allowed it to be opened
+            win.focus();
+        } else {
+            //Browser has blocked it
+            alert('Please allow popups for this website');
+        }
+    });
+</script>

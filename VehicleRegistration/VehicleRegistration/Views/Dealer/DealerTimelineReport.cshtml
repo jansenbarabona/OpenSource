@@ -1,0 +1,106 @@
+﻿@using VehicleRegistration.Tools
+@using VehicleRegistration.Models
+@model DealerTimeLineReportModel
+<meta http-equiv='cache-control' content='no-cache'>
+<meta http-equiv='expires' content='0'>
+<meta http-equiv='pragma' content='no-cache'>
+
+@{
+    ViewBag.Title = "DealerTimelineReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="nav-icon fas fa-file-signature"></i> Pending Dealers List  <small> </small></h6>
+                </div>
+
+                @using (Html.BeginForm("DealerTimelineReport", "Dealer", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="card-body">
+                        <div class="check btn-info" id="btn_report" type="button" name="btnSubmit" data-toggle="tooltip" title="Download Report"
+                             @*data-toggle="modal" data-target=".bd-example-modal-xl"*@><i class="fas fa-car"></i></div>
+
+                        <div class="row">
+                            @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.DataBridgeAsia)
+                            {
+                                <div class="form-group col-lg-4">
+                                    @Html.LabelFor(m => m.SelectedDealerID)
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fas fa-truck-pickup"></i> </span>
+                                        </div>
+                                        @Html.DropDownListFor(m => m.SelectedDealerID,
+                   new SelectList(Model.DealerList, "DealerID", "DealerName"), "Select Dealer", new { @class = "form-control select2" })
+                                    </div>
+                                    @Html.ValidationMessageFor(m => m.SelectedDealerID, "", new { @class = "" })
+                                </div> <!-- Vehicle Make form-group// -->
+                            }
+                            <div class="form-group col-lg-4">
+                                @Html.LabelFor(m => m.DateFrom)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-car"></i> </span>
+                                    </div>
+                                    @Html.EditorFor(m => m.DateFrom, new { htmlAttributes = new { @class = "form-control", placeholder = "Date Submitted From", @type = "date" } })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.DateFrom, "", new { @class = "" })
+                            </div> <!-- Vehicle Model form-group// -->
+                            <div class="form-group col-lg-4">
+                                @Html.LabelFor(m => m.DateTo)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-car"></i> </span>
+                                    </div>
+                                    @Html.EditorFor(m => m.DateTo, new { htmlAttributes = new { @class = "form-control", placeholder = "Date Submitted To", @type = "date" } })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.DateTo, "", new { @class = "" })
+                            </div> <!-- Vehicle Body form-group// -->
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                }
+                @*<iframe src="~/Reports/VRTempFiles/file.pdf" frameborder="0"
+                    scrolling="no"  seamless="seamless" marginheight="0" marginwidth="0" role="document" style="width: 100%; margin: 0%" aria-label="PDF document" title="PDF document"></iframe>*@
+            </div>
+            <!-- /.card -->
+            <iframe id="report_viewer" frameborder="0"
+                    scrolling="no" seamless="seamless" marginheight="0" marginwidth="0" role="document" style="width: 100%; margin: 0%; height: 720px;" aria-label="PDF document" title="PDF document"></iframe>
+        </div>
+    </div>
+    <!-- /.col -->
+
+</section>
+
+
+<script>
+
+    $(document).ready(function () {
+        @if (ViewBag.Path != null)
+        {
+            <text>$('#report_viewer').attr('src', '@Url.Content("~/Reports/VRTempFiles/"+ ViewBag.Path)');</text>
+
+        }
+    });
+
+    $("#btn_report").on("click", function () {
+        if (jQuery("form").valid()) {
+            $("form").submit();
+        }
+    });
+
+</script>
+@*<script>
+    $.ajax({
+            url: "test.html",
+        cache: false,
+        success: function (html) {
+            $("#results").append(html);
+        }
+    });
+
+</script>*@

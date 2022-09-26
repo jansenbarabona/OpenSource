@@ -1,0 +1,85 @@
+﻿@using VehicleRegistration.Models
+@using System.Data
+@model MAIUploadModel
+@{
+    ViewBag.Title = "UploadMAITest";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("UploadMAITest", "MAI", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="info2">
+        <h2>Browse File for uploading</h2>
+        @Html.AntiForgeryToken()
+
+        <div class="form-group" name="Fichier1">
+            <!-- COMPONENT START -->
+            <div class="form-group">
+                <div class="form-group col-lg-4">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-image"></i> </span>
+                        </div>
+                        @Html.TextBoxFor(m => m.UploadFile,
+                           new
+                           {
+                               id = "UploadFile",
+                               @class = "form-control",
+                               type = "file",
+                               @accept = ".xls,.xlsx"
+                           })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.UploadFile, "", new { @class = "" })
+                </div>
+                @*<div class="input-group input-file">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-choose" type="button">Choose</button>
+                        </span>
+                        <input type="text" class="form-control" placeholder='Choose a file...' accept=".xls,.xlsx" />
+
+                    </div>*@
+            </div>
+            @*<input type="file" id="dataFile" name="upload" />*@
+
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Upload" class="btn btn-default" />
+        </div>
+
+
+        <div class="alert alert-danger">
+            @Html.ValidationSummary()
+            @*<strong></strong> asdasd*@
+        </div>
+
+        @Html.HiddenFor(m => m.UploadedDataTable)
+
+    </div>
+    if (Model.UploadedDataTable != null)
+    {
+
+        <table id="table1" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    @foreach (DataColumn col in Model.UploadedDataTable.Columns)
+                    {
+                        <th>@col.ColumnName</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (DataRow row in Model.UploadedDataTable.Rows)
+                {
+                    <tr>
+                        @foreach (DataColumn col in Model.UploadedDataTable.Columns)
+                        {
+                            <td>@row[col.ColumnName]</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+

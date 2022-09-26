@@ -1,0 +1,96 @@
+﻿@using VehicleRegistration.Models
+@model List<LTOBatchDetailVehicle>
+
+<table id="tbl_VehicleList" class="table table-bordered table-striped table-hover" style="width:100%; table-layout:auto;">
+    <thead>
+        <tr>
+            <th style="width:15%">Engine #</th>
+            <th style="width:15%">Chassis #</th>
+            <th style="width:15%">Make</th>
+            <th style="width:15%">Model</th>
+            <th style="width:15%">Variant</th>
+            <th style="width:10%">Year</th>
+            <th style="width:15%">Remarks</th>
+        </tr>
+    </thead>
+    <tbody id="vehiclelist_tbody">
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+        <tr class="rowclick" style="cursor: pointer" target="_blank" data-href="@Url.Action("VehicleInfo","VehicleInfo", new { id = Model[i].VehicleID })">
+            <td style="width:15%">
+                @Html.DisplayFor(o => Model[i].EngineNumber)
+                @Html.HiddenFor(o => Model[i].EngineNumber,
+                new
+                {
+                    Name = "VehicleList[" + i + "].EngineNumber"
+                })
+            </td>
+            <td style="width:15%">
+                @Html.DisplayFor(o => Model[i].ChassisNumber)
+                @Html.HiddenFor(o => Model[i].ChassisNumber,
+                new
+                {
+                    Name = "VehicleList[" + i + "].ChassisNumber"
+                })
+            </td>
+            <td style="width:15%">
+                @Html.DisplayFor(o => Model[i].VehicleMakeName)
+                @Html.HiddenFor(o => Model[i].VehicleID,
+                new
+                {
+                    Name = "VehicleList[" + i + "].VehicleID"
+                })
+                @Html.HiddenFor(o => Model[i].VehicleMakeName,
+                new
+                {
+                    Name = "VehicleList[" + i + "].VehicleMakeName"
+                })
+            </td>
+            <td style="width:15%">
+                @Html.DisplayFor(o => Model[i].VehicleModelName)
+                @Html.HiddenFor(o => Model[i].VehicleModelName,
+                new
+                {
+                    Name = "VehicleList[" + i + "].VehicleModelName"
+                })
+            </td>
+            <td style="width:15%">
+                @Html.DisplayFor(o => Model[i].Variant)
+                @Html.HiddenFor(o => Model[i].Variant,
+                new
+                {
+                    Name = "VehicleList[" + i + "].Variant"
+                })
+            </td>
+            <td style="width:10%">
+                @Html.DisplayFor(o => Model[i].YearOfMake)
+                @Html.HiddenFor(o => Model[i].YearOfMake,
+                new
+                {
+                    Name = "VehicleList[" + i + "].YearOfMake"
+                })
+            </td>
+            <td style="width:15%">
+                @Html.DisplayFor(o => Model[i].Remarks)
+                @Html.HiddenFor(o => Model[i].Remarks,
+                new
+                {
+                    Name = "VehicleList[" + i + "].Remarks"
+                })
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<script>
+    $(".rowclick").click(function () {
+        var win = window.open($(this).data("href"), '_blank');
+        if (win) {
+            //Browser has allowed it to be opened
+            win.focus();
+        } else {
+            //Browser has blocked it
+            alert('Please allow popups for this website');
+        }
+    });
+</script>

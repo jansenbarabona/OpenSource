@@ -1,0 +1,41 @@
+﻿@using VehicleRegistration.Models
+@using VehicleRegistration.Tools
+@model IEnumerable<vwTransactionEntityList>
+
+<table id="tbl_list" class="table table-bordered table-striped table-hover" style="max-width:100%; width:100%">
+    <thead>
+        <tr>
+            @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.DataBridgeAsia)
+            {
+                <th>Entity Type</th>
+                <th>Entity</th>
+            }
+            <th>Transaction</th>
+            <th>Amount</th>
+            <th>Effectivity Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.DataBridgeAsia)
+                {
+                    <td>@item.UserEntityName</td>
+                    <td>@item.EntityName</td>
+                }
+                <td>@item.TransactionName</td>
+                <td>@item.Amount</td>
+                <td>@item.EffectivityDate.ToString("MM/dd/yyyy")</td>
+                <td>
+                    <div class="row" style="align-items:center">
+                        <a href="@Url.Action("EntityCharge","Wallet", new { id = @item.TransactionEntityTypeID })">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

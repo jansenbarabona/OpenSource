@@ -1,0 +1,69 @@
+﻿@using VehicleRegistration.Models
+@model List<vwVehicleClassification>
+
+<table id="delete-classification_list_tbl" class="table table-bordered table-striped table-hover" style="max-width:100%;width:100%;">
+    <thead>
+        <tr>
+            <th style="width:10%">
+                <center>
+                    <div data-toggle="tooltip" title="Check all" class="icheck-success d-inline">
+                        @Html.CheckBox("delete_check_all", false)
+                        <label for="delete_check_all"></label>
+                    </div>
+                </center>
+            </th>
+            <th style="width:90%;">Classification Name</th>
+        </tr>
+    </thead>
+    <tbody id="delete-tbody">
+        @if (Model != null)
+        {
+            for (int i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+                    <td style="width:10%;">
+                        <center>
+                            <div class="icheck-success d-inline">
+                                @Html.CheckBoxFor(o => Model[i].vwIsChecked, new { id = "delete_" + i, @class = "delete_checkbox_all",
+                               Name = "vwVehicleClassificationList[" + i + "].vwIsChecked"
+                           })
+                                <label for="delete_@i"></label>
+                            </div>
+                        </center>
+                    </td>
+                    <td style="width:90%;">
+                        @Html.DisplayFor(o => Model[i].vwVehicleClassificationName, new
+                   {
+                       Name = "vwVehicleClassificationList[" + i + "].vwVehicleClassificationName"
+                   })
+                        @Html.HiddenFor(o => Model[i].vwVehicleClassificationName, new
+                   {
+                       Name = "vwVehicleClassificationList[" + i + "].vwVehicleClassificationName"
+                   })
+                        @Html.HiddenFor(o => Model[i].vwVehicleClassificationID, new
+                   {
+                       Name = "vwVehicleClassificationList[" + i + "].vwVehicleClassificationID"
+                   })
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<script>
+
+    $(".delete_item").on("click", function () {
+        $("#InsuranceID").val($(this).closest("tr").find("#insurancedealer").attr("data-insuranceid"));
+    });
+
+    $("#delete_check_all").on("click", function () {
+        if ($(this).is(":checked")) {
+            $(".delete_checkbox_all").prop("checked", true);
+        }
+        else {
+            $(".delete_checkbox_all").prop("checked", false);
+        }
+    });
+</script>
+

@@ -1,0 +1,318 @@
+﻿@using VehicleRegistration.Models
+﻿@using VehicleRegistration.Tools
+@model LTOStatusReportModel
+@{
+    ViewBag.Title = "LTO Status Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    button#btn_template.sub-button.bl.fab-excel {
+        border: 0px;
+        /*border-radius: 50%;*/
+        /*background: none;*/
+    }
+
+        button#btn_template.sub-button.bl.fab-excel::before {
+            border: 0px;
+        }
+
+        button#btn_template.sub-button.bl.fab-excel::after {
+            border: 0px;
+        }
+
+    div#btn_assign.sub-button.tl.check.btn-info:before {
+        position: relative;
+        z-index: 100;
+        content: "";
+    }
+
+    #dealercontent {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+    }
+
+    /* /*nav.main-header.navbar.navbar-expand-md.navbar-primary.navbar-dark {
+        background: #7B0303;
+    }*/
+</style>
+
+@using (Html.BeginForm("LTOStatusReport", "Reports", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6><i class="nav-icon fas fa-file-signature"></i>LTO Status Report  <small> </small></h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row" id="dealercontent">
+                            <div class="col-sm-2 col-md-2 col-lg-2">
+                                @Html.LabelFor(m => m.SelectedDealerID)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+                                    </div>
+                                    @Html.DropDownListFor(m => m.SelectedDealerID,
+new SelectList(Model.DealerList, "DealerID", "DealerName"), "Select Dealer", new { @class = "form-control select2" })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.SelectedDealerID, "", new { @class = "" })
+                            </div>
+                            <div class="col-sm-2 col-md-2 col-lg-2">
+                                @Html.LabelFor(m => m.SelectedDealerBranchID)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+                                    </div>
+                                    @Html.DropDownListFor(m => m.SelectedDealerBranchID,
+new SelectList(Model.DealerBranchList, "DealerBranchID", "DealerBranchName"), "Select Dealer Branch", new { @class = "form-control select2" })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.SelectedDealerBranchID, "", new { @class = "" })
+                            </div>
+                        </div>
+                        <div id="getStatusList" style="margin-top:30px">
+                            @{
+                                Html.RenderPartial("_LTOStatusReportTable", Model.TableList, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "TableList" } });
+                            }
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+    </section>
+}
+
+
+<div id="batch_row" class="row" style="display: none;">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header row">
+                <h6 class="col-6"><i class="nav-icon fas fa-file-signature"></i>Batch List</h6>
+                <div class="col-6">
+                    <h6>
+                        Status: <label id="lbl_batch_title"></label>
+                    </h6>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <h6>
+                            Dealer: <label id="lbl_batch_dealer" style="font-size:16px"></label>
+                        </h6>
+                    </div>
+                    <div class="col-6">
+                        <h6>
+                            Branch: <label id="lbl_batch_branch" style="font-size:16px"></label>
+                        </h6>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:5px">
+                    <div class="col">
+                        <div id="getBatchList">
+                            @{
+                                Html.RenderPartial("_BatchList", Model.BatchList);
+                            }
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</div>
+
+<div id="vehicle_row" class="row" style="display: none;">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header row">
+                <h6 class="col-6"><i class="nav-icon fas fa-file-signature"></i> Vehicle List  <small> </small></h6>
+                <div class="col-6">
+                    <h6>
+                        Batch Reference: <label id="lbl_batchreference"></label>
+                    </h6>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="VehicleListTable">
+                    @{
+                        Html.RenderPartial("_BatchDetails", Model.VehicleList, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "VehicleList" } });
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var addAntiForgeryToken = function (data) {
+        data.__RequestVerificationToken = $("[name='__RequestVerificationToken']").val();
+        return data;
+    };
+    $("#SelectedDealerID").on("change", function () {
+        $("#batch_row").hide();
+        $("#vehicle_row").hide();
+        $('#spinnerDiv').show();
+        $('#tbl_rprt_list').find('tbody').empty();
+        $.ajax({
+            url: '@Url.Action("GetDealerBranch", "GetData")',
+            type: "GET",
+            dataType: "JSON",
+            cache: false,
+            data: { "DealerID": this.value },
+            success: function (response) {
+                $("#SelectedDealerBranchID").find("option:gt(1)").remove();
+                $.each(response, function (index, value) {
+                    var o = new Option(value.DealerBranchName, value.DealerBranchID);
+                    $("#SelectedDealerBranchID").append($(o));
+                });
+
+                $("#SelectedDealerBranchID").trigger("change");
+            },
+            error: function (xhr, status, error) {
+                toastr.error('An error has occured!');
+            }
+        });
+        $.ajax({
+            url: '@Url.Action("GetLTOStatusReportTable", "Reports")',
+            type: "POST",
+            data: addAntiForgeryToken({ "DealerID": $("#SelectedDealerID").val(), "DealerBranchID": $("#SelectedDealerBranchID").val() }),
+            cache: false,
+            async: true,
+            success: function (response) {
+                $("#getStatusList").html(response);
+
+                $("#tbl_rprt_list").DataTable({
+                    "scrollX": true,
+                    "scrollY": true,
+                    "info": true,
+                    "lengthChange": false,
+                    "order": [],
+                    "dom":
+                        "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                });
+                $('#spinnerDiv').hide();
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+                $('#spinnerDiv').hide();
+            }
+        });
+    });
+
+    $("#SelectedDealerBranchID").on("change", function () {
+        $("#batch_row").hide();
+        $("#vehicle_row").hide();
+        $('#spinnerDiv').show();
+        $('#tbl_rprt_list').find('tbody').empty();
+        $.ajax({
+            url: '@Url.Action("GetLTOStatusReportTable", "Reports")',
+            type: "POST",
+            data: addAntiForgeryToken({ "DealerID": $("#SelectedDealerID").val(), "DealerBranchID": $("#SelectedDealerBranchID").val() }),
+            cache: false,
+            async: true,
+            success: function (response) {
+                $("#getStatusList").html(response);
+
+                $("#tbl_rprt_list").DataTable({
+                    "scrollX": true,
+                    "scrollY": true,
+                    "info": true,
+                    "lengthChange": false,
+                    "order": [],
+                    "dom":
+                        "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                });
+                $('#spinnerDiv').hide();
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+                $('#spinnerDiv').hide();
+            }
+        });
+    });
+
+    function BatchList(dealer, dealerbranch, status, title, dealername, branchname) {
+        $("#lbl_batch_title").text(title);
+        $("#lbl_batch_dealer").text(dealername);
+        $("#lbl_batch_branch").text(branchname);
+        $("#batch_row").show();
+        $('#spinnerDiv').show();
+        $('#tbl_VehicleList').find('tbody').empty();
+        $.ajax({
+            url: '@Url.Action("GetBatchListReport", "Reports")',
+            type: "POST",
+            data: addAntiForgeryToken({ "DealerID": dealer, "DealerBranchID": dealerbranch, "Status": status }),
+            cache: false,
+            async: true,
+            success: function (response) {
+                $("#getBatchList").html(response);
+
+                $("#tbl_list").DataTable({
+                    "scrollX": true,
+                    "scrollY": true,
+                    "info": false,
+                    "lengthChange": false,
+                    "order": [],
+                    "dom":
+                        "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                });
+                $('#spinnerDiv').hide();
+
+                $('#Header_vehiclelist_tbody tr').on("click", function (event) {
+                    $("#vehicle_row").show();
+                    $('#spinnerDiv').show();
+                    $("#lbl_batchreference").text($(this).find('td.col_batchreference').text().trim());
+                    $.ajax({
+                        url: '@Url.Action("GetVehicleList", "LTO")',
+                        type: "POST",
+                        data: addAntiForgeryToken({ "BatchID": $(this).find('input[type=hidden]').val() }),
+                        cache: false,
+                        async: true,
+                        success: function (response) {
+                            $("#VehicleListTable").html(response);
+
+                            $("#tbl_VehicleList").DataTable({
+                                "scrollX": true,
+                                "scrollY": true,
+                                "info": false,
+                                "lengthChange": false,
+                                "order": [],
+                                "dom":
+                                    "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                                    "<'row'<'col-sm-12'tr>>" +
+                                    "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                            });
+                            $('#spinnerDiv').hide();
+                        },
+                        error: function (xhr, status, error) {
+                            alert(xhr.responseText);
+                            $('#spinnerDiv').hide();
+                        }
+                    });
+                });
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+                $('#spinnerDiv').hide();
+            }
+        });
+    }
+</script>

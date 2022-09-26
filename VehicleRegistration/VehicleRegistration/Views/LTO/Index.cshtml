@@ -1,0 +1,91 @@
+﻿﻿@using VehicleRegistration.Models
+@using VehicleRegistration.Tools
+@model IEnumerable<LTO>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="nav-icon fas fa-car-side"></i> LTO List  <small></small></h6>
+                </div>
+                <!-- /.card-header -->
+                <div class="fab" type="button" name="btnSubmit" data-toggle="tooltip" title="Create New" onclick="location.href='@Url.Action("LTORegistration", "LTO")'"> + </div>
+                <div class="card-body">
+                    <table id="MAI_list_tbl" class="table table-bordered table-striped table-hover" style="max-width:100%; width:99.7%;">
+                        <thead>
+                            <tr>
+                                @*<th style="width:50px;">Logo</th>*@
+                                <th style="width:75px;">Code</th>
+                                <th style="width:250px;">Name</th>
+                                <th style="width:200px;">Email</th>
+                                <th style="width:140px;">Business Phone</th>
+                                <th style="width:125px;">Mobile Phone</th>
+                                <th style="width:125px;">Fax Number</th>
+                                <th style="width:200px;">Website</th>
+                                <th style="width:300px;">Address</th>
+                                @*<th style="width:100px;">Province</th>
+                                <th style="width:100px;">City </th>*@
+                                <th style="width:75px;">ZipCode</th>
+                                <th style="width:250px;">Notes</th>
+                                <th style="width:100px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+
+                                <tr class="rowclick" style="cursor: pointer" data-href="@Url.Action("DealerInfo", new { id = item.LTOID })">
+                                    @if (CurrentUser.Details.IsMain == true && CurrentUser.Details.UserRoleID == (int)UserRoleEnum.Administrator)
+                                    {
+                                        <th style="width:230px;">@item.LTOName</th>
+                                    }
+                                    <td data-toggle="tooltip" title="View Profile" style="max-width:75px; " id="deal_code">@item.LTOID</td>
+                                    <td data-toggle="tooltip" title="View Profile" style="max-width:250px; " id="deal_name">@item.LTOName</td>
+                                    <td data-toggle="tooltip" title="View Profile" style="max-width:200px; " id="deal_email">@item.EmailAddress</td>
+                                    <td data-toggle="tooltip" title="View Profile" style="max-width:130px; " id="deal_bphone">@item.BusinessPhone</td>
+                                    <td data-toggle="tooltip" title="View Profile" style="max-width:125px; " id="deal_mphone">@item.MobilePhone</td>
+                                    <td data-toggle="tooltip" title="View Profile" style="max-width:125px; " id="deal_fax">@item.FaxNumber</td>
+                                    <td style="max-width:200px; " id="deal_web">@item.Website</td>
+                                    <td style="max-width:300px; " id="deal_address">@item.Address</td>
+                                    @*<td style="max-width:100px; " id="deal_city">@item.ProvinceName</td>
+                                    <td style="max-width:100px; " id="deal_city">@item.CityName</td>*@
+                                    <td style="max-width:75px; " id="deal_zipcode">@item.ZipCode</td>
+                                    <td style="max-width:250px; " id="deal_note">@item.Notes</td>
+                                    <td style="max-width:100px; padding-left:5px; padding-right:5px; margin:auto;" align="center">
+                                        <div class="row justify-content-center">
+                                            <a href="@Url.Action("LTORegistration", new { id = item.LTOID})" class="deal_edit btn btn-warning btn-sm">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+<!-- ./wrapper -->
+<script>
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_ul_vehicle").css("display", "block");
+    $("#vehicle_make").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+</script>

@@ -1,0 +1,109 @@
+﻿@using VehicleRegistration.Models
+@using VehicleRegistration.Tools
+@model IEnumerable<InsuranceModel>
+@{
+    ViewBag.Title = "Insurance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="nav-icon fas fa-shipping-fast"></i> Insurance   <small></small></h6>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        @*<input type="button" class="btn btn-info btn-block" name="btnSubmit" value="Create New" onclick="location.href='@Url.Action("Insurance_Register", "Insurance")'" />*@
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                @*<button type="submit" id="mai_new" name="submit" value="New" class="btn btn-info btn-block">Create New </button>*@
+                <div class="fab" type="button" name="btnSubmit" data-toggle="tooltip" title="Create New" onclick="location.href='@Url.Action("Insurance_Register", "Insurance")'"> + </div>
+                <div class="card-body">
+                    <table id="Insurance_list_tbl" class="table table-bordered table-striped table-hover" style="max-width:100%;">
+                        <thead>
+                            <tr>
+                                @*<th style="width:50px;">Logo</th>*@
+                                <th style="width:75px;">Code</th>
+                                <th style="width:250px;">Name</th>
+                                <th style="width:200px;">Email</th>
+                                <th style="width:140px;">Business Phone</th>
+                                <th style="width:125px;">Mobile Phone</th>
+                                <th style="width:125px;">Fax Number</th>
+                                <th style="width:200px;">Website</th>
+                                <th style="width:300px;">Address</th>
+                                <th style="width:100px;">Province</th>
+                                <th style="width:100px;">City</th>
+                                <th style="width:75px;">ZipCode</th>
+                                <th style="width:250px;">Notes</th>
+                                <th style="width:100px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                @*<tr>*@
+                                    @*<td id="deal_logo" style="padding: 2px 2px 2px 2px; height:50px;">
+                                        @if (item.LogoByte != null)
+                                        {
+                                            var base64 = Convert.ToBase64String(item.LogoByte);
+                                            var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                            <img src=@imgSrc style="width:100%; height:100%;" />
+                                        }
+                                    </td>*@
+                                <tr class="rowclick" style="cursor: pointer" data-href="@Url.Action("InsuranceInfo", new { id = item.InsuranceID })">
+                                    @if (CurrentUser.Details.IsMain == true && CurrentUser.Details.UserRoleID == (int)UserRoleEnum.Administrator)
+                                    {
+                                        <th style="width:230px;">@item.InsuranceName</th>
+                                    }
+                                    <td data-toggle="tooltip" title="View Profile" style="max-width:75px; " id="insurance_code">@item.InsuranceID</td>
+                                    <td data-toggle="tooltip" title="View Profile" style="max-width:250px; " id="insurance_name">@item.InsuranceName</td>
+                                    <td data-toggle="tooltip" title="View Profile" style="max-width:200px; " id="insurance_email">@item.EmailAddress</td>
+                                    <td data-toggle="tooltip" title="View Profile" style="max-width:130px; " id="insurance_bphone">@item.BusinessPhone</td>
+                                    <td data-toggle="tooltip" title="View Profile" style="max-width:125px; " id="insurance_mphone">@item.MobilePhone</td>
+                                    <td data-toggle="tooltip" title="View Profile" style="max-width:125px; " id="insurance_fax">@item.FaxNumber</td>
+                                    <td data-toggle="tooltip" title="View Profile" style="max-width:200px; " id="insurance_web">@item.Website</td>
+                                    <td style="max-width:300px; " id="insurance_address">@item.Address</td>
+                                    <td style="max-width:100px; " id="insurance_province">@item.ProvinceName</td>
+                                    <td style="max-width:100px; " id="insurance_city">@item.CityName</td>
+                                    <td style="max-width:75px; " id="insurance_zipcode">@item.ZipCode</td>
+                                    <td style="max-width:250px; " id="insurance_note">@item.Notes</td>
+                                    <td style="max-width:100px; padding-left:5px; padding-right:5px; margin:auto;" align="center">
+                                        <div class="row justify-content-center">
+                                            <a href="@Url.Action("Insurance_Register", new { id = item.InsuranceID})">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+<!-- ./wrapper -->
+<script>
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_ul_insurance").css("display", "block");
+    $("#left_nav_insurance").toggleClass("menu-open");
+    $("#insurance").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+    $(".rowclick").click(function () {
+        window.location = $(this).data("href");
+    });
+</script>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="PNPEmailReport" targetNamespace="http://tempuri.org/PNPEmailReport.xsd" xmlns:mstns="http://tempuri.org/PNPEmailReport.xsd" xmlns="http://tempuri.org/PNPEmailReport.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="PNPEmailReport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="PNPEmailReport" msprop:Generator_UserDSName="PNPEmailReport">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="PNPEmailReport" msprop:Generator_TableClassName="PNPEmailReportDataTable" msprop:Generator_TableVarName="tablePNPEmailReport" msprop:Generator_TablePropName="_PNPEmailReport" msprop:Generator_RowDeletingName="PNPEmailReportRowDeleting" msprop:Generator_RowChangingName="PNPEmailReportRowChanging" msprop:Generator_RowEvHandlerName="PNPEmailReportRowChangeEventHandler" msprop:Generator_RowDeletedName="PNPEmailReportRowDeleted" msprop:Generator_UserTableName="PNPEmailReport" msprop:Generator_RowChangedName="PNPEmailReportRowChanged" msprop:Generator_RowEvArgName="PNPEmailReportRowChangeEvent" msprop:Generator_RowClassName="PNPEmailReportRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Engine" msprop:Generator_ColumnVarNameInTable="columnEngine" msprop:Generator_ColumnPropNameInRow="Engine" msprop:Generator_ColumnPropNameInTable="EngineColumn" msprop:Generator_UserColumnName="Engine" type="xs:string" minOccurs="0" />
+              <xs:element name="Chassis" msprop:Generator_ColumnVarNameInTable="columnChassis" msprop:Generator_ColumnPropNameInRow="Chassis" msprop:Generator_ColumnPropNameInTable="ChassisColumn" msprop:Generator_UserColumnName="Chassis" type="xs:string" minOccurs="0" />
+              <xs:element name="Make" msprop:Generator_ColumnVarNameInTable="columnMake" msprop:Generator_ColumnPropNameInRow="Make" msprop:Generator_ColumnPropNameInTable="MakeColumn" msprop:Generator_UserColumnName="Make" type="xs:string" minOccurs="0" />
+              <xs:element name="Model" msprop:Generator_ColumnVarNameInTable="columnModel" msprop:Generator_ColumnPropNameInRow="Model" msprop:Generator_ColumnPropNameInTable="ModelColumn" msprop:Generator_UserColumnName="Model" type="xs:string" minOccurs="0" />
+              <xs:element name="InvoiceDate" msprop:Generator_ColumnVarNameInTable="columnInvoiceDate" msprop:Generator_ColumnPropNameInRow="InvoiceDate" msprop:Generator_ColumnPropNameInTable="InvoiceDateColumn" msprop:Generator_UserColumnName="InvoiceDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="PNPReceiptReferenceNumber" msprop:Generator_ColumnVarNameInTable="columnPNPReceiptReferenceNumber" msprop:Generator_ColumnPropNameInRow="PNPReceiptReferenceNumber" msprop:Generator_ColumnPropNameInTable="PNPReceiptReferenceNumberColumn" msprop:Generator_UserColumnName="PNPReceiptReferenceNumber" type="xs:string" minOccurs="0" />
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" type="xs:string" minOccurs="0" />
+              <xs:element name="Cost" msprop:Generator_ColumnVarNameInTable="columnCost" msprop:Generator_ColumnPropNameInRow="Cost" msprop:Generator_ColumnPropNameInTable="CostColumn" msprop:Generator_UserColumnName="Cost" type="xs:string" minOccurs="0" />
+              <xs:element name="CSR" msprop:Generator_ColumnVarNameInTable="columnCSR" msprop:Generator_ColumnPropNameInRow="CSR" msprop:Generator_ColumnPropNameInTable="CSRColumn" msprop:Generator_UserColumnName="CSR" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

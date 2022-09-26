@@ -1,0 +1,163 @@
+﻿@using VehicleRegistration.Models
+﻿@using VehicleRegistration.Tools
+@model VehicleListModel
+@{
+    ViewBag.Title = "ForCSR";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    button#btn_report.sub-button.bl.fab-excel {
+        border: 0px;
+        /*border-radius: 50%;*/
+        /*background: none;*/
+    }
+      button#btn_report.sub-button.bl.fab-excel::before {
+        border: 0px;
+      
+    }
+      button#btn_report.sub-button.bl.fab-excel::after {
+        border: 0px;
+      
+    }
+   div#btn_assign.sub-button.tl.check.btn-info:before {
+            position: relative;
+            z-index: 100;
+            content: "";
+        }
+</style>
+
+@using (Html.BeginForm("ForCSR", "VehicleInfo", null, FormMethod.Post, new { enctype = "multipart/form-data", id = "ForBOC" }))
+{
+    @Html.AntiForgeryToken()
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="nav-icon far fa-handshake"></i> CSR List  
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="check btn-info" style="cursor:pointer;" id="btn_batchassign" name="btnSubmit" onclick="location.href='@Url.Action("UploadForCSR", "VehicleInfo")'" rel="tooltip" title="Upload Batch CSR"><i class="fas fa-file-upload"></i></div>
+
+                    @{
+                        Html.RenderPartial("_VehicleList");
+                    }
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>     
+                            Html.RenderPartial("_Modal_CSR", Model.CSRInfo, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "CSRInfo" } });
+                        }
+
+<script>
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#csr").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+    $("#left_nav_mai").toggleClass("menu-open");
+    $("#mai_csr").toggleClass("active");
+
+    $("#btn_report").on("click", function (e) {
+        if ($("#tbl_list input[type=checkbox]:checked").length > 0) {
+            //$("form").submit();
+        }
+        else {
+            toastr.warning("Please check one or more vehicle to get report!");
+            e.preventDefault();
+        }
+    });
+
+    $("#btn_assign").on("click", function () {
+
+        if ($("#tbl_list input[type=checkbox]:checked").length > 0) {
+            @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.MAI)
+        {
+            <text>
+            if ($("#vehiclelist_tbody tr").length == 0) {
+                $("#modal-CSR-Confirmation").modal("show");
+            }
+            else if ($("#vehiclelist_tbody tr").length > 0) {
+                if ($("#vehiclelist_tbody tr").length > 0) {
+                    jQuery.noConflict();
+                    if (jQuery.fn.DataTable.isDataTable('#tbl_listofsummary')) {
+                        jQuery('#tbl_listofsummary').DataTable().clear();
+                        jQuery('#tbl_listofsummary').DataTable().destroy();
+                    }
+
+                    if ($("#summarry_thead tr").length == 0) {
+                        $("#modal-body-csr-confirmation").append("" +
+                        "<table id='tbl_listofsummary' class='table table-bordered table-striped table-hover' style='width:100%; max-width:100%;'>" +
+                        "   <thead id='summarry_thead'>" +
+                        "       <tr>" +
+                        "           <th style='width:25%'>Make</th>" +
+                        "           <th style='width:25%'>Model</th>" +
+                        "           <th style='width:25%'>Engine</th>" +
+                        "           <th style='width:25%'>Body</th>" +
+                        "       </tr>" +
+                        "   </thead>" +
+                        "   <tbody id='summarry_tbody'>" +
+                        "   </tbody>" +
+                        "</table>");
+                    }
+
+                    $("#vehiclelist_tbody .checkbox_all:checkbox:checked").each(function () {
+                        var tr = $(this).closest("tr");
+                        var make = tr.find("td:eq(1)").text().trim();
+                        var model = tr.find("td:eq(2)").text().trim();
+                        var engine = tr.find("td:eq(5)").text().trim();
+                        var body = tr.find("td:eq(6)").text().trim();
+                        $("#tbl_listofsummary #summarry_tbody").append("" +
+                        "<tr>" +
+                        "    <td>" + make + "</td>" +
+                        "    <td>" + model + "</td>" +
+                        "    <td>" + engine + "</td>" +
+                        "    <td>" + body + "</td>" +
+                        "</tr>");
+
+                    });
+                    jQuery.noConflict();
+                    var summary_tbl = jQuery("#tbl_listofsummary").DataTable({
+                        "scrollX": true,
+                        "scrollY": true,
+                        "info": false,
+                        "lengthChange": false,
+                        "searching": false,
+                        "paging": false,
+                        "order": [],
+                        "dom":
+                            "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                            "<'row'<'col-sm-12'tr>>" +
+                            "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                    });
+
+                    $(document).on('shown.bs.modal', '.modal', function (e) {
+                        summary_tbl.columns.adjust();
+                    });
+                }
+
+                $("#modal-CSR-Confirmation").modal("show");
+            }
+            </text>
+            }
+            else
+            {
+                <text>
+                    $("#modal-CSR").modal("show");
+                </text>
+            }
+        }
+        else {
+            toastr.warning("Please check one or more vehicle to assign!");
+        }
+    });
+</script>

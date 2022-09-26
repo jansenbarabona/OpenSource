@@ -1,0 +1,529 @@
+﻿@using VehicleRegistration.Models
+@model DealerInvoiceModel
+    <style>
+        .info-label {
+            color: #17a2b8;
+            font-size: 12px;
+        }
+    </style>
+@using (Html.BeginForm("Invoice", "Dealer", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.FormOrigin)
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <h5><b>Vehicle Info</b></h5>
+                </div>
+            </div>
+            <div class="card card-gray-dark card-outline"></div>
+            <div class="row">
+                <div class="form-group col-lg-4">
+                    @Html.LabelFor(m => m.SelectedVehicleID)
+                    <div class="input-group">
+
+                        <div class="input-group-prepend">
+
+                            <span class="input-group-text"> <i class="fas fa-barcode"></i> </span>
+                        </div>
+                        @Html.DropDownListFor(m => m.SelectedVehicleID, new SelectList(Model.VehicleList, "VehicleID", "VehicleID"), "Select Vehicle", new { @class = "form-control select2" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.SelectedVehicleID, "", new { @class = "" })
+                </div>
+                <div class="form-group col-lg-4">
+                    <label>Make</label>
+                    <div class="input-group disabled">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fas fa-car"></i> </span>
+                        </div>
+                        @*<input id="VehicleMakeName" class="form-control" readonly>*@
+                        @Html.TextBoxFor(m => m.VehicleInfo.VehicleMakeName, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="form-group col-lg-4">
+                    <label>Model</label>
+                    <div class="input-group disabled">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fas fa-car-side"></i> </span>
+                        </div>
+                        @Html.TextBoxFor(m => m.VehicleInfo.VehicleModelName, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-4">
+                    <label>Engine Number</label>
+                    <div class="input-group disabled">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fas fa-hashtag"></i> </span>
+                        </div>
+                        @Html.TextBoxFor(m => m.VehicleInfo.EngineNumber, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="form-group col-lg-4">
+                    <label>Chassis Number</label>
+                    <div class="input-group disabled">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fas fa-hashtag"></i> </span>
+                        </div>
+                        @Html.TextBoxFor(m => m.VehicleInfo.ChassisNumber, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+
+                <!--<div class="form-group col-lg-4">
+                    @Html.LabelFor(m => m.VehicleTypeID)
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fas fa-car"></i> </span>
+                        </div>
+                        @Html.DropDownListFor(m => m.VehicleTypeID, new SelectList(Model.VehicleTypeList, "VehicleTypeID", "VehicleName"), "Select vehicle type", new { @class = "form-control select2" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.VehicleTypeID, "", new { @class = "" })
+                </div>-->  <!--Vehicle Type-->
+
+                
+                <div class="form-group col-lg-4">
+                    @Html.LabelFor(m => m.AffidavitOfConversionFile)
+                    <div class="input-group">
+
+                        @if (Model.VehicleTypeID == 6 && Model.AffidavitOfConversionByte != null)
+                        {
+                            var base64 = Convert.ToBase64String(Model.AffidavitOfConversionByte);
+                            var InvoiceimgSrc = String.Format("data:" + Model.AffidavitOfConversionContentType + ";base64,{0}", base64);
+                            <a class="input-group-prepend" href="@InvoiceimgSrc" data-fancybox data-caption="&lt;b&gt;This file is Affidavid of Conversion.">
+                                <span class="input-group-text bg-green"><i class="fa fa-image"></i></span>
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-image"></i></span>
+                            </a>
+                        }
+                        <div class="custom-file">
+                            @Html.TextBoxFor(m => m.AffidavitOfConversionFile,
+                           new
+                           {
+                               placeholder = "Affidavit File",
+                               @class = "custom-file-input",
+                               type = "file",
+                               accept = ".jpg,.jpeg,.png,.pdf"
+                           })
+                            @Html.LabelFor(m => m.AffidavitOfConversionFile, "Choose file",
+                           new
+                           {
+                               @class = "custom-file-label",
+                           })
+                        </div>
+                    </div>
+                    <span id="affidavit_info" class="info-label">This only for MS (Motorcycle with Side Car) vehicle type.</span>
+                </div> <!--Invoice File form-group// -->
+            </div>
+
+            @*<div class="row" id="affidavit_row" style="@if (Model.VehicleTypeID != 4) { <text>display: none;</text>}">
+            </div>*@
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                @Html.HiddenFor(m => m.InvoiceID)
+                <div class="form-group col-lg-4">
+                    @Html.LabelFor(m => m.SelectedCustomerID)
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fas fa-user"></i> </span>
+                        </div>
+                        @Html.DropDownListFor(m => m.SelectedCustomerID, new SelectList(Model.CustomerList, "CustomerID", "FullName"), "Select Customer", new { @class = "form-control select2" })
+                        <div class="input-group-prepend">
+                            <a class="input-group-text" href="@Url.Action("Customer", "Customer")" data-toggle="tooltip" title="New Customer"> <i class="fas fa-user-plus"></i> </a>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.SelectedCustomerID, "", new { @class = "" })
+                </div> <!--Customer List-->
+
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-4">
+                    @Html.LabelFor(m => m.VehicleCost)
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fas fa-ruble-sign"></i> </span>
+                        </div>
+                        @Html.TextBoxFor(m => m.VehicleCost, new { placeholder = "Cost of Vehicle", @class = "form-control", type = "number" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.VehicleCost, "", new { @class = "" })
+                </div>  <!--Invoice Number-->
+                <div class="form-group col-lg-4">
+                    @Html.LabelFor(m => m.InvoiceNumber)
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fas fa-asterisk"></i> </span>
+                        </div>
+                        @Html.TextBoxFor(m => m.InvoiceNumber, new { placeholder = "Invoice Number", @class = "form-control", type = "text" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.InvoiceNumber, "", new { @class = "" })
+                </div>  <!--Invoice Number-->
+                <div class="form-group col-lg-4">
+                    @Html.LabelFor(m => m.InvoiceDate)
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fas fa-asterisk"></i> </span>
+                        </div>
+                        @Html.EditorFor(m => m.InvoiceDate, new { htmlAttributes = new { @class = "form-control", placeholder = "Invoice Date", @type = "date" } })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.InvoiceDate, "", new { @class = "" })
+                    <span id="penalty_info" class="info-label"></span>
+                </div>  <!--Invoice Number-->
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-4">
+                    @Html.LabelFor(m => m.InvoiceFile)
+                    <div class="input-group">
+                        @if (Model.InvoiceByte != null)
+                        {
+                            string InvoiceimgSrc;
+                            var base64 = Convert.ToBase64String(Model.InvoiceByte);
+                            InvoiceimgSrc = String.Format("data:" + Model.InvoiceContentType + ";base64,{0}", base64);
+                            <a class="input-group-prepend" data-src="@InvoiceimgSrc" data-type="iframe" data-fancybox data-caption="&lt;b&gt;This image is Invoice Receipt." href="javascript:;">
+                                <span class="input-group-text bg-green"><i class="fa fa-image"></i></span>
+                            </a>
+
+                        }
+                        else
+                        {
+                            <a class="input-group-prepend" href="//:0" data-fancybox data-caption="&lt;b&gt;This image is Invoice Receipt.">
+                                <span class="input-group-text"><i class="fa fa-image"></i></span>
+                            </a>
+                        }
+                        <div class="custom-file">
+                            @Html.TextBoxFor(m => m.InvoiceFile,
+    new
+    {
+        placeholder = "Invoice File",
+        //id = "file_Invoice",
+        @class = "custom-file-input",
+        type = "file",
+        accept = ".jpg,.jpeg,.png,.pdf"
+    })
+                            @Html.LabelFor(m => m.InvoiceFile, "Choose file",
+    new
+    {
+        @class = "custom-file-label",
+    })
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.InvoiceFile, "", new { @class = "" })
+                </div> <!--Invoice File form-group// -->
+                <div class="form-group col-lg-4">
+                    @Html.LabelFor(m => m.PreferredEndingPlateNumber)
+                    <div class="input-group">
+                        <div class="input-group-prepend" >
+                            <span class="input-group-text"> <i class="fas fa-money-check"></i> </span>
+                        </div>
+                        @Html.TextBoxFor(m => m.PreferredEndingPlateNumber, new { placeholder = "Preferred Ending Plate Number", @class = "form-control", type = "text" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.PreferredEndingPlateNumber, "", new { @class = "" })
+                </div>  <!--COC-->
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-4">
+                <label></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fas fa-check-square"></i> </span>
+                        </div>
+                        <div class="form-control">
+                            <div class="icheck-success d-inline">
+                                @Html.CheckBoxFor(o => o.Encumbered)
+                                @Html.LabelFor(o => o.Encumbered)
+                            </div>
+                        </div>
+                    </div>
+                </div>  <!--COC-->
+                <div class="form-group col-lg-4" id="financial_content" @if (!Model.Encumbered) {<text>style="display:none;"</text>}>
+                    @Html.LabelFor(m => m.FinancialInstitution)
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fas fa-university"></i> </span>
+                        </div>
+                        @Html.TextBoxFor(m => m.FinancialInstitution, new { placeholder = "Financial Institution", @class = "form-control", type = "text" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.FinancialInstitution, "", new { @class = "" })
+                </div>  <!--COC-->
+            </div>
+
+            @if (ViewBag.Edit == false)
+            {
+                <center>
+                    <div class="form-group">
+                        <center>
+                            <button type="button" id="btn_invoice-create" @*data-toggle="modal" data-target="#modal-Invoice-Confirmation"*@ class="btn btn-primary btn-block" style="width:250px;"> Create Invoice</button>
+                        </center>
+                    </div>
+                </center>
+            }
+            else
+            {
+                <center>
+                    <div class="form-group row">
+                        <button type="button" data-toggle="modal" data-target="#modal-delete" class="btn btn-danger btn-block col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width:250px;"> Delete </button>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+                        <button type="button" id="btn_invoice-save" @*data-toggle="modal" data-target="#modal-Invoice-Confirmation"*@ class="btn btn-success btn-block col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width:250px;"> Save </button>
+                    </div>
+                </center>
+            }
+
+            @Html.Partial("_Confirmation")
+
+            <div id="modal-Invoice-Confirmation" class="modal fade">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Are you sure you want to save?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <h5>Vehicle Info</h5>
+                            </div>
+                            <div class="card card-gray-dark card-outline"></div>
+                            <div class="row">
+                                <div class="form-group col-4">
+                                    @Html.LabelFor(m => m.VehicleID): <label id="lbl_VehicleID"></label>
+                                </div>
+                                <div class="form-group col-4">
+                                    @Html.LabelFor(m => m.VehicleInfo.VehicleMakeName): <label id="lbl_VehicleMakeName"></label>
+                                </div>
+                                <div class="form-group col-4">
+                                    @Html.LabelFor(m => m.VehicleInfo.VehicleModelName): <label id="lbl_VehicleModelName"></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-4">
+                                    @Html.LabelFor(m => m.VehicleInfo.EngineNumber): <label id="lbl_EngineNumber"></label>
+                                </div>
+                                <div class="form-group col-4">
+                                    @Html.LabelFor(m => m.VehicleInfo.ChassisNumber): <label id="lbl_ChassisNumber"></label>
+                                </div>
+                                @*<div class="form-group col-4">
+                                    @Html.LabelFor(m => m.VehicleClassificationID): <label id="lbl_VehicleClassificationID"></label>
+                                </div>*@
+                            </div>
+                            &nbsp;
+                            <div class="row">
+                                <h5>Invoice Info</h5>
+                            </div>
+                            <div class="card card-gray-dark card-outline"></div>
+                            <div class="row">
+                                <div class="form-group col-4">
+                                    @Html.LabelFor(m => m.SelectedCustomerID): <label id="lbl_SelectedCustomerID"></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-4">
+                                    @Html.LabelFor(m => m.VehicleCost): <label id="lbl_VehicleCost"></label>
+                                </div>
+                                <div class="form-group col-4">
+                                    @Html.LabelFor(m => m.InvoiceNumber): <label id="lbl_InvoiceNumber"></label>
+                                </div>
+                                <div class="form-group col-4">
+                                    @Html.LabelFor(m => m.InvoiceDate): <label id="lbl_InvoiceDate"></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-4">
+                                    @Html.LabelFor(m => m.InvoiceFile): <label id="lbl_InvoiceFile"></label>
+                                </div>
+                                <div class="form-group col-4">
+                                    @Html.LabelFor(m => m.PreferredEndingPlateNumber): <label id="lbl_PreferredEndingPlateNumber"></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-4">
+                                    @Html.LabelFor(m => m.Encumbered): <label id="lbl_InvoiceEncumbered"></label>
+                                </div>
+                                <div class="form-group col-4">
+                                    @Html.LabelFor(m => m.FinancialInstitution): <label id="lbl_InvoiceFinancialInstitution"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" id="btn_invoice_confirmation_close" class="btn btn-default" >Close</button>
+
+                            @if (ViewBag.Edit == false)
+                            {
+                                <button type="submit" name="submit" value="Create" class="btn btn-primary">Save</button>
+                            }
+                            else
+                            {
+                                <button type="submit" name="submit" value="Save" class="btn btn-primary">Save</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $('#SelectedVehicleID').on('change', function () {
+        $.ajax({
+            url: '@Url.Action("GetVehicleInformation", "Dealer")',
+            type: "POST",
+            dataType: "JSON",
+            cache: false,
+            data: { "VehicleID": this.value },
+            success: function (response) {
+                $("#VehicleInfo_VehicleMakeName").val(response.VehicleMakeName);
+                $("#VehicleInfo_VehicleModelName").val(response.VehicleModelName);
+                $("#VehicleInfo_EngineNumber").val(response.EngineNumber);
+                $("#VehicleInfo_ChassisNumber").val(response.ChassisNumber);
+                //jQuery("#VehicleClassificationID").val(response.VehicleClassificationID).trigger("change");
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+    });
+
+    @*$("#VehicleTypeID").on("change", function () {
+        if ($(this).val() == 6) {
+            $("#affidavit_row").show();
+        } else {
+            $("#affidavit_row").hide();
+        }
+        $.ajax({
+            url: '@Url.Action("GetPremiumType", "GetData")',
+            type: "GET",
+            dataType: "JSON",
+            cache: false,
+            data: { "VehicleTypeID": this.value },
+            success: function (response) {
+                $("#VehicleClassificationID").find("option:gt(0)").remove();
+                $.each(response, function (index, value) {
+                    var o = new Option(value.VehicleClassificationName, value.VehicleClassificationID);
+                    $("#VehicleClassificationID").append($(o));
+                });
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+    });*@
+
+    $('#btn_invoice-create').click(function () {
+        if (jQuery(this).closest("form").valid()) {
+            //VehicleInfo
+            $("#lbl_VehicleID").text($("#SelectedVehicleID option:selected").text());
+            $("#lbl_VehicleMakeName").text($("#VehicleInfo_VehicleMakeName").val());
+            $("#lbl_VehicleModelName").text($("#VehicleInfo_VehicleModelName").val());
+            $("#lbl_EngineNumber").text($("#VehicleInfo_EngineNumber").val());
+            $("#lbl_ChassisNumber").text($("#VehicleInfo_ChassisNumber").val());
+            $("#lbl_VehicleClassificationID").text($("#VehicleClassificationID option:selected").val());
+
+            //InvoiceInfo
+            $("#lbl_SelectedCustomerID").text($("#SelectedCustomerID option:selected").text());
+            $("#lbl_VehicleCost").text($("#VehicleCost").val());
+            $("#lbl_InvoiceNumber").text($("#InvoiceNumber").val());
+            $("#lbl_InvoiceDate").text($("#InvoiceDate").val());
+            $("#lbl_InvoiceFile").text($("#InvoiceFile").val().replace('C:\\fakepath\\', ''));
+            $("#lbl_PreferredEndingPlateNumber").text($("#PreferredEndingPlateNumber").val());
+            if ($("#Encumbered").is(":checked")) {
+                $("#lbl_InvoiceEncumbered").text("Yes");
+            }
+            else {
+                $("#lbl_InvoiceEncumbered").text("No");
+            }
+            $("#lbl_InvoiceFinancialInstitution").text($("#FinancialInstitution").val());
+            //$("#lbl_COCPolicyNumber").text($("#COCPolicyNumber").val());
+
+            $("#modal-Invoice-Confirmation").modal("show");
+        }
+    });
+
+    $('#btn_invoice-save').click(function () {
+        if (jQuery(this).closest("form").valid()) {
+            //VehicleInfo
+            $("#lbl_VehicleID").text($("#SelectedVehicleID option:selected").text());
+            $("#lbl_VehicleMakeName").text($("#VehicleInfo_VehicleMakeName").val());
+            $("#lbl_VehicleModelName").text($("#VehicleInfo_VehicleModelName").val());
+            $("#lbl_EngineNumber").text($("#VehicleInfo_EngineNumber").val());
+            $("#lbl_ChassisNumber").text($("#VehicleInfo_ChassisNumber").val());
+            $("#lbl_VehicleClassificationID").text($("#VehicleClassificationID option:selected").val());
+
+            //InvoiceInfo
+            $("#lbl_SelectedCustomerID").text($("#SelectedCustomerID option:selected").text());
+            $("#lbl_VehicleCost").text($("#VehicleCost").val());
+            $("#lbl_InvoiceNumber").text($("#InvoiceNumber").val());
+            $("#lbl_InvoiceDate").text($("#InvoiceDate").val());
+            $("#lbl_InvoiceFile").text($("#InvoiceFile").val().replace('C:\\fakepath\\', ''));
+            $("#lbl_PreferredEndingPlateNumber").text($("#PreferredEndingPlateNumber").val());
+            if ($("#Encumbered").is(":checked")) {
+                $("#lbl_InvoiceEncumbered").text("Yes");
+            }
+            else {
+                $("#lbl_InvoiceEncumbered").text("No");
+            }
+            $("#lbl_InvoiceFinancialInstitution").text($("#FinancialInstitution").val());
+            //$("#lbl_COCPolicyNumber").text($("#COCPolicyNumber").val());
+
+            $("#modal-Invoice-Confirmation").modal("show");
+        }
+    });
+
+    $('#Encumbered').change(function () {
+        if (this.checked) {
+            $('#financial_content').show();
+        }
+        else {
+            $('#financial_content').hide();
+        }
+
+    });
+
+    $('#InvoiceDate').change(function () {
+        if (jQuery('#InvoiceDate').valid()) {
+            var date = $('#InvoiceDate').val();
+            var from = date.split("-")
+            var year = from[0];
+            var month = from[1];
+            var day = Number(from[2]) + 7;
+            var newdate = new Date(year + ", " + month + ", " + day);
+            var hldr = newdate.toDateString();
+            $("#penalty_info").text("Last day of submission of documents and payments for registration is on or before " + hldr);
+        }
+        else
+            $("#penalty_info").text("");
+    });
+
+    $("#btn_invoice_confirmation_close").on("click", function () {
+        $("#modal-Invoice-Confirmation").modal("hide");
+    });
+    $('#PreferredEndingPlateNumber').keypress(function (e) {
+        //if the letter is not digit then display error and don't type anything
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) || $(this).val().length > 20) {
+            return false;
+        }
+
+        var value = $("#PreferredEndingPlateNumber").val();
+        var valslice = value.slice(-1);
+        if (valslice.length == 1 && valslice != "-") {
+            $("#PreferredEndingPlateNumber").val(value + "-")
+        }
+    });
+    $('#PreferredEndingPlateNumber').keyup(function (e) {
+        var value = $("#PreferredEndingPlateNumber").val();
+        var valslice = value.slice(-1);
+        if (valslice.length == 1 && valslice == "-") {
+            $("#PreferredEndingPlateNumber").val(value.slice(0,-1))
+        }
+    })  
+        //$('#PreferredEndingPlateNumber').keyup(function () {
+        //    var v = $(this).val().replace(/\D/g, '');   
+        //    v = v.replace(/(\d{1})(?=\d)/g, '$1-');
+        //    $(this).val(v)
+        //}); 
+</script>

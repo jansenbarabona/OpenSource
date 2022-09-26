@@ -1,0 +1,71 @@
+﻿@*MODAL CREATE*@
+<div class="modal fade" id="modal-create">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="modal-create-header" class="modal-header">
+                <h4 id="modal-header-title" class="modal-title">Are you sure you want to save?</h4>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" id="btn_create" name="submit" value="Create" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+@*MODAL EDIT*@
+<div class="modal fade" id="modal-save">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Are you sure you want to save?</h4>
+            </div>
+            @*<div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>*@
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" id="btn_edit" name="submit" value="Save" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+@*MODAL DELETE*@
+<div class="modal fade" id="modal-delete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Are you sure you want to delete?</h4>
+            </div>
+            @*<div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>*@
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" id="btn_delete" name="submit" value="Delete" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script>
+    $("#btn_create").click(function () {
+        $("#modal-create").modal("toggle");
+        $(".modal-backdrop").hide();
+    });
+    $("#btn_edit").click(function () {
+        $("#modal-save").modal("toggle");
+        $(".modal-backdrop").hide();
+    });
+    $("#btn_delete").click(function () {
+        $("#modal-delete").modal("hide");
+        $(".modal-backdrop").hide();
+    });
+</script>

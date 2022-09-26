@@ -1,0 +1,50 @@
+﻿@using VehicleRegistration.Models
+@model VehicleListModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("ReAllocatedVehicle", "VehicleInfo", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6><i class="nav-icon fas fa-file-signature"></i> List of Allocated Vehicle  <small> </small></h6>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="check btn-info" id="btn_assign" type="button" name="btnSubmit" data-toggle="tooltip" title="Dealer List"><i class="fas fa-car"></i></div>
+
+                        @{
+                            Html.RenderPartial("_VehicleList");
+                        }
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+
+    Html.RenderPartial("_Modal_Dealer", Model.DealerInfo, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "DealerInfo" } });
+    //Html.RenderPartial("_Modal_BOC", Model.BOCInfo);
+}
+
+<script type="text/javascript">
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#reallocate").toggleClass("active");
+
+    $("#btn_assign").on("click", function () {
+        if ($("#tbl_list input[type=checkbox]:checked").length > 0) {
+            $("#modal-dealer").modal("show");
+        }
+        else {
+            toastr.warning("Please check one or more row to assign!");
+        }
+    });
+</script>

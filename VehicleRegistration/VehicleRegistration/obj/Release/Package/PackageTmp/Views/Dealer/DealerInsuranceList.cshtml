@@ -1,0 +1,67 @@
+﻿@using VehicleRegistration.Models
+@model IEnumerable<DealerModel>
+@{
+    ViewBag.Title = "DealerInsuranceList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="nav-icon fas fa-shipping-fast"></i> Dealer Insurance <small></small></h6>
+                </div>
+                <div class="card-body">
+                    <table id="Dealer_insurance_list_tbl" class="table table-bordered table-striped table-hover" style="max-width:100%;">
+                        <thead>
+                            <tr>
+                                <th style="width:150px;">Code</th>
+                                <th style="width:345px;">Name</th>
+                                <th style="width:450px;">Email</th>
+                                <th style="width:100px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="max-width:50px;" id="deal_code">@item.DealerID</td>
+                                    <td style="max-width:220px;" id="deal_name">@item.DealerName</td>
+                                    <td style="max-width:150px;" id="deal_email">@item.EmailAddress</td>
+                                    <td style="max-width:50px; padding-left:5px; padding-right:5px; margin:auto;" align="center">
+                                        <div class="row justify-content-center">
+                                            <a href="@Url.Action("DealerInsurance", new { dealer_id = item.DealerID})" class="btn btn-warning btn-sm">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+<!-- ./wrapper -->
+<script>
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_ul_dealer").css("display", "block");
+    $("#left_nav_dealer").toggleClass("menu-open");
+    $("#dealer_insurance").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+</script>
+
+

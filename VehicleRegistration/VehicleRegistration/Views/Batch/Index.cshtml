@@ -1,0 +1,81 @@
+﻿@using VehicleRegistration.Models
+@using VehicleRegistration.Tools
+
+
+@{
+    ViewBag.Title = "Batch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("DealerForm", "Dealer", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <section class="content">
+        <div class="card">
+            <div class="card-header">
+                <h6>Batch Master</h6>
+            </div>
+            <div class="card-body">
+                <div class="check btn-info" id="btn_modal" type="button" name="btnSubmit" data-toggle="tooltip" title="List of Vehicle"><i class="fas fa-tasks"></i></div>
+                @{
+                    Html.RenderPartial("_BatchHeader");
+                }
+
+                @{
+                    Html.RenderPartial("_BatchDetails");
+                }
+            </div>
+            <div class="card-footer" style="background-color:#E5EAF8">
+                <center>
+                    <button type="submit" name="submit" value="Save" class="btn btn-primary btn-block" style="width:250px;"> Save </button>
+                </center>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal-List_Vehicle">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">List of Vehicle</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table id="list_vehicle" class="table table-bordered table-striped table-hover" style="max-width:100%; width:100%">
+                            <thead>
+                                <tr>
+                                    <th style="width:10%;"> # </th>
+                                    <th style="width:23%;">Make</th>
+                                    <th style="width:23%;">Model</th>
+                                    <th style="width:23%;">Engine</th>
+                                    <th style="width:23%;">Chassis</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @*@foreach (var item in Model.TransactionList.OrderByDescending(o => o.CreatedDate))
+                                    {
+                                        <tr class="rowclick" style="cursor: pointer" data-href="@Url.Action("VehicleInfo", "VehicleInfo", new { id = item.VehicleID })">
+                                            <td style="max-width:50px;">@item.TransactionID</td>
+                                            <td style="max-width:120px;">@item.TransactionName</td>
+                                            <td style="max-width:125px;" align="right">@item.ComputedAmount.Value.ToString("#,##0.00;(#,##0.00)")</td>
+                                            <td style="max-width:130px;">@item.Remarks</td>
+                                            <td style="max-width:100px;" align="right">@item.CreatedDate.ToString("MMM dd, yyyy HH:mm:ss")</td>
+                                        </tr>
+                                    }*@
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" id="btn_boc" class="btn btn-primary" data-dismiss="modal">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+                    }
+<script>
+    $("#btn_modal").click(function () {
+        $("#modal-List_Vehicle").modal("show")
+    });
+</script>

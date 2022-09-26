@@ -1,0 +1,95 @@
+﻿@using VehicleRegistration.Models
+@model IEnumerable<InsuranceBranchModel>
+@{
+    ViewBag.Title = "InsuranceBranchList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+
+                    <h6><i class="nav-icon fas fa-project-diagram"></i> Branch List  <small> </small></h6>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="fab" type="button" name="btnSubmit" onclick="location.href='@Url.Action("InsuranceBranch", "Insurance")'"> + </div>
+                <div class="card-body">
+                    <table id="insurance_branch_list_tbl" class="table table-bordered table-striped table-hover" style="max-width:100%;">
+                        <thead>
+                            <tr>
+                                <th style="width:75px;">Code</th>
+                                <th style="width:250px;">Name</th>
+                                <th style="width:250px;">Insurance Name</th>
+                                <th style="width:200px;">Email</th>
+                                <th style="width:140px;">Business Phone</th>
+                                <th style="width:125px;">Mobile Phone</th>
+                                <th style="width:125px;">Fax Number</th>
+                                <th style="width:200px;">Website</th>
+                                <th style="width:300px;">Address</th>
+                                <th style="width:100px;">City</th>
+                                <th style="width:75px;">ZipCode</th>
+                                <th style="width:50px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="max-width:75px;" id="insurance_branch_code">@item.InsuranceBranchID</td>
+                                    <td style="max-width:250px;" id="insurance_branch_name">@item.InsuranceBranchName</td>
+                                    <td style="max-width:200px;" id="insurance_branch_insurance_name">@item.InsuranceName</td>
+                                    <td style="max-width:200px;" id="insurance_branch_email">@item.EmailAddress</td>
+                                    <td style="max-width:130px;" id="insurance_branch_bphone">@item.BusinessPhone</td>
+                                    <td style="max-width:125px;" id="insurance_branch_mphone">@item.MobilePhone</td>
+                                    <td style="max-width:125px;" id="insurance_branch_fax">@item.FaxNumber</td>
+                                    <td style="max-width:200px;" id="insurance_branch_web">@item.WebSite</td>
+                                    <td style="max-width:300px;" id="insurance_branch_address">@item.Address</td>
+                                    <td style="max-width:100px;" id="insurance_branch_city">@item.CityName</td>
+                                    <td style="max-width:75px;" id="insurance_branch_zipcode">@item.ZipCode</td>
+                                    <td style="max-width:50px;">
+                                        <div class="row" style="align-items:center">
+                                            <a href="@Url.Action("InsuranceBranch", new { id = item.InsuranceBranchID })">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+<!-- ./wrapper -->
+<script>
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_dlr_insurance_branch").toggleClass("active");
+
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_admin").toggleClass("menu-open");
+   
+    $("#insurance_branch").toggleClass("active");
+</script>
+
+
+
+

@@ -1,0 +1,123 @@
+﻿@using VehicleRegistration.Models
+@model InsuranceCOCSeriesModel
+
+@{
+    ViewBag.Title = "Insurance COC Series";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Back" onclick="location.href='@Url.Action("Dashboard", "Home")'">
+                    <i class="far fa-times-circle"></i>
+                    @*<i class="far fa-times-circle"></i>*@
+                </button>
+            </div>
+            <h6><i class="nav-icon far fas fa-users"></i> Insurance COC Series Registration Form   <small></small></h6>
+        </div>
+        <!-- /.card-header -->
+
+        <article class="card-body mx-1">
+            @using (Html.BeginForm("InsuranceCOCSeries", "Insurance", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    @Html.HiddenFor(m => m.InsuranceCOCSeriesID)
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.InsuranceID)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-building"></i></span>
+                            </div>
+                            @Html.DropDownListFor(m => m.InsuranceID,
+                           new SelectList(Model.InsuranceList, "InsuranceID", "InsuranceName"), "Select Insurance", new { @class = "form-control select2" })
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.EffectiveDate)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+                            </div>
+                            @Html.EditorFor(m => m.EffectiveDate, new { htmlAttributes = new { @class = "form-control", placeholder = "Date Issued", @type = "date" } })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.EffectiveDate, "", new { @class = "" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.SeriesFrom)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.SeriesFrom,
+                           new
+                           {
+                               placeholder = "Series From",
+                               @class = "form-control",
+                               type = "number"
+                           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.SeriesFrom, "", new { @class = "" })
+                    </div>
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.SeriesTo)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.SeriesTo,
+                           new
+                           {
+                               placeholder = "Series To",
+                               @class = "form-control",
+                               type = "number"
+                           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.SeriesTo, "", new { @class = "" })
+                    </div>
+                </div>
+                if (ViewBag.Edit == false)
+                {
+                    <center>
+                        <div class="form-group">
+                            <center>
+                                <button type="submit" name="submit" value="Create" class="btn btn-primary btn-block" style="width:250px;"> Create Account </button>
+                            </center>
+                        </div>
+                    </center>
+                }
+                else
+                {
+                    <center>
+                        <div class="form-group row">
+                            <button type="button" data-toggle="modal" data-target="#modal-delete" class="btn btn-danger btn-block col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width:250px;"> Delete Account </button>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+                            <button type="button" data-toggle="modal" data-target="#modal-save" class="btn btn-success btn-block col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width:250px;"> Save Account </button>
+                        </div>
+                    </center>
+                }
+
+                @Html.Partial("_Confirmation")
+            }
+        </article>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+<script>
+        $("#left_nav_dbinc").toggleClass("menu-open");
+        $("#left_nav_ul_insurance").css("display", "block");
+        $("#left_nav_insurance").toggleClass("menu-open");
+        $("#insurancecoclist").toggleClass("active");
+        ///// automatic open navbar after login ///////
+        $("#left_nav_dbinc").toggleClass("menu-open");
+        $("#left_nav_admin_insurance").toggleClass("menu-open");
+        $("#left_nav_dlr").toggleClass("menu-open");
+        $("#left_nav_mai").toggleClass("menu-open");
+        ///// end automatic open navbar after login ///////
+</script>

@@ -1,0 +1,177 @@
+﻿@using VehicleRegistration.Models
+@model CTPLReportModel
+
+@{
+    ViewBag.Title = "CTPL Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    button.fab-excel {
+        z-index: 1;
+        width: 56px;
+        height: 56px;
+        background: -webkit-linear-gradient(left,#498C66,#227446);
+        border-radius: 50%;
+        box-shadow: 0 6px 10px 0 #666;
+        font-size: 28px;
+        /*font-weight:800;*/
+        line-height: 50px;
+        color: white;
+        text-align: center;
+        position: fixed;
+        right: 25px;
+        bottom: 25px;
+        border: 0px;
+        transition: all 0.1s ease-in-out;
+    }
+
+    button.fab-edit:hover {
+        box-shadow: 0 6px 14px 0 #666;
+        transform: scale(1.05);
+    }
+
+    form {
+        padding: 10px 20px;
+        /*margin:20px;*/
+    }
+
+    div.card-header {
+        color: seagreen;
+    }
+
+    h2 {
+        color: #4E4E4E;
+    }
+
+    .btn-choose {
+        background-color: DodgerBlue;
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 2px;
+    }
+
+        /* Darker background on mouse-over */
+        .btn-choose:hover {
+            background-color: RoyalBlue;
+            color: white;
+        }
+
+    button.btn-info {
+        background-color: seagreen;
+        color: #4E4E4E;
+        border-radius: 50%;
+        /*border: 1px solid #4E4E4E;*/
+        color: white;
+        width: 45px;
+        height: 45px;
+        /*padding: 6px 16px;*/
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    input.btn.btn-upload, button.btn.btn-upload {
+        background-color: #DC3545;
+        color: #4E4E4E;
+        border-radius: 50%;
+        /*border: 1px solid #4E4E4E;*/
+        color: white;
+        width: 45px;
+        height: 45px;
+        /*padding: 6px 6px;
+         font-size: 18px;*/
+        cursor: pointer;
+    }
+
+        input.btn.btn-upload:hover, button.btn.btn-upload:hover {
+            background-color: #D9534F;
+            color: #4E4E4E;
+            border-radius: 50%;
+            /*border: 1px solid #4E4E4E;*/
+            color: white;
+            width: 45px;
+            height: 45px;
+            /*padding: 6px 6px;
+         font-size: 18px;*/
+            cursor: pointer;
+        }
+
+    .form-control {
+        margin: 0px;
+    }
+
+    i.far.fa-times-circle {
+        color: #D9534F;
+    }
+
+        i.far.fa-times-circle:hover {
+            color: #DC3545;
+        }
+
+    div.alert.alert-danger {
+        background: #007BFF;
+        border: 0px;
+    }
+</style>
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="nav-icon fas fa-file-signature"></i> CTPL Report  <small> </small></h6>
+                </div>
+
+                @using (Html.BeginForm("CTPL", "Insurance", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="card-body">
+                        <button class="fab-excel" type="submit" name="btnSubmit" title="Download Report">
+                            <i class="far fa-file-excel"></i>
+                        </button>
+
+                        <div class="row">
+                            <div class="form-group col-lg-4">
+                                @Html.LabelFor(m => m.DateFrom)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-car"></i> </span>
+                                    </div>
+                                    @Html.EditorFor(m => m.DateFrom, new { htmlAttributes = new { @class = "form-control", placeholder = "Date Submitted From", @type = "date" } })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.DateFrom, "", new { @class = "" })
+                            </div> <!-- Vehicle Model form-group// -->
+                            <div class="form-group col-lg-4">
+                                @Html.LabelFor(m => m.DateTo)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-car"></i> </span>
+                                    </div>
+                                    @Html.EditorFor(m => m.DateTo, new { htmlAttributes = new { @class = "form-control", placeholder = "Date Submitted To", @type = "date" } })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.DateTo, "", new { @class = "" })
+                            </div> <!-- Vehicle Body form-group// -->
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                }
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+</section>
+
+
+<script>
+
+
+
+    $("#btn_report").on("click", function () {
+        if (jQuery("form").valid()) {
+            $("form").submit();
+        }
+    });
+</script>

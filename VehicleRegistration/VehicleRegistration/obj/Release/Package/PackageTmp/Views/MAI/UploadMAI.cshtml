@@ -1,0 +1,246 @@
+﻿
+@{
+    ViewBag.Title = "UploadMAI";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model System.Data.DataTable
+@using System.Data;
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+
+
+<script>
+    function bs_input_file() {
+        $(".input-file").before(
+            function () {
+                if (!$(this).prev().hasClass('input-ghost')) {
+                    var element = $("<input type='file' id='dataFile' name='upload' class='input-ghost' style='visibility:hidden; height:0'>");
+                    element.attr("name", $(this).attr("name"));
+                    element.change(function () {
+                        element.next(element).find('input').val((element.val()).split('\\').pop());
+                    });
+                    $(this).find("button.btn-choose").click(function () {
+                        element.click();
+                    });
+                    $(this).find("button.btn-reset").click(function () {
+                        element.val(null);
+                        $(this).parents(".input-file").find('input').val('');
+                    });
+                    $(this).find('input').css("cursor", "pointer");
+                    $(this).find('input').mousedown(function () {
+                        $(this).parents('.input-file').prev().click();
+                        return false;
+                    });
+                    return element;
+                }
+            }
+        );
+    }
+
+    function clear() {
+        var input = $("#dataFile").val('');
+    };
+    $(function () {
+        clear();
+        bs_input_file();
+    });
+</script>
+<section class="content">
+
+    <div class="card">
+        @*<div class="card-header" style="background-color:seagreen;">
+            </div>*@
+        @using (Html.BeginForm("UploadMAI", "MAI", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+            <div class="info2">
+                <h2>
+                    Browse File for uploading @*<a href="~/UploadTemplate/MAI-Template.xlsx" class="btn btn-close" title="close" style="float:right; color:#DC3545"><i class="far fa-times-circle"></i></a>*@
+
+                </h2>
+                @*<a href="~/UploadTemplate/MAI-Template.xlsx" class="btn btn-info" style="float:right"><i class="far fa-file-excel"></i> .xlsx</a>*@
+
+                @Html.AntiForgeryToken()
+                <div class="form-group" name="Fichier1">
+                    <!-- COMPONENT START -->
+                    <div class="form-group">
+                        <div class="input-group input-file">
+                            <span class="input-group-btn">
+                                @*<button class="btn btn-default btn-choose" type="button">Browse...</button>*@
+                                <button class="btn btn-choose" type="button"><i class="fas fa-folder-open"></i> Browse..</button>
+                            </span>
+                            <input type="text" class="form-control" placeholder='Choose a file...' accept=".xls,.xlsx" />
+                            <button type="submit" title="Upload files" class="btn btn-upload"><i class="fas fa-cloud-upload-alt"></i></button>
+                        </div>
+                    </div>
+                    @*<input type="file" id="dataFile" name="upload" />*@
+
+                </div>
+
+                <div class="form-group">
+                    @*<input type="submit" value="Upload" class="btn btn-upload"/>*@
+                    @*<button type="submit" class="btn btn-upload"><i class="fas fa-cloud-upload-alt"></i></button>*@
+                </div>
+
+
+                <div class="alert alert-danger">
+                    <h6>Download <a href="~/UploadTemplate/MAI-Template.xlsx"><small><i class="far fa-file-excel"></i> Template.xlsx</small></a></h6>
+                    @*<h6>Download <small>Templete.xls<a href="~/UploadTemplate/MAI-Template.xlsx"  title="Template.xlsx"></a></small></h6>*@
+                    @Html.ValidationSummary()
+                    @*<strong></strong> asdasd*@
+                </div>
+
+
+
+            </div>
+            if (Model != null)
+            {
+                <table id="table1" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            @foreach (DataColumn col in Model.Columns)
+                            {
+                                <th>@col.ColumnName</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (DataRow row in Model.Rows)
+                        {
+                            <tr>
+                                @foreach (DataColumn col in Model.Columns)
+                                {
+                                    <td>@row[col.ColumnName]</td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+
+        }
+
+    </div>
+    <div class="body-content">
+        <img src="~/scripts/Img/svg/undraw_add_file_4gfw.svg" />
+    </div>
+</section>
+
+<script>
+    $("#content_header").text("MAI Import Excel File");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+</script>
+<style>
+    img {
+        display:block;
+        z-index:-5;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        width: 200px;
+        height:200px;
+    }
+
+    form {
+        padding: 10px 20px;
+        /*margin:20px;*/
+    }
+
+    div.card-header {
+        color: seagreen;
+    }
+
+    h2 {
+        color: #4E4E4E;
+    }
+
+    h6 {
+        color: white;
+        float: right;
+    }
+
+    small:hover {
+        color: white;
+    }
+
+    .btn-choose {
+        background-color: DodgerBlue;
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 2px;
+    }
+
+        /* Darker background on mouse-over */
+        .btn-choose:hover {
+            background-color: RoyalBlue;
+            color: white;
+        }
+
+    a.btn-close {
+        color: #DC3545;
+        border-radius: 50%;
+        color: white;
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+        cursor: pointer;
+        border: none;
+        font-size: 30px;
+        padding: 0px;
+    }
+
+        a.btn-close:hover {
+            background-color: #DC3545;
+            color: white;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 20px;
+            cursor: pointer;
+            border: none;
+            font-size: 35px;
+            padding: 0px;
+        }
+
+    input.btn.btn-upload, button.btn.btn-upload {
+        background-color: #F57224;
+        color: #4E4E4E;
+        border-radius: 50%;
+        /*border: 1px solid #4E4E4E;*/
+        color: white;
+        width: 45px;
+        height: 45px;
+        /*padding: 6px 6px;
+         font-size: 18px;*/
+        cursor: pointer;
+    }
+
+        input.btn.btn-upload:hover, button.btn.btn-upload:hover {
+            background-color: #007BFF;
+            color: #4E4E4E;
+            border-radius: 50%;
+            /*border: 1px solid #4E4E4E;*/
+            color: white;
+            width: 45px;
+            height: 45px;
+            /*padding: 6px 6px;
+         font-size: 18px;*/
+            cursor: pointer;
+        }
+
+    div.alert.alert-danger {
+        background-color: #007BFF;
+        border: none;
+    }
+
+    .form-control {
+        margin: 3px;
+    }
+</style>

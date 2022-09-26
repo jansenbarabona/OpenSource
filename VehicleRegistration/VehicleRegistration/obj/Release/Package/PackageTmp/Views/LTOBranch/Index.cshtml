@@ -1,0 +1,135 @@
+﻿@using VehicleRegistration.Models
+@using VehicleRegistration.Tools
+@using System.Data.Entity
+@model IEnumerable<LTOBranchModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <td style="max-width:100px; padding-left:5px; padding-right:5px; margin:auto;" align="center">
+    </td>
+    
+}
+<div align="right">
+    @Html.ActionLink("Click here to download", "Download", new { })
+</div>
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="nav-icon fas fa-car-side"></i> LTO Branch List  <small></small></h6>
+
+                    </div>
+                    @*<div class="fab" type="button" name="btnSubmit" data-toggle="tooltip" title="Create New" onclick="location.href='@Url.Action("LTOBrancReg", "LTOBranch")'"> + </div>*@
+                    <div class="card-body">
+
+                    <table id="LTOBranch_list_tbl" class="table table-bordered table-striped table-hover" style="max-width:100%; width:99.7%;">
+
+                        <thead>
+
+                            <tr>
+
+                                <th style="width:75px;">Code</th>
+                                <th style="width:250px;">Region</th>
+                                <th style="width:250px;">Branch Name</th>
+                                <th style="width:200px;">Email</th>
+                                <th style="width:125px;">Phone No.</th>
+                                <th style="width:125px;">Mobile No.</th>
+                                <th style="width:100px;">Fax No.</th>
+                                <th style="width:200px;">Website</th>
+                                <th style="width:300px;">Address</th>
+                                <th style="width:50px;">Province Name</th>
+                                <th style="width:50px;">City Name</th>
+                                <th style="width:50px;">Barangay Name</th>
+                                <th style="width:75px;">Zip Code</th>
+                                @*<th style="width:50px;">Created By</th>*@
+                                @*<th style="width:50px;">Created Date</th>*@
+                                <th style="width:50px;">Active</th>
+                                <th style="width:50px;">Is Main</th>
+                                @*<th style="width:50px;">Updated By</th>*@
+                                @*<th style="width:50px;">Logo</th>*@
+                                <th style="width:50px;">Plate Email</th>
+                                <th style="width:50px;">PNP Email</th>
+                                <th style="width:100px;">Action</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                            <tr class="rowclick" style="cursor: pointer" data-href="@Url.Action("AddEdit", new { id = item.LTOBranchID })">
+                                @if (CurrentUser.Details.IsMain == true && CurrentUser.Details.UserRoleID == (int)UserRoleEnum.Administrator)
+                                {
+                                    <th style="width:230px;">@item.LTOBranchName</th>
+                                }
+                                <td data-toggle="tooltip" title="View Profile" style="max-width:75px; " id="deal_Code">@item.LTOBranchID</td>
+                                <td data-toggle="tooltip" title="View Profile" style="max-width:75px; " id="deal_Code">@item.Region_Name</td>
+                                <td data-toggle="tooltip" title="View Profile" style="max-width:250px; " id="deal_LTOBranchName">@item.LTOBranchName</td>
+                                <td data-toggle="tooltip" title="View Profile" style="max-width:200px; " id="deal_code">@item.EmailAddress</td>
+                                <td data-toggle="tooltip" title="View Profile" style="max-width:125px; " id="deal_code">@item.BusinessPhone</td>
+                                <td data-toggle="tooltip" title="View Profile" style="max-width:125px; " id="deal_MobilePhone">@item.MobilePhone</td>
+                                <td data-toggle="tooltip" title="View Profile" style="max-width:100px; " id="deal_FaxNumber">@item.FaxNumber</td>
+                                <td data-toggle="tooltip" title="View Profile" style="max-width:200px; " id="deal_WebSite">@item.Website</td>
+                                <td data-toggle="tooltip" title="View Profile" style="max-width:300px; " id="deal_Address">@item.Address</td>
+                                <td data-toggle="tooltip" title="View Profile" style="max-width:300px; " id="deal_Address">@item.Province_Name</td>
+                                <td data-toggle="tooltip" title="View Profile" style="max-width:300px; " id="deal_Address">@item.City_Name</td>
+                                <td data-toggle="tooltip" title="View Profile" style="max-width:300px; " id="deal_Address">@item.Barangay_Name</td>
+                                <td data-toggle="tooltip" title="View Profile" style="max-width:75px; " id="deal_ZipCode">@item.ZipCode</td>
+                                <td data-toggle="tooltip" title="View Profile" style="max-width:75px; " id="deal_ZipCode">@item.Active</td>
+                                <td data-toggle="tooltip" title="View Profile" style="max-width:75px; " id="deal_ZipCode">@item.IsMain</td>
+                                <td data-toggle="tooltip" title="View Profile" style="max-width:75px; " id="deal_ZipCode">@item.PlateEmail</td>
+                                <td data-toggle="tooltip" title="View Profile" style="max-width:75px; " id="deal_ZipCode">@item.PNPEmail</td>
+                                <td style="max-width:100px; padding-left:5px; padding-right:5px; margin:auto;" align="center">
+                                    <div class="row justify-content-center">
+                                        <a href="@Url.Action("LTOBranchReg", new { id = item.LTOBranchID})">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <iframe id="report_viewer" frameborder="0"
+                    scrolling="no" seamless="seamless" marginheight="0" marginwidth="0" role="document" style="width: 100%; margin: 0%; height: 720px;" aria-label="PDF document" title="PDF document"></iframe>
+            </div>
+
+        
+
+</section>
+
+
+<script>
+    $(document).ready(function () {
+        @if (ViewBag.Path != null)
+        {
+            <text>$('#report_viewer').attr('src', '@Url.Content(Server.MapPath(string.Format("~/Reports/VRTempFiles/")) + ViewBag.Path)');</text>
+
+        }
+    });
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_ul_vehicle").css("display", "block");
+    $("#vehicle_make").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+
+
+    function callChangefunc(val) {
+        //Form post
+       //var val = $(this).find("option:selected").val();
+        window.location.href = '@Url.Action("Index", "LTOBranch/Index")/' + val;
+      }
+
+
+</script>

@@ -1,0 +1,64 @@
+﻿@using VehicleRegistration.Models
+@model IEnumerable<spInsuranceDealer_Result>
+
+@{
+    ViewBag.Title = "Insurance Dealer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="nav-icon fas fa-shipping-fast"></i>Insurance Dealer List <small></small></h6>
+                </div>
+                <div class="card-body">
+                    <table id="Insurance_dealer_list_tbl" class="table table-bordered table-striped table-hover" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th style="width:150px;">Code</th>
+                                <th style="width:345px;">Name</th>
+                                <th style="width:450px;">Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td id="deal_code">@item.DealerID</td>
+                                    <td id="deal_name">@item.DealerName</td>
+                                    <td id="deal_email">@item.EmailAddress</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+<!-- ./wrapper -->
+<script>
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_ul_dealer").css("display", "block");
+    $("#dealer_insurance").toggleClass("active");
+    $("#insurance_dealer").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+</script>
+
+
+
+
+

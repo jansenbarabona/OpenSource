@@ -1,0 +1,131 @@
+﻿@using VehicleRegistration.Models
+@model List<LTOBatchHeader>
+
+    <table id="tbl_list" class="table table-bordered table-striped table-hover" style="width:100%; table-layout:auto;">
+        <thead>
+            <tr>
+                @if (ViewBag.EntityType == "MAI")
+                {
+                    <th style="width:15%">MAI Name</th>
+                }
+                else
+                {
+                    <th style="width:15%">Dealer Name</th>
+                    if (ViewBag.IsMain == true && ViewBag.IsAdmin == true)
+                    {
+                        <th style="width:15%">Dealer Branch Name</th>
+                    }
+                }
+                <th style="width:15%">Batch Number</th>
+                <th style="width:25%">Description</th>
+                <th style="width:10%">Date & Time</th>
+                <th style="width:5%">Count</th>
+                <th style="width:15%">Payment Ref</th>
+                <th style="width:5%">Receipt</th>
+                <th style="width:5%">E-Pat</th>
+            </tr>
+        </thead>
+        <tbody id="Header_vehiclelist_tbody">
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+            <tr style="cursor: pointer">
+                <td style="width:15%">
+                    @Html.DisplayFor(o => Model[i].EntityName)
+                    @Html.HiddenFor(o => Model[i].BatchID, new { id = "BatchID" })
+                </td>
+                @if (ViewBag.IsMain == true && ViewBag.IsAdmin == true)
+                {
+                    <th style="width:15%">
+                        @Html.DisplayFor(o => Model[i].SubEntityName)
+                    </th>
+                }
+                <td style="width:15%" class="col_batchreference">
+                    @Html.DisplayFor(o => Model[i].ReferenceNo)
+                </td>
+                <td style="width:25%">
+                    @Html.DisplayFor(o => Model[i].BatchDescription)
+                </td>
+                <td style="width:10%">
+                    @Html.DisplayFor(o => Model[i].DateSubmitted)
+                </td>
+                <td style="width:5%">
+                    @Html.DisplayFor(o => Model[i].BatchCount)
+                </td>
+                <td style="width:15%">
+                    @Html.DisplayFor(o => Model[i].PaymentRef)
+                </td>
+                <td style="width:5%;">
+                    <div class="row justify-content-center">
+                        @if (Model[i].PaymentImageContentType != null)
+                        {
+                            <a class="receipt_image_open input-group-prepend" href="javascript:;">
+                                <span class="input-group-text bg-green"><i class="fa fa-image"></i></span>
+                            </a>
+                        }
+                        else
+                        {
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fas fa-image"></i> </span>
+                            </div>
+                        }
+                    </div>
+                </td>
+                <td style="width:5%;">
+                    <div class="row justify-content-center">
+                        @if (Model[i].EPatImageContentType != null)
+                        {
+                            <a class="epat_image_open input-group-prepend">
+                                <span class="input-group-text bg-green"><i class="fa fa-image"></i></span>
+                            </a>
+                        }
+                        else
+                        {
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fas fa-image"></i> </span>
+                            </div>
+                        }
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+    <script>
+        $(".receipt_image_open").on("click", function (e) {
+            $.ajax({
+                url: '@Url.Action("GetPaymentReceiptFile", "GetData")',
+                type: "GET",
+                dataType: "JSON",
+                cache: false,
+                data: { "BatchID": $(this).closest("tr").find("#BatchID").val() },
+                success: function (response) {
+                    jQuery.fancybox.open({
+                        src: response,
+                        type: 'iframe',
+                        opts: {
+                            caption: 'Payment Receipt'
+                        }
+                    });
+                }
+            });
+        });
+        $(".epat_image_open").on("click", function (e) {
+            $.ajax({
+                url: '@Url.Action("GetEPatReceiptFile", "GetData")',
+                type: "GET",
+                dataType: "JSON",
+                cache: false,
+                data: { "BatchID": $(this).closest("tr").find("#BatchID").val() },
+                success: function (response) {
+                    jQuery.fancybox.open({
+                        src: response,
+                        type: 'iframe',
+                        opts: {
+                            caption: 'E-Pat'
+                        }
+                    });
+                }
+            });
+        });
+    </script>

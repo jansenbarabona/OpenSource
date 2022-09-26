@@ -1,0 +1,101 @@
+﻿@using VehicleRegistration.Models
+@model WalletModel
+
+@using (Html.BeginForm("MyWallet", "Wallet", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+
+    <div class="card">
+        <div class="card-header">
+            <h6><i class="nav-icon fas fa-wallet"></i> Wallet</h6>
+        </div>
+        <div class="card-body">
+            <div class="row" style="text-align:center">
+                <div class="col 12">
+                    <label>Available Balance:</label>
+                </div>
+            </div>
+            <div class="row" style="text-align:center">
+                <div class="col 12">
+                    <h1>P @Model.AvailableBalanceStr</h1>
+                </div>
+            </div>
+            <div class="row" style="text-align:center">
+                <div class="col-12">
+                    Threshold: @Model.Threshold <a href="#" data-toggle="modal" data-target="#modal-threshold"><i class="fas fa-edit nav-icon" style="margin-right:15px;"></i></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h6><i class="nav-icon fas fa-list-alt"></i> Transaction History</h6>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table id="transaction_history" class="table table-bordered table-striped table-hover" style="max-width:100%; width:100%">
+                <thead>
+                    <tr>
+                        <th style="width:50px;">Transaction Code</th>
+                        <th style="width:120px;">Transaction</th>
+                        <th style="width:125px;">Amount</th>
+                        <th style="width:130px;">Remarks</th>
+                        <th style="width:100px;">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.TransactionList.OrderByDescending(o => o.CreatedDate))
+                    {
+                        <tr class="rowclick" style="cursor: pointer" data-href="@Url.Action("VehicleInfo", "VehicleInfo", new { id = item.VehicleID })">
+                            <td style="max-width:50px;">@item.TransactionID</td>
+                            <td style="max-width:120px;">@item.TransactionName</td>
+                            <td style="max-width:125px;" align="right">@item.ComputedAmount.Value.ToString("#,##0.00;(#,##0.00)")</td>
+                            <td style="max-width:130px;">@item.Remarks</td>
+                            <td style="max-width:100px;" align="right">@item.CreatedDate.ToString("MMM dd, yyyy HH:mm:ss")</td>
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <div class="modal fade" id="modal-threshold">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                @*<div class="modal-header">
+                        <h4 class="modal-title"><label id="lblModalTitle">Certificate of Payment Information</label></h4>
+                    </div>*@
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-group col-12">
+                            @Html.LabelFor(m => m.ThresholdInput)
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-id-card"></i> </span>
+                                </div>
+                                @Html.TextBoxFor(m => m.ThresholdInput, new { @class = "form-control", type = "number" })
+                                @Html.HiddenFor(o => o.UserEntityID)
+                                @Html.HiddenFor(o => o.ReferenceID)
+                                @Html.HiddenFor(o => o.SubReferenceID)
+                            </div>
+                            @Html.ValidationMessageFor(m => m.ThresholdInput, "", new { @class = "" })
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" id="btnSubmit" class="btn btn-primary">Update Threshold</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+    <script>
+        $(".rowclick").click(function () {
+            window.location = $(this).data("href");
+        });
+    </script>
+

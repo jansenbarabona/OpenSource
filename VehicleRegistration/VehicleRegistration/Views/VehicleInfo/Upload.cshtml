@@ -1,0 +1,167 @@
+﻿@using VehicleRegistration.Models
+@model UploadModel
+
+@{
+    ViewBag.Title = "Upload";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #newrow {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+    }
+</style>
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6>Vehicle Batch<small> </small></h6>
+                </div>
+                <div class="card-body">
+                    <div class="row" id="newrow">
+                        <div class="col-sm-2 col-md-2 col-lg-2">
+                            <div class="input-group">
+                                <button id="new_row" class="btn-success">Add Row</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table id="upload_tbl" class="table table-bordered table-striped table-hover" style="margin-top: 5px; max-width:100%;">
+                        <thead>
+                            <tr>
+                                <th style="width:250px;">Make</th>
+                                <th style="width:250px;">Model</th>
+                                <th style="width:250px;">Body Type</th>
+                                <th style="width:250px;">Color</th>
+                                <th style="width:250px;">Aircon Type</th>
+                                <th style="width:250px;">Conduction Sticker</th>
+                                <th style="width:250px;">Engine Number</th>
+                                <th style="width:250px;">Piston Displacement</th>
+                                <th style="width:250px;">Fuel</th>
+                                <th style="width:250px;">Cylinders</th>
+                                <th style="width:250px;">Chasis Number</th>
+                                <th style="width:250px;">Series</th>
+                                <th style="width:250px;">Body ID Number</th>
+                                <th style="width:250px;">Year Tires</th>
+                                <th style="width:250px;">Gross Vehicle Weight</th>
+                                <th style="width:250px;">Front Tires Number</th>
+                                <th style="width:250px;">Rear Tires Number</th>
+                                <th style="width:250px;">Rear Tires Number</th>
+                                <th style="width:50px;">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int cnt = 0;
+                                foreach (var itm in Model.VehicleTable)
+                                {
+                                    <tr>
+                                        <td style="max-width:250px;">
+                                            @Html.DropDownListFor(m => m.VehicleTable[cnt].VehicleMakeID, new SelectList(Model.VehicleMakeList, "VehicleMakeID", "VehicleMakeName"), "Select Vehicle Make", new { @class = "form-control select2", @style = "width:100%" })
+                                        </td>
+                                        <td style="max-width:250px;">
+                                            @Html.DropDownListFor(m => m.VehicleTable[cnt].VehicleModelID, new SelectList(Model.VehicleModelList, "VehicleModelID", "VehicleModelName"), "Select Vehicle Model", new { @class = "form-control select2", @style = "width:100%" })
+                                        </td>
+                                        <td style="max-width:250px;">
+                                            @Html.DropDownListFor(m => m.VehicleTable[cnt].VehicleBodyTypeID, new SelectList(Model.VehicleBodyTypeList, "VehicleBodyTypeID", "VehicleBodyTypeName"), "Select Vehicle Body Type", new { @class = "form-control select2", @style = "width:100%" })
+                                        </td>
+                                        <td style="max-width:250px;">
+                                            @Html.DropDownListFor(m => m.VehicleTable[cnt].VehicleColorID, new SelectList(Model.VehicleColorList, "VehicleColorID", "VehicleColorName"), "Select Vehicle Color", new { @class = "form-control select2", @style = "width:100%" })
+                                        </td>
+                                        <td style="max-width:250px;">
+                                            @Html.TextBoxFor(m => m.VehicleTable[cnt].AirconType, new { placeholder = "Aircon Type", @class = "form-control", @style = "width:100%" })
+                                        </td>
+                                        <td style="max-width:250px;">
+                                            @Html.TextBoxFor(m => m.VehicleTable[cnt].ConductionSticker, new { placeholder = "Conduction Sticker", @class = "form-control", @style = "width:100%" })
+                                        </td>
+                                        <td style="max-width:250px;">
+                                            @Html.TextBoxFor(m => m.VehicleTable[cnt].EngineNumber, new { placeholder = "Engine Number", @class = "form-control", @style = "width:100%" })
+                                        </td>
+                                        <td style="max-width:250px;">
+                                            @Html.TextBoxFor(m => m.VehicleTable[cnt].PistonDisplacement, new { placeholder = "Piston Displacement", @class = "form-control", @style = "width:100%" })
+                                        </td>
+                                        <td style="max-width:250px;">
+                                            @Html.DropDownListFor(m => m.VehicleTable[cnt].VehicleFuelTypeID, new SelectList(Model.VehicleFuelTypeList, "VehicleFuelTypeID", "VehicleFuelTypeName"), "Select Vehicle Fuel", new { @class = "form-control select2", @style = "width:100%" })
+                                        </td>
+                                        <td style="max-width:250px;">
+                                            @Html.TextBoxFor(m => m.VehicleTable[cnt].Cylinders, new { placeholder = "Cylinders", @class = "form-control", @style = "width:100%" })
+                                        </td>
+                                        <td style="max-width:250px;">
+                                            @Html.TextBoxFor(m => m.VehicleTable[cnt].ChassisNumber, new { placeholder = "Chassis Number", @class = "form-control", @style = "width:100%" })
+                                        </td>
+                                        <td style="max-width:250px;">
+                                            @Html.TextBoxFor(m => m.VehicleTable[cnt].Series, new { placeholder = "Series", @class = "form-control", @style = "width:100%" })
+                                        </td>
+                                        <td style="max-width:250px;">
+                                            @Html.TextBoxFor(m => m.VehicleTable[cnt].BodyIDNumber, new { placeholder = "Body ID Number", @class = "form-control", @style = "width:100%" })
+                                        </td>
+                                        <td style="max-width:250px;">
+                                            @Html.TextBoxFor(m => m.VehicleTable[cnt].Year, new { placeholder = "Year Tires", @class = "form-control", @style = "width:100%" })
+                                        </td>
+                                        <td style="max-width:250px;">
+                                            @Html.TextBoxFor(m => m.VehicleTable[cnt].GrossVehicleWeight, new { placeholder = "Gross Vehicle Weight", @class = "form-control", @style = "width:100%" })
+                                        </td>
+                                        <td style="max-width:250px;">
+                                            @Html.TextBoxFor(m => m.VehicleTable[cnt].FrontTiresNumber, new { placeholder = "Front Tires Number", @class = "form-control", @style = "width:100%" })
+                                        </td>
+                                        <td style="max-width:250px;">
+                                            @Html.TextBoxFor(m => m.VehicleTable[cnt].RearTiresNumber, new { placeholder = "Rear Tires Number", @class = "form-control", @style = "width:100%" })
+                                        </td>
+                                        <td style="max-width:250px;">
+                                            @Html.TextBoxFor(m => m.VehicleTable[cnt].COCNo, new { placeholder = "COC Number", @class = "form-control", @style = "width:100%" })
+                                        </td>
+                                        <td style="max-width:50px;">
+                                            <center>
+                                                <button class="remove btn-danger">
+                                                    <i class="fa fa-trash" title="Remove"></i>
+                                                </button>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<script>
+    $(document).ready(function () {
+        all_table.destroy();
+        var table = jQuery(".table").DataTable({
+            "scrollX": true,
+            "scrollY": true,
+            "info": true,
+            "lengthChange": false,
+            "order": [],
+            "dom":
+                "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+        });
+        $("#new_row").on("click", function () {
+            table.row.add([
+                '@Html.TextBox("VehicleTable_1__AirconType", null, new { placeholder = "Aircon Type", @class = "form-control", @style = "width:100%" })',
+                '@Html.TextBox("VehicleTable_1__ConductionSticker", null, new { placeholder = "Conduction Sticker", @class = "form-control", @style = "width:100%" })',
+                '@Html.TextBox("VehicleTable_1__EngineNumber", null, new { placeholder = "Engine Number", @class = "form-control", @style = "width:100%" })',
+                '@Html.TextBox("VehicleTable_1__PistonDisplacement", null, new { placeholder = "Piston Displacement", @class = "form-control", @style = "width:100%" })',
+                '@Html.TextBox("VehicleTable_1__Cylinders", null, new { placeholder = "Cylinders", @class = "form-control", @style = "width:100%" })',
+                '@Html.TextBox("VehicleTable_1__ChassisNumber", null, new { placeholder = "Chassis Number", @class = "form-control", @style = "width:100%" })',
+                '@Html.TextBox("VehicleTable_1__Series", null, new { placeholder = "Series", @class = "form-control", @style = "width:100%" })',
+                '@Html.TextBox("VehicleTable_1__BodyIDNumber", null, new { placeholder = "Body ID Number", @class = "form-control", @style = "width:100%" })',
+                '@Html.TextBox("VehicleTable_1__Year", null, new { placeholder = "Year Tires", @class = "form-control", @style = "width:100%" })',
+                '@Html.TextBox("VehicleTable_1__GrossVehicleWeight", null, new { placeholder = "Gross Vehicle Weight", @class = "form-control", @style = "width:100%" })',
+                '@Html.TextBox("VehicleTable_1__FrontTiresNumber", null, new { placeholder = "Front Tires Number", @class = "form-control", @style = "width:100%" })',
+                '@Html.TextBox("VehicleTable_1__RearTiresNumber", null, new { placeholder = "Rear Tires Number", @class = "form-control", @style = "width:100%" })',
+                '@Html.TextBox("VehicleTable_1__COCNo", null, new { placeholder = "COC Number", @class = "form-control", @style = "width:100%" })',
+            ]).draw(false);
+        });
+    });
+</script>

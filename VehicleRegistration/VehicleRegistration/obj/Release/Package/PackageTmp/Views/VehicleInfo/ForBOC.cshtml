@@ -1,0 +1,64 @@
+﻿@using VehicleRegistration.Models
+@model VehicleListModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("ForBOC", "VehicleInfo", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6><i class="nav-icon fas fa-file-signature"></i> Pending BOC Certificate of Payment List  <small> </small></h6>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="check btn-info" id="btn_assign" type="button" name="btnSubmit" data-toggle="tooltip" title="Add COP Information"><i class="fas fa-car"></i></div>
+                        @*@{
+                            Html.RenderPartial("_BatchFilter", Model.BatchFilter, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "BatchFilter" } });
+                        }*@
+                        <div id="getVehicleList">
+                            @{
+                                Html.RenderPartial("_VehicleList");
+                            }
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+                                Html.RenderPartial("_Modal_BOC", Model.BOCInfo, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "BOCInfo" } });
+                                //Html.RenderPartial("_Modal_BOC", Model.BOCInfo);
+                            }
+
+<script>
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#cop").toggleClass("active");
+
+    $("#left_nav_mai").toggleClass("menu-open");
+    $("#boc").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+
+    $("#btn_assign").on("click", function () {
+        if ($("#tbl_list input[type=checkbox]:checked").length > 0) {
+            $("#modal-BOC").modal("show");
+        }
+        else {
+            toastr.warning("Please check one or more row to assign!");
+        }
+    });
+
+</script>

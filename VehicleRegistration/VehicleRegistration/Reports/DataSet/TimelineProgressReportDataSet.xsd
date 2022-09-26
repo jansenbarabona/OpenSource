@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TimelineProgressReportDataSet" targetNamespace="http://tempuri.org/TimelineProgressReportDataSet.xsd" xmlns:mstns="http://tempuri.org/TimelineProgressReportDataSet.xsd" xmlns="http://tempuri.org/TimelineProgressReportDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="VRSystemConnectionString1" IsAppSettingsProperty="true" Modifier="Assembly" Name="VRSystemConnectionString1 (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.VRSystemConnectionString1.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="TimelineProgressReportDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="TimelineProgressReportDataSet" msprop:Generator_UserDSName="TimelineProgressReportDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowClassName="DataTable1Row" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BatchID" msprop:Generator_ColumnVarNameInTable="columnBatchID" msprop:Generator_ColumnPropNameInRow="BatchID" msprop:Generator_ColumnPropNameInTable="BatchIDColumn" msprop:Generator_UserColumnName="BatchID" type="xs:string" minOccurs="0" />
+              <xs:element name="DateSubmitted" msprop:Generator_ColumnVarNameInTable="columnDateSubmitted" msprop:Generator_ColumnPropNameInRow="DateSubmitted" msprop:Generator_ColumnPropNameInTable="DateSubmittedColumn" msprop:Generator_UserColumnName="DateSubmitted" type="xs:string" minOccurs="0" />
+              <xs:element name="DateAssessed" msprop:Generator_ColumnVarNameInTable="columnDateAssessed" msprop:Generator_ColumnPropNameInRow="DateAssessed" msprop:Generator_ColumnPropNameInTable="DateAssessedColumn" msprop:Generator_UserColumnName="DateAssessed" type="xs:string" minOccurs="0" />
+              <xs:element name="DatePaid" msprop:Generator_ColumnVarNameInTable="columnDatePaid" msprop:Generator_ColumnPropNameInRow="DatePaid" msprop:Generator_ColumnPropNameInTable="DatePaidColumn" msprop:Generator_UserColumnName="DatePaid" type="xs:string" minOccurs="0" />
+              <xs:element name="DateCompleted" msprop:Generator_ColumnVarNameInTable="columnDateCompleted" msprop:Generator_ColumnPropNameInRow="DateCompleted" msprop:Generator_ColumnPropNameInTable="DateCompletedColumn" msprop:Generator_UserColumnName="DateCompleted" type="xs:string" minOccurs="0" />
+              <xs:element name="ProcessingDays" msprop:Generator_ColumnVarNameInTable="columnProcessingDays" msprop:Generator_ColumnPropNameInRow="ProcessingDays" msprop:Generator_ColumnPropNameInTable="ProcessingDaysColumn" msprop:Generator_UserColumnName="ProcessingDays" type="xs:string" minOccurs="0" />
+              <xs:element name="PaidDays" msprop:Generator_ColumnVarNameInTable="columnPaidDays" msprop:Generator_ColumnPropNameInRow="PaidDays" msprop:Generator_ColumnPropNameInTable="PaidDaysColumn" msprop:Generator_UserColumnName="PaidDays" type="xs:string" minOccurs="0" />
+              <xs:element name="Reference" msprop:Generator_ColumnVarNameInTable="columnReference" msprop:Generator_ColumnPropNameInRow="Reference" msprop:Generator_ColumnPropNameInTable="ReferenceColumn" msprop:Generator_UserColumnName="Reference" type="xs:string" minOccurs="0" />
+              <xs:element name="ForPickUpDate" msprop:Generator_ColumnVarNameInTable="columnForPickUpDate" msprop:Generator_ColumnPropNameInRow="ForPickUpDate" msprop:Generator_ColumnPropNameInTable="ForPickUpDateColumn" msprop:Generator_UserColumnName="ForPickUpDate" type="xs:string" minOccurs="0" />
+              <xs:element name="DownloadedDate" msprop:Generator_ColumnVarNameInTable="columnDownloadedDate" msprop:Generator_ColumnPropNameInRow="DownloadedDate" msprop:Generator_ColumnPropNameInTable="DownloadedDateColumn" msprop:Generator_UserColumnName="DownloadedDate" type="xs:string" minOccurs="0" />
+              <xs:element name="BatchCount" msprop:Generator_ColumnVarNameInTable="columnBatchCount" msprop:Generator_ColumnPropNameInRow="BatchCount" msprop:Generator_ColumnPropNameInTable="BatchCountColumn" msprop:Generator_UserColumnName="BatchCount" type="xs:string" minOccurs="0" />
+              <xs:element name="DealerName" msprop:Generator_ColumnVarNameInTable="columnDealerName" msprop:Generator_ColumnPropNameInRow="DealerName" msprop:Generator_ColumnPropNameInTable="DealerNameColumn" msprop:Generator_UserColumnName="DealerName" type="xs:string" minOccurs="0" />
+              <xs:element name="DealerBranch" msprop:Generator_ColumnVarNameInTable="columnDealerBranch" msprop:Generator_ColumnPropNameInRow="DealerBranch" msprop:Generator_ColumnPropNameInTable="DealerBranchColumn" msprop:Generator_UserColumnName="DealerBranch" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,72 @@
+﻿
+@using VehicleRegistration.Models
+@model IEnumerable<VehicleFuelType>
+@*Views-- > Folder Name("VehicleFuelType") *@
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="nav-icon fas fa-car-side"></i> Vehicle Fuel Type  <small></small></h6>
+                </div>
+                <!-- /.card-header -->
+                <div class="fab" type="button" name="btnSubmit" data-toggle="tooltip" title="Create New" onclick="location.href='@Url.Action("Vehicle_Fuel_Registration", "VehicleFuelType")'"> + </div>
+                <div class="card-body">
+                    <table id="MAI_list_tbl" class="table table-bordered table-striped table-hover" style="max-width:100%; width:99.7%;">
+                        <thead>
+                            <tr>
+                                <th style="width:670px;">Vehicle Fuel Type</th>
+                                <th style="width:75px;">Action</th>
+
+                            </tr>
+                        </thead>
+
+
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="width:670px;" id="User_Entity_Code">@item.VehicleFuelTypeName</td>
+                                    <td style="max-width:75px; padding-left:5px; padding-right:5px; margin:auto;" align="center">
+                                        <div class="row justify-content-center">
+                                            <a href="@Url.Action("Vehicle_Fuel_Registration", "VehicleFuelType", new { id = item.VehicleFuelTypeID })" class="btn btn-warning btn-md">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+<!-- ./wrapper -->
+<script>
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_ul_vehicle").css("display", "block");
+    $("#vehicle_fuel_type").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+</script>

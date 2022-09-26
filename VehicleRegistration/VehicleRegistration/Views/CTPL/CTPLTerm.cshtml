@@ -1,0 +1,99 @@
+﻿@using VehicleRegistration.Models
+@model CTPLTermModel
+@{
+    ViewBag.Title = "CTPLTerm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Back" onclick="location.href='@Url.Action("CTPLTermList", "CTPL")'">
+                    <i class="far fa-times-circle"></i>
+                </button>
+            </div>
+            <h6><i class="nav-icon fas fa-project-diagram"></i> CTPL Term Form   <small> </small></h6>
+        </div>
+        <!-- /.card-header -->
+
+        <article class="card-body">
+
+            @using (Html.BeginForm("CTPLTerm", "CTPL", new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.CoverageYear)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                            </div>
+                            @Html.HiddenFor(m => m.CPTLTermID)
+                            @Html.TextBoxFor(m => m.CoverageYear,
+                           new
+                           {
+                               placeholder = "Coverage Year",
+                               @class = "form-control",
+                               @required = "required",
+                               type = "number"
+                           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.CoverageYear, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.TermDescription)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.TermDescription,
+                           new
+                           {
+                               placeholder = "Term Description",
+                               @class = "form-control",
+                               @required = "required"
+                           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.TermDescription, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                </div>
+                if (ViewBag.Edit == false)
+                {
+                    <center>
+                        <div class="form-group">
+                            <center>
+                                <button type="submit" name="submit" value="Create" class="btn btn-primary btn-block" style="width:250px;"> Create </button>
+                            </center>
+                        </div>
+                    </center>
+                }
+                else
+                {
+                    <center>
+                        <div class="form-group row">
+                            <button type="button" data-toggle="modal" data-target="#modal-delete" class="btn btn-danger btn-block col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width:250px;"> Delete </button>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+                            <button type="button" data-toggle="modal" data-target="#modal-save" class="btn btn-success btn-block col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width:250px;"> Save </button>
+                        </div>
+                    </center>
+                }
+
+                @Html.Partial("_Confirmation")
+            }
+        </article>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+<script type="text/javascript">
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#ctpl_term").toggleClass("active");
+  
+</script>
+
+
+
+
+

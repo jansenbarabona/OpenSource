@@ -1,0 +1,40 @@
+﻿@using VehicleRegistration.Models
+@model PNPModel
+
+@{
+    ViewBag.Title = "Completed List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("CompletedList", "PNP", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6><i class="nav-icon fas fa-file-signature"></i>Completed Vehicles</h6>
+                    </div>
+                    <div class="card-body">
+
+                        @*<div class="check btn-info" id="btn_assign" style="cursor:pointer;" type="button" data-toggle="tooltip" title="LTO Information">
+                                <i class="fas fa-car"></i>
+                            </div>*@
+
+                        <div id="getVehicleList" style="margin-top:5px">
+                            @{
+                                Html.RenderPartial("_PNPVehicleList", Model.VehicleList, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "VehicleList" } });
+                            }
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+                                }
+

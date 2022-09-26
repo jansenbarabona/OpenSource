@@ -1,0 +1,319 @@
+﻿@using VehicleRegistration.Models
+﻿@using VehicleRegistration.Tools
+@model CSRModel
+
+<style>
+    div#ui-datepicker-div.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all {
+        z-index: 2051 !important;
+    }
+</style>
+
+<div class="modal fade" id="modal-CSR">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><label id="lblModalTitle">CSR Information</label></h4>
+            </div>
+            <div class="modal-body">
+
+                @*@{
+                    Html.RenderPartial("_BatchHeader", Model.BatchHeader, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "CSRInfo.BatchHeader" } });
+                }*@
+                <div class="row">
+                    <div class="form-group col-6">
+                        @Html.LabelFor(m => m.CSRNumber)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fas fa-hashtag"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.CSRNumber,
+           new
+           {
+               placeholder = "CSR Number",
+               @class = "form-control"
+           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.CSRNumber, "", new { @class = "" })
+                    </div> <!-- CSR Number form-group// -->
+                    <div class="form-group col-6">
+                        @Html.LabelFor(m => m.CSRFile)
+                        <div class="input-group">
+                            @if (Model.CSRByte != null)
+                            {
+                                <a class="input-group-prepend" data-src="@Model.CSRImage" data-type="iframe" data-fancybox data-caption="&lt;b&gt;This image is BOC Certification OF Payment." href="javascript:;">
+                                    <span class="input-group-text bg-green"><i class="fa fa-image"></i></span>
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-image"></i></span>
+                                </a>
+                            }
+                            <div class="custom-file">
+                                @Html.TextBoxFor(m => m.CSRFile,
+           new
+           {
+               placeholder = "CSR File",
+               //id = "file_SOC",
+               @class = "custom-file-input",
+               type = "file",
+               accept = ".jpg,.jpeg,.png,.pdf"
+           })
+                                @Html.LabelFor(m => m.CSRFile, "Choose file",
+           new
+           {
+               @class = "custom-file-label",
+           })
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.CSRFile, "", new { @class = "" })
+                    </div>
+                </div>
+                @*<div class="row">
+                    <div class="form-group col-6">
+                        @Html.LabelFor(m => m.TransactionID)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fas fa-barcode"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.TransactionID,
+           new
+           {
+               placeholder = "Transaction ID",
+               @class = "form-control"
+           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.TransactionID, "", new { @class = "" })
+                    </div>
+                    
+                    <div class="form-group col-6">
+                        @Html.LabelFor(m => m.ItemType)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fas fa-hashtag"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.ItemType,
+           new
+           {
+               placeholder = "Item Type",
+               @class = "form-control"
+           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.ItemType, "", new { @class = "" })
+
+                    </div> 
+                </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        @Html.LabelFor(m => m.ReportEntryID)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fas fa-barcode"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.ReportEntryID,
+           new
+           {
+               placeholder = "Report Entry ID",
+               @class = "form-control"
+           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.ReportEntryID, "", new { @class = "" })
+                    </div>
+                    <div class="form-group col-6">
+                        @Html.LabelFor(m => m.ReportDate)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fas fa-barcode"></i> </span>
+                            </div>
+                            @Html.EditorFor(m => m.ReportDate, new { htmlAttributes = new { @class = "form-control", placeholder = "Report Date", @type = "date" } })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.ReportDate, "", new { @class = "" })
+                    </div> 
+                </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        @Html.LabelFor(m => m.BIRCCMV)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fas fa-barcode"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.BIRCCMV,
+           new
+           {
+               placeholder = "BIR CCMV",
+               @class = "form-control"
+           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.BIRCCMV, "", new { @class = "" })
+                    </div>
+                    <div class="form-group col-6">
+                        @Html.LabelFor(m => m.DateIssued3)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="far fa-calendar-alt"></i> </span>
+                            </div>
+                            @Html.EditorFor(m => m.DateIssued3, new { htmlAttributes = new { @class = "form-control", placeholder = "Date Issued", @type = "date" } })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.DateIssued3, "", new { @class = "" })
+                    </div> 
+                </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        @Html.LabelFor(m => m.TaxType)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="far fa-file-alt"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.TaxType,
+           new
+           {
+               placeholder = "Tax Type",
+               @class = "form-control"
+           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.TaxType, "", new { @class = "" })
+                    </div>
+                    <div class="form-group col-6">
+                        @Html.LabelFor(m => m.TaxAmount)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fas fa-ruble-sign"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.TaxAmount,
+           new
+           {
+               placeholder = "Tax Amount",
+               @class = "form-control"
+           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.TaxAmount, "", new { @class = "" })
+                    </div> 
+                </div>*@
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" id="btn_csr" class="btn btn-primary">Update CSR</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal-CSR-Confirmation" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Are you sure you want to submit?</h4>
+            </div>
+            <div id="modal-body-csr-confirmation" class="modal-body">
+                <div class="row">
+                    <div class="col-6">
+                        @Html.LabelFor(m => m.CSRNumber): <label id="lbl_CSRNumber"></label>
+                    </div>
+                    <div class="col-6">
+                        @Html.LabelFor(m => m.CSRFile) : <label id="lbl_CSRFile"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" id="btn_csr_confirmation_close" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" name="submit" value="DealerCSR" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#btn_csr').click(function () {
+        //$("#lbl_TransactionID").text($("#CSRInfo_TransactionID").val());
+        $("#lbl_CSRNumber").text($("#CSRInfo_CSRNumber").val());
+        //$("#lbl_ReportEntryID").text($("#CSRInfo_ReportEntryID").val());
+        //$("#lbl_ReportDate").text($("#CSRInfo_ReportDate").val());
+        //$("#lbl_ItemType").text($("#CSRInfo_ItemType").val());
+        //$("#lbl_BIRCCMV").text($("#CSRInfo_BIRCCMV").val());
+        //$("#lbl_DateIssued3").text($("#CSRInfo_DateIssued3").val());
+        //$("#lbl_TaxType").text($("#CSRInfo_TaxType").val());
+        //$("#lbl_TaxAmount").text($("#CSRInfo_TaxAmount").val());
+        /**/
+        $("#lbl_CSRFile").text($("#CSRInfo_CSRFile").val().replace('C:\\fakepath\\', ''));
+
+        if (jQuery("form").valid()) {
+            $("#modal-CSR").modal("hide");
+            $("#modal-CSR-Confirmation").modal("show");
+        }
+    /**/
+    //if ($("#vehiclelist_tbody tr").length == 0) {
+    //    if (jQuery("form").valid()) {
+    //        $("#modal-CSR").modal("hide");
+    //        $("#modal-CSR-Confirmation").modal("show");
+    //    }
+    //}
+    //else if ($("#vehiclelist_tbody tr").length > 0) {
+    //    if (jQuery("form").valid()) {
+    //        $("#modal-CSR").modal("hide");
+    //        if ($("#vehiclelist_tbody tr").length > 0) {
+    //            jQuery.noConflict();
+    //            if (jQuery.fn.DataTable.isDataTable('#tbl_listofsummary')) {
+    //                jQuery('#tbl_listofsummary').DataTable().clear();
+    //                jQuery('#tbl_listofsummary').DataTable().destroy();
+    //            }
+
+    //            if ($("#summarry_thead tr").length == 0) {
+    //                $("#modal-body-csr-confirmation").append("" +
+    //                "<table id='tbl_listofsummary' class='table table-bordered table-striped table-hover' style='width:100%; max-width:100%;'>" +
+    //                "   <thead id='summarry_thead'>" +
+    //                "       <tr>" +
+    //                "           <th style='width:25%'>Make</th>" +
+    //                "           <th style='width:25%'>Model</th>" +
+    //                "           <th style='width:25%'>Engine</th>" +
+    //                "           <th style='width:25%'>Body</th>" +
+    //                "       </tr>" +
+    //                "   </thead>" +
+    //                "   <tbody id='summarry_tbody'>" +
+    //                "   </tbody>" +
+    //                "</table>");
+    //            }
+
+    //            $("#vehiclelist_tbody .checkbox_all:checkbox:checked").each(function () {
+    //                var tr = $(this).closest("tr");
+    //                var make = tr.find("td:eq(1)").text().trim();
+    //                var model = tr.find("td:eq(2)").text().trim();
+    //                var engine = tr.find("td:eq(5)").text().trim();
+    //                var body = tr.find("td:eq(6)").text().trim();
+    //                $("#tbl_listofsummary #summarry_tbody").append("" +
+    //                "<tr>" +
+    //                "    <td>" + make + "</td>" +
+    //                "    <td>" + model + "</td>" +
+    //                "    <td>" + engine + "</td>" +
+    //                "    <td>" + body + "</td>" +
+    //                "</tr>");
+
+    //            });
+    //            jQuery.noConflict();
+    //            var summary_tbl = jQuery("#tbl_listofsummary").DataTable({
+    //                "scrollX": true,
+    //                "scrollY": true,
+    //                "info": false,
+    //                "lengthChange": false,
+    //                "searching": false,
+    //                "paging": false,
+    //                "order": [],
+    //                "dom":
+    //                    "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+    //                    "<'row'<'col-sm-12'tr>>" +
+    //                    "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+    //            });
+
+    //            $(document).on('shown.bs.modal', '.modal', function (e) {
+    //                summary_tbl.columns.adjust();
+    //            });
+    //        }
+
+    //        $("#modal-CSR-Confirmation").modal("show");
+    //    }
+    //}
+});
+
+$('#btn_csr_confirmation_close').click(function () {
+    $("#modal-CSR").modal("show");
+});
+
+</script>

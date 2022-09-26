@@ -1,0 +1,21 @@
+﻿@using VehicleRegistration.Models
+@model LTOPaymentInfo
+
+<div class="row">
+    <div class="form-group col-12">
+        OR/CR Ref: <label id="lbl_ref">@Model.PaymentRef</label>
+    </div>
+
+    @*<div class="form-group col-6">
+        Amount: <label id="lbl_amount">@Model.PaymentAmount</label>
+    </div>*@
+</div>
+<div class="row">
+    <div class="form-group col-12">
+        <a data-fancybox data-type="iframe" data-src="@Model.PaymentImage" data-caption="&lt;b&gt;Receipt" href="javascript:;">
+            <iframe style="width:100%; height: 500px;" src="@Model.PaymentImage" allowfullscreen></iframe>
+        </a>
+    </div>
+</div>
+
+<script></script>

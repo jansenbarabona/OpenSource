@@ -1,0 +1,86 @@
+﻿@using VehicleRegistration.Models
+@model BatchFilter
+
+<style>
+    #batch_filter_adjust {
+        position: absolute;
+        margin-bottom: 10px;
+        z-index: 1;
+    }
+</style>
+<div class="row" style="margin-bottom:5px;">
+    <div id="batch_filter_adjust" class="col-sm-12 col-md-3">
+       
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Batch: </span>
+            </div>
+            @{ 
+
+                Model.BatchFilterList.Insert(0, new BatchFilterList()
+                {
+                    BatchID = "all",
+                    ReferenceNo = "All"
+                });
+            }
+            @Html.DropDownListFor(m => m.SelectedBatchFilter, new SelectList(Model.BatchFilterList, "BatchID", "ReferenceNo"), "Select Reference", new { @class = "form-control select2" })
+            
+        </div>
+    </div>
+</div>
+
+<script>
+    @*<!-- /.window response -->*@
+    function windowSize() {
+        windowHeight = window.innerHeight ? window.innerHeight : $(window).height();
+        windowWidth = window.innerWidth ? window.innerWidth : $(window).width();
+
+    }
+
+    windowSize();
+    $(window).resize(function () {
+        windowSize();
+        
+        if (windowWidth < 768) {
+            $("#batch_filter_adjust").css({ "position": "relative", "margin-bottom": "10px", "z-index": "1", });
+        }else{
+            $("#batch_filter_adjust").css({ "position": "absolute", "margin-bottom": "10px", "z-index": "1", });
+        
+        }
+    });
+    @*<!-- /.end window response -->*@
+
+    var addAntiForgeryToken = function (data) {
+        data.__RequestVerificationToken = $("[name='__RequestVerificationToken']").val();
+        return data;
+    };
+
+    $("#BatchFilter_SelectedBatchFilter").on("change", function () {
+        $.ajax({
+            url: '@Url.Action("GetBatchFilter", "Batch")',
+            type: "POST",
+            data: addAntiForgeryToken({ "batchID": $("#BatchFilter_SelectedBatchFilter").val() }),
+            cache: false,
+            async: true,
+            success: function (response) {
+                $("#getVehicleList").html(response);
+
+                $("#tbl_list").DataTable({
+                    "scrollX": true,
+                    "scrollY": true,
+                    "info": false,
+                    "lengthChange": false,
+                    "order": [],
+                    "dom":
+                        "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                });
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+    });
+
+</script>

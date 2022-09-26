@@ -1,0 +1,64 @@
+﻿@using VehicleRegistration.Models
+@model IEnumerable<vwCustomerList>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="fas fa-users nav-icon"></i> Customer List   <small> </small></h6>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        @*<input type="button" class="btn btn-info btn-block" name="btnSubmit" value="Create New" onclick="location.href='@Url.Action("Customer", "Customer")'" />*@
+
+                    </div>
+                </div>
+                <div class="fab" type="button" name="btnSubmit" data-toggle="tooltip" title="Create New" onclick="location.href='@Url.Action("Customer", "Customer")'"> + </div>
+                <div class="card-body">
+                    <table id="MAI_list_tbl" class="table table-bordered table-striped table-hover" style="max-width:100%;">
+                        <thead>
+                            <tr>
+                                <th style="width:350px;">Corporation Name</th>
+                                <th style="width:320px;">Last Name</th>
+                                <th style="width:325px;">First Name</th>
+                                <th style="width:50px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="max-width:100px;">@item.CorpName</td>
+                                    <td style="max-width:100px;">@item.LastName</td>
+                                    <td style="max-width:100px;">@item.FirstName</td>
+                                    <td style="max-width:100px;">
+                                        <div class="row" style="align-items:center">
+                                            <a href="@Url.Action("Customer", new { id = item.CustomerID })">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#costumer").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+</script>
+

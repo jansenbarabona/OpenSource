@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="PullOutDataSet" targetNamespace="http://tempuri.org/PullOutDataSet.xsd" xmlns:mstns="http://tempuri.org/PullOutDataSet.xsd" xmlns="http://tempuri.org/PullOutDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="PullOutDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="PullOutDataSet" msprop:Generator_UserDSName="PullOutDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="PullOutList" msprop:Generator_TableClassName="PullOutListDataTable" msprop:Generator_TableVarName="tablePullOutList" msprop:Generator_TablePropName="PullOutList" msprop:Generator_RowDeletingName="PullOutListRowDeleting" msprop:Generator_RowChangingName="PullOutListRowChanging" msprop:Generator_RowEvHandlerName="PullOutListRowChangeEventHandler" msprop:Generator_RowDeletedName="PullOutListRowDeleted" msprop:Generator_UserTableName="PullOutList" msprop:Generator_RowChangedName="PullOutListRowChanged" msprop:Generator_RowEvArgName="PullOutListRowChangeEvent" msprop:Generator_RowClassName="PullOutListRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CompanyName" msprop:Generator_ColumnVarNameInTable="columnCompanyName" msprop:Generator_ColumnPropNameInRow="CompanyName" msprop:Generator_ColumnPropNameInTable="CompanyNameColumn" msprop:Generator_UserColumnName="CompanyName" type="xs:string" minOccurs="0" />
+              <xs:element name="BranchName" msprop:Generator_ColumnVarNameInTable="columnBranchName" msprop:Generator_ColumnPropNameInRow="BranchName" msprop:Generator_ColumnPropNameInTable="BranchNameColumn" msprop:Generator_UserColumnName="BranchName" type="xs:string" minOccurs="0" />
+              <xs:element name="VehicleModel" msprop:Generator_ColumnVarNameInTable="columnVehicleModel" msprop:Generator_ColumnPropNameInRow="VehicleModel" msprop:Generator_ColumnPropNameInTable="VehicleModelColumn" msprop:Generator_UserColumnName="VehicleModel" type="xs:string" minOccurs="0" />
+              <xs:element name="VehicleVariant" msprop:Generator_ColumnVarNameInTable="columnVehicleVariant" msprop:Generator_ColumnPropNameInRow="VehicleVariant" msprop:Generator_ColumnPropNameInTable="VehicleVariantColumn" msprop:Generator_UserColumnName="VehicleVariant" type="xs:string" minOccurs="0" />
+              <xs:element name="VehicleColor" msprop:Generator_ColumnVarNameInTable="columnVehicleColor" msprop:Generator_ColumnPropNameInRow="VehicleColor" msprop:Generator_ColumnPropNameInTable="VehicleColorColumn" msprop:Generator_UserColumnName="VehicleColor" type="xs:string" minOccurs="0" />
+              <xs:element name="VehicleEngine" msprop:Generator_ColumnVarNameInTable="columnVehicleEngine" msprop:Generator_ColumnPropNameInRow="VehicleEngine" msprop:Generator_ColumnPropNameInTable="VehicleEngineColumn" msprop:Generator_UserColumnName="VehicleEngine" type="xs:string" minOccurs="0" />
+              <xs:element name="VehicleChassis" msprop:Generator_ColumnVarNameInTable="columnVehicleChassis" msprop:Generator_ColumnPropNameInRow="VehicleChassis" msprop:Generator_ColumnPropNameInTable="VehicleChassisColumn" msprop:Generator_UserColumnName="VehicleChassis" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

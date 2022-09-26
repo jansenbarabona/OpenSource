@@ -1,0 +1,33 @@
+﻿@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/js")
+
+<script>
+    $(document).ready(function () {
+        toastr.options = {
+            timeOut: 0,
+            extendedTimeOut: 0
+        };
+        @if (ViewContext.Controller.TempData["ErrorMessage"] != null)
+        {
+            <text>toastr.error('@ViewContext.Controller.TempData["ErrorMessage"]');</text>
+         };
+
+        @if (ViewContext.Controller.TempData["SuccessMessage"] != null)
+        {
+            <text>toastr.success('@ViewContext.Controller.TempData["SuccessMessage"]');</text>
+        };
+
+         @if (ViewContext.Controller.TempData["WarningMessage"] != null)
+         {
+             <text>toastr.warning('@ViewContext.Controller.TempData["WarningMessage"]');</text>
+         };
+
+         @if (ViewContext.Controller.TempData["InfoMessage"] != null)
+         {
+             <text>toastr.info('@ViewContext.Controller.TempData["InfoMessage"]');</text>
+         };
+
+    });
+</script>

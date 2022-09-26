@@ -1,0 +1,133 @@
+﻿@using VehicleRegistration.Models
+@using VehicleRegistration.Tools
+@model IEnumerable<vwVehicleListModel>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6 @*data-step="1" data-intro="Get Started, Vehicle List Form title" data-position='right'*@><i class="nav-icon far fa-copy"></i> Vehicle Info List  <small> </small></h6>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        @*<input type="button" class="btn btn-info btn-block" name="btnSubmit" onclick="location.href='@Url.Action("Vehicle", "VehicleInfo")'" value="Create New" />*@
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Dealer || CurrentUser.Details.UserEntityID == (int)UserEntityEnum.MAI)
+                {
+                    <div class="add-button" type="button" name="btnSubmit">
+                        <div class="sub-button tl" data-toggle="tooltip" title="Create new" type="button" name="btnSubmit" onclick="location.href='@Url.Action("Vehicle", "VehicleInfo")'"></div>
+                        @*<div class="sub-button tr"></div>*@
+                        @if (CurrentUser.Details.UploadVersion == 2) 
+                        { 
+                            <div class="sub-button bl" data-toggle="tooltip" title="Upload .xlsx" name="btnUpload" onclick="location.href='@Url.Action("UploadVehicleInfoV2", "VehicleInfo")'"> <i class="fas fa-paperclip"></i></div>
+                        }
+                        else
+                        {
+                            <div class="sub-button bl" data-toggle="tooltip" title="Upload .xlsx" name="btnUpload" onclick="location.href='@Url.Action("UploadVehicleInfo", "VehicleInfo")'"> <i class="fas fa-paperclip"></i></div>
+                        }
+                        @*<div class="sub-button br"></div>*@
+                    </div>
+                }
+                <div class="card-body">
+                    @*<button type="submit" id="startButton" href="javascript:void(0);" class="btn btn-primary getstart"
+                        style="position:absolute;left:10px; top:50px"><span class="fas fa-graduation-cap"></span> Get Started</button>*@
+                    <table id="MAI_list_tbl" class="table table-bordered table-striped table-hover" @*data-step="2" data-intro="Ok, Vehicle Registered Info's" data-position='left'*@ style="max-width:100%;">
+
+                        <thead>
+
+                            <tr>
+                                @if (CurrentUser.Details.IsMain == true && CurrentUser.Details.UserRoleID == (int)UserRoleEnum.Administrator)
+                                {
+                                    <th style="width:100px;">Branch</th>
+                                }
+                                <th style="width:100px;">Make</th>
+                                <th style="width:100px;">Model</th>
+                                <th style="width:350px;">Variant</th>
+                                <th style="width:100px;">Year</th>
+                                <th style="width:100px;">Engine #</th>
+                                <th style="width:100px;">Chasis #</th>
+                                @*<th style="width:100px;">Body #</th>*@
+                                <th style="width:80px;">Date</th>
+                                <th style="width:100px;">Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr class="rowclick" style="cursor: pointer" data-href="@Url.Action("VehicleInfo", new { id = item.VehicleID })">
+                                @if (CurrentUser.Details.IsMain == true && CurrentUser.Details.UserRoleID == (int)UserRoleEnum.Administrator)
+                                {
+                                    <th style="width:100px;">@item.DealerBranchName</th>
+                                }
+                                <td style="max-width:100px;">@item.VehicleMakeName</td>
+                                <td style="max-width:100px;">@item.VehicleModelName</td>
+                                <td style="max-width:350px;">@item.Variant</td>
+                                <td style="max-width:100px;">@item.Year</td>
+                                <td style="max-width:100px;">@item.EngineNumber</td>
+                                <td style="max-width:100px;">@item.ChassisNumber</td>
+                                @*<td style="max-width:100px;">@item.BodyIDNumber</td>*@
+                                <td style="max-width:80px;">@item.CreatedDate.ToShortDateString()</td>
+                                <td title="Edit" style="max-width:100px;">
+                                    <div class="row" style="align-items:center">
+                                        <a href="@Url.Action("Vehicle", new { id = item.VehicleID })">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+<!-- ./wrapper -->
+<!-- ./Introjs -->
+@*<script type="text/javascript">
+          document.getElementById('startButton').onclick = function() {
+            introJs().setOption('doneLabel', 'Next page').start().oncomplete(function() {
+              window.location.href = 'second.html?multipage=true';
+            });
+          };
+    </script>*@
+<!-- ./ end Introjs -->
+<style>
+    td {
+        font-size: 14px;
+    }
+</style>
+<script>
+    // main user
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#vehicle_info").toggleClass("active");
+    // mai admin user share
+    $("#left_nav_mai").toggleClass("menu-open");
+    $("#mai_users").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+    //$("#left_nav_mai").toggleClass("menu-open");
+    //$("#mai_dealer").toggleClass("active");
+    $(".rowclick").click(function () {
+        window.location = $(this).data("href");
+    });
+</script>

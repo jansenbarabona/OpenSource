@@ -1,0 +1,252 @@
+﻿@using VehicleRegistration.Models
+@model DealerInvoiceModel
+
+
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <h5 style="color: #40A2E2; font-family: Arial, Helvetica, sans-serif;"><b>Vehicle Info</b></h5>
+            </div>
+        </div>
+        <div class="card card-primary card-outline"></div>
+        <div class="post">
+            <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="row">
+                        <div class="col-5 text-right">
+                            <b>Vehicle ID:</b>
+                        </div>
+                        <div class="col-7">
+                            @Model.SelectedVehicleID
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="row">
+                        <div class="col-5 text-right">
+                            <b>Vehicle Make:</b>
+                        </div>
+                        <div class="col-7">
+                            @Model.VehicleInfo.VehicleMakeName
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="row">
+                        <div class="col-5 text-right">
+                            <b>Vehicle Model:</b>
+                        </div>
+                        <div class="col-7">
+                            @Model.VehicleInfo.VehicleModelName
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="post">
+            <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="row">
+                        <div class="col-5 text-right">
+                            <b>Engine Number:</b>
+                        </div>
+                        <div class="col-7">
+                            @Model.VehicleInfo.EngineNumber
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="row">
+                        <div class="col-5 text-right">
+                            <b>Chassis Number:</b>
+                        </div>
+                        <div class="col-7">
+                            @Model.VehicleInfo.ChassisNumber
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="row">
+                        <div class="col-5 text-right">
+                            <b>Vehicle Classification:</b>
+                        </div>
+                        <div class="col-7">
+                            @Model.VehicleClassificationName
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <h5 style="color: #40A2E2; font-family: Arial, Helvetica, sans-serif;"><b>Invoice Info</b></h5>
+            </div>
+        </div>
+        <div class="card card-primary card-outline"></div>
+        <div class="post">
+            <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="row">
+                        <div class="col-5 text-right">
+                            <b>Customer:</b>
+                        </div>
+                        <div class="col-7">
+                            @Model.CustomerFullName
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="post">
+            <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="row">
+                        <div class="col-5 text-right">
+                            <b>Cost of Vehicle:</b>
+                        </div>
+                        <div class="col-7">
+
+                            @String.Format("{0:n}", Model.VehicleCost)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="row">
+                        <div class="col-5 text-right">
+                            <b>Invoice Number:</b>
+                        </div>
+                        <div class="col-7">
+                            @Model.InvoiceNumber
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="row">
+                        <div class="col-5 text-right">
+                            <b>Invoice Date:</b>
+                        </div>
+                        <div class="col-7">
+                            @Model.InvoiceDate.ToShortDateString()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="post">
+            <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="row">
+                        <div class="col-5 text-right">
+                            <b>Invoice Image:</b>
+                        </div>
+                        <div class="col-7">
+                            @if (ViewBag.Edit == true)
+                            {
+                                string InvoiceimgSrc;
+                                if (Model.InvoiceByte != null)
+                                {
+                                    var base64 = Convert.ToBase64String(Model.InvoiceByte);
+                                    InvoiceimgSrc = String.Format("data:" + Model.InvoiceContentType + ";base64,{0}", base64);
+                                    <a class="input-group-prepend" href="@InvoiceimgSrc" data-fancybox data-caption="&lt;b&gt;This image is Invoice Receipt.">
+                                        <span class="input-group-text bg-green"><i class="fa fa-image"></i></span>
+                                    </a>
+
+                                }
+                                else
+                                {
+                                    <a class="input-group-prepend" href="//:0" data-fancybox data-caption="&lt;b&gt;This image is Invoice Receipt.">
+                                        <span class="input-group-text"><i class="fa fa-image"></i></span>
+                                    </a>
+                                }
+                            }
+                            else
+                            {
+                                <a class="input-group-prepend" href="//:0" data-fancybox data-caption="&lt;b&gt;This image is Invoice Receipt.">
+                                    <span class="input-group-text"><i class="fa fa-image"></i></span>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="row">
+                        <div class="col-5 text-right">
+                            <b>Preferred Ending Plate Number:</b>
+                        </div>
+                        <div class="col-7">
+                            @Model.PreferredEndingPlateNumber
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="post">
+            <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="row">
+                        <div class="col-5 text-right">
+                            <b>CoC Number:</b>
+                        </div>
+                        <div class="col-7">
+                            @Model.COC
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="row">
+                        <div class="col-5 text-right">
+                            <b>CoC Authentication Code:</b>
+                        </div>
+                        <div class="col-7">
+                            @Model.COCAuthenticationCode
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="row">
+                        <div class="col-5 text-right">
+                            <b>CoC Image:</b>
+                        </div>
+                        <div class="col-7">
+                            @if (ViewBag.Edit == true)
+                            {
+                                string COCimgSrc;
+                                if (Model.COCByte != null)
+                                {
+                                    var base64 = Convert.ToBase64String(Model.COCByte);
+                                    COCimgSrc = String.Format("data:" + Model.COCContentType + ";base64,{0}", base64);
+
+                                    <a class="input-group-prepend" href="@COCimgSrc" data-fancybox data-caption="&lt;b&gt;This image is Certificate of Cover.">
+                                        <span class="input-group-text bg-green"><i class="fa fa-image"></i></span>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a class="input-group-prepend" href="//:0" data-fancybox data-caption="&lt;b&gt;This image is Certificate of Cover.">
+                                        <span class="input-group-text"><i class="fa fa-image"></i></span>
+                                    </a>
+                                }
+                            }
+                            else
+                            {
+                                <a class="input-group-prepend" href="//:0" data-fancybox data-caption="&lt;b&gt;This image is Certificate of Cover.">
+                                    <span class="input-group-text"><i class="fa fa-image"></i></span>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+</script>

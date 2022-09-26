@@ -1,0 +1,218 @@
+﻿@using VehicleRegistration.Models
+@model CTPLModel
+@{
+    ViewBag.Title = "CTPL";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Main content -->
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Back" onclick="location.href='@Url.Action("Index", "CTPL")'">
+                    <i class="far fa-times-circle"></i>
+                </button>
+            </div>
+            <h6><i class="nav-icon fas fa-project-diagram"></i> CTPL Form   <small> </small></h6>
+        </div>
+        <!-- /.card-header -->
+
+        <article class="card-body">
+
+            @using (Html.BeginForm("CTPL", "CTPL", new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.CTPLTermID)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-list"></i> </span>
+                            </div>
+                            @Html.HiddenFor(m => m.CTPLID)
+                            @Html.DropDownListFor(m => m.CTPLTermID,
+                           new SelectList(Model.CTPLTermList, "CPTLTermID", "CoverageYear"), "Select CTPL Term", new { @class = "select2 form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.CTPLTermID, "", new { @class = "" })
+                    </div> <!--  form-group// -->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.VehicleClassificationID)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-list"></i> </span>
+                            </div>
+
+                            @Html.DropDownListFor(m => m.VehicleClassificationID,
+                           new SelectList(Model.VehicleClassificationList, "VehicleClassificationID", "VehicleClassificationName"), "Select Vehicle Classification", new { @class = "select2 form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.VehicleClassificationID, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.BasicPremium)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-money-check-alt"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.BasicPremium,
+                           new
+                           {
+                               placeholder = "Basic Premium",
+                               @class = "form-control",
+                               @required = "required",
+                               type = "number",
+                               step = "1"
+                           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.BasicPremium, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.VAT)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-percent"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.VAT,
+                           new
+                           {
+                               placeholder = "VAT",
+                               @class = "form-control",
+                               @required = "required",
+                               type = "number",
+                               step = "1"
+                           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.VAT, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.DST)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-percent"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.DST,
+                           new
+                           {
+                               placeholder = "DST",
+                               @class = "form-control",
+                               @required = "required",
+                               type = "number",
+                               step = "1"
+                           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.DST, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.LGT)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-percent"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.LGT,
+                           new
+                           {
+                               placeholder = "LGT",
+                               @class = "form-control",
+                               @required = "required",
+                               type = "number",
+                               step = "1"
+                           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.LGT, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.Taxes)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-percent"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.Taxes,
+                           new
+                           {
+                               placeholder = "Taxes",
+                               @class = "form-control",
+                               @required = "required",
+                               type = "number",
+                               step = "1"
+                           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Taxes, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.AuthenticationFee)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-money-bill-wave"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.AuthenticationFee,
+                           new
+                           {
+                               @required = "required",
+                               placeholder = "Authentication Fee",
+                               @class = "form-control",
+                               type = "number"
+
+                           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.AuthenticationFee, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.GrossPremium)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-calculator"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.GrossPremium,
+                           new
+                           {
+                               placeholder = "Gross Premium",
+                               @class = "form-control",
+                               @required = "required",
+                               type = "number",
+                               step = "1"
+                           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.GrossPremium, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                </div>
+                if (ViewBag.Edit == false)
+                {
+                    <center>
+                        <div class="form-group">
+                            <center>
+                                <button type="submit" name="submit" value="Create" class="btn btn-primary btn-block" style="width:250px;"> Create Account</button>
+                            </center>
+                        </div>
+                    </center>
+                }
+                else
+                {
+                    <center>
+                        <div class="form-group row">
+                            <button type="button" data-toggle="modal" data-target="#modal-delete" class="btn btn-danger btn-block col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width:250px;"> Delete </button>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+                            <button type="button" data-toggle="modal" data-target="#modal-save" class="btn btn-success btn-block col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width:250px;"> Save </button>
+                        </div>
+                    </center>
+                }
+
+                @Html.Partial("_Confirmation")
+            }
+        </article>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+<script type="text/javascript">
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#ctpl").toggleClass("active");
+  
+</script>
+
+
+

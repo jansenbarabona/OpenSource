@@ -1,0 +1,120 @@
+﻿@using VehicleRegistration.Models
+@model VehicleListModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("ForPullOut", "VehicleInfo", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6><i class="nav-icon fas fa-file-signature"></i> List of vehicle can pull out</h6>
+                    </div>
+              
+                    <div class="card-body">
+                        <div class="add-button" type="button">
+                            <div class="sub-button tl"  id="btn_assign" data-toggle="tooltip" title="Pull Out">
+                            </div>
+
+                            <div class="sub-button bl" data-toggle="tooltip" title="Pull Out Report" id="pullout_report">
+                                <button id="btn_pullout_report" type="submit" name="submit" value="pulloutReport" hidden></button>
+                                <i class="fas fa-undo-alt"></i>
+                            </div>
+                        </div>
+
+                            @{
+                                Html.RenderPartial("_VehicleList");
+                            }
+                        </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+
+    @*MAI Dealer List*@          
+    Html.RenderPartial("_Modal_PullOut");
+}
+
+<script type="text/javascript">
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#forpullout").toggleClass("active");
+
+    $("#pullout_report").click(function () {
+        $("#btn_pullout_report").click();
+    });
+    $("#btn_assign").on("click", function () {
+        if ($("#tbl_list input[type=checkbox]:checked").length > 0) {
+            //jQuery.noConflict();
+            //if (jQuery.fn.DataTable.isDataTable('#tbl_listofsummary')) {
+            //    jQuery('#tbl_listofsummary').DataTable().clear();
+            //    jQuery('#tbl_listofsummary').DataTable().destroy();
+            //}
+
+            $("#modal-pullout-body").remove();
+
+            if ($("#summarry_thead tr").length == 0) {
+                $("#modal-pullout-header").after("" +
+                "<div id='modal-pullout-body' class='modal-body'>" +
+                "<table id='tbl_listofsummary' class='table table-bordered table-striped table-hover' style='width:100%; max-width:100%;'>" +
+                "   <thead id='summarry_thead'>" +
+                "       <tr>" +
+                "           <th style='width:25%'>Vehicle Make</th>" +
+                "           <th style='width:25%'>Vehicle Model</th>" +
+                "           <th style='width:25%'>Vehicle Engine</th>" +
+                "           <th style='width:25%'>Vehicle Body</th>" +
+                "       </tr>" +
+                "   </thead>" +
+                "   <tbody id='summarry_tbody'>" +
+                "   </tbody>" +
+                "</table>" +
+                "");
+            }
+
+            $("#vehiclelist_tbody .checkbox_all:checkbox:checked").each(function () {
+                var tr = $(this).closest("tr");
+                var make = tr.find("td:eq(1)").text().trim();
+                var model = tr.find("td:eq(2)").text().trim();
+                var engine = tr.find("td:eq(5)").text().trim();
+                var body = tr.find("td:eq(6)").text().trim();
+                $("#tbl_listofsummary #summarry_tbody").append("" +
+                "<tr>" +
+                "    <td>" + make + "</td>" +
+                "    <td>" + model + "</td>" +
+                "    <td>" + engine + "</td>" +
+                "    <td>" + body + "</td>" +
+                "</tr>");
+            });
+
+            jQuery.noConflict();
+            var summary_tbl = jQuery("#tbl_listofsummary").DataTable({
+                "scrollX": true,
+                "scrollY": true,
+                "info": false,
+                "lengthChange": false,
+                "searching": false,
+                "paging": false,
+                "order": [],
+                "dom":
+                    "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+            });
+
+            $(document).on('shown.bs.modal', '.modal', function (e) {
+                summary_tbl.columns.adjust();
+            });
+            $("#modal-Pull_Out-Confirmation").modal("show");
+        }
+        else {
+            toastr.warning("Please check one or more row to assign!");
+        }
+    });
+</script>

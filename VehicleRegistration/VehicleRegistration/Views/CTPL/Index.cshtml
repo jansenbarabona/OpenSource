@@ -1,0 +1,70 @@
+﻿@using VehicleRegistration.Models
+@model CTPLModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="fas fa-users nav-icon"></i> CTPL List   <small> </small></h6>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        @*<input type="button" class="btn btn-info btn-block" name="btnSubmit" value="Create New" onclick="location.href='@Url.Action("Customer", "Customer")'" />*@
+
+                    </div>
+                </div>
+                <div class="fab" type="button" name="btnSubmit" data-toggle="tooltip" title="Create New" onclick="location.href='@Url.Action("CTPL", "CTPL")'"> + </div>
+                <div class="card-body">
+                    <table id="CTPL_list_tbl" class="table table-bordered table-striped table-hover" style="max-width:100%;">
+                        <thead>
+                            <tr>
+                                <th style="width:150px;">CTPL Code</th>
+                                <th style="width:150px;">CTP Term</th>
+                                <th style="width:150px;">Vehicle Clasification</th>
+                                <th style="width:200px;">Basic Premuim</th>
+                                <th style="width:200px;">Taxes</th>
+                                <th style="width:200px;">Authentication Fee</th>
+                                <th style="width:200px;">Gross Premuim</th>
+                                <th style="width:50px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.vwCTPLModelList)
+                            {
+                                <tr>
+                                    <td style="max-width:100px;">@item.CTPLID</td>
+                                    <td style="max-width:100px;">@item.CTPLTermID</td>
+                                    <td style="max-width:100px;">@item.VehicleClassificationName</td>
+                                    <td style="max-width:100px;">@item.BasicPremium</td>
+                                    <td style="max-width:100px;">@item.Taxes</td>
+                                    <td style="max-width:100px;">@item.AuthenticationFee</td>
+                                    <td style="max-width:100px;">@item.GrossPremium</td>
+                                    <td style="max-width:100px;">
+                                        <div class="row" style="align-items:center">
+                                            <a href="@Url.Action("CTPL", new { id = item.CTPLID })">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $("#left_nav_ctpl").toggleClass("menu-open");
+    $("#ctpl").toggleClass("active");
+
+  
+
+</script>
+
+

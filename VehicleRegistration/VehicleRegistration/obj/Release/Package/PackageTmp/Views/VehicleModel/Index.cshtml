@@ -1,0 +1,84 @@
+﻿
+@using VehicleRegistration.Models
+@model IEnumerable<vwVehicleModel>
+@*Views-- > Folder Name("VehicleMake") *@
+
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="nav-icon fas fa-car"></i> Vehicle Model   <small></small></h6>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        </div>
+                    </div>
+                <!-- /.card-header -->               
+                <div class="fab" type="button" name="btnSubmit" data-toggle="tooltip" title="Create New" onclick="location.href='@Url.Action("VehicleModel_Register", "VehicleModel")'"> + </div>
+                <div class="card-body">
+                    <table id="Vehicle_Model_list_tbl" class="table table-bordered table-striped table-hover" style="max-width:100%;width: 99.7%">
+                        <thead>
+                            <tr>
+                                <th style="width:20%;">Brand</th>
+                                <th style="width:20%;">Model Name</th>
+                                <th style="width:20%;">Variant</th>
+                                <th style="width:20%;">Year of Make</th>
+                                <th style="width:20%;">Action</th>
+
+                            </tr>
+                        </thead>
+
+
+                       <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                           <tr>
+                               <td style="max-width:20%;" id="Model_Make_Name">@item.VehicleMakeName</td>
+                               <td style="max-width:20%;" id="Model_Model_Name">@item.VehicleModelName</td>
+                               <td style="max-width:20%;" id="Model_Variant">@item.Variant</td>
+                               <td style="max-width:20%;" id="Model_Year">@item.YearOfMake</td>
+                               <td style="max-width:100px; padding-left:5px; padding-right:5px; margin:auto;" align="center">
+                                   <div class="row justify-content-center">
+                                       <a href="@Url.Action("VehicleModel_Register", "VehicleModel", new { id = item.VehicleModelID })" class="btn btn-warning btn-md">
+                                           <i class="fa fa-edit"></i>
+                                       </a>
+                                   </div>
+                               </td>
+                           </tr>
+                            }
+
+                      </tbody>
+
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+<!-- ./wrapper -->
+<script>
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_ul_vehicle").css("display", "block");
+    $("#vehicle_model").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+</script>
+
+

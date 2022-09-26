@@ -1,0 +1,59 @@
+﻿﻿@using VehicleRegistration.Models
+@using VehicleRegistration.Tools
+@model IEnumerable<AirconType>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="nav-icon fas fa-shipping-fast"></i> Aircon Type List   <small></small></h6>
+                </div>
+                <!-- /.card-header -->
+                @*<button type="submit" id="mai_new" name="submit" value="New" class="btn btn-info btn-block">Create New </button>*@
+                <div class="fab" type="button" name="btnSubmit" data-toggle="tooltip" title="Create New" onclick="location.href='@Url.Action("AirconTypeRegistration", "AirconType")'"> + </div>
+                <div class="card-body">
+                    <table id="Dealer_list_tbl" class="table table-bordered table-striped table-hover" style="max-width:100%;">
+                        <thead>
+                            <tr>
+                                <th style="width:350px;">Aircon Reference ID </th>
+                                <th style="width:350px;">Aircon Reference Name </th>
+                                <th style="width:350px;">Aircon Type Description </th>
+                                <th style="width:100px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="width:350px;" id="User_Entity_Code">@item.AirconTypeID</td>
+                                    <td style="width:350px;" id="User_Entity_Code">@item.AirconTypeReference</td>
+                                    <td style="width:350px;" id="User_Entity_Code">@item.AirconTypeDescription</td>
+                                    <td style="max-width:75px; padding-left:5px; padding-right:5px; margin:auto;" align="center">
+                                        <div class="row justify-content-center">
+                                            <a href="@Url.Action("AirconTypeRegistration", "AirconType", new { id = item.AirconTypeID })" class="btn btn-warning btn-md">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </div>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+
+
+

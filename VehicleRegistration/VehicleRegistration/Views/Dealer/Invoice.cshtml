@@ -1,0 +1,43 @@
+﻿@using VehicleRegistration.Models
+@model DealerInvoiceModel
+
+@{
+    ViewBag.Title = "Invoice Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Back" onclick="location.href='@Url.Action("InvoiceList", "Dealer")'">
+                    <i class="far fa-times-circle"></i>
+                </button>
+            </div>
+            <h6><i class="nav-icon fas fa-car-side"></i>Invoice Registration Form  <small> </small></h6>
+
+        </div>
+    </div>
+
+    @{
+        Html.RenderPartial("_DealerInvoice");
+    }
+</section>
+
+
+
+<script>
+
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#invoice").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+    //$("#content_header").text("Dealer");
+   
+
+</script>

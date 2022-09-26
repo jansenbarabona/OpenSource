@@ -1,0 +1,72 @@
+﻿@using VehicleRegistration.Models
+@model IEnumerable<vwTransactionTypeList>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="nav-icon far fas fa-wallet"></i> Transaction Type Maintenance   <small></small></h6>
+                </div>
+                <div class="fab" type="button" name="btnSubmit" data-toggle="tooltip" title="Create New" onclick="location.href='@Url.Action("TransactionType", "Wallet")'"> + </div>
+                <div class="card-body">
+                    <table id="MAI_list_tbl" class="table table-bordered table-striped table-hover" style="max-width:99.7%;">
+                        <thead>
+                            <tr>
+                                <th style="width:150px;">Code</th>
+                                <th style="width:445px;">Transaction Name</th>
+                                <th style="width:350px;">Type</th>
+                                <th style="width:100px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="max-width:75px; " id="title_code">@item.TransactionTypeID</td>
+                                    <td style="max-width:250px; " id="title_name">@item.TransactionName</td>
+                                    <td style="max-width:150px; " id="title_abbr">@item.TransactionEntryTypeName</td>
+                                    <td style="max-width:100px; padding-left:5px; padding-right:5px; margin:auto;" align="center">
+                                        <div class="row justify-content-center">
+                                            <a href="@Url.Action("TransactionType", new { id = item.TransactionTypeID})" @*class="deal_edit btn btn-warning btn-md"*@>
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<script>
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_wallet").toggleClass("menu-open");
+    $("#left_nav_ul_wallet").css("display", "block");
+    $("#transactiontype").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+</script>
+
+
+
+

@@ -1,0 +1,25 @@
+﻿@using VehicleRegistration.Models
+@model List<vwDealerVehicleMake>
+
+<table id="Dealer_Vehicle_list_tbl" class="table table-bordered table-striped table-hover" style="width:100%; max-width:100%;">
+    <thead>
+        <tr>
+            <th style="width:1030px;">Vehicle Name</th>
+            <th style="width:100px;">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="max-width:850px;" id="dealervehicle" data-dealerID="@item.DealerID" data-dealerNM="@item.DealerName" data-dealervehiclemakeID="@item.DealerVehicleMakeID" data-vehiclemakeID="@item.VehicleMakeID">@item.VehicleMakeName</td>
+                <td>
+                    <center>
+                        <button style="max-width:100px;" type="button" class="delete_item btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-delete"><i class="fa fa-trash"></i></button>
+                    </center>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

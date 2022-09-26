@@ -1,0 +1,616 @@
+﻿@using VehicleRegistration.Models
+﻿@using VehicleRegistration.Tools
+@model CustomerModel
+
+@{
+    ViewBag.Title = "Customer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Back" onclick="location.href='@Url.Action("Index", "Customer")'">
+                            <i class="far fa-times-circle"></i>
+                            @*<i class="far fa-arrow-alt-circle-right"></i>*@
+                        </button>
+                    </div>
+                    <h6><i class="fas fa-users nav-icon"></i> Customer Registration Form   <small> </small></h6>
+                </div>
+                <!-- /.card-header -->
+                @using (Html.BeginForm("Customer", "Customer", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <article class="card-body mx-auto">
+                        <div class="row">
+                            <div class="form-group col-lg-4">
+                                @Html.LabelFor(m => m.ClientReferenceNumber)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-asterisk"></i> </span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.ClientReferenceNumber,
+                           new
+                           {
+                               placeholder = "Reference Number",
+                               @class = "form-control"
+                           })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.ClientReferenceNumber, "", new { @class = "" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            @Html.HiddenFor(m => m.CustomerID)
+                            <div class="form-group col-lg-4">
+                                @Html.LabelFor(m => m.SelectedTitleID)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+                                    </div>
+                                    @Html.DropDownListFor(m => m.SelectedTitleID,
+                           new SelectList(Model.TitleList, "TitleID", "TitleName"), "Select title", new { @class = "select2 form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.SelectedTitleID, "", new { @class = "" })
+                            </div> <!-- Title form-group// -->
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-4 TitleType" data-attribute='@Convert.ToInt32(TitleTypeEnum.Individual)'>
+                                @Html.LabelFor(m => m.LastName)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.LastName,
+                           new
+                           {
+                               placeholder = "Last Name",
+                               @class = "form-control"
+                           })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "" })
+                            </div> <!-- Last Name form-group// -->
+                            <div class="form-group col-lg-4 TitleType" data-attribute="1">
+                                @Html.LabelFor(m => m.FirstName)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.FirstName,
+                           new
+                           {
+                               placeholder = "First Name",
+                               @class = "form-control"
+                           })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "" })
+                            </div> <!-- First Name form-group// -->
+                            <div class="form-group col-lg-4 TitleType" data-attribute="@Convert.ToInt32(TitleTypeEnum.Individual)">
+                                @Html.LabelFor(m => m.MiddleName)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.MiddleName,
+                           new
+                           {
+                               placeholder = "Middle Name",
+                               @class = "form-control"
+                           })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.MiddleName, "", new { @class = "" })
+                            </div> <!-- Middle Name form-group// -->
+                            <div class="form-group col-lg-4 TitleType" data-attribute="@Convert.ToInt32(TitleTypeEnum.Corporation)">
+                                @Html.LabelFor(m => m.CorpName)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.CorpName,
+                           new
+                           {
+                               placeholder = "Organization Name",
+                               @class = "form-control"
+                           })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.CorpName, "", new { @class = "" })
+                            </div> <!-- Corp Name form-group// -->
+                            <div class="form-group col-lg-4 TitleType" data-attribute="@Convert.ToInt32(TitleTypeEnum.Corporation)">
+                                @Html.LabelFor(m => m.Alias)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.Alias,
+                           new
+                           {
+                               placeholder = "Organization Mnemonic",
+                               @class = "form-control"
+                           })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.Alias, "", new { @class = "" })
+                            </div> <!-- Alias form-group// -->
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-4 TitleType" data-attribute="@Convert.ToInt32(TitleTypeEnum.Individual)">
+                                @Html.LabelFor(m => m.Birthdate)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="far fa-calendar-alt"></i> </span>
+                                    </div>
+                                    @Html.EditorFor(m => m.Birthdate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.Birthdate, "", new { @class = "" })
+                            </div> <!-- Birthdate form-group// -->
+                            <div class="form-group col-lg-4 TitleType" data-attribute="@Convert.ToInt32(TitleTypeEnum.Individual)">
+                                @Html.LabelFor(m => m.Birthplace)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-location-arrow"></i> </span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.Birthplace,
+                           new
+                           {
+                               placeholder = "Birth Place",
+                               @class = "form-control"
+                           })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.Birthplace, "", new { @class = "" })
+                            </div> <!-- Birth Place form-group// -->
+                            <div class="form-group col-lg-4 TitleType" data-attribute="@Convert.ToInt32(TitleTypeEnum.Individual)">
+                                @Html.LabelFor(m => m.Citizenship)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-map-marked-alt"></i> </span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.Citizenship,
+                           new
+                           {
+                               placeholder = "Citizenship",
+                               @class = "form-control"
+                           })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.Citizenship, "", new { @class = "" })
+                            </div> <!-- Citizenship form-group// -->
+                            <div class="form-group col-lg-4 TitleType" data-attribute="@Convert.ToInt32(TitleTypeEnum.Individual)">
+                                @Html.LabelFor(m => m.SelectedCivilStatusCode)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-user-friends"></i> </span>
+                                    </div>
+                                    @Html.DropDownListFor(m => m.SelectedCivilStatusCode,
+                           new SelectList(Model.CivilStatusList, "CivilStatusCode", "CivilStatusName"), "Select Civil Status", new { @class = "select2 form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.SelectedCivilStatusCode, "", new { @class = "" })
+                            </div> <!-- Civil Status Code form-group// -->
+                            <div class="form-group col-lg-4 TitleType" data-attribute="@Convert.ToInt32(TitleTypeEnum.Individual)">
+                                @Html.LabelFor(m => m.SelectedSexCode)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-restroom"></i> </span>
+                                    </div>
+                                    @Html.DropDownListFor(m => m.SelectedSexCode,
+                           new SelectList(Model.SexList, "SexCode", "SexName"), "Select sex", new { @class = "select2 form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.SelectedSexCode, "", new { @class = "" })
+                            </div> <!-- Sex Code form-group// -->
+                            <div class="form-group col-lg-4 TitleType" data-attribute="@Convert.ToInt32(TitleTypeEnum.Individual)">
+                                @Html.LabelFor(m => m.Height)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-ruler-vertical"></i> </span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.Height,
+                           new
+                           {
+                               placeholder = "Height",
+                               @class = "form-control"
+                           })
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">cm</span>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.Height, "", new { @class = "" })
+                            </div> <!-- Height form-group// -->
+                            <div class="form-group col-lg-4 TitleType" data-attribute="@Convert.ToInt32(TitleTypeEnum.Individual)">
+                                @Html.LabelFor(m => m.Weight)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-ruler-vertical"></i> </span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.Weight,
+                           new
+                           {
+                               placeholder = "Weight",
+                               @class = "form-control"
+                           })
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">kg</span>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.Weight, "", new { @class = "" })
+                            </div> <!-- Weight form-group// -->
+                            <div class="form-group col-lg-4 TitleType" data-attribute="@Convert.ToInt32(TitleTypeEnum.Individual)">
+                                @Html.LabelFor(m => m.FathersName)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-user"></i> </span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.FathersName,
+                           new
+                           {
+                               placeholder = "Father's Name",
+                               @class = "form-control"
+                           })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.FathersName, "", new { @class = "" })
+                            </div> <!-- Fathers Name form-group// -->
+                            <div class="form-group col-lg-4 TitleType" data-attribute="@Convert.ToInt32(TitleTypeEnum.Individual)">
+                                @Html.LabelFor(m => m.MothersName)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="far fa-user"></i> </span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.MothersName,
+                           new
+                           {
+                               placeholder = "Mother's Name",
+                               @class = "form-control"
+                           })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.MothersName, "", new { @class = "" })
+                            </div> <!-- Mothers Name form-group// -->
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-4 TitleType" data-attribute="@Convert.ToInt32(TitleTypeEnum.Corporation)">
+                                @Html.LabelFor(m => m.ContactPerson)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-user"></i> </span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.ContactPerson,
+                           new
+                           {
+                               placeholder = "Contact Person",
+                               @class = "form-control"
+                           })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.ContactPerson, "", new { @class = "" })
+                            </div> <!-- Contact Person form-group// -->
+                            <div class="form-group col-lg-4 TitleType" data-attribute="@Convert.ToInt32(TitleTypeEnum.Corporation)">
+                                @Html.LabelFor(m => m.ContactPersonNumber)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-mobile-alt"></i> </span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.ContactPersonNumber,
+                           new
+                           {
+                               placeholder = "Contact Person Number",
+                               @class = "form-control"
+                           })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.ContactPersonNumber, "", new { @class = "" })
+                            </div> <!-- Contact Person Number form-group// -->
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-4">
+                                @Html.LabelFor(m => m.ContactNumber)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-mobile-alt"></i></span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.ContactNumber,
+                           new
+                           {
+                               placeholder = "Contact Number",
+                               @class = "form-control"
+                           })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.ContactNumber, "", new { @class = "" })
+                            </div> <!-- Contact Number form-group// -->
+                            <div class="form-group col-lg-4">
+                                @Html.LabelFor(m => m.EmailAddress)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.EmailAddress,
+                           new
+                           {
+                               placeholder = "Email Address",
+                               @class = "form-control"
+                           })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "" })
+                            </div> <!-- Email Address form-group// -->
+                            <div class="form-group col-lg-4">
+                                @Html.LabelFor(m => m.TIN)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-hashtag"></i> </span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.TIN,
+                           new
+                           {
+                               placeholder = "XXX-XXX-XXXX-XXXX",
+                               @class = "form-control",
+                               maxlength = "15"
+                           })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.TIN, "", new { @class = "" })
+                            </div> <!-- TIN form-group// -->
+                            <div class="form-group col-lg-4">
+                                @Html.LabelFor(m => m.SelectedProvinceID)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-map-marker-alt"></i> </span>
+                                    </div>
+                                    @Html.DropDownListFor(m => m.SelectedProvinceID,
+                           new SelectList(Model.ProvinceList, "ProvinceID", "ProvinceName"), "Province", new { @class = "select2 form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.SelectedProvinceID, "", new { @class = "" })
+                            </div> <!-- Province form-group// -->
+                            <div class="form-group col-lg-4">
+                                @Html.LabelFor(m => m.SelectedCityID)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-map-marked-alt"></i> </span>
+                                    </div>
+                                    @Html.DropDownListFor(m => m.SelectedCityID,
+                           new SelectList(Model.CityList, "CityID", "CityName"), "City", new { @class = "form-control select2" })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.SelectedCityID, "", new { @class = "" })
+                            </div> <!-- City form-group// -->
+                            <div class="form-group col-lg-4">
+                                @Html.LabelFor(m => m.Barangay)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-home"></i> </span>
+                                    </div>
+                                    @Html.DropDownListFor(m => m.Barangay,
+                           new SelectList(Model.BarangayList, "BarangayID", "BarangayName"), "Barangay", new { @class = "form-control select2" })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.Barangay, "", new { @class = "" })
+                            </div> <!-- Barangay form-group// -->
+                            <div class="form-group col-lg-4">
+                                @Html.LabelFor(m => m.HouseBldgNumber)
+                                @*<span id="count1" style="float: right; font-family: Raleway; font-size:13px; font-weight:700; margin-top:5px;margin-right:5px;">5</span><br>*@
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.HouseBldgNumber,
+                           new
+                           {
+
+                               placeholder = "House/Bldg Number",
+                               @class = "form-control",
+                               maxlength = "5"
+
+                           })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.HouseBldgNumber, "", new { @class = "" })
+                            </div> <!-- HouseBldgNumber form-group// -->
+                            <div class="form-group col-lg-4">
+                                @Html.LabelFor(m => m.StreetSubdivision)
+                               @* <span id="count2" style="float: right; font-family: Raleway; font-size:13px; font-weight:700; margin-top:5px;margin-right:5px;">30</span><br>*@
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-road"></i> </span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.StreetSubdivision,
+                           new
+                           {
+
+                               placeholder = "Street/Subdivision",
+                               @class = "form-control",
+                               maxlength = "30"
+
+                           })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.StreetSubdivision, "", new { @class = "" })
+                            </div> <!-- StreetSudivision form-group// -->
+                            <div class="form-group col-lg-4">
+                                @Html.LabelFor(m => m.ZipCode)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-street-view"></i> </span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.ZipCode,
+                           new
+                           {
+                               placeholder = "Zip Code",
+                               @class = "form-control"
+                           })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.ZipCode, "", new { @class = "" })
+                            </div> <!-- Zip Code form-group// -->
+                            <div class="form-group col-lg-4">
+                                @Html.LabelFor(m => m.AdditionalAddress)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-map-marked-alt"></i> </span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.AdditionalAddress,
+                           new
+                           {
+                               placeholder = "Additional Address",
+                               @class = "form-control"
+                           })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.AdditionalAddress, "", new { @class = "" })
+                            </div> <!-- Additional Address form-group// -->
+                        </div>
+                        @if (ViewBag.Edit == false)
+                {
+                            <center>
+                                <div class="form-group">
+                                    <center>
+                                        <button type="submit" name="submit" value="Create" class="btn btn-primary btn-block" style="width:250px;"> Create </button>
+                                    </center>
+                                </div>
+                            </center>
+                        }
+                        else
+                        {
+                            <center>
+                                <div class="form-group row">
+                                    <button type="button" data-toggle="modal" data-target="#modal-delete" class="btn btn-danger btn-block col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width:250px;"> Delete </button>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+                                    <button type="button" data-toggle="modal" data-target="#modal-save" class="btn btn-success btn-block col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width:250px;"> Save </button>
+                                </div>
+                            </center>
+                        }
+
+                        @Html.Partial("_Confirmation")
+
+                    </article>
+        <!-- /.card-body -->
+                }
+            </div>
+        </div>
+    </div>
+    <!-- /.card -->
+</section>
+<script type="text/javascript">
+    $(document).ready(function () {
+        switchUi(@ViewBag.TitleTypeID);
+    });
+
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#customer").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+    //$("#content_header").text(" Dealer");
+
+    $('#SelectedTitleID').change(function (data) {
+        if (this.value != "") {
+            $.ajax({
+                url: '@Url.Action("GetTitleTypeID", "GetData")',
+                type: "GET",
+                dataType: "JSON",
+                cache: false,
+                data: { "TitleID": this.value },
+                success: function (result) {
+                    switchUi(result.TitleTypeID);
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText);
+                }
+            });
+        }
+        else {
+            //switchUi($('#SelectedTitleID').val());
+        }
+    });
+
+    function switchUi(selection) {
+        $('div.TitleType').filter('[data-attribute="' + selection + '"]').show();
+        $('div.TitleType').not('[data-attribute="' + selection + '"]').hide();
+    }
+
+    //CASCADING DROPDOWNLIST
+    $('#SelectedProvinceID').on('change', function () {
+        $.ajax({
+            url: '@Url.Action("GetProvinceCity", "GetData")',
+            type: "GET",
+            dataType: "JSON",
+            cache: false,
+            data: { "ProviceCode": this.value },
+            success: function (response) {
+                $("#SelectedCityID").find("option:gt(0)").remove();
+                $.each(response, function (index, value) {
+                    var o = new Option(value.CityName, value.CityID);
+                    $("#SelectedCityID").append($(o));
+                });
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+    });
+
+    $('#SelectedCityID').on('change', function () {
+        $.ajax({
+            url: '@Url.Action("GetCityBarangay", "GetData")',
+            type: "GET",
+            dataType: "JSON",
+            cache: false,
+            data: { "CityCode": this.value },
+            success: function (response) {
+                $("#Barangay").find("option:gt(0)").remove();
+                $.each(response, function (index, value) {
+                    var o = new Option(value.BarangayName, value.BarangayID);
+                    $("#Barangay").append($(o));
+                });
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+    });
+
+    $("#TIN").keypress(function (e) {
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+            return false;
+        }
+
+        var value = $("#TIN").val();
+        if (value.length == 3 || value.length == 7 || value.length == 11) {
+            $("#TIN").val(value + "-")
+        }
+    });
+    $("#OrganizationTIN").keypress(function (e) {
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+            return false;
+        }
+
+        var value = $("#OrganizationTIN").val();
+        if (value.length == 3 || value.length == 7 || value.length == 11) {
+            $("#OrganizationTIN").val(value + "-")
+        }
+    });
+    
+    var count = 1;
+
+do {
+    function count_down1(obj, count){
+
+    let element = document.getElementById('count'+ count);
+
+    element.innerHTML = 5 - obj.value.length;
+
+    if(5 - obj.value.length < 4){
+        element.style.color = "#dc3545";
+    }else{
+        element.style.color = "#48484d";
+    }
+}
+count++;
+} while (count < 5); 
+
+    var count = 1;
+
+do {
+    function count_down2(obj, count){
+
+    let element = document.getElementById('count'+ count);
+
+    element.innerHTML = 30 - obj.value.length;
+
+    if(30 - obj.value.length < 11){
+        element.style.color = "#dc3545";
+    }else{
+        element.style.color = "#48484d";
+    }
+}
+count++;
+} while (count < 30); 
+</script>

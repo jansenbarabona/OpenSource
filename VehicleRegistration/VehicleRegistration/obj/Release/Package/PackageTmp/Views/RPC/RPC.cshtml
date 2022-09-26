@@ -1,0 +1,280 @@
+﻿@using VehicleRegistration.Models
+@model RPCModel
+@{
+    ViewBag.Title = "RPC";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Back" onclick="location.href='@Url.Action("RPCList", "RPC", new { RPCtype = Model.RPCtype})'">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <h6><i class="nav-icon fas fa-car-side"></i> Region, Province, City & Barangay<small></small></h6>
+        </div>
+        <!-- /.card-header -->
+        <article class="card-body">
+            @using (Html.BeginForm("RPC", "RPC", @*null, FormMethod.Post,*@ new { Edit = false, RPCtype = Model.RPCtype, enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken();
+                <!-- Div start-->
+            <div class="row">
+                @Html.HiddenFor(m => m.RPCCode)
+                @switch (Model.RPCtype)
+                {
+                    case "Region":
+
+                        <div class="form-group col-lg-4">
+                            <label>Region Number</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fas fa-car-side"></i> </span>
+                                </div>
+                                @Html.TextBoxFor(m => m.RPCNumber, new { placeholder = "Region Number", @class = "form-control" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.RPCNumber, "", new { @class = "" })
+                        </div> <!-- form-group// -->
+
+                        <div class="form-group col-lg-4">
+                            <label>Region Name</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fas fa-car-side"></i> </span>
+                                </div>
+                                @Html.TextBoxFor(m => m.RPCName, new { placeholder = "Region Name", @class = "form-control" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.RPCName, "", new { @class = "" })
+                        </div> <!-- form-group// -->
+                        break;
+                    case "Province":
+
+                        <div class="form-group col-lg-4">
+                            <label>Region Name</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+                                </div>
+                                @Html.DropDownListFor(m => m.RPCRefID,
+                       new SelectList(Model.RegionList, "RegionID", "RegionName"), "Select Region", new { @class = "form-control select2" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.RPCRefID, "", new { @class = "" })
+                        </div> <!-- form-group end.// -->
+
+                        <div class="form-group col-lg-4">
+                            <label>Province Number</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fas fa-car-side"></i> </span>
+                                </div>
+                                @Html.TextBoxFor(m => m.RPCNumber, new { placeholder = "Province Number", @class = "form-control" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.RPCNumber, "", new { @class = "" })
+                        </div> <!-- form-group// -->
+
+                        <div class="form-group col-lg-4">
+                            <label>Province Name</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fas fa-car-side"></i> </span>
+                                </div>
+                                @Html.TextBoxFor(m => m.RPCName, new { placeholder = "Province Name", @class = "form-control" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.RPCName, "", new { @class = "" })
+                        </div> <!-- form-group// -->
+
+                        break;
+                    case "City":
+
+                        <div class="form-group col-lg-4">
+                            <label>Province Name</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+                                </div>
+                                @Html.DropDownListFor(m => m.RPCRefID,
+                       new SelectList(Model.ProvinceList, "ProvinceID", "ProvinceName"), "Select Province", new { @class = "form-control select2" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.RPCRefID, "", new { @class = "" })
+                        </div> <!-- form-group end.// -->
+
+                        <div class="form-group col-lg-4">
+                            <label>City Number</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fas fa-car-side"></i> </span>
+                                </div>
+                                @Html.TextBoxFor(m => m.RPCNumber, new { placeholder = "City Number", @class = "form-control" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.RPCNumber, "", new { @class = "" })
+                        </div> <!-- form-group// -->
+
+                        <div class="form-group col-lg-4">
+                            <label>City Name</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fas fa-car-side"></i> </span>
+                                </div>
+                                @Html.TextBoxFor(m => m.RPCName, new { placeholder = "City Name", @class = "form-control" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.RPCName, "", new { @class = "" })
+                        </div> <!-- form-group// -->
+
+                        break;
+                    case "Barangay":
+
+                        <div class="form-group col-lg-4">
+                            <label>City Name</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+                                </div>
+                                @Html.DropDownListFor(m => m.RPCRefID,
+                       new SelectList(Model.CityList, "CityID", "CityName"), "Select City", new { @class = "form-control select2" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.RPCRefID, "", new { @class = "" })
+                        </div> <!-- form-group end.// -->
+                        <div class="form-group col-lg-4">
+                            <label>Barangay Name</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fas fa-car-side"></i> </span>
+                                </div>
+                                @Html.TextBoxFor(m => m.RPCName, new { placeholder = "Barangay Name", @class = "form-control" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.RPCName, "", new { @class = "" })
+                        </div> <!-- form-group// -->
+
+                        break;
+                }
+            </div>
+
+                if (ViewBag.Edit == false)
+                {
+                    <center>
+                        <div class="form-group">
+                            <center>
+                                <button type="submit" name="submit" value="Create" class="btn btn-primary btn-block col-lg-4"> Create </button>
+                            </center>
+                        </div>
+                    </center>
+                }
+                else
+                {
+                    <center>
+                        <div class="form-group row">
+                            <button type="button" data-toggle="modal" data-target="#modal-delete" class="btn btn-danger btn-block col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width:250px;"> Delete </button>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+                            <button type="button" data-toggle="modal" data-target="#modal-save" class="btn btn-success btn-block col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width:250px;"> Save </button>
+                        </div>
+                    </center>
+                }
+
+                @Html.Partial("_Confirmation")
+            }
+        </article>
+        <!-- /.card-body -->
+    </div>
+    @if (ViewBag.Edit == true && Model.RPCtype != "City")
+    {
+        <div class="card">
+            <div class="card-body">
+                <table id="rpc_edit_list_tbl" class="table-rpc table table-bordered table-striped table-hover" style="max-width:100%; width:100%;">
+                    <thead>
+                        <tr>
+                            <th style="width:75px;">Code</th>
+                            <th style="width:250px;">Name</th>
+                            <th style="width:100px;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @switch (Model.RPCtype)
+                        {
+                            case "Region":
+                                foreach (var item in Model.ProvinceList)
+                                {
+                                    <tr>
+                                        <td style="max-width:75px; " id="province_code">@item.ProvinceID</td>
+                                        <td style="max-width:250px; " id="province_name">@item.ProvinceName</td>
+                                        <td style="max-width:100px; padding-left:5px; padding-right:5px; margin:auto;" align="center">
+                                            <div class="row justify-content-center">
+                                                <a href="@Url.Action("RPC", new { Edit = true,RPCtype = "Province", RPCCode = item.ProvinceID })" class="btn btn-warning btn-sm">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                                break;
+                            case "Province":
+                                foreach (var item in Model.CityList)
+                                {
+                                    <tr>
+                                        <td style="max-width:75px; " id="city_code">@item.CityID</td>
+                                        <td style="max-width:250px; " id="city_name">@item.CityName</td>
+                                        <td style="max-width:100px; padding-left:5px; padding-right:5px; margin:auto;" align="center">
+                                            <div class="row justify-content-center">
+                                                <a href="@Url.Action("RPC", new { Edit = true,RPCtype = "City", RPCCode = item.CityID })" class="btn btn-warning btn-sm">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                                break;
+                            case "Barangay":
+                                foreach (var item in Model.BarangayList)
+                                {
+                                    <tr>
+                                        <td style="max-width:75px; " id="city_code">@item.BarangayID</td>
+                                        <td style="max-width:250px; " id="city_name">@item.BarangayName</td>
+                                        <td style="max-width:100px; padding-left:5px; padding-right:5px; margin:auto;" align="center">
+                                            <div class="row justify-content-center">
+                                                <a href="@Url.Action("RPC", new { Edit = true,RPCtype = "Barangay", RPCCode = item.BarangayID    })" class="btn btn-warning btn-sm">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                                break;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    <!-- /.card -->
+</section>
+<script>
+    $(document).ready(function () {
+        $(".has-treeview").toggleClass("menu-open");
+        $("#left_nav_ul_rpc").css("display", "block");
+        ///// automatic open navbar after login ///////
+        $("#left_nav_dbinc").toggleClass("menu-open");
+        $("#left_nav_admin_insurance").toggleClass("menu-open");
+        $("#left_nav_dlr").toggleClass("menu-open");
+        $("#left_nav_mai").toggleClass("menu-open");
+        ///// end automatic open navbar after login ///////
+        @switch (Model.RPCtype)
+        {
+            case "Region":
+                <text>$("#region_list").toggleClass("active");</text>
+                break;
+            case "Province":
+                <text>$("#province_list").toggleClass("active");</text>
+                break;
+            case "City":
+                <text>$("#city_list").toggleClass("active");</text>
+                break;
+        }
+    });
+
+    $("#myaccount").on("click", function () {
+        $(this).dropdown("toggle");
+    });
+</script>
+<!-- /.content -->

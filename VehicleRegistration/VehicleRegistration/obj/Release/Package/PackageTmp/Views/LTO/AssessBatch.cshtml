@@ -1,0 +1,359 @@
+﻿@using VehicleRegistration.Models
+@model LTOAssessBatch
+<style>
+    #batch_filter_adjust {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        margin-left: 7.5px;
+    }
+
+    /*nav.main-header.navbar.navbar-expand-md.navbar-primary.navbar-dark {
+        background: #7B0303;
+    }*/
+</style>
+@{
+    ViewBag.Title = "Assessment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("AssessBatch", "LTO", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6><i class="nav-icon fas fa-file-signature"></i>Batch List for Assessment <small> </small></h6>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="row" id="batch_filter_adjust">
+                            <div class="col-sm-12 col-md-3 col-lg-3">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Dealer: </span>
+                                    </div>
+                                    @Html.DropDownListFor(m => m.SelectedDealerID, new SelectList(Model.DealerList, "DealerID", "DealerName"), "Select Dealer", new { @class = "form-control select2" })
+                                    @Html.HiddenFor(m => m.SelectedBatchID)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top:5px">
+                            <div class="col">
+                                <div id="getBatchList">
+                                    @{
+                                        Html.RenderPartial("_BatchList", Model.BatchList);
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header row">
+                        <h6 class="col-6"><i class="nav-icon fas fa-file-signature"></i> Vehicle List  <small> </small></h6>
+                        <div class="col-6">
+                            <h6>
+                                Batch Reference: <label id="lbl_batchreference"></label>
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="VehicleListTable">
+                            @{
+                                Html.RenderPartial("_AssessBatchDetails", Model.VehicleList, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "VehicleList" } });
+                            }
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+                        <center>
+                            <div class="form-group">
+                                <center>
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <button type="button" id="reject_btn" class="btn btn-danger" style="width: 100%; max-width: 250px;">Reject</button>
+                                        </div>
+                                        <div class="col-2"></div>
+                                        <div class="col-5">
+                                            <button type="button" id="assess_btn" class="btn btn-primary" style="width:100%; max-width:250px;">Submit</button>
+                                        </div>
+                                    </div>
+                                </center>
+                            </div>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="modal-final-assess">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><label id="lblModalTitle">Are you sure you want to submit?</label></h4>
+                </div>
+                <div id="modal-body-final-assess" class="modal-body">
+                    @*<div class="row">
+                            <div class="form-group col-12">
+                                <h1 style="text-align:center;">₱ <label id="lbl_amount"></label></h1>
+                            </div>
+                        </div>*@
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <h5>
+                                Dealer: <label class="lbl_dealer"></label>
+                            </h5>
+                        </div>
+                        <div class="form-group col-6">
+                            <h5>
+                                Reference: <label class="lbl_ref"></label>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <h5>
+                                Description: <label class="lbl_desc"></label>
+                            </h5>
+                        </div>
+                        <div class="form-group col-6">
+                            <h5>
+                                Count: <label class="lbl_count"></label>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    <button type="submit" name="submit" value="assessed" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modal-final-reject">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><label id="lblModalTitleReject">Are you sure you want to reject?</label></h4>
+                </div>
+                <div id="modal-body-reject-assess" class="modal-body">
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <h5>
+                                Dealer: <label class="lbl_dealer"></label>
+                            </h5>
+                        </div>
+                        <div class="form-group col-6">
+                            <h5>
+                                Reference: <label class="lbl_ref"></label>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <h5>
+                                Description: <label class="lbl_desc"></label>
+                            </h5>
+                        </div>
+                        <div class="form-group col-6">
+                            <h5>
+                                Count: <label class="lbl_count"></label>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-12">
+                            @Html.LabelFor(m => m.RejectRemarks)
+                            <div class="input-group">
+                                @Html.TextAreaFor(m => m.RejectRemarks, new { @class = "form-control", @style = "resize: none", @rows = "5" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.RejectRemarks, "", new { @class = "" })
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    <button type="submit" name="submit" value="reject" class="btn btn-danger">Reject</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<script>
+    var addAntiForgeryToken = function (data) {
+        data.__RequestVerificationToken = $("[name='__RequestVerificationToken']").val();
+        return data;
+    };
+
+    var tbl_VehicleList;
+    $("#SelectedDealerID").on("change", function () {
+        $('#spinnerDiv').show();
+        $('#tbl_VehicleList').find('tbody').empty();
+        $.ajax({
+            url: '@Url.Action("GetBatchListAssess", "LTO")',
+            type: "POST",
+            data: addAntiForgeryToken({ "DealerID": $("#SelectedDealerID").val() }),
+            cache: false,
+            async: true,
+            success: function (response) {
+                $("#getBatchList").html(response);
+
+                $("#tbl_list").DataTable({
+                    "scrollX": true,
+                    "scrollY": true,
+                    "info": true,
+                    "lengthChange": false,
+                    "order": [],
+                    "dom":
+                        "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                });
+                $('#spinnerDiv').hide();
+
+                $('#Header_vehiclelist_tbody').on("click", "tr", function (event) {
+                    $('#spinnerDiv').show();
+                    $("#lbl_batchreference").text($(this).find('td.col_batchreference').text().trim());
+                    $(".lbl_dealer").text($(this).find("td:eq(0)").text());
+                    $(".lbl_ref").text($(this).find("td:eq(1)").text());
+                    $(".lbl_desc").text($(this).find("td:eq(2)").text());
+                    $(".lbl_count").text($(this).find("td:eq(4)").text());
+                    $("#SelectedBatchID").val($(this).find('input[type=hidden]').val());
+
+                    $.ajax({
+                        url: '@Url.Action("GetAssessVehicleList", "LTO")',
+                        type: "POST",
+                        data: addAntiForgeryToken({ "BatchID": $(this).find('input[type=hidden]').val() }),
+                        cache: false,
+                        async: true,
+                        success: function (response) {
+                            $("#VehicleListTable").html(response);
+
+                            tbl_VehicleList = $("#tbl_VehicleList").DataTable({
+                                "scrollX": true,
+                                "scrollY": true,
+                                "info": true,
+                                "lengthChange": false,
+                                "order": [],
+                                "dom":
+                                    "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                                    "<'row'<'col-sm-12'tr>>" +
+                                    "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                            });
+
+
+                            $('#spinnerDiv').hide();
+
+                            //$("#modal-assess").modal("show");
+                        },
+                        error: function (xhr, status, error) {
+                            alert(xhr.responseText);
+                            $('#spinnerDiv').hide();
+                        }
+                    });
+                });
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+                $('#spinnerDiv').hide();
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $('#Header_vehiclelist_tbody').on("click", "tr", function (event) {
+            $('#spinnerDiv').show();
+            $("#lbl_batchreference").text($(this).find('td.col_batchreference').text().trim());
+            $(".lbl_dealer").text($(this).find("td:eq(0)").text());
+            $(".lbl_ref").text($(this).find("td:eq(1)").text());
+            $(".lbl_desc").text($(this).find("td:eq(2)").text());
+            $(".lbl_count").text($(this).find("td:eq(4)").text());
+            $("#SelectedBatchID").val($(this).find('input[type=hidden]').val());
+
+            $.ajax({
+                url: '@Url.Action("GetAssessVehicleList", "LTO")',
+                type: "POST",
+                data: addAntiForgeryToken({ "BatchID": $(this).find('input[type=hidden]').val() }),
+                cache: false,
+                async: true,
+                success: function (response) {
+                    $("#VehicleListTable").html(response);
+
+                    tbl_VehicleList = $("#tbl_VehicleList").DataTable({
+                        "scrollX": true,
+                        "scrollY": true,
+                        "info": true,
+                        "lengthChange": false,
+                        "order": [],
+                        "dom":
+                            "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                            "<'row'<'col-sm-12'tr>>" +
+                            "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                    });
+
+
+                    $('#spinnerDiv').hide();
+
+                    //$("#modal-assess").modal("show");
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText);
+                    $('#spinnerDiv').hide();
+                }
+            });
+        });
+    });
+
+    $("#assess_btn").on("click", function () {
+        if ($("#SelectedBatchID").val() > 0) {
+            $("#modal-final-assess").modal("show");
+        } else {
+            toastr.warning("Please select batch before to submit!");
+        }
+        //var $nonempty = $('#tbl_VehicleList input.amount').filter(function () {
+        //    return this.value == '';
+        //});
+
+        //if ($nonempty.length == 0) {
+        //    $("#modal-final-assess").modal("show");
+
+        //    var sum = 0;
+
+        //    $('#tbl_VehicleList input.amount').each(function () {
+        //        sum = sum + parseFloat($(this).val());
+        //    });
+
+        //    $("#lbl_sum").text(sum);
+        //}
+        //else {
+        //        toastr.warning("All amount field is required!");
+        //}
+    });
+
+    $("#reject_btn").on("click", function () {
+        if ($("#SelectedBatchID").val() > 0) {
+            $("#modal-final-reject").modal("show");
+        } else {
+            toastr.warning("Please select batch before to reject!");
+        }
+    });
+</script>

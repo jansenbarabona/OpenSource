@@ -1,0 +1,1554 @@
+﻿﻿@using VehicleRegistration.Tools
+
+<!DOCTYPE html>
+<style>
+    .row label {
+        margin: 0px;
+    }
+
+    label {
+        font-size: 0.8em;
+    }
+
+
+    div.form-group {
+        text-align: left;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #48484D;
+    }
+
+    .info a {
+        font-size: 0.9em;
+    }
+    /*card style start*/
+    .card-header h6 {
+        color: #343A40;
+        font-size: 20px;
+        font-weight: 600;
+        /*font-family: sans-serif;*/
+    }
+    /*card header color*/
+    div.card-header {
+        /*background: -webkit-linear-gradient(left,#44C0F5,#3E91D7,#3245A4);*/
+        /*background: #F9FBFE;*/
+        margin: 0px;
+        padding: 0.3em;
+    }
+
+    div.card-body {
+        /*background: #F9FBFE;*/
+    }
+    /*search input card*/
+    input.form-control.form-control-sm {
+        /*background: #F9FBFE;*/
+    }
+
+    table {
+        table-layout: fixed;
+        width: 100%;
+    }
+
+        table td {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        table td {
+            width: 100%;
+            /*overflow:auto;*/
+        }
+
+    newtable {
+        table-layout: fixed;
+        width: 100%;
+    }
+
+        newtable td {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        newtable td {
+            width: 100%;
+            /*overflow:auto;*/
+        }
+    /*td.dataTables_empty{
+           padding:50px;
+       }*/
+
+    i.far.fa-times-circle {
+        color: #343A40;
+    }
+    /*card style End*/
+
+    /*dashboard name
+    div.col-sm-12 h1 {
+        color: #405467;
+        font-size: 1.6em;
+    }
+
+    .user-header {
+        background-color: #47835A;
+        color: rgba(255,255,255,0.8);
+        font-family: Source Sans Pro;
+    }*/
+
+
+    /*.dataTable tr td {
+
+        padding: 1px;
+        padding-left: 7px;
+    }*/
+    .dataTable tr td {
+        padding: 7px;
+        /*margin:0px;*/
+    }
+
+    /*tables layout*/
+    /*.dataTables_filter {
+        padding-right: 20px;
+    }*/
+
+    /*.pagination {
+        padding-right: 80px;
+    }*/
+
+    /*tr td{
+
+        line-height:3px;
+
+    }*/
+
+    /*address button*/
+    div.fab {
+        z-index: 1;
+        width: 56px;
+        height: 56px;
+        background-color: #FD7E14;
+        border-radius: 50%;
+        box-shadow: 0 6px 10px 0 #666;
+        font-size: 28px;
+        font-weight: 800;
+        line-height: 56px;
+        color: white;
+        text-align: center;
+        position: fixed;
+        right: 25px;
+        bottom: 25px;
+        transition: all 0.1s ease-in-out;
+    }
+
+        div.fab:hover {
+            box-shadow: 0 6px 14px 0 #666;
+            transform: scale(1.05);
+        }
+    /*edit button*/
+    div.fab-edit {
+        z-index: 1;
+        width: 56px;
+        height: 56px;
+        background: -webkit-linear-gradient(left,#44C0F5,#3E91D7);
+        border-radius: 50%;
+        box-shadow: 0 6px 10px 0 #666;
+        font-size: 25px;
+        /*font-weight:800;*/
+        line-height: 56px;
+        color: white;
+        text-align: center;
+        position: fixed;
+        right: 55px;
+        bottom: 25px;
+        transition: all 0.1s ease-in-out;
+    }
+
+        div.fab-edit:hover {
+            box-shadow: 0 6px 14px 0 #666;
+            transform: scale(1.05);
+        }
+
+    /*check*/
+    div.check {
+        z-index: 1;
+        width: 45px;
+        height: 45px;
+        background-color: seagreen;
+        color: white;
+        border-radius: 50%;
+        box-shadow: 0 6px 10px 0 #666;
+        font-size: 25px;
+        line-height: 45px;
+        text-align: center;
+        position: fixed;
+        right: 25px;
+        bottom: 25px;
+        transition: all 0.1s ease-in-out;
+    }
+
+        div.check:hover {
+            background-color: seagreen;
+            color: white;
+            box-shadow: 0 6px 14px 0 #666;
+            transform: scale(1.05);
+        }
+
+    /*/ button /*/
+    /*.btn-group{
+        margin:5px;
+
+    }
+    label.btn.btn-secondary{
+        margin:5px;
+        width: 5px;
+
+    }
+    div.btn-group.btn-group-toggle{
+         width: 25em;
+
+    }*/
+
+
+    .card-header h6 {
+        float: left;
+        margin: 0px;
+        padding: 0.3em 0em 0.3em 0.5em;
+    }
+
+    .card-header {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .card-tools {
+        padding-right: 0.5em;
+    }
+
+    .btn-group-toggle {
+        float: right;
+        margin: 0px;
+    }
+
+    div.card input.btn.btn-info.btn-block {
+        width: 115px;
+        height: 35px;
+        background-color: #405467;
+        border-radius: 5px;
+        margin: 0em 0.3em 0em 0em;
+        text-align: center;
+        padding: 0px;
+        border: 1px solid #F0F0F0;
+    }
+
+
+    /*button.btn{
+        color:white;
+        border-radius:5px;
+
+    }
+    button.btn:hover{
+        color:white;
+    }*/
+
+
+    /*// button animation add and attach//*/
+
+    .add-button {
+        z-index: 1;
+        border-radius: 50%;
+        box-shadow: 0 6px 10px 0 #666;
+        color: white;
+        background-color: #FD7E14;
+        /*right: 25px;
+        bottom: 25px;*/
+        width: 56px;
+        height: 56px;
+        position: fixed;
+        right: 40px;
+        bottom: 35px;
+        overflow: visible;
+        -webkit-transition: transform .4s cubic-bezier(.58,-0.37,.45,1.46), color 0s ease .4s,font-size .2s;
+        -moz-transition: transform .4s cubic-bezier(.58,-0.37,.45,1.46), color 0s ease .4s,font-size .2s;
+        transition: transform .4s cubic-bezier(.58,-0.37,.45,1.46), color 0s ease .4s,font-size .2s;
+        text-align: center;
+        line-height: 56px;
+        font-size: 28px;
+    }
+
+        .add-button:before {
+            position: relative;
+            z-index: 100;
+            content: "+";
+        }
+
+
+
+        .add-button:hover {
+            background-color: rgba(255,255,255,0);
+            transform: rotate(45deg);
+        }
+
+    .sub-button {
+        position: absolute;
+        display: inline-block;
+        background-color: #FD7E14;
+        color: rgba(255,255,255,0);
+        width: 28px;
+        height: 28px;
+        line-height: 48px;
+        font-family: "FontAwesome";
+        font-size: 22px;
+        -webkit-transition: top .2s cubic-bezier(.58,-0.37,.45,1.46) .2s, left .2s cubic-bezier(.58,-0.37,.45,1.46) .2s, bottom .2s cubic-bezier(.58,-0.37,.45,1.46) .2s, right .2s cubic-bezier(.58,-0.37,.45,1.46) .2s, width .2s cubic-bezier(.58,-0.37,.45,1.46) .2s, height .2s cubic-bezier(.58,-0.37,.45,1.46) .2s, transform .1s ease 0s, border-radius .2s ease .2s;
+        -moz-transition: top .2s cubic-bezier(.58,-0.37,.45,1.46) .2s, left .2s cubic-bezier(.58,-0.37,.45,1.46) .2s, bottom .2s cubic-bezier(.58,-0.37,.45,1.46) .2s, right .2s cubic-bezier(.58,-0.37,.45,1.46) .2s, width .2s cubic-bezier(.58,-0.37,.45,1.46) .2s, height .2s cubic-bezier(.58,-0.37,.45,1.46) .2s, transform .1s ease 0s, border-radius .2s ease .2s;
+        transition: top .2s cubic-bezier(.58,-0.37,.45,1.46) .2s, left .2s cubic-bezier(.58,-0.37,.45,1.46) .2s, bottom .2s cubic-bezier(.58,-0.37,.45,1.46) .2s, right .2s cubic-bezier(.58,-0.37,.45,1.46) .2s, width .2s cubic-bezier(.58,-0.37,.45,1.46) .2s, height .2s cubic-bezier(.58,-0.37,.45,1.46) .2s, transform .1s ease 0s, border-radius .2s ease .2s;
+    }
+
+    .tl {
+        top: 0;
+        left: 0;
+        border-radius: 28px 0 0 0;
+    }
+
+    .tr {
+        top: 0;
+        right: 0;
+        border-radius: 0 28px 0 0;
+    }
+
+    .bl {
+        bottom: 0;
+        left: 0;
+        border-radius: 0 0 0 28px;
+    }
+
+    .br {
+        bottom: 0;
+        right: 0;
+        border-radius: 0 0 28px 0;
+    }
+
+
+    .tl:before {
+        content: "+";
+    }
+
+    /*.tr:before {
+        content: "";
+    }*/
+
+    .bl:before {
+        content: "";
+    }
+
+    /*.br:before {
+        content: "";
+    }*/
+
+
+    .add-button:hover .sub-button {
+        width: 48px;
+        height: 48px;
+        transform: rotate(-45deg);
+        color: rgba(255,255,255,1);
+        -webkit-transition: top .4s cubic-bezier(.58,-0.37,.45,1.46) .4s, left .4s cubic-bezier(.58,-0.37,.45,1.46) .4s, bottom .4s cubic-bezier(.58,-0.37,.45,1.46) .4s, right .4s cubic-bezier(.58,-0.37,.45,1.46) .4s, width .4s cubic-bezier(.58,-0.37,.45,1.46) .4s, height .4s cubic-bezier(.58,-0.37,.45,1.46) .4s, color .3s ease .8s, transform .3s ease .8s, border-radius .4s ease .6s;
+        -moz-transition: top .4s cubic-bezier(.58,-0.37,.45,1.46) .4s, left .4s cubic-bezier(.58,-0.37,.45,1.46) .4s, bottom .4s cubic-bezier(.58,-0.37,.45,1.46) .4s, right .4s cubic-bezier(.58,-0.37,.45,1.46) .4s, width .4s cubic-bezier(.58,-0.37,.45,1.46) .4s, height .4s cubic-bezier(.58,-0.37,.45,1.46) .4s, color .3s ease .8s, transform .3s ease .8s, border-radius .4s ease .6s;
+        transition: top .4s cubic-bezier(.58,-0.37,.45,1.46) .4s, left .4s cubic-bezier(.58,-0.37,.45,1.46) .4s, bottom .4s cubic-bezier(.58,-0.37,.45,1.46) .4s, right .4s cubic-bezier(.58,-0.37,.45,1.46) .4s, width .4s cubic-bezier(.58,-0.37,.45,1.46) .4s, height .4s cubic-bezier(.58,-0.37,.45,1.46) .4s, color .3s ease .8s, transform .3s ease .8s, border-radius .4s ease .6s;
+    }
+
+    .add-button:hover .tl {
+        top: -25px;
+        left: -25px;
+        border-radius: 28px;
+    }
+
+    .add-button:hover .tr {
+        top: -25px;
+        right: -25px;
+        border-radius: 28px;
+    }
+
+    .add-button:hover .bl {
+        bottom: -25px;
+        left: -25px;
+        border-radius: 28px;
+    }
+
+    .add-button:hover .br {
+        bottom: -25px;
+        right: -25px;
+        border-radius: 28px;
+    }
+    /*// end button animation add and attach//*/
+
+    button.btn.btn-tool {
+        /*border:1px solid white;*/
+        width: 30px;
+        height: 30px;
+        border-radius: 30%;
+        /*top:5px;*/
+        right: 3px;
+        margin-right: 10px;
+        /*margin-top:0.3px;*/
+        margin-bottom: 3px;
+        color: white;
+        font-size: 30px;
+        font-weight: 100;
+    }
+
+
+        button.btn.btn-tool:hover {
+            /*background-color: #007BFF;
+        width: 30px;
+        height: 30px;
+        border-radius:50%;*/
+            color: #DC3545;
+            /*border: 2px solid white;*/
+            /*background-color:#DC3545;*/
+        }
+
+    /*.close {
+        /*position: absolute;
+        right: 32px;
+        top: 32px;
+        width: 50px;
+        height: 32px;
+        opacity: 0.3;
+        padding:2px;
+        margin:5px;
+        border:1px solid white;
+        border-radius:100%;
+        color:white;
+    }
+
+        .close:hover {
+            opacity: 1;
+        }
+
+        .close:before, .close:after {
+            position: absolute;
+            left: 15px;
+            content: ' ';
+            height: 33px;
+            width: 2px;
+            background-color: #333;
+        }
+
+        .close:before {
+            transform: rotate(45deg);
+        }
+
+        .close:after {
+            transform: rotate(-45deg);
+        }*/
+
+
+    /*dropdown myaccount*/
+    button#myaccount.btn.dropdown-toggle {
+        color: white;
+    }
+
+
+
+    nav.main-header.navbar.navbar-expand-md.navbar-primary.navbar-dark {
+        margin-bottom: 0px;
+        padding: 4px;
+        background-color: none;
+    }
+
+    div.card-body {
+        padding-top: 10px;
+    }
+    /*action table and edit*/
+    div.row.justify-content-center {
+        text-align: center;
+    }
+
+
+    i.fa.fa-edit {
+        color: #218838;
+        padding-left: 2em;
+    }
+
+    a.btn.btn-warning.btn-sm, a.btn.btn-warning.btn-md {
+        background-color: transparent;
+        border: 0px;
+    }
+    /*end action table and edit*/
+    /*div.col-lg-11{
+        text-align:right;
+    }*/
+    div.col-sm-9 {
+        position: fixed;
+        left: 80px;
+        bottom: 15px;
+    }
+    /*<!-- back to top scroll code -->*/
+    i.fas.fa-chevron-circle-up {
+        font-size: 30px;
+        color: black;
+        opacity: 0.6;
+        background: white;
+        margin: 0px;
+        padding: 0px;
+        border-radius: 50%;
+    }
+
+        i.fas.fa-chevron-circle-up:hover {
+            color: #252526;
+            background: white;
+            opacity: 1;
+        }
+
+    .back-to-top {
+        cursor: pointer;
+        position: fixed;
+        bottom: 60px;
+        right: 5px;
+        display: none;
+    }
+
+    a#back-to-top.btn.btn-primary.btn-lg.back-to-top {
+        background: none;
+        border: none;
+        margin: 0px;
+        padding: 0px;
+        bottom: 80px;
+        right: 5px;
+    }
+    /*<!-- /end back to top scroll code -->*/
+
+
+    /*progress step*/
+    .content-wrapper .progress-tracker {
+        position: relative;
+        z-index: 0;
+        width: 100%;
+    }
+    /*///// help tips//////*/
+    button.btn.btn-Help {
+        margin: 5px;
+        text-align: center;
+        background-color: #5F6486;
+        border-radius: 50%;
+        /*border: 1px solid #1E1E1E;*/
+        width: 16px;
+        height: 16px;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 16px;
+        cursor: default;
+        padding: 0px;
+        color: white;
+        font-style: normal;
+        font-family: Helvetica, Arial, sans-serif;
+    }
+    /*///// end help tips//////*/
+    /*///// step by steps //////*/
+    span.label {
+        font-weight: 700;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #0078FF;
+    }
+
+    span.circle {
+        height: 25px;
+        width: 25px;
+        color: white;
+        border-radius: 50%;
+        display: inline-block;
+        background: -webkit-linear-gradient(left,#44C0F5,#3E91D7);
+        padding-left: 9px;
+    }
+
+    ul {
+        list-style-type: none;
+    }
+
+    a.admin-item {
+        color: #4F5962;
+        margin-left: 25px;
+    }
+
+    li.admin-list:hover {
+        /*cursor: pointer;*/ /*need to change into in the list href# code*/
+        background: #E7EEEC;
+        color: white;
+    }
+    /*///// step by steps //////*/
+    div.wrapper {
+        margin: 0px;
+    }
+
+    li.user-header {
+        text-align: center;
+    }
+
+    span.brand-text.font-weight-light {
+        font-weight: 300;
+    }
+
+    li.user-footer {
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+
+    div.container {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    ul.order-1.order-md-3.navbar-nav.navbar-no-expand.ml-md-auto {
+        margin-right: 1em;
+    }
+    /*li.user-header{
+        background:#21313C;
+    }*/
+    i.fas.fa-caret-right.float-right {
+        text-align: center;
+        /*position: fixed;*/
+        margin-top: 4px;
+    }
+
+    a#dashboard_home.navbar-brand {
+        padding-top: 0px;
+    }
+</style>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+
+    <!-- Previous Layout -->
+    <title>@ViewBag.Title</title>
+
+    @*<link href="~/scripts/Additional/css/_layout2.min.css" rel="stylesheet" />*@
+    <link href="~/favicon.ico" rel="icon">
+    <link href="~/scripts/Admin_temp/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/js")
+    @Styles.Render("~/Admin/css")
+    @Scripts.Render("~/Admin/js")
+    @RenderSection("scripts", required: false)
+    @RenderSection("styles", required: false)
+
+    <link href="~/scripts/Home_temp/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="~/scripts/Home_temp/css/style.min.css" rel="stylesheet" />
+    <link href="~/scripts/Additional/css/_layout.css" rel="stylesheet" />
+    <link href="~/scripts/Admin_temp/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/scripts/Additional/lightbox2/dist/css/lightbox.min.css" rel="stylesheet" />
+    <link href="~/scripts/Additional/fancybox-master/dist/jquery.fancybox.min.css" rel="stylesheet" />
+    <link href="~/scripts/Additional/progress-tracker/docs/styles/progress-tracker.css" rel="stylesheet" />
+    <link href="~/scripts/Introjs/css/introjs.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <link href="~/scripts/Admin_temp/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <!-- Theme style -->
+    <link href="~/scripts/Admin_temp/dist/css/adminlte.min.css" rel="stylesheet" />
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+
+<body class="hold-transition layout-top-nav">
+
+    <div class="wrapper">
+
+        <!-- Navbar -->
+        @*@if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.DataBridgeAsia)
+            {
+                if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Dealer)
+                {
+                    if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.MAI)
+                    {
+                        if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Insurance)
+                        {*@
+        <nav class="main-header navbar navbar-expand-md navbar-primary navbar-dark" id="topnavbar">
+            <div class="container">
+                <a id="dashboard_home" href="#" @*onclick="location.href='/'"*@ data-original-title="Homepage" class="navbar-brand">
+                    @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.MAI)
+                    {
+                        <img rel="tooltip" title="" src="@Url.Content("~/Logos/" + CurrentUser.Details.EntityLogo)" alt="Admin_Logo" class="brand-image img-circle elevation-3"
+                             style="opacity: 100">
+                    }
+                    else if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Dealer)
+                    {
+                        <img rel="tooltip" title="" src="@Url.Content("~/Logos/" + CurrentUser.Details.EntityLogo)" alt="Admin_Logo" class="brand-image img-circle elevation-3"
+                             style="opacity: 100">
+                    }
+                    else if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Insurance)
+                    {
+                        <img rel="tooltip" title="" src="@Url.Content("~/Logos/" + CurrentUser.Details.EntityLogo)" alt="Admin_Logo" class="brand-image img-circle elevation-3"
+                             style="opacity: 100">
+                    }
+                    else if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.PNP)
+                    {
+                        <img rel="tooltip" title="" src="@Url.Content("~/scripts/Img/pnp_logo.png")" alt="Admin_Logo" class="brand-image img-circle elevation-3"
+                             style="opacity: 100">
+                    }
+                    else
+                    {
+                        <img rel="tooltip" title="" src="~/Scripts/Admin_temp/dist/img/AdminLTE Logo.png" alt="Admin_Logo" class="brand-image img-circle elevation-3"
+                             style="opacity: 100">
+                    }
+
+                    @*<span class="brand-text font-weight-normal">Home</span>*@
+                </a>
+
+                <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <div class="collapse navbar-collapse order-3" id="navbarCollapse">
+                    <!-- Left navbar links -->
+                    <ul class="navbar-nav">
+                        <li id="topnav_dashboard" class="nav-item">
+                            <a href="@Url.Action("Dashboard", "Home")" class="nav-link">Dashboard</a>
+                        </li>
+                        <!-- UserEntityEnum DataBridgeAsia -->
+                        @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.DataBridgeAsia)
+                        {
+                            <li class="nav-item d-none d-sm-inline-block">
+                                <a href="@Url.Action("Index", "MAI")" class="nav-link">MAI</a>
+                            </li>
+                            <!-- Reports Dropdown -->
+                            <li class="nav-item dropdown">
+                                <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Reports</a>
+                                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                                    <li class="dropdown-submenu dropdown-hover">
+                                        <a id="dropdownReportDatabridgeSubMenu" tabindex="-1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item">
+                                            Databridge
+                                            <i class="fas fa-caret-right float-right"></i>
+                                        </a>
+                                        <ul aria-labelledby="dropdownReportDatabridgeSubMenu" class="dropdown-menu border-0 shadow">
+                                            <li><a href="@Url.Action("CompanyListReport", "Reports")" class="dropdown-item">Company List Report</a></li>
+                                            <li><a href="@Url.Action("WalletReport", "Reports")" class="dropdown-item">Wallet Report</a></li>
+                                            <li><a href="@Url.Action("StatementOfAccount", "Reports")" class="dropdown-item">Statement Of Account</a></li>
+                                        </ul>
+                                    </li><!-- /.End Dropdown -->
+                                    <li class="dropdown-divider"></li>
+                                    <li class="dropdown-submenu dropdown-hover">
+                                        <a id="dropdownReportMAISubMenu" tabindex="-1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item">
+                                            MAI
+                                            <i class="fas fa-caret-right float-right"></i>
+                                        </a>
+                                        <ul aria-labelledby="dropdownReportMAISubMenu" class="dropdown-menu border-0 shadow"></ul>
+                                    </li><!-- /.End Dropdown -->
+                                    <li class="dropdown-divider"></li>
+                                    <li class="dropdown-submenu dropdown-hover">
+                                        <a id="dropdownReportDealerSubMenu" tabindex="-1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item">
+                                            Dealer
+                                            <i class="fas fa-caret-right float-right"></i>
+
+                                        </a>
+                                        <ul aria-labelledby="dropdownReportDealerSubMenu" class="dropdown-menu border-0 shadow">
+                                            <li><a href="@Url.Action("DealerVehicleStatusReport", "Reports")" class="dropdown-item">Vehicle Status Report</a></li>
+                                            <li><a href="@Url.Action("DealerStatusReport", "Reports")" class="dropdown-item">LTO Status Report</a></li>
+                                            <li><a href="@Url.Action("DealerTimelineReport", "Dealer")" class="dropdown-item">Dealer Timeline Report</a></li>
+                                            <li><a href="@Url.Action("VehicleRegistrationReport", "Dealer")" class="dropdown-item">Vehicle Registration Report</a></li>
+                                        </ul>
+                                    </li><!-- /.End Dropdown -->
+                                    <li class="dropdown-divider"></li>
+                                    <li class="dropdown-submenu dropdown-hover">
+                                        <a id="dropdownReportInsuranceSubMenu" tabindex="-1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item">
+                                            Insurance
+                                            <i class="fas fa-caret-right float-right"></i>
+                                        </a>
+                                        <ul aria-labelledby="dropdownReportInsuranceSubMenu" class="dropdown-menu border-0 shadow"></ul>
+                                    </li><!-- /.End Dropdown -->
+                                    <li class="dropdown-divider"></li>
+                                    <li class="dropdown-submenu dropdown-hover">
+                                        <a id="dropdownReportLTOSubMenu" tabindex="-1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item">
+                                            LTO
+                                            <i class="fas fa-caret-right float-right"></i>
+                                        </a>
+                                        <ul aria-labelledby="dropdownReportLTOSubMenu" class="dropdown-menu border-0 shadow">
+                                            <li><a href="@Url.Action("LTOStatusReport", "Reports")" class="dropdown-item">Status Report</a></li>
+                                            <li><a href="@Url.Action("PlateSection", "Reports")" class="dropdown-item">Plate Section</a></li>
+                                        </ul>
+                                    </li><!-- /.End Dropdown -->
+                                    <li class="dropdown-divider"></li>
+                                    <li class="dropdown-submenu dropdown-hover">
+                                        <a id="dropdownReportLTOSubMenu" tabindex="-1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item">
+                                            Vehicle
+                                            <i class="fas fa-caret-right float-right"></i>
+                                        </a>
+                                        <ul aria-labelledby="dropdownReportLTOSubMenu" class="dropdown-menu border-0 shadow">
+                                            <li><a href="@Url.Action("VehicleModel_Reports", "VehicleModel")" class="dropdown-item">Vehicle Model Report</a></li>
+
+                                        </ul>
+                                    </li><!-- /.End Dropdown -->
+                                </ul>
+                            </li><!-- /.End Dropdown -->
+                            <!-- Dealer Dropdown -->
+                            <li class="nav-item dropdown">
+                                <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Dealer</a>
+                                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                                    <li><a href="@Url.Action("Index", "Dealer")" class="dropdown-item">Dealer List </a></li>
+                                    <li><a href="@Url.Action("DealerBranch", "Dealer")" class="dropdown-item">Dealer Branch List </a></li>
+                                    <li><a href="@Url.Action("DealerInsuranceList", "Dealer")" class="dropdown-item">Insurance List</a></li>
+                                    <li><a href="@Url.Action("DealerVehicleMake", "Dealer")" class="dropdown-item"> Vehicle Makes Assign</a></li>
+                                </ul>
+                            </li><!-- /.End Dealer Dropdown -->
+                            <!-- Insurance Dropdown -->
+                            <li class="nav-item dropdown">
+                                <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Insurance</a>
+                                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                                    <li><a href="@Url.Action("Index", "Insurance")" class="dropdown-item">Insurance List</a></li>
+                                    <li><a href="@Url.Action("InsuranceBranchList", "Insurance")" class="dropdown-item">Insurance Branch List</a></li>
+                                    <li><a href="@Url.Action("InsuranceCOCSeriesList", "Insurance")" class="dropdown-item">COC Series List</a></li>
+                                </ul>
+                            </li><!-- /.End Insurance Dropdown -->
+                            <!-- LTO Dropdown -->
+                            <li class="nav-item dropdown">
+                                <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">LTO</a>
+                                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                                    <li><a href="@Url.Action("Index", "LTO")" class="dropdown-item">LTO</a></li>
+                                    <li><a href="@Url.Action("Index", "LTOBranch")" class="dropdown-item">LTO Branch</a></li>
+                                </ul>
+                            </li><!-- /.End LTO Dropdown -->
+                            <!-- Insurance Dropdown -->
+                            <li class="nav-item dropdown">
+                                <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Vehicle</a>
+                                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                                    <li><a href="@Url.Action("Index", "VehicleInfo")" class="dropdown-item">Monitor Vehicles </a></li>
+                                    <li class="dropdown-divider"></li><!-- CTPL dropdownSubMenu2 -->
+                                    <li class="dropdown-submenu dropdown-hover">
+                                        <a id="dropdownSubMenu2" tabindex="-1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item">
+                                            CTPL
+                                            <i class="fas fa-caret-right float-right"></i>
+                                        </a>
+                                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                                            <li>
+                                                <a tabindex="-1" href="@Url.Action("Index", "CTPL")" class="dropdown-item">CTPL List</a>
+                                            </li>
+
+                                            <li><a href="@Url.Action("CTPLTermList", "CTPL")" class="dropdown-item">CTPL Term List</a></li>
+
+                                            <!-- Level three dropdown-->
+
+                                        </ul>
+                                    </li><!-- /.End Dropdown -->
+                                    <li class="dropdown-divider"></li><!-- Divisions dropdownSubMenu2 -->
+                                    <li class="dropdown-submenu dropdown-hover">
+                                        <a id="dropdownSubMenu2" tabindex="-1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item">
+                                            Divisions
+                                            <i class="fas fa-caret-right float-right"></i>
+                                        </a>
+                                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                                            <li>
+                                                <a tabindex="-1" href="@Url.Action("RPCList", "RPC", new { RPCtype = "Region" })" class="dropdown-item">Region</a>
+                                            </li>
+
+                                            <li><a href="@Url.Action("RPCList", "RPC", new { RPCtype = "Province" })" class="dropdown-item">Province</a></li>
+                                            <li><a href="@Url.Action("RPCList", "RPC", new { RPCtype = "City" })" class="dropdown-item">City</a></li>
+                                            <li><a href="@Url.Action("RPCList", "RPC", new { RPCtype = "Barangay" })" class="dropdown-item">Barangay</a></li>
+                                            @*<li><a href="@Url.Action("Index", "Barangay")" class="dropdown-item">Barangay</a></li>*@
+                                            <!-- Level three dropdown-->
+
+                                        </ul>
+                                    </li><!-- /.End Dropdown -->
+                                    <li class="dropdown-divider"></li><!-- Vehicle Settings dropdownSubMenu2 -->
+                                    <li class="dropdown-submenu dropdown-hover">
+                                        <a id="dropdownSubMenu2" tabindex="-1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item">
+                                            Vehicle Settings
+                                            <i class="fas fa-caret-right float-right"></i>
+                                        </a>
+                                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                                            <li>
+                                                <a tabindex="-1" href="@Url.Action("Index", "VehicleMake")" class="dropdown-item">Vehicle Make</a>
+                                            </li>
+
+                                            <li><a href="@Url.Action("Index", "VehicleModel")" class="dropdown-item">Vehicle Model</a></li>
+                                            <li><a href="@Url.Action("VehicleBodyList", "VehicleInfo")" class="dropdown-item">Vehicle Body</a></li>
+                                            <li><a href="@Url.Action("Vehicle_Color_List", "VehicleColor")" class="dropdown-item">Vehicle Color</a></li>
+                                            <li><a href="@Url.Action("Index", "VehicleFuelType")" class="dropdown-item">Vehicle Fuel Type</a></li>
+                                            <li><a href="@Url.Action("Index", "AirconType")" class="dropdown-item">Vehicle Aircon Type</a></li>
+                                            <li><a href="@Url.Action("Index", "VehicleClassification")" class="dropdown-item">Vehicle Classification</a></li>
+                                            <li><a href="@Url.Action("Index", "VehicleType")" class="dropdown-item">Vehicle Type</a></li>
+                                            <li><a href="@Url.Action("Index", "MVPremium")" class="dropdown-item">MV Premium</a></li>
+                                            <!-- Level three dropdown-->
+
+                                        </ul>
+                                    </li><!-- /.End Dropdown -->
+                                </ul>
+                            </li><!-- /.End Dropdown -->
+                            if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.DataBridgeAsia)
+                            {
+                                if (CurrentUser.Details.UserRoleID == (int)UserRoleEnum.Administrator)
+                                {
+                                    if (CurrentUser.Details.IsMain == true || CurrentUser.Details.IsMain == null)
+                                    {
+                                        <li class="nav-item dropdown">
+                                            <!-- Wallet dropdown-->
+                                            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Wallet</a>
+                                            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                                                <li><a href="@Url.Action("NewTransaction", "Wallet")" class="dropdown-item"> New Transaction </a></li>
+                                                <li class="dropdown-divider"></li>
+                                                <li><a href="@Url.Action("TransactionTypeList", "Wallet")" class="dropdown-item"> Transaction Type</a></li>
+
+                                                <li class="dropdown-submenu dropdown-hover">
+                                                    <a id="dropdownSubMenu2" tabindex="-1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item">
+                                                        Charges
+                                                        <i class="fas fa-caret-right float-right"></i>
+                                                    </a>
+                                                    <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                                                        <li>
+                                                            <a tabindex="-1" href="@Url.Action("EntityChargeList", "Wallet")" class="dropdown-item">Entity Charge</a>
+                                                        </li>
+                                                        <li><a href="@Url.Action("EntityBranchChargeList", "Wallet")" class="dropdown-item"> Entity Branch Charge </a></li>
+                                                        <li><a href="@Url.Action("EntityTypeChargeList", "Wallet")" class="dropdown-item"> Entity Type Charge </a></li>
+                                                        <!-- Level three dropdown-->
+
+                                                    </ul>
+                                                </li><!-- /.End Dropdown -->
+                                            </ul>
+                                        </li><!-- /.End wallet Dropdown -->
+                                    }
+                                }
+                            }
+                            <li class="nav-item dropdown">
+                                <!-- Wallet dropdown-->
+                                <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Account</a>
+                                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                                    <li><a href="@Url.Action("Index", "User")" class="dropdown-item"> User Admin</a></li>
+                                    <li><a href="@Url.Action("Index", "Title")" class="dropdown-item"> Title Maintenance</a></li>
+                                    <li><a href="https://docs.google.com/forms/d/1qvHf3u_upIVUBCpgJ43moJKtlxD4H_iA1KRaExxqUlQ/viewform?edit_requested=true" target="_blank" class="dropdown-item"> Account Assigned</a></li>
+
+                                </ul>
+                            </li><!-- /.End wallet Dropdown -->
+                        }<!-- End UserEntityEnum DataBridgeAsia -->
+                        <!-- UserEntityEnum Dealer -->
+                        @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Dealer)
+                        {
+                            <li class="nav-item d-none d-sm-inline-block">
+                                <a href="@Url.Action("Index", "Customer")" class="nav-link">Client</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Vehicle</a>
+                                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                                    <li><a href="@Url.Action("Index", "VehicleInfo")" class="dropdown-item">Vehicle Info </a></li>
+                                    <li><a href="@Url.Action("AllocatedVehicle", "VehicleInfo")" class="dropdown-item">Allocated Vehicle</a></li>
+                                    <li><a href="@Url.Action("DealerTimelineReport", "Dealer")" class="dropdown-item">Timeline Report</a></li>
+                                    <li><a href="@Url.Action("VehicleRegistrationReport", "Dealer")" class="dropdown-item">Vehicle Registration Report</a></li>
+                                    <li class="dropdown-divider"></li>
+
+                                    <li class="dropdown-submenu dropdown-hover">
+                                        <a id="dropdownSubMenu2" tabindex="-1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item">
+                                            LTO Registration
+                                            <i class="fas fa-caret-right float-right"></i>
+                                        </a>
+                                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                                            <li>
+                                                <a tabindex="-1" href="@Url.Action("ForLTO", "VehicleInfo")" class="dropdown-item" style="">Vehicles for Submission</a>
+                                            </li>
+                                            <li><a href="@Url.Action("ForLTO_Submitted", "VehicleInfo")" class="dropdown-item">Vehicles Submitted</a></li>
+                                            <li><a href="@Url.Action("ForLTO_Payment", "VehicleInfo")" class="dropdown-item">Vehicles for Payment</a></li>
+                                            <li><a href="@Url.Action("ForLTO_Processed", "VehicleInfo")" class="dropdown-item">Vehicles Pending Completion</a></li>
+                                            <li><a href="@Url.Action("ForLTO_Completed", "VehicleInfo")" class="dropdown-item">Vehicles Completed</a></li>
+                                            <li><a href="@Url.Action("ForLTO_ForPickUp", "VehicleInfo")" class="dropdown-item">Vehicles For OR/CR Pick Up</a></li>
+                                            <li><a href="@Url.Action("ForLTO_Received", "VehicleInfo")" class="dropdown-item">Vehicles Received OR/CR</a></li>
+                                            <li class="dropdown-divider"></li>
+                                            <li><a href="@Url.Action("ForLTO_Rejected", "VehicleInfo")" class="dropdown-item">Vehicles Rejected</a></li>
+                                            <!-- Level three dropdown-->
+
+                                        </ul>
+                                    </li><!-- /.End Dropdown -->
+                                </ul>
+                            </li><!-- /.End Dropdown -->
+                            <li class="nav-item">
+                                @*<a href="@Url.Action("InvoiceList", "Dealer")" class="nav-link">Invoice</a>*@
+                            </li>
+                        }<!-- /.End UserEntityEnum Dealer -->
+                        <!--  UserEntityEnum MAI -->
+                        @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.MAI)
+                        {
+                            <li class="nav-item dropdown">
+                                <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Vehicle</a>
+                                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                                    <li><a href="@Url.Action("Index", "VehicleInfo")" class="dropdown-item">Vehicle Info </a></li>
+                                    <li><a href="@Url.Action("ForAllocate", "VehicleInfo")" class="dropdown-item">Allocated Vehicle</a></li>
+                                    @if (CurrentUser.Details.UserRoleID == (int)UserRoleEnum.Administrator)
+                                    {
+                                        <li><a href="@Url.Action("ReAllocatedVehicle", "VehicleInfo")" class="dropdown-item">Vehicle List for Re-Allocate</a></li>
+                                        <li><a href="@Url.Action("ForPullOut", "VehicleInfo")" class="dropdown-item">Vehicle List for Pull Out</a></li>
+                                    }
+                                    <li><a href="@Url.Action("Index", "Batch")" class="dropdown-item">Batch Master</a></li>
+                                    <li class="dropdown-divider"></li>
+
+                                    <!-- Level two dropdown-->
+                                    <li class="dropdown-submenu dropdown-hover">
+                                        <a id="dropdownSubMenu2" tabindex="-1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item">
+                                            Batch Process
+                                            <i class="fas fa-caret-right float-right"></i>
+                                        </a>
+                                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                                            <li>
+                                                <a tabindex="-1" href="@Url.Action("ForBOC", "VehicleInfo")" class="dropdown-item">Vehicle List for COP</a>
+                                            </li>
+
+                                            <li><a href="@Url.Action("ForSOE", "VehicleInfo")" class="dropdown-item">Vehicle List for SOE</a></li>
+                                            <li><a href="@Url.Action("ForSOC", "VehicleInfo")" class="dropdown-item">Vehicle List for SOC</a></li>
+                                            <li><a href="@Url.Action("ForCSR", "VehicleInfo")" class="dropdown-item">Vehicle List for CSR</a></li>
+                                            <li><a href="@Url.Action("ForDealers", "VehicleInfo")" class="dropdown-item">Vehicle List for Dealers</a></li>
+
+                                            <!-- Level three dropdown-->
+
+                                        </ul>
+                                    </li><!-- /.End Level two -->
+
+                                    <li class="dropdown-divider"></li>
+                                    <li class="dropdown-submenu dropdown-hover">
+                                        <a id="dropdownMAILTOSubMenu" tabindex="-1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item">
+                                            LTO Registration
+                                            <i class="fas fa-caret-right float-right"></i>
+                                        </a>
+                                        <ul aria-labelledby="dropdownMAILTOSubMenu" class="dropdown-menu border-0 shadow">
+                                            <li><a tabindex="-1" href="@Url.Action("ForLTO_CSR", "VehicleInfo")" class="dropdown-item" style="">Vehicles for Submission</a></li>
+                                            <li><a href="@Url.Action("ForCSR_Submitted", "VehicleInfo")" class="dropdown-item">Vehicles Submitted</a></li>
+                                            <li><a href="@Url.Action("ForLTO_Payment", "VehicleInfo")" class="dropdown-item">Vehicles for Payment</a></li>
+                                            <li><a href="@Url.Action("ForLTO_Processed", "VehicleInfo")" class="dropdown-item">Vehicles Pending Completion</a></li>
+                                            <li><a href="@Url.Action("ForLTO_Completed", "VehicleInfo")" class="dropdown-item">Vehicles Completed</a></li>
+                                            <li><a href="@Url.Action("ForLTO_ForPickUp", "VehicleInfo")" class="dropdown-item">Vehicles For OR/CR Pick Up</a></li>
+                                            <li><a href="@Url.Action("ForLTO_Received", "VehicleInfo")" class="dropdown-item">Vehicles Received OR/CR</a></li>
+                                            <li class="dropdown-divider"></li>
+                                            <li><a href="@Url.Action("ForLTO_Rejected", "VehicleInfo")" class="dropdown-item">Vehicles Rejected</a></li>
+                                            <!-- Level three dropdown-->
+
+                                        </ul>
+                                    </li><!-- /.End Dropdown -->
+                                </ul>
+                            </li><!-- /.End Dropdown -->
+                        }<!-- /.End UserEntityEnum MAI -->
+                        <!-- UserEntityEnum Insurance -->
+                        @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Insurance)
+                        {
+                            <li class="nav-item d-none d-sm-inline-block">
+                                @*<a href="@Url.Action("InsuranceDealerList", "Insurance")" class="nav-link">Insurance</a>*@
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Insurance</a>
+                                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                                    <li><a href="@Url.Action("InsuranceDealerList", "Insurance")" class="dropdown-item">Insurance Dealer List</a></li>
+                                    <li><a href="@Url.Action("CTPL", "Insurance")" class="dropdown-item">CTPL Report</a></li>
+                                </ul>
+                            </li><!-- /.End Dropdown -->
+                        }<!-- /.End UserEntityEnum Insurance -->
+                        <!-- UserEntityEnum LTO -->
+
+
+                        @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.PNP)
+                        {
+                            <li class="nav-item dropdown">
+                                <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Vehicle</a>
+                                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                                    <li><a href="@Url.Action("ApprovalList", "PNP")" class="dropdown-item">Approval</a></li>
+                                    <li><a href="@Url.Action("CompletedList", "PNP")" class="dropdown-item">Completed</a></li>
+                                </ul>
+                            </li><!-- /.End Dropdown -->
+                        }
+                    </ul><!-- /.End List -->
+                </div><!-- End Container -->
+            </div><!-- /.container-fluid -->
+            <!-- Right navbar links -->
+            @*<ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">*@
+            <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-md-auto">
+                <!-- My Account -->
+                <li class="nav-item dropdown">
+
+                    <a style="margin-bottom:8px;" id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link active dropdown-toggle">
+                        <img src="~/Scripts/Admin_temp/dist/img/user2-160x160.jpg" style="width:33px; height:33px; margin-right:5px;" class="user-image img-circle" alt="User Image">
+                        <span class="hidden-xs">@CurrentUser.Details.FirstName</span>
+                    </a>
+
+                    <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow dropdown-menu-lg-right" style="width:250px; ">
+                        <!-- User image -->
+                        <li class="user-header">
+                            <img src="~/Scripts/Admin_temp/dist/img/user2-160x160.jpg" class="img-circle" style="width: 90px;height: 90px;" alt="User Image">
+                            <p>
+                                @CurrentUser.Details.FirstName @CurrentUser.Details.LastName
+                                <small>@CurrentUser.Details.EmailAddress</small>
+                            </p>
+                            <!-- User Entities -->
+                            @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.DataBridgeAsia)
+                            {
+
+                                if (CurrentUser.Details.UserRoleID == (int)UserRoleEnum.Administrator)
+                                {
+                                    if (CurrentUser.Details.IsMain == true || CurrentUser.Details.IsMain == null)
+                                    {
+                                        @*<li><a href="@Url.Action("Index", "User")" class="dropdown-item">  <i class="fas fa-user-shield nav-icon" style="margin-right:14px;"></i>   User</a></li>
+                                            <li><a href="@Url.Action("Index", "Title")" class="dropdown-item">  <i class="fas fa-users nav-icon" style="margin-right:14px;"></i>     Title Maintenance</a></li>*@
+                                        <!-- Wallet Dropdown -->
+                                        @*<li style="text-align:center; margin-top:5px; font-weight:normal; color:#4F5962"><p href="#" class="admin-item disabled" style="margin:5px;">Wallet</p></li>
+                                            <li><a href="@Url.Action("NewTransaction", "Wallet")" class="dropdown-item"><i class="fas fa-wallet nav-icon" style="margin-right:16px;"></i> New Transaction </a></li>
+                                            <li><a href="@Url.Action("TransactionTypeList", "Wallet")" class="dropdown-item"><i class="fas fa-wallet nav-icon" style="margin-right:16px;"></i> Transaction Type</a></li>
+                                            <li><a href="@Url.Action("EntityChargeList", "Wallet")" class="dropdown-item"><i class="fas fa-wallet nav-icon" style="margin-right:16px;"></i> Entity Charge</a></li>
+                                            <li><a href="@Url.Action("EntityTypeChargeList", "Wallet")" class="dropdown-item"><i class="fas fa-wallet nav-icon" style="margin-right:16px;"></i> Entity Type Charge </a></li>*@
+                                    }
+                                }
+                            }
+                            @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Dealer)
+                            {
+
+                                if (CurrentUser.Details.UserRoleID == (int)UserRoleEnum.Administrator)
+                                {
+                                <li><a href="@Url.Action("Index", "User")" class="dropdown-item">  <i class="fas fa-user-shield nav-icon" style="margin-right:15px;"></i>   User </a></li>
+                                    if (CurrentUser.Details.IsMain == true || CurrentUser.Details.IsMain == null)
+                                    {
+                                        <li><a href="@Url.Action("DealerBranch", "Dealer")" class="dropdown-item">  <i class="fas fa-users nav-icon" style="margin-right:15px;"></i>   Branches</a></li>
+                                        <li><a href="@Url.Action("DealerVehicleMake", "Dealer")" class="dropdown-item">  <i class="fas fa-car nav-icon" style="margin-right:19px;"></i>     Vehicle Makes</a></li>
+                                        <li><a href="@Url.Action("MyWallet", "Wallet")" class="dropdown-item">  <i class="fas fa-wallet nav-icon" style="margin-right:19px;"></i>   Wallet</a></li>
+                                    }
+                                }
+                            }
+                            @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.MAI)
+                            {
+                                if (CurrentUser.Details.UserRoleID == (int)UserRoleEnum.Administrator)
+                                {
+                                    <li><a href="@Url.Action("Index", "User")" class="dropdown-item">  <i class="fas fa-user-shield nav-icon" style="margin-right:15px;"></i>   User </a></li>
+                                    if (CurrentUser.Details.IsMain == true || CurrentUser.Details.IsMain == null)
+                                    {
+                                        <li><a href="@Url.Action("MAI_Dealer", "MAI")" class="dropdown-item">  <i class="fas fa-users nav-icon" style="margin-right:15px;"></i>   Dealers</a></li>
+                                        <li><a href="@Url.Action("MAIVehicleMake", "MAI")" class="dropdown-item">  <i class="fas fa-car nav-icon" style="margin-right:19px;"></i>     Vehicle Makes</a></li>
+                                        <li><a href="@Url.Action("MyWallet", "Wallet")" class="dropdown-item">  <i class="fas fa-wallet nav-icon" style="margin-right:19px;"></i>   Wallet</a></li>
+                                    }
+                                }
+                            }
+                            @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Insurance)
+                            {
+                                if (CurrentUser.Details.UserRoleID == (int)UserRoleEnum.Administrator)
+                                {
+                                    <li><a href="@Url.Action("Index", "User")" class="dropdown-item">  <i class="fas fa-user-shield nav-icon" style="margin-right:15px;"></i>   User </a></li>
+                                    if (CurrentUser.Details.IsMain == true || CurrentUser.Details.IsMain == null)
+                                    {
+                                        <li><a href="@Url.Action("InsuranceBranchList", "Insurance")" class="dropdown-item">  <i class="fas fa-users nav-icon" style="margin-right:15px;"></i>   Branches</a></li>
+                                        <li><a href="@Url.Action("MyWallet", "Wallet")" class="dropdown-item">  <i class="fas fa-wallet nav-icon" style="margin-right:19px;"></i>   Wallet</a></li>
+                                    }
+                                }
+                            }
+                            <!-- /.End User Entities -->
+
+                            <li style="margin-top:5px;" class="dropdown-divider"></li>
+                            <li class="user-footer">
+                                <div style="float:left;">
+                                    <a href="@Url.Action("Index", "MyAccount")" class="btn btn-info btn-flat">My Account</a>
+                                </div>
+                                <div style="float:right;">
+                                    <a href="@Url.Action("LogOut", "Home")" class="nav-link btn btn-flat active" style="background-color:#DC3545; color:white;">Log out</a>
+                                </div>
+                            </li>
+
+                        </ul>
+
+                    </li><!-- /.End Dropdown -->
+
+                </ul><!-- /.Right navbar links -->
+            </nav><!-- /.navbar -->
+            <!-- LTO Entity -->
+            @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.LTO)
+            {
+                <script>
+                    var objtopnavbar = document.getElementById("topnavbar");
+                    objtopnavbar.remove();
+                </script>
+            <!-- Navbar -->
+                <nav class="main-header navbar navbar-expand-md navbar-primary navbar-dark" style="background: #960C0C;">
+                    <div class="container">
+
+                        <a id="dashboard_home" href="#" @*onclick="location.href='/'"*@ data-original-title="Homepage" class="navbar-brand">
+                            <img rel="tooltip" title="" src="~/Logos/LTOLogo.png" alt="Admin_Logo" class="brand-image img-circle elevation-3"
+                                 style="opacity: 100;  width:32px; height:32px;" onclick="location.href='/'">
+                            <span class="brand-text font-weight-normal" @*style="padding-top:10px;"*@>Home</span>
+                        </a>
+
+                        <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="fas fa-bars"></i>
+                        </button>
+
+                        <div class="collapse navbar-collapse order-3" id="navbarCollapse">
+                            <!-- Left navbar links -->
+                            <ul class="navbar-nav">
+                                <li id="topnav_dashboard" class="nav-item">
+                                    <a href="@Url.Action("Dashboard", "Home")" class="nav-link">Dashboard</a>
+                                </li>
+
+                                <li class="nav-item dropdown">
+                                    <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Vehicles</a>
+                                    <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                                        <li class="dropdown-submenu dropdown-hover">
+                                            <a style="margin-right:10px;" id="dropdownLTODealerSubMenu" tabindex="-1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item">
+                                                Registration Processing
+                                                <i class="fas fa-caret-right float-right"></i>
+                                            </a>
+                                            <ul aria-labelledby="dropdownLTODealerSubMenu" class="dropdown-menu border-0 shadow">
+                                                @if (CurrentUser.Details.SubReferenceID == 3)
+                                                {
+                                                    <li><a href="@Url.Action("SubmittedBatch", "LTO")" class="dropdown-item">Submitted </a></li>
+                                                    <li><a href="@Url.Action("AssessBatch", "LTO")" class="dropdown-item">Assessment</a></li>
+                                                }
+                                                <li><a href="@Url.Action("PaymentBatch", "LTO")" class="dropdown-item">Paid</a></li>
+                                                <li><a href="@Url.Action("CompletedBatch", "LTO")" class="dropdown-item">Completed</a></li>
+                                            </ul>
+                                        </li><!-- /.End Dropdown -->
+                                        <li class="dropdown-divider"></li>
+                                        <li class="dropdown-submenu dropdown-hover">
+                                            <a id="dropdownLTOMAISubMenu" tabindex="-1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item">
+                                                CSR Processing
+                                                <i class="fas fa-caret-right float-right"></i>
+                                            </a>
+                                            <ul aria-labelledby="dropdownLTOMAISubMenu" class="dropdown-menu border-0 shadow">
+                                                <li><a href="@Url.Action("CSRSubmittedBatch", "LTO")" class="dropdown-item">Submitted </a></li>
+                                                <li><a href="@Url.Action("CSRAssessBatch", "LTO")" class="dropdown-item">Assessment</a></li>
+                                                <li><a href="@Url.Action("CSRPaymentBatch", "LTO")" class="dropdown-item">Paid</a></li>
+                                                <li><a href="@Url.Action("CSRCompletedBatch", "LTO")" class="dropdown-item">Completed</a></li>
+                                            </ul>
+                                        </li><!-- /.End Dropdown -->
+                                    </ul>
+                                </li><!-- /.End Dropdown -->
+                            </ul>
+                        </div>
+                    </div>
+                    <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-md-auto">
+                        <!-- My Account -->
+                        <li class="nav-item dropdown">
+
+                            <a style="margin-bottom:8px;" id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link active dropdown-toggle">
+                                <img src="~/Scripts/Admin_temp/dist/img/user2-160x160.jpg" style="width:33px; height:33px; margin-right:5px;" class="user-image img-circle" alt="User Image">
+                                <span class="hidden-xs">@CurrentUser.Details.FirstName</span>
+                            </a>
+
+                            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow dropdown-menu-lg-right" style="width:250px; ">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <img src="~/Scripts/Admin_temp/dist/img/user2-160x160.jpg" class="img-circle" style="width: 90px;height: 90px;" alt="User Image">
+                                    <p>
+                                        @CurrentUser.Details.FirstName @CurrentUser.Details.LastName
+                                        <small>@CurrentUser.Details.EmailAddress</small>
+                                    </p>
+
+                                <li style="margin-top:5px;" class="dropdown-divider"></li>
+                                <li class="user-footer">
+                                    <div style="float:left;">
+                                        <a href="@Url.Action("Index", "MyAccount")" class="btn btn-info btn-flat">My Account</a>
+                                    </div>
+                                    <div style="float:right;">
+                                        <a href="@Url.Action("LogOut", "Home")" class="nav-link btn btn-flat active" style="background-color:#DC3545; color:white;">Log out</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li><!-- /.End Dropdown -->
+                    </ul><!-- /.Right navbar links -->
+                </nav><!-- /.navbar -->
+            }<!-- /.End UserEntityEnum LTO -->
+            <!-- /.LTO Entity -->
+            <!-- Content Wrapper. Contains page content -->
+            <div id="home_content" class="content-wrapper">
+                @RenderBody()
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                @*<h1 class="m-0 text-dark"> Top Navigation <small>Example 3.0</small></h1>*@
+                            </div><!-- /.col -->
+
+                        </div><!-- /.row -->
+                    </div><!-- /.container-fluid -->
+                </div>
+                <!-- /.content-header -->
+                <!-- Main content -->
+                <div class="content">
+                    <div class="container">
+                        <div class="row">
+                        </div><!-- /.row -->
+                    </div><!-- /.container-fluid -->
+                </div><!-- /.content -->
+
+            </div><!-- /.content-wrapper -->
+            <!-- Control Sidebar -->
+            <aside class="control-sidebar control-sidebar-dark">
+                <!-- Control sidebar content goes here -->
+            </aside><!-- /.control-sidebar -->
+            <!-- Main Footer -->
+
+        </div><!-- ./wrapper -->
+        @*SPINNER*@
+        <div class="overlay-spinner" style="display:none" id="spinnerDiv">
+            <div class="spinner"></div>
+        </div>
+        <!-- REQUIRED SCRIPTS -->
+        <!-- DataTables -->
+        <link href="~/scripts/Admin_temp/pace-progress/themes/green/pace-theme-flat-top.css" rel="stylesheet" />
+        <script src="~/scripts/Admin_temp/pace-progress/pace.min.js"></script>
+
+        <link rel="stylesheet" href="~/Scripts/Admin_temp/datatables-bs4/css/dataTables.bootstrap4.min.css">
+        <script src="~/Scripts/Admin_temp/datatables/jquery.dataTables.min.js"></script>
+        <script src="~/Scripts/Admin_temp/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+        <script src="~/Scripts/Admin_temp/datatables-buttons/js/dataTables.buttons.min.js"></script>
+
+        <script src="~/scripts/Admin_temp/select2/js/select2.full.min.js"></script>
+        <script src="~/scripts/Admin_temp/jquery-ui/jquery-ui.min.js"></script>
+        <script src="~/scripts/Additional/lightbox2/dist/js/lightbox.min.js"></script>
+        <script src="~/scripts/Additional/fancybox-master/dist/jquery.fancybox.min.js"></script>
+        <script src="~/scripts/Additional/progress-tracker/docs/scripts/site.js"></script>
+        <script src="~/scripts/Introjs/js/intro.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js" integrity="sha512-BmM0/BQlqh02wuK5Gz9yrbe7VyIVwOzD1o40yi1IsTjriX/NGF37NyXHfmFzIlMmoSIBXgqDiG1VNU6kB5dBbA==" crossorigin="anonymous"></script>
+
+        @*<script src="~/scripts/Home_temp/lib/popper/popper.min.js"></script>*@
+        <!-- jQuery -->
+        @*<script src="~/scripts/Admin_temp/jquery/jquery.min.js"></script>*@
+        <!-- Bootstrap 4 -->
+        <script src="~/scripts/Admin_temp/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="~/scripts/Admin_temp/dist/js/adminlte.min.js"></script>
+    </body>
+</html>
+<script>
+
+    //// Clicking dropdown button will toggle display
+    //function btnToggle() {
+    //    document.getElementById("demo").classList.toggle("show");
+    //}
+
+    //// Prevents menu from closing when clicked inside
+    //document.getElementById("demo").addEventListener('click', function (event) {
+    //    alert("click outside");
+    //    event.stopPropagation();
+    //});
+
+    //// Closes the menu in the event of outside click
+    //window.onclick = function (event) {
+    //    if (!event.target.matches('.dropbutton')) {
+
+    //        var dropdowns =
+    //        document.getElementsByClassName("nav-item dropdown");
+
+    //        var i;
+    //        for (i = 0; i < dropdowns.length; i++) {
+    //            var openDropdown = dropdowns[i];
+    //            if (openDropdown.classList.contains('show')) {
+    //                openDropdown.classList.remove('show');
+    //            }
+    //        }
+    //    }
+    //}
+    $('.dropdown-toggle').dropdown()
+
+    //$('.data-toggle').dropdown()
+    //$("#dropdownSubMenu2").toggleClass("shadow show");
+    //$("#dropdownSubMenu1").toggleClass("shadow show");
+    //$('.collapse').collapse()
+    //$("#dropdownSubMenu2").click(function () {
+    //    $(this).dropdown("toggle");
+    //});
+    //SPINNER
+    $('form').submit(function (e) {
+        //alert('submit!');
+        jQuery.noConflict();
+        if ($(this).closest('form').valid()) {
+            $('#spinner').show();
+        }
+    });
+    /*<!-- back to top scroll code -->*/
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 50) {
+                $('#back-to-top').fadeIn();
+            } else {
+                $('#back-to-top').fadeOut();
+            }
+        });
+        //// scroll body to 0px on click
+        //$('#back-to-top').click(function () {
+        //    $('#back-to-top').tooltip('hide');
+        //    $('body,html').animate({
+        //        scrollTop: 0
+        //    }, 800);
+        //    return false;
+        //});
+
+        //$('#back-to-top').tooltip('hide');
+
+    });
+    /*<!-- /end back to top scroll code -->*/
+    $(document).ajaxStart(function () { Pace.restart(); });
+
+
+    $("#myaccount_notif").click(function () {
+        $(this).dropdown("toggle");
+    });
+
+
+    $("#left_nav_dashboard").toggleClass("menu-open");
+    $("#left_nav_dashboard").toggleClass("active");
+    $("#left_nav_batchprocess").toggleClass("menu-open");
+
+    $(".select2").select2({
+        theme: 'bootstrap4'
+    });
+
+    var all_table = $(".table").DataTable({
+        "scrollX": true,
+        "scrollY": true,
+        "info": true,
+        "lengthChange": false,
+        "order": [],
+        "dom":
+            "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+    });
+
+    //$('a[data-toggle="tab"]').on('click', function (e) {
+    //    setTimeout(function () {
+    //        all_table.columns.adjust();
+    //    }, 400);
+    //});
+    //$('[data-toggle="modal"]').on('click', function () {
+    //    setTimeout(function () {
+    //        all_table.columns.adjust();
+    //    }, 400);
+    //});
+    $("select option[value='']").attr("disabled", true);
+    $("input[type='date']").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        showAnim: "slide",
+        dateFormat: 'yy-mm-dd',
+        yearRange: "-100:+10"
+    });
+
+    $(".select2").on("change", function () {
+        $(".select2").trigger("click");
+    });
+
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+
+    $.fancybox.defaults.animationEffect = "circular";
+    $('[data-fancybox]').fancybox({
+        toolbar: true,
+        //smallBtn: true,
+        buttons: [
+            "zoom",
+            //"share",
+            "slideShow",
+            "fullScreen",
+            //"download",
+            "thumbs",
+            "close"
+        ],
+        iframe: {
+            preload: false,
+        }
+    });
+
+    /////////// Tool Tip ///////
+    //$(function () {
+    //    $('[data-toggle="tooltip"]').tooltip()
+    //    $("[rel='tooltip']").tooltip();
+    //})
+
+    //
+    jQuery.noConflict();
+    all_table.columns.adjust();
+    $(document).ready(function (e) {
+        all_table.columns.adjust();
+    });
+    $(document).on('shown.bs.modal', '.modal', function (e) {
+        all_table.columns.adjust();
+    });
+    $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
+        all_table.columns.adjust();
+    });
+</script>
+<style>
+    .row {
+        margin: 0px;
+    }
+
+    .custom-file-label {
+        font-size: 1rem;
+        font-weight: 400;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .pagination {
+        float: left !important;
+    }
+
+    /*SPINNER*/
+    .overlay-spinner {
+        position: fixed;
+        z-index: 99999;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: rgba(0,0,0,.7);
+    }
+
+    .spinner {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        height: 60px;
+        width: 60px;
+        margin: 0px auto;
+        -webkit-animation: rotation .6s infinite linear;
+        -moz-animation: rotation .6s infinite linear;
+        -o-animation: rotation .6s infinite linear;
+        animation: rotation .6s infinite linear;
+        border-left: 6px solid rgba(0,174,239,.15);
+        border-right: 6px solid rgba(0,174,239,.15);
+        border-bottom: 6px solid rgba(0,174,239,.15);
+        border-top: 6px solid rgba(0,174,239,.8);
+        border-radius: 100%;
+    }
+
+    @@-webkit-keyframes rotation {
+        from {
+            -webkit-transform: rotate(0deg);
+        }
+
+        to {
+            -webkit-transform: rotate(359deg);
+        }
+    }
+
+    @@-moz-keyframes rotation {
+        from {
+            -moz-transform: rotate(0deg);
+        }
+
+        to {
+            -moz-transform: rotate(359deg);
+        }
+    }
+
+    @@-o-keyframes rotation {
+        from {
+            -o-transform: rotate(0deg);
+        }
+
+        to {
+            -o-transform: rotate(359deg);
+        }
+    }
+
+    @@keyframes rotation {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(359deg);
+        }
+    }
+</style>

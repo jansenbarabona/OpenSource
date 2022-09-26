@@ -1,0 +1,257 @@
+﻿@using VehicleRegistration.Models
+@using VehicleRegistration.Tools;
+@model  DealerVehicleMakeModel
+@{
+    ViewBag.Title = "Dealer Vehicle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #filter_adjust {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        margin-left: 7.5px;
+    }
+
+    /*nav.main-header.navbar.navbar-expand-md.navbar-primary.navbar-dark {
+        background: #7B0303;
+    }*/
+</style>
+
+@Html.Partial("_Confirmation")
+@using (Html.BeginForm("DealerVehicleMake", "Dealer", new { enctype = "multipart/form-data" }))
+{
+    <!-- Main content -->
+    @Html.AntiForgeryToken()
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6><i class="nav-icon fas fa-warehouse"></i> Vehicle Make List <small> </small></h6>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            @*<input type="button" data-toggle="modal" data-target="#modal-vehicle_list" value="Create New" class="btn btn-info btn-block"> </>*@
+
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="fab" type="button" name="btnSubmit" data-toggle="modal" title="Create New" data-target="#modal-vehicle_list"> + </div>
+                    <div class="card-body">
+                        @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.DataBridgeAsia)
+                        {
+                            <div class="row" id="filter_adjust">
+                                <div class="col-sm-12 col-md-3 col-lg-3">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Dealer </span>
+                                        </div>
+                                        @Html.DropDownListFor(m => m.DealerID, new SelectList(Model.DealerList, "DealerID", "DealerName"), "Select Dealer", new { @class = "form-control select2" })
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        <div class="row" style="margin-top:5px">
+                            <div class="col">
+                                <div id="getVehicleSelectedList">
+                                    @{
+                                        Html.RenderPartial("_VehicleMakeSelectedList", Model.vwDealerVehicleMakeModelList);
+                                    }
+                                    @*<table id="Dealer_Vehicle_list_tbl" class="table table-bordered table-striped table-hover" style="width:100%; max-width:100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:1030px;">Vehicle Name</th>
+                                                    <th style="width:100px;">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.vwDealerVehicleMakeModelList)
+                                                {
+                                                    <tr>
+                                                        <td style="max-width:850px;" id="dealervehicle" data-dealerID="@item.DealerID" data-dealerNM="@item.DealerName" data-dealervehiclemakeID="@item.DealerVehicleMakeID" data-vehiclemakeID="@item.VehicleMakeID">@item.VehicleMakeName</td>
+                                                        <td>
+                                                            <center>
+                                                                <button style="max-width:100px;" type="button" class="delete_item btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-delete"><i class="fa fa-trash"></i></button>
+                                                            </center>
+                                                        </td>
+                                                    </tr>
+                                                }
+
+                                            </tbody>
+                                        </table>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    @*Confirmation modal*@
+    <label id="index_selected"></label>
+    <label id="vehicle_id_selected" hidden></label>
+    <label id="dealer_id_selected" hidden></label>
+
+
+
+
+    @*Vehicle List*@
+    <div class="modal fade" id="modal-vehicle_list">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                @*@Html.AntiForgeryToken()*@
+                <div class="modal-header">
+                    <h4 class="modal-title" style="text-align:center">List of Vehicle Make's</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col">
+                            <div id="getVehicleList">
+                                @{
+                                    Html.RenderPartial("_VehicleMakeList", Model.VehicleMakeModelList, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "VehicleMakeModelList" } });
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" name="submit" value="Save" class="btn btn-primary">Add</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+}
+<script>
+    $("#selected_holder").text();
+    var index_holder = "";
+    var vehicle_id_holder = "";
+    var dealervehicle_id_holder = "";
+    var dealer_id_holder = 0;
+
+    $(".delete_item").on("click", function () {
+        index_holder = $(this).closest("tr").index();
+        vehicle_id_holder = $(this).closest("tr").find("#dealervehicle").attr("data-vehiclemakeID");
+        dealervehicle_id_holder = $(this).closest("tr").find("#dealervehicle").attr("data-dealervehiclemakeID");
+        if ($("#DealerID option:selected").val() != undefined)
+            dealer_id_holder = $("#DealerID option:selected").val();
+    });
+
+    var addAntiForgeryToken = function (data) {
+        data.__RequestVerificationToken = $("[name='__RequestVerificationToken']").val();
+        return data;
+    };
+
+    $("#btn_delete").click(function () {
+        $.ajax({
+            url: '@Url.Action("DealerVehicleMake_deletes", "Dealer")',
+            type: "POST",
+            data: addAntiForgeryToken({
+                dealervehicle_id: dealervehicle_id_holder,
+                dealerid: dealer_id_holder,
+            }),
+            //dataType: 'json',
+            success: function (result) {
+                $('#modal-delete').modal('toggle');
+                location.reload();
+                $("#Dealer_Vehicle_list_tbl").row(index_holder).remove().draw();
+            }
+        });
+    });
+
+    var tbl_VehicleList;
+    $("#DealerID").on("change", function () {
+        $('#spinnerDiv').show();
+        $.ajax({
+            url: '@Url.Action("GetDealerVehicleMake", "Dealer")',
+            type: "POST",
+            data: addAntiForgeryToken({ "DealerID": $("#DealerID").val() }),
+            cache: false,
+            async: true,
+            success: function (response) {
+                $("#getVehicleList").html(response);
+
+                $.ajax({
+                    url: '@Url.Action("GetDealerVehicleMakeSelected", "Dealer")',
+                    type: "POST",
+                    data: addAntiForgeryToken({ "DealerID": $("#DealerID").val() }),
+                    cache: false,
+                    async: true,
+                    success: function (response) {
+                        $("#getVehicleSelectedList").html(response);
+
+                        all_table = $(".table").DataTable({
+                            "scrollX": true,
+                            "scrollY": true,
+                            "info": true,
+                            "lengthChange": false,
+                            "order": [],
+                            "dom":
+                                "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                                "<'row'<'col-sm-12'tr>>" +
+                                "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                        });
+
+                        $(".delete_item").on("click", function () {
+                            index_holder = $(this).closest("tr").index();
+                            vehicle_id_holder = $(this).closest("tr").find("#dealervehicle").attr("data-vehiclemakeID");
+                            dealervehicle_id_holder = $(this).closest("tr").find("#dealervehicle").attr("data-dealervehiclemakeID");
+                            if ($("#DealerID option:selected").val() != undefined)
+                                dealer_id_holder = $("#DealerID option:selected").val();
+                        });
+
+                        $(document).on('shown.bs.modal', '.modal', function (e) {
+                            all_table.columns.adjust();
+                        });
+                        $('#spinnerDiv').hide();
+                    },
+                    error: function (xhr, status, error) {
+                        alert(xhr.responseText);
+                        $('#spinnerDiv').hide();
+                    }
+                });
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+                $('#spinnerDiv').hide();
+            }
+        });
+    });
+
+
+
+    // Handle form submission event
+    $('form').on('submit', function (e) {
+        var form = this;
+
+        // Encode a set of form elements from all pages as an array of names and values
+        var params = all_table.$('input,select,textarea').serializeArray();
+
+        // Iterate over all form elements
+        $.each(params, function () {
+            // If element doesn't exist in DOM
+            if (!$.contains(document, form[this.name])) {
+                // Create a hidden element
+                $(form).append(
+                    $('<input>')
+                        .attr('type', 'hidden')
+                        .attr('name', this.name)
+                        .val(this.value)
+                );
+            }
+        });
+    });
+</script>
+

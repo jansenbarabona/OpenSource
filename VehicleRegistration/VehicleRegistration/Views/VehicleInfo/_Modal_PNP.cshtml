@@ -1,0 +1,266 @@
+﻿@using VehicleRegistration.Models
+﻿@using VehicleRegistration.Tools
+@model PNPModel
+
+<style>
+    div#ui-datepicker-div.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all {
+        z-index: 2051 !important;
+    }
+</style>
+<div class="modal fade" id="modal-PNP">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><label id="lblModalTitle">PNP Information</label></h4>
+            </div>
+            <div class="modal-body">
+                <div class="row" id="HPGRow">
+                    <div class="form-group col-6">
+                        @Html.LabelFor(m => m.HPGControlNumber)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-id-card"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.HPGControlNumber, new { placeholder = "HPG Control Number", @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.HPGControlNumber, "", new { @class = "" })
+                    </div>
+                    <div class="form-group col-6">
+                        @Html.LabelFor(m => m.PNPFile)
+                        <div class="input-group">
+                            <a class="input-group-prepend" href="//:0" data-fancybox data-caption="&lt;b&gt;This image is BOC Certification OF Payment.">
+                                <span class="input-group-text"><i class="fa fa-image"></i></span>
+                            </a>
+                            <div class="custom-file">
+                                @Html.TextBoxFor(m => m.PNPFile,
+           new
+           {
+               placeholder = "PNP File",
+               @class = "custom-file-input",
+               type = "file",
+               accept = ".jpg,.jpeg,.png,.pdf"
+           })
+                                @Html.LabelFor(m => m.PNPFile, "Choose file",
+           new
+           {
+               @class = "custom-file-label",
+           })
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.PNPFile, "", new { @class = "" })
+                    </div>
+                </div>
+                @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Dealer)
+                {
+                    <div class="row">
+                        <div class="icheck-success d-inline">
+                            @Html.CheckBoxFor(o => o.AutoPNP)
+                            @Html.LabelFor(o => o.AutoPNP)
+                        </div>
+                    </div>
+                    <div class="row" id="PNPReceiptRow" style="display:none">
+                        <div class="form-group col-6">
+                            @Html.LabelFor(m => m.PNPReceiptReferenceNumber)
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-id-card"></i> </span>
+                                </div>
+                                @Html.TextBoxFor(m => m.PNPReceiptReferenceNumber, new { placeholder = "Reference Number", @class = "form-control" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.PNPReceiptReferenceNumber, "", new { @class = "" })
+                        </div>
+                        <div class="form-group col-6">
+                            @Html.LabelFor(m => m.PNPReceiptFile)
+                            <div class="input-group">
+                                <a class="input-group-prepend" href="//:0" data-fancybox data-caption="&lt;b&gt;This image is PNP Receipt.">
+                                    <span class="input-group-text"><i class="fa fa-image"></i></span>
+                                </a>
+                                <div class="custom-file">
+                                    @Html.TextBoxFor(m => m.PNPReceiptFile,
+           new
+           {
+               placeholder = "Receipt",
+               @class = "custom-file-input",
+               type = "file",
+               accept = ".jpg,.jpeg,.png,.pdf"
+           })
+                                    @Html.LabelFor(m => m.PNPReceiptFile, "Choose file",
+           new
+           {
+               @class = "custom-file-label",
+           })
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.PNPReceiptFile, "", new { @class = "" })
+                        </div>
+                    </div>
+
+                }
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" id="btn_pnp" class="btn btn-primary" @*data-dismiss="modal" data-toggle="modal" data-target="#modal-BOC-Confirmation" *@>Update PNP</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-PNP-Confirmation" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Are you sure you want to save?</h4>
+            </div>
+            <div id="modal-body-pnp-confirmation" class="modal-body">
+                <div class="row" id="HPGConfirmationRow">
+                    <div class="form-group col-6">
+                        @Html.LabelFor(m => m.HPGControlNumber): <label id="lbl_HPG"></label>
+                    </div>
+                    <div class="form-group col-6">
+                        @Html.LabelFor(m => m.PNPFile): <label id="lbl_PNPFile"></label>
+                    </div>
+
+                </div>
+                <div class="row" id="AutoPNPConfirmationRow" style="display:none">
+                    <div class="col-12">
+                        <label>Application for PNP Certificate submitted</label>
+                    </div>
+                    <div class="form-group col-6">
+                        @Html.LabelFor(m => m.PNPReceiptReferenceNumber): <label id="lbl_PNPReceiptReferenceNumber"></label>
+                    </div>
+                    <div class="form-group col-6">
+                        @Html.LabelFor(m => m.PNPReceiptFile): <label id="lbl_PNPReceipt"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" id="btn_pnp_confirmation_close" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" name="submit" value="PNP" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    //$(document).ready(function () {
+    //    $(window).width(function () {
+    //        if ($(this).width() < 770) {
+    //            $("#batch_filter_adjust").css({ "position": "static", "margin-bottom": "10px", "z-index": "1" });
+    //        } else {
+
+    //            $("#batch_filter_adjust").css({ "position": "fixed", "margin-bottom": "10px", "z-index": "1" });
+    //        }
+    //    });
+    //});
+    $('#btn_pnp').click(function () {
+
+        $("#lbl_HPG").text($("#PNPInfo_HPGControlNumber").val());
+        $("#lbl_PNPFile").text($("#PNPInfo_PNPFile").val().replace('C:\\fakepath\\', ''));
+    
+        @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Dealer)
+        {
+            <text>
+                $("#lbl_PNPReceiptReferenceNumber").text($("#PNPInfo_PNPReceiptReferenceNumber").val());
+                $("#lbl_PNPReceipt").text($("#PNPInfo_PNPReceiptFile").val().replace('C:\\fakepath\\', ''));
+            </text>
+        }
+        if (jQuery("form").valid()) {
+            $("#modal-PNP").modal("hide");
+            $("#modal-PNP-Confirmation").modal("show");
+        }
+
+        //if ($("#vehiclelist_tbody tr").length == 0) {
+        //    if (jQuery("form").valid()) {
+        //        $("#modal-PNP").modal("hide");
+        //        $("#modal-PNP-Confirmation").modal("show");
+        //    }
+        //}
+        //else if ($("#vehiclelist_tbody tr").length > 0) {
+        //    if (jQuery("form").valid()) {
+        //        $("#modal-PNP").modal("hide");
+        //        jQuery.noConflict();
+        //        if (jQuery.fn.DataTable.isDataTable('#tbl_listofsummary')) {
+        //            jQuery('#tbl_listofsummary').DataTable().clear();
+        //            jQuery('#tbl_listofsummary').DataTable().destroy();
+        //        }
+
+        //        if ($("#summarry_thead tr").length == 0) {
+        //            $("#modal-body-pnp-confirmation").append("" +
+        //                "<table id='tbl_listofsummary' class='table table-bordered table-striped table-hover' style='width:100%; max-width:100%;'>" +
+        //                "   <thead id='summarry_thead'>" +
+        //                "       <tr>" +
+        //                "           <th style='width:25%'>Make</th>" +
+        //                "           <th style='width:25%'>Model</th>" +
+        //                "           <th style='width:25%'>Engine</th>" +
+        //                "           <th style='width:25%'>Body</th>" +
+        //                "       </tr>" +
+        //                "   </thead>" +
+        //                "   <tbody id='summarry_tbody'>" +
+        //                "   </tbody>" +
+        //                "</table>");
+        //        }
+
+        //        $("#vehiclelist_tbody .checkbox_all:checkbox:checked").each(function () {
+        //            var tr = $(this).closest("tr");
+        //            var make = tr.find("td:eq(1)").text().trim();
+        //            var model = tr.find("td:eq(2)").text().trim();
+        //            var engine = tr.find("td:eq(5)").text().trim();
+        //            var body = tr.find("td:eq(6)").text().trim();
+        //            $("#tbl_listofsummary #summarry_tbody").append("" +
+        //                "<tr>" +
+        //                "    <td>" + make + "</td>" +
+        //                "    <td>" + model + "</td>" +
+        //                "    <td>" + engine + "</td>" +
+        //                "    <td>" + body + "</td>" +
+        //                "</tr>");
+        //        });
+
+        //        jQuery.noConflict();
+        //        var summary_tbl = jQuery("#tbl_listofsummary").DataTable({
+        //            "scrollX": true,
+        //            "scrollY": true,
+        //            "info": false,
+        //            "lengthChange": false,
+        //            "searching": false,
+        //            "paging": false,
+        //            "order": [],
+        //            "dom":
+        //                "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+        //                "<'row'<'col-sm-12'tr>>" +
+        //                "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+        //        });
+
+        //        $(document).on('shown.bs.modal', '.modal', function (e) {
+        //            summary_tbl.columns.adjust();
+        //        });
+        //        $("#modal-PNP-Confirmation").modal("show");
+
+        //    }
+        //}
+    });
+
+    $("#btn_pnp_confirmation_close").click(function () {
+        $("#modal-PNP").modal("show");
+    });
+
+    $(document).ready(function () {
+        $('#PNPInfo_AutoPNP').change(function () {
+            if (this.checked) {
+
+                $('#HPGRow').hide();
+                $('#PNPReceiptRow').show();
+                $('#HPGConfirmationRow').hide();
+                $('#AutoPNPConfirmationRow').show();
+
+            }
+            else {
+                $('#HPGRow').show();
+                $('#PNPReceiptRow').hide();
+                $('#HPGConfirmationRow').show();
+                $('#AutoPNPConfirmationRow').hide();
+            }
+
+        });
+    });
+
+</script>

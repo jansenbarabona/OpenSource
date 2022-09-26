@@ -1,0 +1,312 @@
+﻿@using VehicleRegistration.Models
+﻿@using VehicleRegistration.Tools
+@model LTOPayment
+<style>
+    #batch_filter_adjust {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        margin-left: 7.5px;
+    }
+
+    /*nav.main-header.navbar.navbar-expand-md.navbar-primary.navbar-dark {
+        background: #7B0303;
+    }*/
+</style>
+@{
+    ViewBag.Title = "LTO Payment Batch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("ForLTO_Payment", "VehicleInfo", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    @Html.AntiForgeryToken()
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6><i class="nav-icon fas fa-file-signature"></i>For Payment - Batch List  <small> </small></h6>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="check btn-info" id="btn_or-cr" type="button" name="submit" value="OR" data-toggle="tooltip" title="Submit for OR/CR Processing">
+                            <i class="fas fa-paper-plane" style="margin-top:12px; padding-right:5px;"></i>
+                        </div>
+                        @Html.HiddenFor(m => m.SelectedBatchID)
+                        <div class="row" style="margin-top:5px">
+                            <div class="col">
+                                <div id="getBatchList">
+
+                                    @{
+                                        Html.RenderPartial("_PaymentBatchList", Model.BatchList);
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header row">
+                        <h6 class="col-6"><i class="nav-icon fas fa-file-signature"></i> Vehicle List  <small> </small></h6>
+                        <div class="col-6">
+                            <h6>
+                                Batch Reference: <label id="lbl_batchreference"></label>
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="VehicleListTable">
+                            @{
+                                Html.RenderPartial("_PaymentBatchDetails", Model.VehicleList, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "VehicleList" } });
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="modal-payment">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><label id="lblModalTitle">Payment</label></h4>
+                </div>
+                <div id="modal-body-payment" class="modal-body">
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(m => m.PaymentRef)
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fas fa-barcode"></i> </span>
+                                </div>
+                                @Html.TextBoxFor(m => m.PaymentRef, new { placeholder = "Reference Number", @class = "form-control", type = "text" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.PaymentRef, "", new { @class = "" })
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(m => m.PaymentFile)
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-image"></i></span>
+                                </div>
+                                <div class="custom-file">
+                                    @Html.TextBoxFor(m => m.PaymentFile,
+                               new
+                               {
+                                   placeholder = "File",
+                                   @class = "custom-file-input",
+                                   type = "file",
+                                   accept = ".jpg,.jpeg,.png,.pdf"
+                               })
+                                    @Html.LabelFor(m => m.PaymentFile, "Choose file",
+                               new
+                               {
+                                   @class = "custom-file-label",
+                               })
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.PaymentFile, "", new { @class = "" })
+                        </div> <!--COC File form-group// -->
+
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            @Html.LabelFor(m => m.EPATFile)
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-image"></i></span>
+                                </div>
+                                <div class="custom-file">
+                                    @Html.TextBoxFor(m => m.EPATFile,
+                               new
+                               {
+                                   placeholder = "File",
+                                   @class = "custom-file-input",
+                                   type = "file",
+                                   accept = ".jpg,.jpeg,.png,.pdf"
+                               })
+                                    @Html.LabelFor(m => m.EPATFile, "Choose file",
+                               new
+                               {
+                                   @class = "custom-file-label",
+                               })
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.EPATFile, "", new { @class = "" })
+                        </div>
+                    </div>
+                    <hr />
+                    <h4 class="modal-title"><label id="lblModalTitle">Pick up</label></h4>
+                    <div class="row">
+                        <div id="LTO" class="form-group col-lg-6">
+                            @Html.LabelFor(m => m.LTOList)
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+
+                                    <span class="input-group-text" id="role"> <i class="fas fa-user-shield"></i> </span>
+                                </div>
+                                @Html.DropDownListFor(m => m.LTOID, new SelectList(Model.LTOList, "LTOID", "LTONAme"), "Select LTO Region", new { @class = "form-control select2" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.LTOID, "", new { @class = "" })
+                        </div> <!-- form-group// -->
+
+                        <div id="LTOBranch" class="form-group col-lg-6">
+                            @Html.LabelFor(m => m.LTOBranchList)
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+
+                                    <span class="input-group-text" id="role"> <i class="fas fa-user-shield"></i> </span>
+                                </div>
+                                @Html.DropDownListFor(m => m.LTOBranchID, new SelectList(Model.LTOBranchList, "LTOBranchID", "LTOBranchName"), "Select LTO District", new { @class = "form-control select2" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.LTOBranchID, "", new { @class = "" })
+                        </div> <!-- form-group// -->
+                    </div>
+
+                </div>
+
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.MAI)
+                    {
+                        <button type="submit" name="submit" value="payment" id="submit_or-cr" class="btn btn-primary">For CSR Processing</button>
+                    }
+                    else
+                    {
+                        <button type="submit" name="submit" value="payment" id="submit_or-cr" class="btn btn-primary">For ORCR Processing</button>
+
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    var addAntiForgeryToken = function (data) {
+        data.__RequestVerificationToken = $("[name='__RequestVerificationToken']").val();
+        return data;
+    };
+
+    $("#btn_or-cr").click(function () {
+        if ($("#SelectedBatchID").val() != 0) {
+            $("#modal-payment").modal("show");
+        } else {
+            toastr.warning("Please choose a batch!");
+        }
+    });
+    $("#submit_or-cr").click(function (e) {
+        if ($("#vehiclelist_tbody").find(".rowclick").length == 0) {
+            toastr.warning("Please choose a batch!");
+            e.preventDefault();
+        }
+    })
+
+
+    $("#SelectedDealerID").on("change", function () {
+        $('#spinnerDiv').show();
+        $('#tbl_VehicleList').find('tbody').empty();
+        $.ajax({
+            url: '@Url.Action("GetPaymentBatchList", "LTO")',
+            type: "POST",
+            data: addAntiForgeryToken({ "DealerID": $("#SelectedDealerID").val() }),
+            cache: false,
+            async: true,
+            success: function (response) {
+                $("#getBatchList").html(response);
+
+                $("#tbl_list").DataTable({
+                    "scrollX": true,
+                    "scrollY": true,
+                    "info": false,
+                    "lengthChange": false,
+                    "order": [],
+                    "dom":
+                        "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                });
+                $('#spinnerDiv').hide();
+
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+                $('#spinnerDiv').hide();
+            }
+        });
+    });
+    $('#Header_vehiclelist_tbody tr').click(function (event) {
+        $('#spinnerDiv').show();
+        $("#SelectedBatchID").val($(this).find('input[type=hidden]').val());
+        $("#lbl_batchreference").text($(this).find('td.col_batchreference').text().trim());
+        $.ajax({
+            url: '@Url.Action("GetPaymentVehicleList", "LTO")',
+            type: "POST",
+            data: addAntiForgeryToken({ "BatchID": $(this).find('input[type=hidden]').val() }),
+            cache: false,
+            async: true,
+            success: function (response) {
+                $("#VehicleListTable").html(response);
+
+                tbl_VehicleList = $("#tbl_VehicleList").DataTable({
+                    "scrollX": true,
+                    "scrollY": true,
+                    "info": false,
+                    "lengthChange": false,
+                    "order": [],
+                    "dom":
+                        "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                });
+
+
+                $('#spinnerDiv').hide();
+
+                //$("#modal-assess").modal("show");
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+                $('#spinnerDiv').hide();
+            }
+        });
+    });
+
+   $("#LTOID").on("change", function () {
+        var reference_id = $(this).val();
+       $("#LTOBranchID").find("option:gt(0)").remove();
+       //LTO block
+                 $.ajax({
+                    url: '@Url.Action("GetLTO_SubReferenceID", "GetData")',
+                    type: "GET",
+                    dataType: "JSON",
+                    cache: false,
+                    data: { "reference_id": reference_id },
+                    success: function (response) {
+                        $.each(response, function (index, value) {
+                            var o = new Option(value.LTOBranchName, value.LTOBranchID);
+                            $("#LTOBranchID").append($(o));
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        alert(error);
+                    }
+                });
+    });
+</script>

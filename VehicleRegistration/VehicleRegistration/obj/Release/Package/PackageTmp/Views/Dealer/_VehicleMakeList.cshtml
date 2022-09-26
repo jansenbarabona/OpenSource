@@ -1,0 +1,43 @@
+﻿@using VehicleRegistration.Models
+@model List<VehicleMakeModel>
+
+
+<table id="Vehicle_list_tbl" class="table table-bordered table-striped table-hover" style="width:100%; table-layout:auto;">
+    <thead>
+        <tr>
+            <th style="width:10%;"></th>
+            <th style="width:90%;">Vehicle Name</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @{
+            int i = 0;
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td style="width:10%;">
+                        <div class="icheck-success d-inline">
+                            @Html.CheckBoxFor(o => item.isChecked, new { id = i, Name = "VehicleMakeModelList[" + i + "].isChecked" })
+                            <label for="@i"></label>
+                        </div>
+                    </td>
+                    <td style="width:90%;" id="vehicle_name">
+                        @Html.DisplayFor(o => item.VehicleMakeName,
+                       new
+                       {
+                           Name = "VehicleMakeModelList[" + i + "].VehicleMakeName"
+                       })
+                        @Html.HiddenFor(o => item.VehicleMakeID,
+                       new
+                       {
+                           Name = "VehicleMakeModelList[" + i + "].VehicleMakeID"
+                       })
+                    </td>
+                </tr>
+                i++;
+            }
+        }
+
+    </tbody>
+</table>

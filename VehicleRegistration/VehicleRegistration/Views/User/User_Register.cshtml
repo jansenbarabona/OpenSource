@@ -1,0 +1,497 @@
+﻿@using VehicleRegistration.Models
+@using VehicleRegistration.Tools
+@model UserModel
+@{
+    ViewBag.Title = "User_Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Back" onclick="location.href='@Url.Action("Index", "User")'">
+                    @*<i class="close"></i>*@
+                    <i class="far fa-times-circle"></i>
+                    @*<i class="far fa-arrow-alt-circle-right"></i>*@
+                </button>
+            </div>
+            <h6><i class="nav-icon fas fa-users-cog"></i> User Admin Registration Form   <small></small></h6>
+        </div>
+        <!-- /.card-header -->
+        <article class="card-body">
+            @using (Html.BeginForm("User_Register", "User", null, FormMethod.Post, new { enctype = "multipart/form-data", user_id = Model.UserID }))
+            {
+                @Html.AntiForgeryToken()
+                <!-- Div start-->
+                <div class="row">
+
+                    @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.DataBridgeAsia)
+                    {
+                        <!---Entity-->
+                        <div class="form-group col-lg-4">
+                            @Html.LabelFor(m => m.SelectedUserEntityID)
+                            <div class="input-group">
+
+                                <div class="input-group-prepend">
+
+                                    <span class="input-group-text"> <i class="fas fa-sitemap"></i> </span>
+                                </div>
+                                @Html.DropDownListFor(m => m.SelectedUserEntityID, new SelectList(Model.UserEntityList, "UserEntityID", "UserEntityName"), "Select Entity", new { @class = "form-control select2" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.SelectedUserEntityID, "", new { @class = "" })
+                        </div> <!-- form-group// -->
+                        <!---Reference ID-->
+
+                <div id="refrence_field" class="form-group col-lg-4">
+
+                    @Html.LabelFor(m => m.ReferenceID)
+                   
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fas fa-sitemap"></i> </span>
+                        </div>
+                        @if (ViewBag.Edit == true)
+                        {
+                            switch (Model.SelectedUserEntityID)
+                            {
+                                case (int)UserEntityEnum.MAI:
+                                    @Html.DropDownListFor(m => m.ReferenceID,
+                                      new SelectList(Model.MAITypeList, "MAITypeID", "MAITypeName"),
+                                      "Select MAI Type", new { @class = "form-control select2" })
+                                    break;
+                                case (int)UserEntityEnum.Dealer:
+                                    @Html.DropDownListFor(m => m.ReferenceID,
+                                      new SelectList(Model.DealerList, "DealerID", "DealerName"),
+                                      "Select Dealer", new { @class = "form-control select2" })
+                                    break;
+                                case (int)UserEntityEnum.Insurance:
+                                    @Html.DropDownListFor(m => m.ReferenceID,
+                                      new SelectList(Model.InsuranceList, "InsuranceID", "InsuranceName"),
+                                      "Select Insurance", new { @class = "form-control select2" })
+                                    break;
+                                default:
+                                    @Html.DropDownListFor(m => m.ReferenceID,
+                                        new List<SelectListItem> {new SelectListItem { Value = "" , Text = "Select Reference" }
+                                        }, new { @class = "form-control select2" })
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            @Html.DropDownListFor(m => m.ReferenceID,
+                                       new List<SelectListItem> {new SelectListItem { Value = "" , Text = "Select Reference" }
+                                       }, new { @class = "form-control select2" })
+                        }
+                    </div>
+                    @Html.ValidationMessageFor(m => m.ReferenceID, "", new { @class = "" })
+                </div>
+                        <!-- form-group// -->
+                    }
+
+                    <!---Subreference ID-->
+                <div id="subrefrence_field" class="form-group col-lg-4">
+
+                    @switch (Model.SelectedUserEntityID)
+                    {
+                        case 2:
+                            @Html.LabelFor(m => m.SubReferenceID, "MAI")
+                            break;
+                        case 3:
+                            @Html.LabelFor(m => m.SubReferenceID, "Dealer Branch")
+                            break;
+                        case 4:
+                            @Html.LabelFor(m => m.SubReferenceID, "Insurance Branch")
+                            break;
+                        default:
+                            @Html.LabelFor(m => m.SubReferenceID, "Sub Reference")
+                            break;
+                    }
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fas fa-sitemap"></i> </span>
+                        </div>
+                        @switch (Model.SelectedUserEntityID)
+                        {
+                            case 2:
+                                @Html.DropDownListFor(m => m.SubReferenceID,
+                                   new SelectList(Model.MAIList, "MAIID", "MAIName"),
+                                   "Select Company", new { @class = "form-control select2" })
+                                break;
+                            case 3:
+                                @Html.DropDownListFor(m => m.SubReferenceID,
+                                   new SelectList(Model.DealerBranchList, "DealerBranchID", "DealerBranchName"),
+                                   "Select Branch", new { @class = "form-control select2" })
+                                break;
+                            case 4:
+                                @Html.DropDownListFor(m => m.SubReferenceID,
+                                   new SelectList(Model.InsuranceBranchist, "InsuranceBranchID", "InsuranceBranchName"),
+                                   "Select Branch", new { @class = "form-control select2" })
+                                break;
+                            default:
+                                @Html.DropDownListFor(m => m.SubReferenceID,
+                                    new List<SelectListItem> {new SelectListItem { Value = "" , Text = "Select Subreference" }
+                                    }, new { @class = "form-control select2" })
+                                break;
+                        }
+                        @*@if (ViewBag.Edit == true)
+            {
+                switch (Model.SelectedUserEntityID)
+                {
+                    case 2:
+                        @Html.DropDownListFor(m => m.SubReferenceID,
+                           new SelectList(Model.MAIList, "MAIID", "MAIName"),
+                           "Select Company", new { @class = "form-control select2" })
+                        break;
+                    case 3:
+                        @Html.DropDownListFor(m => m.SubReferenceID,
+                           new SelectList(Model.DealerBranchList, "DealerBranchID", "DealerBranchName"),
+                           "Select Branch", new { @class = "form-control select2" })
+                        break;
+                    case 4:
+                        @Html.DropDownListFor(m => m.SubReferenceID,
+                           new SelectList(Model.InsuranceBranchist, "InsuranceBranchID", "InsuranceBranchName"),
+                           "Select Branch", new { @class = "form-control select2" })
+                        break;
+                    default:
+                        @Html.DropDownListFor(m => m.SubReferenceID,
+                            new List<SelectListItem> {new SelectListItem { Value = "" , Text = "Select Subreference" }
+                            }, new { @class = "form-control select2" })
+                        break;
+                }
+            }
+            else
+            {
+                @Html.DropDownListFor(m => m.SubReferenceID,
+                            new List<SelectListItem> {new SelectListItem { Value = "" , Text = "Select Subreference" }
+                            }, new { @class = "form-control select2" })
+            }*@
+                    </div>
+                    @Html.ValidationMessageFor(m => m.SubReferenceID, "", new { @class = "" })
+
+                </div>
+                    <!-- form-group// -->
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.SelectedUserRoleID)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+
+                                <span class="input-group-text" id="role"> <i class="fas fa-user-shield"></i> </span>
+                            </div>
+                            @Html.DropDownListFor(m => m.SelectedUserRoleID, new SelectList(Model.UserRoleList, "UserRoleID", "UserRoleName"), "Select User Role", new { @class = "form-control select2" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.SelectedUserRoleID, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                    <div id="LTOUserType_field" class="form-group col-lg-4" hidden>
+                        @Html.LabelFor(m => m.LTOUserTypeList)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+
+                                <span class="input-group-text" id="role"> <i class="fas fa-user-shield"></i> </span>
+                            </div>
+                            @Html.DropDownListFor(m => m.SelectedLTOUserTypeID, new SelectList(Model.LTOUserTypeList, "LTOUserTypeID", "LTOUserTypeName"), "Select LTO User Role", new { @class = "form-control select2" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.SelectedLTOUserTypeID, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                </div>
+                <div class="row">
+                    <!--Email-->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.EmailAddress)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.EmailAddress, new { placeholder = "Email address", @class = "form-control", type = "email" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                    <!--Last name-->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.LastName)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fas fa-id-card"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.LastName, new { placeholder = "Last name", @class = "form-control", type = "lastname" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                    <!--First name-->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.FirstName)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-id-card"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.FirstName, new { placeholder = "First name", @class = "form-control", type = "firstname" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                    <!--Password-->
+                    <div class="form-group col-lg-4" @(ViewBag.Edit ? "hidden" : "")>
+                        @Html.LabelFor(m => m.Password)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fas fa-key"></i> </span>
+                            </div>
+                            @if (ViewBag.Edit == false)
+                            {
+                                @Html.TextBoxFor(m => m.Password, new { placeholder = "Password", @class = "form-control", type = "password" })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(m => m.Password, new { placeholder = "Password", @class = "form-control", type = "password", @readonly = "readonly" })
+                            }
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                </div>
+
+                if (ViewBag.Edit == false)
+                {
+                    <center>
+                        <div class="form-group">
+                            <center>
+                                <button type="submit" name="submit" value="Create" class="btn btn-primary btn-block" style="width:250px;"> Create Account </button>
+                            </center>
+                        </div>
+                    </center>
+                }
+                else
+                {
+                    <center>
+                        <div class="form-group row">
+                            <button type="button" data-toggle="modal" data-target="#modal-delete" class="btn btn-danger btn-block col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width:250px;"> Delete Account </button>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+                            <button type="button" data-toggle="modal" data-target="#modal-save" class="btn btn-success btn-block col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width:250px;"> Save Account </button>
+                        </div>
+                    </center>
+                }
+                Html.RenderPartial("_Confirmation");
+            }
+        </article>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+
+<script type="text/javascript">
+    $("#left_nav_mai").toggleClass("menu-open");
+    $("#all_user").toggleClass("active");
+
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#all_user").toggleClass("active");
+
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#all_user").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+    //CASCADING DROPDOWNLIST
+
+    //Reference and Subreference
+    $("#SelectedUserEntityID").on("change", function () {
+        var entity = $(this).val();
+        $("#ReferenceID").find("option:gt(0)").remove();
+        $("#SubReferenceID").find("option:gt(0)").remove();
+        $("#ReferenceID").val("");
+        $("#SubReferenceID").val("");
+        switch (entity) {
+            case "1":
+                // DataBridge block
+                $("#refrence_field").attr("hidden", true);
+                $("#subrefrence_field").attr("hidden", true);
+                $("#LTOUserType_field").attr("hidden", true);
+                break;
+            case "2":
+                // MAI block
+                $.ajax({
+                    url: '@Url.Action("GetMAI_ReferenceID", "User")',
+                    type: "GET",
+                    dataType: "JSON",
+                    cache: false,
+                    data: { "entity": this.value },
+                    success: function (response) {
+                        $.each(response, function (index, value) {
+                            var o = new Option(value.MAITypeName, value.MAITypeID);
+                            $("#ReferenceID").append($(o));
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        alert(error);
+                    }
+                });
+                $("#refrence_field").attr("hidden", false);
+                $("#subrefrence_field").attr("hidden", false);
+                $("#LTOUserType_field").attr("hidden", true);
+                $("label[for='ReferenceID']").text("MAI Type");
+                $("label[for='SubReferenceID']").text("MAI");
+                break;
+            case "3":
+                // Dealer block
+                $.ajax({
+                    url: '@Url.Action("GetDealer_ReferenceID", "User")',
+                    type: "GET",
+                    dataType: "JSON",
+                    cache: false,
+                    data: { "entity": this.value },
+                    success: function (response) {
+                        $.each(response, function (index, value) {
+                            var o = new Option(value.DealerName, value.DealerID);
+                            $("#ReferenceID").append($(o));
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        alert(error);
+                    }
+                });
+                $("#refrence_field").attr("hidden", false);
+                $("#subrefrence_field").attr("hidden", false);
+                $("#LTOUserType_field").attr("hidden", true);
+                $("label[for='ReferenceID']").text("Dealer");
+                $("label[for='SubReferenceID']").text("Branch");
+                break;
+            case "4":
+                // Insurance block
+                $.ajax({
+                    url: '@Url.Action("GetInsurance_ReferenceID", "User")',
+                    type: "GET",
+                    dataType: "JSON",
+                    cache: false,
+                    data: { "entity": this.value },
+                    success: function (response) {
+                        $.each(response, function (index, value) {
+                            var o = new Option(value.InsuranceName, value.InsuranceID);
+                            $("#ReferenceID").append($(o));
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        alert(error);
+                    }
+                });
+                $("#refrence_field").attr("hidden", false);
+                $("#subrefrence_field").attr("hidden", false);
+                $("#LTOUserType_field").attr("hidden", true);
+                $("label[for='ReferenceID']").text("Insurance");
+                $("label[for='SubReferenceID']").text("Branch");
+                break;
+            case "5":
+                //LTO block
+                 $.ajax({
+                    url: '@Url.Action("GetLTO_ReferenceID", "User")',
+                    type: "GET",
+                    dataType: "JSON",
+                    cache: false,
+                    data: { "entity": this.value },
+                    success: function (response) {
+                        $.each(response, function (index, value) {
+                            var o = new Option(value.LTOName, value.LTOID);
+                            $("#ReferenceID").append($(o));
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        alert(error);
+                    }
+                });
+                $("#refrence_field").attr("hidden", false);
+                $("#subrefrence_field").attr("hidden", false);
+                $("#LTOUserType_field").attr("hidden", false);
+                $("label[for='ReferenceID']").text("LTO Region");
+                $("label[for='SubReferenceID']").text("LTO District");
+                break;
+        }
+    });
+
+    $("#ReferenceID").on("change", function () {
+        var entity = $("#SelectedUserEntityID").val();
+        var reference_id = $(this).val();
+        $("#SubReferenceID").find("option:gt(0)").remove();
+        switch (entity) {
+            case "2":
+                // MAI block
+                $.ajax({
+                    url: '@Url.Action("GetMAI_SubReferenceID", "User")',
+                    type: "GET",
+                    dataType: "JSON",
+                    cache: false,
+                    data: { "reference_id": reference_id },
+                    success: function (response) {
+                        $.each(response, function (index, value) {
+                            var o = new Option(value.MAIName, value.MAIID);
+                            $("#SubReferenceID").append($(o));
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        alert(JSON.stringify(error));
+                    }
+                });
+                break;
+            case "3":
+                // Dealer block
+                $.ajax({
+                    url: '@Url.Action("GetDealer_SubReferenceID", "User")',
+                    type: "GET",
+                    dataType: "JSON",
+                    cache: false,
+                    data: { "reference_id": reference_id },
+                    success: function (response) {
+                        $.each(response, function (index, value) {
+                            var o = new Option(value.DealerBranchName, value.DealerBranchID);
+                            $("#SubReferenceID").append($(o));
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        alert(error);
+                    }
+                });
+                break;
+            case "4":
+                // Insurance block
+                $.ajax({
+                    url: '@Url.Action("GetInsurance_SubReferenceID", "User")',
+                    type: "GET",
+                    dataType: "JSON",
+                    cache: false,
+                    data: { "reference_id": reference_id },
+                    success: function (response) {
+                        $.each(response, function (index, value) {
+                            var o = new Option(value.InsuranceBranchName, value.InsuranceBranchID);
+                            $("#SubReferenceID").append($(o));
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        alert(error);
+                    }
+                });
+                break;
+            case "5":
+                //LTO block
+                 $.ajax({
+                    url: '@Url.Action("GetLTO_SubReferenceID", "User")',
+                    type: "GET",
+                    dataType: "JSON",
+                    cache: false,
+                    data: { "reference_id": reference_id },
+                    success: function (response) {
+                        $.each(response, function (index, value) {
+                            var o = new Option(value.LTOBranchName, value.LTOBranchID);
+                            $("#SubReferenceID").append($(o));
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        alert(error);
+                    }
+                });
+                break;
+        }
+    });
+
+</script>
+<!-- /.content -->

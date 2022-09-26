@@ -1,0 +1,177 @@
+﻿@using VehicleRegistration.Models
+@model  MAIVehicleMakeModel
+@{
+    ViewBag.Title = "MAI Vehicle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="nav-icon fas fa-car-side"></i> DataBridge Asia Inc.   <small> </small></h6>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        @*<input type="button" data-toggle="modal" data-target="#modal-vehicle_list" class="btn btn-info btn-block" value="Create New" > </>*@                      
+                    </div>
+                </div>
+                <!-- /.card-header -->
+              @*data-toggle="tooltip" title="Create New">*@
+                    <div class="fab" type="button" name="btnSubmit" data-toggle="modal" rel="tooltip" title="Create New" data-target="#modal-vehicle_list"> + </div>
+                 
+                    <div class="card-body">
+                        <table id="MAI_Vehicle_list_tbl" class="table table-bordered table-striped table-hover" style="max-width:100%;">
+                            <thead>
+                                <tr>
+                                    <th style="width:1030px;">Vehicle Name</th>
+                                    <th style="width:100px;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.vwMAIVehicleMakeModelList)
+                                {
+                                    <tr style="font-size:14px;">
+                                        <td style="max-width:500px; " id="maivehicle" data-maiID="@item.MAIID" data-maiNM="@item.MAIName" data-maivehiclemakeID="@item.MAIVehicleMakeID" data-vehiclemakeID="@item.VehicleMakeID">@item.VehicleMakeName</td>
+                                        <td>
+                                            <center data-toggle="tooltip" title="Delete">
+                                                <button type="button" class="delete_item btn btn-danger btn-sm" data-toggle="modal" title="Delete" data-target="#modal-delete"><i class="fa fa-trash"></i></button>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+</div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+@*Confirmation modal*@
+<label id="index_selected"></label>
+<label id="vehicle_id_selected" hidden></label>
+<label id="mai_id_selected" hidden></label>
+@Html.Partial("_Confirmation")
+
+@*Vehicle List*@
+<div class="modal fade" id="modal-vehicle_list">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @using (Html.BeginForm("MAIVehicleMake", "MAI", @*null, FormMethod.Post,*@ new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-header">
+                    <h4 class="modal-title" style="text-align:center">List of Vehicle Make's</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table id="Vehicle_list_tbl" class="table table-bordered table-striped table-hover" style="max-width:100%;width:100%;">
+                        <thead>
+                            <tr>
+                                <th style="width:25px"></th>
+                                <th style="width:100%;">Vehicle Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.VehicleMakeModelList.Count() > 0)
+                            {
+                                for (int i = 0; i < Model.VehicleMakeModelList.Count(); i++)
+                                {
+                                    <tr>
+                                        <td style="width:25px;">
+                                            <div class="icheck-success d-inline">
+                                                @Html.CheckBoxFor(o => o.VehicleMakeModelList[i].isChecked, new { id = i })
+                                                <label for="@i"></label>
+                                            </div>
+                                        </td>
+                                        <td style="width:100%;" id="vehicle_name">
+                                            @Html.DisplayFor(o => o.VehicleMakeModelList[i].VehicleMakeName)
+                                            @Html.HiddenFor(o => o.VehicleMakeModelList[i].VehicleMakeID)
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" name="submit" value="Save" class="btn btn-primary">Add</button>
+                </div>
+            }
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script>
+    //$("#content_header").text("MAI Vehicle Make");
+    // mai admin user share
+    $("#left_nav_mai").toggleClass("menu-open");
+    $("#mai_vehicle_make_list").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+    $("#selected_holder").text();
+    var index_holder = "";
+    var maivehiclemake_id_holder = "";
+    var mai_id_holder = "";
+    var vehicle_id_holder = "";
+    $(".delete_item").on("click", function () {
+        index_holder = $(this).closest("tr").index();
+        maivehiclemake_id_holder = $(this).closest("tr").find("#maivehicle").attr("data-maivehiclemakeID");
+    });
+
+    var addAntiForgeryToken = function (data) {
+        data.__RequestVerificationToken = $("[name='__RequestVerificationToken']").val();
+        return data;
+    };
+    $("#btn_delete").click(function () {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("MAIVehicleMake_delete", "MAI")',
+            data: addAntiForgeryToken({
+                maivehiclemakeid: maivehiclemake_id_holder,
+            }),
+            dataType: 'json',
+            success: function (result) {
+                location.reload();
+
+            }
+        });
+    });
+
+    // Handle form submission event
+    $('form').on('submit', function (e) {
+        var form = this;
+
+        // Encode a set of form elements from all pages as an array of names and values
+        var params = all_table.$('input,select,textarea').serializeArray();
+
+        // Iterate over all form elements
+        $.each(params, function () {
+            // If element doesn't exist in DOM
+            if (!$.contains(document, form[this.name])) {
+                // Create a hidden element
+                $(form).append(
+                    $('<input>')
+                        .attr('type', 'hidden')
+                        .attr('name', this.name)
+                        .val(this.value)
+                );
+            }
+        });
+    });
+</script>
+

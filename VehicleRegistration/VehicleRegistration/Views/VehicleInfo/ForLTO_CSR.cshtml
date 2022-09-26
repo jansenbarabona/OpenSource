@@ -1,0 +1,258 @@
+﻿@using VehicleRegistration.Models
+@model VehicleListModel
+@{
+    ViewBag.Title = "LTO Batch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    button#btn_template.sub-button.bl.fab-excel {
+        border: 0px;
+        /*border-radius: 50%;*/
+        /*background: none;*/
+    }
+
+        button#btn_template.sub-button.bl.fab-excel::before {
+            border: 0px;
+        }
+
+        button#btn_template.sub-button.bl.fab-excel::after {
+            border: 0px;
+        }
+
+    div#btn_assign.sub-button.tl.check.btn-info:before {
+        position: relative;
+        z-index: 100;
+        content: "";
+    }
+
+    #BuyerType {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+    }
+
+    /* /*nav.main-header.navbar.navbar-expand-md.navbar-primary.navbar-dark {
+        background: #7B0303;
+    }*/
+</style>
+
+
+
+@using (Html.BeginForm("ForLTO_CSR", "VehicleInfo", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6><i class="nav-icon fas fa-file-signature"></i> Vehicles Awaiting CSR Submission  <small> </small></h6>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="check btn-info" id="btn_assign" style="cursor:pointer;" type="button" data-toggle="tooltip" title="LTO Information">
+                            <i class="fas fa-car"></i>
+                        </div>
+
+                        @*<div class="row" id="BuyerType">
+                                <div class="col-sm-2 col-md-2 col-lg-2">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                @Html.RadioButtonFor(m => m.BuyerType, "IND", new { @id = "BuyerType1" })
+                                            </div>
+                                        </div>
+                                        @Html.LabelFor(m => m.BuyerType, "Individual", new { @class = "form-control", @for = "BuyerType1" })
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 col-md-2 col-lg-2">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                @Html.RadioButtonFor(m => m.BuyerType, "ORG", new { @id = "BuyerType2" })
+                                            </div>
+                                        </div>
+                                        @Html.LabelFor(m => m.BuyerType, "Organization", new { @class = "form-control", @for = "BuyerType2" })
+                                    </div>
+                                </div>
+                            </div>*@
+                        <div id="getVehicleList" style="margin-top:5px">
+                            @{
+                                Html.RenderPartial("_VehicleList");
+                            }
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    Html.RenderPartial("_Modal_LTO", Model.BatchHeader, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "BatchHeader" } });
+}
+
+<script>
+    var addAntiForgeryToken = function (data) {
+        data.__RequestVerificationToken = $("[name='__RequestVerificationToken']").val();
+        return data;
+    };
+    var table;
+    @*$("input:radio[name='BuyerType']").on("change", function () {
+        $('#spinnerDiv').show();
+        $('#tbl_list').find('tbody').empty();
+        $.ajax({
+            url: '@Url.Action("GetVehicleListByBuyerType", "VehicleInfo")',
+            type: "POST",
+            data: addAntiForgeryToken({ "buyertype": $(this).val() }),
+            cache: false,
+            async: true,
+            success: function (response) {
+                $("#getVehicleList").html(response);
+
+                table = $("#tbl_list").DataTable({
+                    "scrollX": true,
+                    "scrollY": true,
+                    "info": true,
+                    "lengthChange": false,
+                    "order": [],
+                    "dom":
+                        "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                });
+                $('#spinnerDiv').hide();
+            },
+            error: function (xhr, status, error) {
+                toastr.error('An error has occured!');
+                $('#spinnerDiv').hide();
+            }
+        });
+    });*@
+
+    $(document).ready(function () {
+        table = all_table;
+    });
+
+
+    $("#btn_lto").on("click", function (e) {
+        if (table.rows().nodes().to$().find("input[type=checkbox]:checked").length > 25){
+            toastr.warning("25 Vehicles are allowed per batch!");
+            e.preventDefault();
+        }
+    });
+
+    $("#btn_assign").on("click", function () {
+        if (table.rows().nodes().to$().find("input[type=checkbox]:checked").length > 0) {
+
+            jQuery.noConflict();
+            if (jQuery.fn.DataTable.isDataTable('#tbl_listofsummary')) {
+                jQuery('#tbl_listofsummary').DataTable().clear();
+                jQuery('#tbl_listofsummary').DataTable().destroy();
+            }
+
+            if ($("#summarry_thead tr").length == 0) {
+                $("#modal-body-lto").append(" " +
+                        "   <div class='row'> " +
+                        "       <div class='form-group col-12' > " +
+                        "           <table id='tbl_listofsummary' class='table table-bordered table-striped table-hover' style='width:100%; max-width:100%;'>" +
+                        "              <thead id='summarry_thead'>" +
+                        "                  <tr>" +
+                        "                      <th style='width:25%'>Make</th>" +
+                        "                      <th style='width:25%'>Model</th>" +
+                        "                      <th style='width:25%'>Engine</th>" +
+                        "                      <th style='width:25%'>Body</th>" +
+                        "                  </tr>" +
+                        "              </thead>" +
+                        "              <tbody id='summarry_tbody'>" +
+                        "              </tbody>" +
+                        "           </table>" +
+                        "       </div> " +
+                        "   </div> " +
+                        "");
+            }
+
+            all_table.rows().nodes().to$().find('.checkbox_all:checkbox:checked').each(function () {
+                var tr = $(this).closest("tr");
+                var make = tr.find("td:eq(1)").text().trim();
+                var model = tr.find("td:eq(2)").text().trim();
+                var engine = tr.find("td:eq(5)").text().trim();
+                var body = tr.find("td:eq(6)").text().trim();
+                $("#tbl_listofsummary #summarry_tbody").append("" +
+                    "<tr>" +
+                    "    <td>" + make + "</td>" +
+                    "    <td>" + model + "</td>" +
+                    "    <td>" + engine + "</td>" +
+                    "    <td>" + body + "</td>" +
+                    "</tr>");
+            });
+            //$("#vehiclelist_tbody .checkbox_all:checkbox:checked").each(function () {
+            //    var tr = $(this).closest("tr");
+            //    var make = tr.find("td:eq(1)").text().trim();
+            //    var model = tr.find("td:eq(2)").text().trim();
+            //    var engine = tr.find("td:eq(5)").text().trim();
+            //    var body = tr.find("td:eq(6)").text().trim();
+            //    $("#tbl_listofsummary #summarry_tbody").append("" +
+            //    "<tr>" +
+            //    "    <td>" + make + "</td>" +
+            //    "    <td>" + model + "</td>" +
+            //    "    <td>" + engine + "</td>" +
+            //    "    <td>" + body + "</td>" +
+            //    "</tr>");
+            //});
+
+            jQuery.noConflict();
+            var summary_tbl = jQuery("#tbl_listofsummary").DataTable({
+                "scrollX": true,
+                "scrollY": true,
+                "info": false,
+                "lengthChange": false,
+                "searching": false,
+                "paging": false,
+                "order": [],
+                "dom":
+                    "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+            });
+
+            $(document).on('shown.bs.modal', '.modal', function (e) {
+                summary_tbl.columns.adjust();
+            });
+
+            $("#modal-LTO").modal("show");
+        }
+        else {
+            toastr.warning("Please check one or more row to assign!");
+        }
+    });
+
+    // Handle form submission event
+    $('form').on('submit', function (e) {
+        var form = this;
+
+        // Encode a set of form elements from all pages as an array of names and values
+        var params = table.$('input,select,textarea').serializeArray();
+
+        // Iterate over all form elements
+        $.each(params, function () {
+            // If element doesn't exist in DOM
+            if (!$.contains(document, form[this.name])) {
+                // Create a hidden element
+                $(form).append(
+                    $('<input>')
+                        .attr('type', 'hidden')
+                        .attr('name', this.name)
+                        .val(this.value)
+                );
+            }
+        });
+    });
+</script>
+<style>
+    /*nav.main-header.navbar.navbar-expand-md.navbar-primary.navbar-dark {
+        background: #7B0303;
+    }*/
+</style>

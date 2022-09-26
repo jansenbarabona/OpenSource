@@ -1,0 +1,444 @@
+﻿@using VehicleRegistration.Models
+@model CSRLTOSubmittedBatch
+
+@{
+    ViewBag.Title = "CSRSubmittedBatch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #batch_filter_adjust {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        margin-left: 7.5px;
+    }
+
+    button.sub-button.tl:before {
+        content: "";
+    }
+
+    button.sub-button.tl {
+        border: 0px;
+    }
+
+    button#btn_download.sub-button.bl {
+        border: 0px;
+    }
+
+    /*nav.main-header.navbar.navbar-expand-md.navbar-primary.navbar-dark {
+        background: #7B0303;
+    }*/
+</style>
+@using (Html.BeginForm("CSRSubmittedBatch", "LTO", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6><i class="nav-icon fas fa-file-signature"></i>CSR Submitted Batch List  <small> </small></h6>
+                    </div>
+
+                    <div class="card-body">
+                        <div>
+                            <div class="check btn-info fab-excel" id="btn_download" type="button" value="Template" data-toggle="tooltip" title="Download Report">
+                                <i class="far fa-file-excel"></i>
+                            </div>
+                        </div>
+
+                        @*<div class="add-button" type="button" name="btnSubmit">
+                                <div data-toggle="tooltip" title="Accept & Download Report">
+                                    <button class="sub-button bl" id="btn_download" type="button"><i class="fas fa-file-excel"></i></button>
+                                </div>
+                                <div data-toggle="tooltip" title="Reject Batch">
+                                    <button class="sub-button tl" id="btn_reject" type="button"><i class="fas fa-ban"></i></button>
+                                </div>
+                            </div>*@
+
+
+                        <div class="row" id="batch_filter_adjust">
+                            <div class="col-sm-6 col-md-3 col-lg-3">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">MAI: </span>
+                                    </div>
+                                    @Html.DropDownListFor(m => m.SelectedMAIID, new SelectList(Model.MAIList, "MAIID", "MAIName"), "Select MAI", new { @class = "form-control select2" })
+                                    @Html.HiddenFor(m => m.SelectedBatchReferenceNo)
+                                    @Html.HiddenFor(m => m.SelectedBatchID)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top:5px">
+                            <div class="col">
+                                <div id="getBatchList">
+
+                                    @{
+                                        Html.RenderPartial("_BatchList", Model.BatchList);
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header row">
+                        <h6 class="col-6"><i class="nav-icon fas fa-file-signature"></i> Vehicle List  <small> </small></h6>
+                        <div class="col-6">
+                            <h6>
+                                Batch Reference: <label id="lbl_batchreference"></label>
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="VehicleListTable">
+
+                            @{
+                                Html.RenderPartial("_BatchDetails", Model.VehicleList, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "VehicleList" } });
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="modal-reject">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><label id="lblModalTitle">Are you sure you want to reject?</label></h4>
+                </div>
+                <div id="modal-body-final-assess" class="modal-body">
+                    @*<div class="row">
+                            <div class="form-group col-12">
+                                <h1 style="text-align:center;">₱ <label id="lbl_amount"></label></h1>
+                            </div>
+                        </div>*@
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <h5>
+                                Dealer: <label id="lbl_dealer_rej"></label>
+                            </h5>
+                        </div>
+                        <div class="form-group col-6">
+                            <h5>
+                                Reference: <label id="lbl_ref_rej"></label>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <h5>
+                                Description: <label id="lbl_desc_rej"></label>
+                            </h5>
+                        </div>
+                        <div class="form-group col-6">
+                            <h5>
+                                Count: <label id="lbl_count_rej"></label>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-12">
+                            @Html.LabelFor(m => m.RejectedRemarks)
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fas fa-sticky-note"></i> </span>
+                                </div>
+                                @Html.TextBoxFor(m => m.RejectedRemarks,
+               new
+               {
+                   placeholder = "Remarks",
+                   @class = "form-control"
+               })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.RejectedRemarks, "", new { @class = "" })
+                        </div>
+                    </div>
+                    @*<div class="row">
+                            <div class="col-6"></div>
+                            <div class="form-group col-6">
+                                <h5>
+                                    Sum: <label id="lbl_sum"></label>
+                                </h5>
+                            </div>
+                        </div>*@
+                    @*<div id="VehicleListTable">
+                            @{
+                                Html.RenderPartial("_BatchDetails", Model.VehicleList);
+                            }
+                        </div>*@
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    <button type="submit" name="submit" id="sbmt_reject" value="Reject" class="btn btn-primary">Reject</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-download">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><label id="lblModalTitle">Are you sure you want to Accept & Download?</label></h4>
+                </div>
+                <div id="modal-body-final-assess" class="modal-body">
+                    @*<div class="row">
+                            <div class="form-group col-12">
+                                <h1 style="text-align:center;">₱ <label id="lbl_amount"></label></h1>
+                            </div>
+                        </div>*@
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <h5>
+                                Dealer: <label id="lbl_dealer"></label>
+                            </h5>
+                        </div>
+                        <div class="form-group col-6">
+                            <h5>
+                                Reference: <label id="lbl_ref"></label>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <h5>
+                                Description: <label id="lbl_desc"></label>
+                            </h5>
+                        </div>
+                        <div class="form-group col-6">
+                            <h5>
+                                Count: <label id="lbl_count"></label>
+                            </h5>
+                        </div>
+                    </div>
+                    @*<div class="row">
+                            <div class="col-6"></div>
+                            <div class="form-group col-6">
+                                <h5>
+                                    Sum: <label id="lbl_sum"></label>
+                                </h5>
+                            </div>
+                        </div>*@
+                    @*<div id="VehicleListTable">
+                            @{
+                                Html.RenderPartial("_BatchDetails", Model.VehicleList);
+                            }
+                        </div>*@
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    <button type="submit" name="submit" id="sbmt_download" value="Download" class="btn btn-primary">Accept & Download</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<script>
+    var addAntiForgeryToken = function (data) {
+        data.__RequestVerificationToken = $("[name='__RequestVerificationToken']").val();
+        return data;
+    };
+
+    $("#btn_download").on("click", function (e) {
+        if ($("#SelectedBatchID").val() != 0) {
+            $("#modal-download").modal("show");
+        }
+        else {
+            toastr.warning("Please click one batch to Accept & Download Report!");
+        }
+    });
+    $("#btn_reject").on("click", function (e) {
+        if ($("#SelectedBatchID").val() != 0) {
+            $("#modal-reject").modal("show");
+        }
+        else {
+            toastr.warning("Please click one batch to Accept & Download Report!");
+        }
+    });
+
+    $("#sbmt_reject, #sbmt_download").on("click", function (e) {
+        if ($("#vehiclelist_tbody tr").length <= 0) {
+            toastr.warning("Please click one batch to Accept & Download Report!");
+            e.preventDefault();
+        }
+    });
+    var table;
+    $("#SelectedMAIID").on("change", function () {
+        $('#spinnerDiv').show();
+        $('#tbl_VehicleList').find('tbody').empty();
+        $.ajax({
+            url: '@Url.Action("GetCSRBatchList", "LTO")',
+            type: "POST",
+            data: addAntiForgeryToken({ "MAIID": $("#SelectedMAIID").val() }),
+            cache: false,
+            async: true,
+            success: function (response) {
+                $("#getBatchList").html(response);
+
+                $("#tbl_list").DataTable({
+                    "scrollX": true,
+                    "scrollY": true,
+                    "info": true,
+                    "lengthChange": false,
+                    "order": [],
+                    "dom":
+                        "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                });
+                $('#spinnerDiv').hide();
+
+                $('#Header_vehiclelist_tbody').on("click", "tr", function (event) {
+                    $('#spinnerDiv').show();
+                    $("#lbl_batchreference").text($(this).find('td.col_batchreference').text().trim());
+                    $("#SelectedBatchReferenceNo").val($(this).find('td.col_batchreference').text().trim());
+                    $("#lbl_dealer").text($(this).find("td:eq(0)").text());
+                    $("#lbl_ref").text($(this).find("td:eq(1)").text());
+                    $("#lbl_desc").text($(this).find("td:eq(2)").text());
+                    $("#lbl_count").text($(this).find("td:eq(4)").text());
+
+                    $("#lbl_dealer_rej").text($(this).find("td:eq(0)").text());
+                    $("#lbl_ref_rej").text($(this).find("td:eq(1)").text());
+                    $("#lbl_desc_rej").text($(this).find("td:eq(2)").text());
+                    $("#lbl_count_rej").text($(this).find("td:eq(4)").text());
+
+                    $("#SelectedBatchID").val($(this).find('input[type=hidden]').val());
+                    $.ajax({
+                        url: '@Url.Action("GetVehicleList", "LTO")',
+                        type: "POST",
+                        data: addAntiForgeryToken({ "BatchID": $(this).find('input[type=hidden]').val() }),
+                        cache: false,
+                        async: true,
+                        success: function (response) {
+                            $("#VehicleListTable").html(response);
+
+                            table = $("#tbl_VehicleList").DataTable({
+                                "scrollX": true,
+                                "scrollY": true,
+                                "info": true,
+                                "lengthChange": false,
+                                "order": [],
+                                "dom":
+                                    "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                                    "<'row'<'col-sm-12'tr>>" +
+                                    "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                            });
+                            $('#spinnerDiv').hide();
+                        },
+                        error: function (xhr, status, error) {
+                            alert(xhr.responseText);
+                            $('#spinnerDiv').hide();
+                        }
+                    });
+                });
+
+                $('form').on('submit', function (e) {
+                    var form = this;
+
+                    // Encode a set of form elements from all pages as an array of names and values
+                    var params = table.$('input,select,textarea').serializeArray();
+
+                    // Iterate over all form elements
+                    $.each(params, function () {
+                        // If element doesn't exist in DOM
+                        if (!$.contains(document, form[this.name])) {
+                            // Create a hidden element
+                            $(form).append(
+                                $('<input>')
+                                    .attr('type', 'hidden')
+                                    .attr('name', this.name)
+                                    .val(this.value)
+                            );
+                        }
+                    });
+                });
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+                $('#spinnerDiv').hide();
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $('#Header_vehiclelist_tbody').on("click", "tr", function (event) {
+                    $('#spinnerDiv').show();
+              $("#lbl_batchreference").text($(this).find('td.col_batchreference').text().trim());
+              $("#SelectedBatchReferenceNo").val($(this).find('td.col_batchreference').text().trim());
+              $("#lbl_dealer").text($(this).find("td:eq(0)").text());
+              $("#lbl_ref").text($(this).find("td:eq(1)").text());
+              $("#lbl_desc").text($(this).find("td:eq(2)").text());
+              $("#lbl_count").text($(this).find("td:eq(4)").text());
+
+              $("#lbl_dealer_rej").text($(this).find("td:eq(0)").text());
+              $("#lbl_ref_rej").text($(this).find("td:eq(1)").text());
+              $("#lbl_desc_rej").text($(this).find("td:eq(2)").text());
+              $("#lbl_count_rej").text($(this).find("td:eq(4)").text());
+              $("#SelectedBatchID").val($(this).find('input[type=hidden]').val());
+                    $.ajax({
+                        url: '@Url.Action("GetVehicleList", "LTO")',
+                        type: "POST",
+                        data: addAntiForgeryToken({ "BatchID": $(this).find('input[type=hidden]').val() }),
+                        cache: false,
+                        async: true,
+                        success: function (response) {
+                            $("#VehicleListTable").html(response);
+
+                            table = $("#tbl_VehicleList").DataTable({
+                                "scrollX": true,
+                                "scrollY": true,
+                                "info": true,
+                                "lengthChange": false,
+                                "order": [],
+                                "dom":
+                                    "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                                    "<'row'<'col-sm-12'tr>>" +
+                                    "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                            });
+                            $('#spinnerDiv').hide();
+                        },
+                        error: function (xhr, status, error) {
+                            alert(xhr.responseText);
+                            $('#spinnerDiv').hide();
+                        }
+                    });
+          });
+
+        $('form').on('submit', function (e) {
+            var form = this;
+
+            // Encode a set of form elements from all pages as an array of names and values
+            var params = table.$('input,select,textarea').serializeArray();
+
+            // Iterate over all form elements
+            $.each(params, function () {
+                // If element doesn't exist in DOM
+                if (!$.contains(document, form[this.name])) {
+                    // Create a hidden element
+                    $(form).append(
+                        $('<input>')
+                            .attr('type', 'hidden')
+                            .attr('name', this.name)
+                            .val(this.value)
+                    );
+                }
+            });
+        });
+    })
+</script>
+

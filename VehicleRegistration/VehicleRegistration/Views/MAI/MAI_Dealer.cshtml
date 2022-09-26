@@ -1,0 +1,147 @@
+﻿@using VehicleRegistration.Models
+@model  MAI_DealerModel
+@{
+    ViewBag.Title = "MAI Dealer List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="nav-icon fas fa-users"></i> MAI Dealer List<small> </small></h6>
+                </div>
+                <!-- /.card-header -->
+
+                @using (Html.BeginForm("MAI_Dealer", "MAI", @*null, FormMethod.Post,*@ new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="fab" type="button" data-toggle="modal" rel="tooltip" title="Create New" data-target="#modal-vehicle_list" name="btnSubmit"> + </div>
+                    <div class="card-body">
+                        <table id="MAI_Dealer_list_tbl" class="table table-bordered table-striped table-hover" style="max-width:100%;">
+                            <thead>
+                                <tr>
+                                    <th style="width:1030px;">Dealer Name</th>
+                                    <th style="width:100px;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.MAI_DealerList)
+                                {
+                                    <tr style="font-size:14px;">
+                                        <td style="max-width:650px;" id="maidealer" data-dealerid="@item.DealerID" data-maidealerid="@item.MAIDealerID">@item.DealerName</td>
+                                        <td style="width:75px;">
+                                            <center>
+                                                <button type="button" class="delete_item btn btn-danger btn-sm" data-toggle="modal" rel="tooltip" title="Delete" data-target="#modal-delete"><i class="fa fa-trash"></i></button>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    @Html.HiddenFor(o => o.MAIDealerID)
+                    @Html.Partial("_Confirmation")
+                }
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+
+@*Dealer List*@
+<div class="modal fade" id="modal-vehicle_list">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @using (Html.BeginForm("MAI_Dealer", "MAI", @*null, FormMethod.Post,*@ new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-header">
+                    <h4 class="modal-title" style="text-align:center">List of Dealer's</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table id="Dealer_list_tbl" class="table table-bordered table-striped table-hover" style="max-width:100%;width:100% !important;">
+                        <thead>
+                            <tr>
+                                <th style="width:25px;"></th>
+                                <th style="width:100%;">Dealer Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.DealerList.Count() > 0)
+                            {
+                                for (int i = 0; i < Model.DealerList.Count(); i++)
+                                {
+                                    <tr>
+                                        <td style="width:25px;">
+                                            <div class="icheck-success d-inline">
+                                                @Html.CheckBoxFor(o => o.DealerList[i].isChecked, new { id = i })
+                                                <label for="@i"></label>
+                                            </div>
+                                        </td>
+                                        <td style="width:100%;" id="dealer_name">
+                                            @Html.DisplayFor(o => o.DealerList[i].DealerName)
+                                            @Html.HiddenFor(o => o.DealerList[i].DealerID)
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" name="submit" value="Save" class="btn btn-primary">Add</button>
+                </div>
+            }
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script>
+
+    $("#left_nav_mai").toggleClass("menu-open");
+    $("#mai_dealer").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+    $(".delete_item").on("click", function () {
+        $("#MAIDealerID").val($(this).closest("tr").find("#maidealer").attr("data-maidealerid"));
+    });
+
+    // Handle form submission event
+    $('form').on('submit', function (e) {
+        var form = this;
+
+        // Encode a set of form elements from all pages as an array of names and values
+        var params = all_table.$('input,select,textarea').serializeArray();
+
+        // Iterate over all form elements
+        $.each(params, function () {
+            // If element doesn't exist in DOM
+            if (!$.contains(document, form[this.name])) {
+                // Create a hidden element
+                $(form).append(
+                    $('<input>')
+                        .attr('type', 'hidden')
+                        .attr('name', this.name)
+                        .val(this.value)
+                );
+            }
+        });
+    });
+</script>
+

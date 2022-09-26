@@ -1,0 +1,104 @@
+﻿
+@using VehicleRegistration.Models
+@model VehicleBodyType
+
+@{
+    ViewBag.Title = "VehicleBody";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Main content -->
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Back" onclick="location.href='@Url.Action("VehicleBodyList", "VehicleInfo")'">
+                    <i class="far fa-times-circle"></i>
+                    @*<i class="far fa-times-circle"></i>*@
+                </button>
+            </div>
+            <h6><i class="nav-icon far fas fa-users"></i> Vehicle Body Maintenance Registration Form   </h6>
+        </div>
+        <!-- /.card-header -->
+
+        <article class="card-body mx-1">
+            @using (Html.BeginForm("VehicleBody", "VehicleInfo", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.VehicleBodyTypeName)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                            </div>
+                            @Html.HiddenFor(m => m.VehicleBodyTypeID,
+                           new
+                           {
+                               @class = "form-control"
+                           })
+                            @Html.TextBoxFor(m => m.VehicleBodyTypeName,
+                           new
+                           {
+                               placeholder = "Title Name",
+                               @class = "form-control"
+                           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.VehicleBodyTypeName, "", new { @class = "" })
+                    </div>
+                    <!-- form-group// -->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.VehicleBodyAbbr)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.VehicleBodyAbbr,
+                           new
+                           {
+                               placeholder = "Vehicle Body Abbreviation",
+                               @class = "form-control"
+                           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.VehicleBodyAbbr, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                </div>
+                if (ViewBag.Edit == false)
+                {
+                    <center>
+                        <div class="form-group">
+                            <center>
+                                <button type="submit" name="submit" value="Create" class="btn btn-primary btn-block" style="width:250px;"> Create </button>
+                            </center>
+                        </div>
+                    </center>
+                }
+                else
+                {
+                    <center>
+                        <div class="form-group row">
+                            <button type="button" data-toggle="modal" data-target="#modal-delete" class="btn btn-danger btn-block col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width:250px;"> Delete </button>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+                            <button type="button" data-toggle="modal" data-target="#modal-save" class="btn btn-success btn-block col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width:250px;"> Save </button>
+                        </div>
+                    </center>
+                }
+
+                @Html.Partial("_Confirmation")
+            }
+        </article>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+<script type="text/javascript">
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#vehiclebody").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+</script>
+
+

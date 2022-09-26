@@ -1,0 +1,219 @@
+﻿@using VehicleRegistration.Models
+@model LTOPayment
+<style>
+    #batch_filter_adjust {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        margin-left: 7.5px;
+    }
+
+    /*nav.main-header.navbar.navbar-expand-md.navbar-primary.navbar-dark {
+        background: #7B0303;
+    }*/
+</style>
+
+@{
+    ViewBag.Title = "LTO Completed Batch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("ForPickUpBatch", "LTO", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    @Html.AntiForgeryToken()
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6><i class="nav-icon fas fa-file-signature"></i>For Pick Up - Batch List  <small> </small></h6>
+                    </div>
+
+                    <div class="card-body">
+                        @*<div class="add-button" type="button" name="btnSubmit">
+                            <button class="sub-button bl" id="btn_report" data-toggle="tooltip" title="Download Report" type="submit" name="submit" value="Report"><i class="fas fa-paperclip"></i></button>
+                            <button class="sub-button tl" data-toggle="tooltip" title="For Pick Up" name="submit" type="submit" value="ForPickUp"></button>
+                        </div>*@
+                        @*<div class="check btn-info" id="btn_report" type="button" name="submit" value="Report" data-toggle="tooltip" title="Download Vehicle List">
+                                <i class="far fa-receipt"></i>
+                            </div>*@
+
+                        <div class="row" id="batch_filter_adjust">
+                            <div class="col-sm-12 col-md-3 col-lg-3">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Dealer: </span>
+                                    </div>
+                                    @Html.DropDownListFor(m => m.SelectedDealerID, new SelectList(Model.DealerList, "DealerID", "DealerName"), "Select Dealer", new { @class = "form-control select2" })
+                                    @Html.HiddenFor(m => m.SelectedBatchID)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top:5px">
+                            <div class="col">
+                                <div id="getBatchList">
+
+                                    @{
+                                        Html.RenderPartial("_PaymentBatchList", Model.BatchList);
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header row">
+                        <h6 class="col-6"><i class="nav-icon fas fa-file-signature"></i> Vehicle List  <small> </small></h6>
+                        <div class="col-6">
+                            <h6>
+                                Batch Reference: <label id="lbl_batchreference"></label>
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="VehicleListTable">
+                            @{
+                                Html.RenderPartial("_PaymentBatchDetails", Model.VehicleList, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "VehicleList" } });
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+<script>
+    var addAntiForgeryToken = function (data) {
+        data.__RequestVerificationToken = $("[name='__RequestVerificationToken']").val();
+        return data;
+    };
+
+    $("#btn_report").on("click", function (e) {
+        if ($("#vehiclelist_tbody tr").length > 0) {
+            $("form").submit();
+        }
+        else {
+            toastr.warning("Please click one batch to get LTO Template!");
+            e.preventDefault();
+        }
+    });
+
+    $("#SelectedDealerID").on("change", function () {
+        $('#spinnerDiv').show();
+        $('#tbl_VehicleList').find('tbody').empty();
+        $.ajax({
+            url: '@Url.Action("GetForPickUpBatchList", "LTO")',
+            type: "POST",
+            data: addAntiForgeryToken({ "DealerID": $("#SelectedDealerID").val() }),
+            cache: false,
+            async: true,
+            success: function (response) {
+                $("#getBatchList").html(response);
+
+                $("#tbl_list").DataTable({
+                    "scrollX": true,
+                    "scrollY": true,
+                    "info": true,
+                    "lengthChange": false,
+                    "order": [],
+                    "dom":
+                        "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                });
+                $('#spinnerDiv').hide();
+                $('#Header_vehiclelist_tbody').on("click", "tr", function (event) {
+                    $('#spinnerDiv').show();
+                    $("#SelectedBatchID").val($(this).find('input[type=hidden]').val());
+                    $("#lbl_batchreference").text($(this).find('td.col_batchreference').text().trim());
+                    $.ajax({
+                        url: '@Url.Action("GetCompletedVehicleList", "LTO")',
+                        type: "POST",
+                        data: addAntiForgeryToken({ "BatchID": $(this).find('input[type=hidden]').val() }),
+                        cache: false,
+                        async: true,
+                        success: function (response) {
+                            $("#VehicleListTable").html(response);
+
+                            tbl_VehicleList = $("#tbl_VehicleList").DataTable({
+                                "scrollX": true,
+                                "scrollY": true,
+                                "info": true,
+                                "lengthChange": false,
+                                "order": [],
+                                "dom":
+                                    "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                                    "<'row'<'col-sm-12'tr>>" +
+                                    "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                            });
+
+
+                            $('#spinnerDiv').hide();
+
+                            //$("#modal-assess").modal("show");
+                        },
+                        error: function (xhr, status, error) {
+                            alert(xhr.responseText);
+                            $('#spinnerDiv').hide();
+                        }
+                    });
+                });
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+                $('#spinnerDiv').hide();
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $('#Header_vehiclelist_tbody').on("click", "tr", function (event) {
+                    $('#spinnerDiv').show();
+                    $("#SelectedBatchID").val($(this).find('input[type=hidden]').val());
+                    $("#lbl_batchreference").text($(this).find('td.col_batchreference').text().trim());
+                    $.ajax({
+                        url: '@Url.Action("GetCompletedVehicleList", "LTO")',
+                        type: "POST",
+                        data: addAntiForgeryToken({ "BatchID": $(this).find('input[type=hidden]').val() }),
+                        cache: false,
+                        async: true,
+                        success: function (response) {
+                            $("#VehicleListTable").html(response);
+
+                            tbl_VehicleList = $("#tbl_VehicleList").DataTable({
+                                "scrollX": true,
+                                "scrollY": true,
+                                "info": true,
+                                "lengthChange": false,
+                                "order": [],
+                                "dom":
+                                    "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                                    "<'row'<'col-sm-12'tr>>" +
+                                    "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                            });
+
+
+                            $('#spinnerDiv').hide();
+
+                            //$("#modal-assess").modal("show");
+                        },
+                        error: function (xhr, status, error) {
+                            alert(xhr.responseText);
+                            $('#spinnerDiv').hide();
+                        }
+                    });
+                });
+    })
+</script>

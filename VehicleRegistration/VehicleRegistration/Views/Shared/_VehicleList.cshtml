@@ -1,0 +1,139 @@
+﻿@using VehicleRegistration.Models
+@model VehicleListModel
+
+<!-- Main content -->
+<table id="tbl_list" class="table table-bordered table-striped table-hover" style="width:100%; table-layout:auto;">
+    <thead>
+        <tr>
+            @if (ViewBag.HasCheckBox == true)
+            {
+                <th style="width:5%;">
+                    <div data-toggle="tooltip" title="Check all" class="icheck-success d-inline">
+                        @Html.CheckBox("check_all", false)
+                        <label for="check_all"></label>
+                    </div>
+                </th>
+            }
+            <th style="width:15%">Engine #</th>
+            <th style="width:15%">Chassis #</th>
+            <th style="width:15%">Make</th>
+            <th style="width:15%">Model</th>
+            <th style="width:15%">Variant</th>
+            <th style="width:15%">Year</th>
+            <th style="width:5%;">Action</th>
+        </tr>
+    </thead>
+    <tbody id="vehiclelist_tbody">
+        @for (int i = 0; i < Model.VehicleList.Count(); i++)
+        {
+            <tr class="rowclick" style="cursor: pointer" data-href="@Url.Action("VehicleInfo", new { id = Model.VehicleList[i].VehicleID })">
+                @if (ViewBag.HasCheckBox == true)
+                {
+                    <td style="width:5%">
+                        <center>
+                            <div class="icheck-success d-inline">
+                                @Html.CheckBoxFor(o => o.VehicleList[i].isChecked, new { id = i, @class = "checkbox_all" })
+                                <label for="@i"></label>
+                            </div>
+                        </center>
+                    </td>
+                }
+                <td style="width:15%">
+                    @Html.DisplayFor(o => o.VehicleList[i].EngineNumber)
+                    @Html.HiddenFor(o => o.VehicleList[i].EngineNumber)
+                </td>
+                <td style="width:15%">
+                    @Html.DisplayFor(o => o.VehicleList[i].ChassisNumber)
+                    @Html.HiddenFor(o => o.VehicleList[i].ChassisNumber)
+                </td>
+                <td style="width:15%">
+                    @Html.DisplayFor(o => o.VehicleList[i].VehicleMakeName)
+                    @Html.HiddenFor(o => o.VehicleList[i].VehicleID)
+                    @Html.HiddenFor(o => o.VehicleList[i].VehicleMakeName)
+                </td>
+                <td style="width:15%">
+                    @Html.DisplayFor(o => o.VehicleList[i].VehicleModelName)
+                    @Html.HiddenFor(o => o.VehicleList[i].VehicleModelName)
+                </td>
+                <td style="width:15%">
+                    @Html.DisplayFor(o => o.VehicleList[i].Variant)
+                    @Html.HiddenFor(o => o.VehicleList[i].Variant)
+                </td>
+                <td style="width:15%">
+                    @Html.DisplayFor(o => o.VehicleList[i].Year)
+                    @Html.HiddenFor(o => o.VehicleList[i].Year)
+                </td>
+                <td style="width:5%;">
+                    <div class="row" style="align-items:center">
+                        <a href="@Url.Action("Vehicle", new { id = Model.VehicleList[i].VehicleID })">
+                            <i class="fa fa-edit" title="Edit"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<style>
+    td {
+        font-size: 14px;
+    }
+</style>
+<script>
+    $("#myaccount").on("click", function () {
+        $(this).dropdown("toggle");
+    });
+
+    $("#check_all").on("click", function () {
+        //if ($(this).is(":checked")) {
+        //    $(".checkbox_all").prop("checked", true);
+        //}
+        //else {
+        //    $(".checkbox_all").prop("checked", false);
+        //}
+        @if (VehicleRegistration.Tools.CurrentUser.Details.UserEntityID == (int)VehicleRegistration.Tools.UserEntityEnum.MAI)
+        {
+            <text>
+                if ($(this).is(":checked")) {
+                    $('.checkbox_all', all_table.cells().nodes()).prop('checked', true);
+                } else {
+                    $('.checkbox_all', all_table.cells().nodes()).prop('checked', false);
+                }
+            </text>
+        }
+        else
+        {
+            <text>
+                if ($(this).is(":checked")) {
+                    $('.checkbox_all', table.cells().nodes()).prop('checked', true);
+                }
+                else {
+                    $('.checkbox_all', table.cells().nodes()).prop('checked', false);
+                }
+            </text>
+        }
+    });
+
+    //$(".rowclick").click(function () {
+    //    window.location = $(this).data("href");
+    //});
+
+    $('table').on('click', 'tbody tr', function (evt) {
+        var $cell = $(evt.target).closest('td'),
+            msg;
+
+        if ($cell.index() > 0)
+            window.location = $(this).data("href");
+
+    });
+</script>
+<!-- /.content -->
+<!-- ./wrapper -->
+@*<!-- jQuery -->
+    <script src="~/Scripts/Admin_temp/jquery/jquery.min.js"></script>
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/Scripts/Admin_temp/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <script src="~/Scripts/Admin_temp/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/Admin_temp/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+
+    <script src="~/Scripts/Admin_temp/datatables-buttons/js/dataTables.buttons.min.js"></script>*@

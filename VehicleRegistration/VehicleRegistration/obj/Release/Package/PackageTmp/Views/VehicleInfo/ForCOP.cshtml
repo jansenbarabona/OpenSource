@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "ForCOP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6><i class="nav-icon fas fa-file-signature"></i> COP List  <small> </small></h6>
+                    </div>
+                    <div class="card-body">
+                        @{
+                            Html.RenderPartial("_VehicleList");
+                        }
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+<script>
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#cop").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+</script>

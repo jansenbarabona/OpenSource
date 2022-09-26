@@ -1,0 +1,285 @@
+﻿@using VehicleRegistration.Models
+@model VehicleListModel
+
+@{
+    ViewBag.Title = "Upload For PNP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*@model System.Data.DataTable
+@using System.Data;*@
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+
+<section class="content">
+    <div class="card">
+        <div class="info2">
+
+            <h2>
+                Browse PNP Clearance image for uploading
+                <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Back" style="float:right" onclick="location.href='@Url.Action("ForPNP", "VehicleInfo")'">
+                    <i class="far fa-times-circle"></i>
+                </button>
+            </h2>
+
+            @using (Html.BeginForm("UploadForPNP", "VehicleInfo", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group" name="Fichier1">
+                    <!-- COMPONENT START -->
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.PNPInfo.PNPFileBatch,
+                       new {
+                           id = "dataFiles",
+                           @class = "nput-ghost",
+                           type = "file",
+                           multiple = "multiple",
+                           style = "visibility:hidden; height:0",
+                           accept = ".jpg,.jpeg,.png"
+                       })
+                        <div class="input-group input-file">
+                            <span class="input-group-btn">
+                                @*<button class="btn btn-default btn-choose" type="button">Browse...</button>*@
+                                <button class="btn btn-choose" type="button"><i class="fas fa-folder-open"></i> Browse..</button>
+                            </span>
+                            <input type="text" id="listname" class="form-control" placeholder='Choose a file...' />
+                            <div id="confirm_btn" @*name="btnSubmit"*@ data-toggle="tooltip" title="Upload file" class="btn btn-upload"><i class="fas fa-cloud-upload-alt"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="alert alert-danger">
+                    @Html.ValidationSummary()
+                </div>
+
+
+                @Html.Partial("_Confirmation")
+            }
+
+        </div>
+        @if (Model != null)
+            {
+            <div class="row">
+                <div class="adjust-table col-lg-6">
+                    <center>
+                        <h3 style="color:green">Successful</h3>
+                    </center>
+                    <table id="table_success" class="table table-bordered table-hover" style="width:100%; max-width: 100%;">
+                        <thead>
+                            <tr>
+                                <th style="width:100%;">Image Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.PNPInfo.PNPListModel.Count; i++)
+                            {
+                                if (Model.PNPInfo.PNPListModel[i].isSuccess)
+                                {
+                                    <tr>
+                                        <td style="width:100%;">
+                                            @Html.DisplayFor(o => o.PNPInfo.PNPListModel[i].PNPListFile.FileName)
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-6">
+                    <center>
+                        <h3 style="color:red">Failed</h3>
+                    </center>
+                    <table id="table_failed" class="table table-bordered table-hover" style="width:100%; max-width: 100%;">
+                        <thead>
+                            <tr>
+                                <th style="width:200px;">Image Name</th>
+                                <th style="width:200px;">Error Message</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.PNPInfo.PNPListModel.Count; i++)
+                            {
+                                if (!Model.PNPInfo.PNPListModel[i].isSuccess)
+                                {
+                                    <tr>
+                                        <td style="max-width:250px;">
+                                            @Html.DisplayFor(o => o.PNPInfo.PNPListModel[i].PNPListFile.FileName)
+                                        </td>
+                                        <td style="max-width:250px;">
+                                            @Html.DisplayFor(o => o.PNPInfo.PNPListModel[i].message)
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<script>
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#pnp").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+    /////// Tool Tip ///////
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+
+
+    $("button.btn-choose").click(function () {
+        $("#dataFiles").click();
+    });
+
+    $('input').css("cursor", "pointer");
+    $('input').mousedown(function () {
+        $(this).parents('.input-file').prev().click();
+        return false;
+    });
+
+    $('#dataFiles').change(function () {
+        var list_filename = "";
+        var list_filename_confirm = "";
+        for (var i = 0 ; i < this.files.length ; i++) {
+            var fileName = this.files[i].name;
+            list_filename += fileName + ", ";
+            list_filename_confirm += fileName + ", \n";
+        }
+        $("#listname").val((list_filename).split('\\').pop());
+        $("#modal-create-body").remove();
+        $("#modal-create-header").after(" " +
+                "<div id='modal-create-body' class='modal-body'> " +
+                "   <div class='row'> " +
+                "       <div class='form-group col-12' > " +
+                "           List of selected image file: <label id='lbl_image' style='white-space: pre-line;'>" + list_filename_confirm + "</label> " +
+                "       </div> " +
+                "   </div> " +
+                "</div> " +
+                "");
+    });
+
+    $("#confirm_btn").click(function () {
+        if($("form").valid()){
+            $("#modal-create").modal("show");
+        }
+    });
+</script>
+<style>
+    /*excel button*/
+    button.fab-excel {
+        z-index: 1;
+        width: 56px;
+        height: 56px;
+        background: -webkit-linear-gradient(left,#498C66,#227446);
+        border-radius: 50%;
+        box-shadow: 0 6px 10px 0 #666;
+        font-size: 28px;
+        /*font-weight:800;*/
+        line-height: 50px;
+        color: white;
+        text-align: center;
+        position: fixed;
+        right: 25px;
+        bottom: 25px;
+        border: 0px;
+        transition: all 0.1s ease-in-out;
+    }
+
+    button.fab-edit:hover {
+        box-shadow: 0 6px 14px 0 #666;
+        transform: scale(1.05);
+    }
+
+    form {
+        padding: 10px 20px;
+        /*margin:20px;*/
+    }
+
+    div.card-header {
+        color: seagreen;
+    }
+
+    h2 {
+        color: #4E4E4E;
+    }
+
+    .btn-choose {
+        background-color: DodgerBlue;
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 2px;
+    }
+
+        /* Darker background on mouse-over */
+        .btn-choose:hover {
+            background-color: RoyalBlue;
+            color: white;
+        }
+
+    button.btn-info {
+        background-color: seagreen;
+        color: #4E4E4E;
+        border-radius: 50%;
+        /*border: 1px solid #4E4E4E;*/
+        color: white;
+        width: 45px;
+        height: 45px;
+        /*padding: 6px 16px;*/
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    input.btn.btn-upload, button.btn.btn-upload, div.btn.btn-upload {
+        background-color: #DC3545;
+        color: #4E4E4E;
+        border-radius: 50%;
+        /*border: 1px solid #4E4E4E;*/
+        color: white;
+        width: 45px;
+        height: 45px;
+        /*padding: 6px 6px;
+         font-size: 18px;*/
+        cursor: pointer;
+    }
+
+        input.btn.btn-upload:hover, button.btn.btn-upload:hover, div.btn.btn-upload:hover {
+            background-color: #D9534F;
+            color: #4E4E4E;
+            border-radius: 50%;
+            /*border: 1px solid #4E4E4E;*/
+            color: white;
+            width: 45px;
+            height: 45px;
+            /*padding: 6px 6px;
+         font-size: 18px;*/
+            cursor: pointer;
+        }
+
+    .form-control {
+        margin: 3px;
+    }
+
+    i.far.fa-times-circle {
+        color: #D9534F;
+    }
+
+        i.far.fa-times-circle:hover {
+            color: #DC3545;
+        }
+
+    div.alert.alert-danger {
+        background: #007BFF;
+        border: 0px;
+    }
+</style>
+

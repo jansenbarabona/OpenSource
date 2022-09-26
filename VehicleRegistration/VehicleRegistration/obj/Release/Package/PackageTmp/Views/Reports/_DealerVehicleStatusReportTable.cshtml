@@ -1,0 +1,54 @@
+﻿@using VehicleRegistration.Models
+@model List<DealerVehicleStatusReportTableModel>
+
+<!-- Main content -->
+<table id="tbl_list" class="table table-bordered table-striped table-hover" style="width:100%; table-layout:auto;">
+    <thead>
+        <tr>
+            <th style="width:16%">Branch Name</th>
+            <th style="width:12%">Inventory</th>
+            <th style="width:12%">CSR</th>
+            <th style="width:12%">Invoice</th>
+            <th style="width:12%">COC</th>
+            <th style="width:12%">PNP</th>
+            <th style="width:12%">Submission</th>
+            <th style="width:12%">Total</th>
+        </tr>
+    </thead>
+    <tbody id="vehiclelist_tbody">
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            <tr>
+                <td style="width:16%">
+                    @Html.DisplayFor(o => Model[i].DealerBranchName)
+                </td>
+                <td style="width:12%">
+                    @Html.DisplayFor(o => Model[i].TotalInventory)
+                </td>
+                <td style="width: 12%">
+                    @Html.DisplayFor(o => Model[i].TotalCSR)
+                </td>
+                <td style="width:12%">
+                    @Html.DisplayFor(o => Model[i].TotalInvoice)
+                </td>
+                <td style="width:12%">
+                    @Html.DisplayFor(o => Model[i].TotalCOC)
+                </td>
+                <td style="width:12%">
+                    @Html.DisplayFor(o => Model[i].TotalPNP)
+                </td>
+                <td style="width:12%">
+                    @Html.DisplayFor(o => Model[i].TotalSubmission)
+                </td>
+                <td style="width:12%">
+                    @Html.DisplayFor(o => Model[i].TotalActive)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<style>
+    td {
+        font-size: 14px;
+    }
+</style>

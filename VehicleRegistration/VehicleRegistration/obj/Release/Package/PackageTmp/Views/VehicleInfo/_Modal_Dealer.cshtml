@@ -1,0 +1,174 @@
+﻿@using VehicleRegistration.Models
+@model AssignDealerModel
+
+<div class="modal fade" id="modal-dealer">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @Html.AntiForgeryToken()
+            <div class="modal-header">
+                <h4 class="modal-title" style="text-align:center">List of Dealer's</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-lg-12">
+                        @Html.LabelFor(m => m.SelectedDealer)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+                            </div>
+                            @Html.DropDownListFor(m => m.SelectedDealer,
+                       new SelectList(Model.MAI_DealerList, "DealerID", "DealerName"), "Select Dealer", new { @class = "form-control select2" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.SelectedDealer, "", new { @class = "" })
+                    </div><!-- Dealer form-group// -->
+                    <div class="form-group col-lg-12">
+                        @Html.LabelFor(m => m.SelectedDealerBranch)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+                            </div>
+                            @Html.DropDownListFor(m => m.SelectedDealerBranch,
+                       new SelectList(Model.MAI_DealerBranchList, "DealerBranchID", "DealerBranchName"), "Select Dealer Branch", new { @class = "form-control select2" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.SelectedDealerBranch, "", new { @class = "" })
+                    </div><!-- Dealer Branch form-group// -->
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" id="btn_dealer" class="btn btn-primary" >Assign</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div id="modal-dealer-Confirmation" class="modal fade">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title text-center">Are you sure you want to save?</h4>
+            </div>
+            <div id="modal-body-dealer-confirmation" class="modal-body">
+                <div class="row">
+                    <div class="col-6 text-center">
+                        @Html.LabelFor(m => m.SelectedDealer): <label id="lbl_SelectedDealer"></label>
+                    </div>
+                    <div class="col-6 text-center">
+                        @Html.LabelFor(m => m.SelectedDealerBranch): <label id="lbl_SelectedDealerBranch"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" id="btn_dealer_confirmation_close" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" name="submit" id="dealer-submit" value="Dealer" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+     $('#DealerInfo_SelectedDealer').on('change', function () {
+        $.ajax({
+            url: '@Url.Action("GetDealerBranch", "GetData")',
+            type: "GET",
+            dataType: "JSON",
+            cache: false,
+            data: { "DealerID": this.value },
+            success: function (response) {
+                $("#DealerInfo_SelectedDealerBranch").find("option:gt(0)").remove();
+                $.each(response, function (index, value) {
+                    var o = new Option(value.DealerBranchName, value.DealerBranchID);
+                    $("#DealerInfo_SelectedDealerBranch").append($(o));
+                });
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+     });
+
+    $('#btn_dealer').click(function () {
+        $("#lbl_SelectedDealer").text($("#DealerInfo_SelectedDealer option:selected").text());
+        $("#lbl_SelectedDealerBranch").text($("#DealerInfo_SelectedDealerBranch option:selected").text());
+
+        if ($("#vehiclelist_tbody tr").length == 0) {
+            //alert("WP1");
+            if (jQuery("form").valid()) {
+                $("#modal-dealer").modal("hide");
+                $("#modal-dealer-Confirmation").modal("show");
+            }
+        }
+        else if ($("#vehiclelist_tbody tr").length > 0) {
+            /*alert("WP2")*/;
+            if (jQuery("form").valid()) {
+                $("#modal-dealer").modal("hide");
+                jQuery.noConflict();
+                if (jQuery.fn.DataTable.isDataTable('#tbl_listofsummary')) {
+                    jQuery('#tbl_listofsummary').DataTable().clear();
+                    jQuery('#tbl_listofsummary').DataTable().destroy();
+                }
+
+                if ($("#summarry_thead tr").length == 0) {
+                    $("#modal-body-dealer-confirmation").append("" +
+                    "<table id='tbl_listofsummary' class='table table-bordered table-striped table-hover' style='width:100%; max-width:100%;'>" +
+                    "   <thead id='summarry_thead'>" +
+                    "       <tr>" +
+                    "           <th style='width:25%'>Make</th>" +
+                    "           <th style='width:25%'>Model</th>" +
+                    "           <th style='width:25%'>Engine</th>" +
+                    "           <th style='width:25%'>Body</th>" +
+                    "       </tr>" +
+                    "   </thead>" +
+                    "   <tbody id='summarry_tbody'>" +
+                    "   </tbody>" +
+                    "</table>");
+                }
+
+                $("#vehiclelist_tbody .checkbox_all:checkbox:checked").each(function () {
+                    var tr = $(this).closest("tr");
+                    var make = tr.find("td:eq(1)").text().trim();
+                    var model = tr.find("td:eq(2)").text().trim();
+                    var engine = tr.find("td:eq(5)").text().trim();
+                    var body = tr.find("td:eq(6)").text().trim();
+                    $("#tbl_listofsummary #summarry_tbody").append("" +
+                    "<tr>" +
+                    "    <td>" + make + "</td>" +
+                    "    <td>" + model + "</td>" +
+                    "    <td>" + engine + "</td>" +
+                    "    <td>" + body + "</td>" +
+                    "</tr>");
+                });
+
+                jQuery.noConflict();
+                var summary_tbl = jQuery("#tbl_listofsummary").DataTable({
+                    "scrollX": true,
+                    "scrollY": true,
+                    "info": false,
+                    "lengthChange": false,
+                    "searching": false,
+                    "paging": false,
+                    "order": [],
+                    "dom":
+                        "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                });
+
+                $(document).on('shown.bs.modal', '.modal', function (e) {
+                    summary_tbl.columns.adjust();
+                });
+                $("#modal-dealer-Confirmation").modal("show");
+
+            }
+        }
+    });
+
+    $('#btn_dealer_confirmation_close').click(function () {
+        $("#modal-dealer").modal("show");
+    })
+</script>

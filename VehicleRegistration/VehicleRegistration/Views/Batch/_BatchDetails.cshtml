@@ -1,0 +1,37 @@
+﻿@using VehicleRegistration.Models
+@model VehicleListModel
+
+<div class="card">
+    <div class="card-header">
+        <h6>Details</h6>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="transaction_history" class="table table-bordered table-striped table-hover" style="max-width:100%; width:100%">
+            <thead>
+                <tr>
+                    <th style="width:50px;">Make</th>
+                    <th style="width:120px;">Model</th>
+                    <th style="width:125px;">Engine</th>
+                    <th style="width:130px;">Chassis</th>
+                    <th style="width:100px;">Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                @*@foreach (var item in Model.TransactionList.OrderByDescending(o => o.CreatedDate))
+                {
+                    <tr class="rowclick" style="cursor: pointer" data-href="@Url.Action("VehicleInfo", "VehicleInfo", new { id = item.VehicleID })">
+                        <td style="max-width:50px;">@item.TransactionID</td>
+                        <td style="max-width:120px;">@item.TransactionName</td>
+                        <td style="max-width:125px;" align="right">@item.ComputedAmount.Value.ToString("#,##0.00;(#,##0.00)")</td>
+                        <td style="max-width:130px;">@item.Remarks</td>
+                        <td style="max-width:100px;" align="right">@item.CreatedDate.ToString("MMM dd, yyyy HH:mm:ss")</td>
+                    </tr>
+                }*@
+
+            </tbody>
+
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>

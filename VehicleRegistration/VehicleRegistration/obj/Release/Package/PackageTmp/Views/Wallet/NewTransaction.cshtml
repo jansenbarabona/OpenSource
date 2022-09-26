@@ -1,0 +1,205 @@
+﻿@using VehicleRegistration.Models
+@using VehicleRegistration.Tools
+@model TransactionModel
+
+@{
+    ViewBag.Title = "New Transaction";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Back" onclick="location.href='@Url.Action("TransactionTypeList", "Wallet")'">
+                    <i class="far fa-times-circle"></i>
+                    @*<i class="far fa-times-circle"></i>*@
+                </button>
+            </div>
+            <h6><i class="far fa-money-bill-alt"></i> New Transaction Form</h6>
+        </div>
+        <!-- /.card-header -->
+        <!-- /.body -->
+        <article class="card-body mx-1">
+            @using (Html.BeginForm("NewTransaction", "Wallet", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <!-- Div start-->
+                <div class="row">
+                    <!---Entity Type-->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.UserEntityTypeList)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-id-card"></i> </span>
+                            </div>
+                            @Html.DropDownListFor(m => m.SelectedUserEntityID, new SelectList(Model.UserEntityTypeList, "UserEntityID", "UserEntityName"), "Select Entity Type", new { @class = "form-control select2" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.SelectedUserEntityID, "", new { @class = "" })
+                    </div>
+                    <!---Entity-->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.SelectedEntityID)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-id-card"></i> </span>
+                            </div>
+                            @Html.DropDownListFor(m => m.SelectedEntityID, Enumerable.Empty<SelectListItem>(), "Select Entity", new { @class = "form-control select2" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.SelectedEntityID, "", new { @class = "" })
+                    </div>
+                    <!--Wallet List-->
+                    @*<div class="form-group col-lg-4">
+                            @Html.LabelFor(m => m.WalletID)
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-id-card"></i> </span>
+                                </div>
+                                @Html.DropDownListFor(m => m.WalletID, new SelectList(Model.Walletlist, "WalletID", "UserEntityID"), "Select Entity", new { @class = "form-control select2" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.WalletID, "", new { @class = "" })
+                        </div>*@ <!-- form-group// -->
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.TransactionTypeID)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-id-card"></i> </span>
+                            </div>
+                            @Html.DropDownListFor(m => m.TransactionTypeID, new SelectList(Model.TransactionTypelist, "TransactionTypeID", "TransactionName"), "Select Transaction Type", new { @class = "form-control select2" })
+                            @*@Html.TextBoxFor(m => m.TransactionTypeID, new { placeholder = "Transaction Type ID", @class = "form-control select2", type = "transactiontypeid" })*@
+                        </div>
+                        @Html.ValidationMessageFor(m => m.TransactionTypeID, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.Amount)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text "> <i class="fas fa-ruble-sign"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.Amount, new { placeholder = "Amount", @class = "form-control", type="number"})
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Amount, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.Remarks)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text "> <i class="fas fa-ruble-sign"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.Remarks, new { placeholder = "Remarks", @class = "form-control", type = "text" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Remarks, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+
+                </div><!-- end row// -->
+                <center>
+                    <div class="form-group">
+                        <center>
+                            @*<button type="submit" name="submit" value="Create" class="btn btn-primary btn-block" style="width:250px; background:#F57224; border:none;"> Send to Wallet </button>*@
+                            <button type="button" data-toggle="modal" data-target="#modal-create" class="btn btn-primary btn-block" style="width:250px; background:#F57224; border:none;"> Save </button>
+                        </center>
+                    </div>
+                </center>
+                Html.RenderPartial("_Confirmation");
+            }
+        </article>
+        <!-- /.card-body -->
+    </div>
+    <!--WALLET-->
+    <div id="Wallet">
+        @{
+            Html.RenderPartial("_TransactionHistory", Model.WalletDetail);
+        }
+    </div>
+</section>
+<script type="text/javascript">
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_wallet").toggleClass("menu-open");
+    $("#left_nav_ul_wallet").css("display", "block");
+    $("#new_transaction").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+        $("#SelectedUserEntityID").on("change", function () {
+            var entity = $(this).val();
+            $("#SelectedEntityID").val("");
+
+            $("#SelectedEntityID").find("option:gt(0)").remove();
+            $.ajax({
+                    url: '@Url.Action("GetEntityList", "Wallet")',
+                    type: "POST",
+                    dataType: "JSON",
+                    cache: false,
+                    data: addAntiForgeryToken({ "EntityTypeID": this.value }),
+                    success: function (response) {
+                        switch (entity) {
+                            case "2":
+                                //MAI
+                                $.each(response, function (index, value) {
+                                    var o = new Option(value.MAIName, value.MAIID);
+                                    $("#SelectedEntityID").append($(o));
+                                });
+                                $("label[for='SelectedEntityID']").text("MAI");
+                                break;
+                            case "3":
+                                //Dealer
+                                $.each(response, function (index, value) {
+                                    var o = new Option(value.DealerName, value.DealerID);
+                                    $("#SelectedEntityID").append($(o));
+                                });
+                                $("label[for='SelectedEntityID']").text("Dealer");
+                                break;
+                            case "4":
+                                //Insurance
+                                $.each(response, function (index, value) {
+                                    var o = new Option(value.InsuranceName, value.InsuranceID);
+                                    $("#SelectedEntityID").append($(o));
+                                });
+                                $("label[for='SelectedEntityID']").text("Insurance");
+                                break;
+                        }
+
+                    },
+                    error: function (xhr, status, error) {
+                        alert(error);
+                    }
+                });
+        });
+
+    var addAntiForgeryToken = function (data) {
+        data.__RequestVerificationToken = $("[name='__RequestVerificationToken']").val();
+        return data;
+    };
+
+    $("#SelectedEntityID").on("change", function () {
+        $.ajax({
+            url: '@Url.Action("GetTransactionList", "Wallet")',
+            type: "POST",
+            data: addAntiForgeryToken({ "EntityTypeID": $("#SelectedUserEntityID").val(), "EntityID": $("#SelectedEntityID").val() }),
+            cache: false,
+            async: true,
+            success: function (result) {
+                $("#Wallet").html(result);
+
+                $("#transaction_history").DataTable({
+                    "scrollX": true,
+                    "scrollY": true,
+                    "info": false,
+                    "lengthChange": false,
+                    "order": [],
+                    "dom":
+                        "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                });
+            }
+        });
+    });
+</script>

@@ -1,0 +1,180 @@
+﻿@using VehicleRegistration.Models
+@model VehicleListModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("ForAllocate", "VehicleInfo", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6><i class="nav-icon fas fa-file-signature"></i> Pending Allocate List  <small> </small></h6>
+                    </div>
+              
+                    <div class="card-body">
+                            <div class="check btn-info" id="btn_assign" type="button" name="btnSubmit" data-toggle="tooltip" title="Dealer List"><i class="fas fa-car"></i></div>
+
+                            @{
+                                Html.RenderPartial("_VehicleList");
+                            }
+                        </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+
+    @*MAI Dealer List*@          
+    Html.RenderPartial("_Modal_Dealer", Model.DealerInfo, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "DealerInfo" } });
+    //Html.RenderPartial("_Modal_BOC", Model.BOCInfo);
+}
+
+<script type="text/javascript">
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#forallocate").toggleClass("active");
+
+    $("#btn_assign").on("click", function () {
+        if ($("#tbl_list input[type=checkbox]:checked").length > 0) {
+            $("#modal-dealer").modal("show");
+        }
+        else {
+            toastr.warning("Please check one or more row to assign!");
+        }
+    });
+
+    //$("#btn_assign").on("click", function () {
+    //    var dealer = $("#SelectedDealer").val();
+    //    var dealer_nm = $("#SelectedDealer option:selected").text();
+    //    var dealerbranch = $("#SelectedDealerBranch").val();
+    //    var dealerbranch_nm = $("#SelectedDealerBranch option:selected").text();
+    //    if (dealer != null && dealerbranch != null) {
+    //        $("#modal-dealer_list").modal("hide");
+
+    //        //jQuery.noConflict();
+    //        //if (jQuery.fn.DataTable.isDataTable('#tbl_listofsummary')) {
+    //        //    jQuery('#tbl_listofsummary').DataTable().clear();
+    //        //    jQuery('#tbl_listofsummary').DataTable().destroy();
+    //        //}
+
+    //        $("#details").remove();
+
+    //        $("#modal-summary-body").prepend(""+
+    //            "<div id='details' class='row'>"+
+    //            "        <div class='col-sm-12 col-md-6 col-lg-6'>"+
+    //            "            <div class='row'>"+
+    //            "                <div class='col-4 text-right'>"+
+    //            "                    <b>Dealer:</b>"+
+    //            "                </div>"+
+    //            "                <div class='col-8'>" +
+    //            "                   " + dealer_nm + "" +
+    //            "                </div>"+
+    //            "            </div>"+
+    //            "        </div>" +
+    //            "        <div class='col-sm-12 col-md-6 col-lg-6'>" +
+    //            "            <div class='row'>" +
+    //            "                <div class='col-4 text-right'>" +
+    //            "                    <b>Dealer Branch:</b>" +
+    //            "                </div>" +
+    //            "                <div class='col-8'>" +
+    //            "                   " + dealerbranch_nm + "" +
+    //            "                </div>" +
+    //            "            </div>" +
+    //            "        </div>" +
+    //            "</div>");
+
+
+
+    //        jQuery.noConflict();
+    //        if (jQuery.fn.DataTable.isDataTable('#tbl_listofsummary')) {
+    //            jQuery('#tbl_listofsummary').DataTable().clear();
+    //            jQuery('#tbl_listofsummary').DataTable().destroy();
+    //        }
+
+    //        if ($("#summarry_thead tr").length == 0) {
+    //            $("#modal-summary-body").append("" +
+    //            "<table id='tbl_listofsummary' class='table table-bordered table-striped table-hover' style='width:100%; max-width:100%;'>" +
+    //            "   <thead id='summarry_thead'>" +
+    //            "       <tr>" +
+    //            "           <th style='width:25%'>Make</th>" +
+    //            "           <th style='width:25%'>Model</th>" +
+    //            "           <th style='width:25%'>Engine</th>" +
+    //            "           <th style='width:25%'>Body</th>" +
+    //            "       </tr>" +
+    //            "   </thead>" +
+    //            "   <tbody id='summarry_tbody'>" +
+    //            "   </tbody>" +
+    //            "</table>");
+    //        }
+
+    //        $("#vehiclelist_tbody .checkbox_all:checkbox:checked").each(function () {
+    //            var tr = $(this).closest("tr");
+    //            var make = tr.find("td:eq(1)").text().trim();
+    //            var model = tr.find("td:eq(2)").text().trim();
+    //            var engine = tr.find("td:eq(5)").text().trim();
+    //            var body = tr.find("td:eq(6)").text().trim();
+    //            $("#tbl_listofsummary #summarry_tbody").append("" +
+    //            "<tr>" +
+    //            "    <td>" + make + "</td>" +
+    //            "    <td>" + model + "</td>" +
+    //            "    <td>" + engine + "</td>" +
+    //            "    <td>" + body + "</td>" +
+    //            "</tr>");
+    //        });
+
+    //        jQuery.noConflict();
+    //        var summary_tbl = jQuery("#tbl_listofsummary").DataTable({
+    //            "scrollX": true,
+    //            "scrollY": true,
+    //            "info": false,
+    //            "lengthChange": false,
+    //            "searching": false,
+    //            "paging": false,
+    //            "order": [],
+    //            "dom":
+    //                "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+    //                "<'row'<'col-sm-12'tr>>" +
+    //                "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+    //        });
+
+    //        $(document).on('shown.bs.modal', '.modal', function (e) {
+    //            summary_tbl.columns.adjust();
+    //        });
+    //        $("#modal-summary").modal("show");
+    //    }
+    //    else {
+    //        toastr.warning("Dealer and DealerBranch are required!");
+    //    }
+    //});
+
+    //$("#btn_no").on("click", function () {
+    //    $("#modal-dealer_list").modal("show");
+    //    $("#modal-summary").modal("hide");
+    //});
+
+    @*$('#SelectedDealer').on('change', function () {
+        $.ajax({
+            url: '@Url.Action("GetDealerBranch", "GetData")',
+            type: "GET",
+            dataType: "JSON",
+            cache: false,
+            data: { "DealerID": this.value },
+            success: function (response) {
+                $("#SelectedDealerBranch").find("option:gt(0)").remove();
+                $.each(response, function (index, value) {
+                    var o = new Option(value.DealerBranchName, value.DealerBranchID);
+                    $("#SelectedDealerBranch").append($(o));
+                });
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+    });*@
+</script>

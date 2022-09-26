@@ -1,0 +1,65 @@
+﻿@using VehicleRegistration.Models
+@model IEnumerable<vwDealerInvoiceModel>
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="nav-icon fas fa-file-invoice-dollar"></i> Invoice List   <small> </small></h6>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        @*<button class="btn" onclick="location.href='@Url.Action("Invoice", "Dealer")'"><i class="fas fa-plus"></i> Create New </button>
+                            <input type="button" class="btn btn-info btn-block" name="btnSubmit" value="Create New" onclick="location.href='@Url.Action("Invoice", "Dealer")'" />*@
+                    </div>
+                </div>
+                <div class="fab" type="button" name="btnSubmit" data-toggle="tooltip" title="Create New" onclick="location.href='@Url.Action("Invoice", "Dealer")'"> + </div>
+                <!-- /.card-header -->
+                @*<button type="submit" id="mai_new" name="submit" value="New" class="btn btn-info btn-block">Create New </button>*@
+                <div class="card-body">
+                    <table id="Dealer_list_tbl" class="table table-bordered table-striped table-hover" style="max-width:100%;">
+                        <thead>
+                            <tr>
+                                <th style="width:300px;">Invoice Number</th>
+                                <th style="width:380px;">Customer Name</th>
+                                <th style="width:210px;">COC</th>
+                                <th style="width:150px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.InvoiceNumber</td>
+                                    <td>@item.CustomerName</td>
+                                    <td>@item.COC</td>
+                                    <td style="max-width:100px; padding-left:5px; padding-right:5px; margin:auto;" align="center">
+                                        <div class="row justify-content-center">
+                                            <a href="@Url.Action("Invoice", new { id = item.InvoiceID})" @*class="deal_edit btn btn-warning btn-md"*@>
+                                                <i class="fa fa-edit"></i>
+
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+<!-- ./wrapper -->
+<!-- jQuery -->
+

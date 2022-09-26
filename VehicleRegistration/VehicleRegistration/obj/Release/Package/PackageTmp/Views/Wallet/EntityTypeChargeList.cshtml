@@ -1,0 +1,78 @@
+﻿
+@using VehicleRegistration.Models
+@model IEnumerable<vwTransactionEntityType>
+@*Views-- > Folder Name("VehicleMake") *@
+
+@{
+    ViewBag.Title = "EntityTypeChargeList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="nav-icon fas fa-car-side"></i> Entity Type Charge  <small></small></h6>
+                </div>
+                <!-- /.card-header -->
+                <div class="fab" type="button" name="btnSubmit" data-toggle="tooltip" title="Create New" onclick="location.href='@Url.Action("EntityTypeCharge", "Wallet")'"> + </div>
+                <div class="card-body">
+                    <table id="MAI_list_tbl" class="table table-bordered table-striped table-hover" style="max-width:100%; width:99.7%;">
+                        <thead>
+                            <tr>
+                                <th style="width:670px;">User Entity Name</th>
+                                <th style="width:670px;">Transaction Name</th>
+                                <th style="width:670px;">Amount</th>
+                                <th style="width:670px;">Effectivity Date</th>
+                                <th style="width:75px;">Action</th>
+
+                            </tr>
+                        </thead>
+
+
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="width:670px;" id="User_Entity_Code">@item.UserEntityName</td>
+                                    <td style="width:670px;" id="User_Entity_Code">@item.TransactionName</td>
+                                    <td style="width:670px;" id="User_Entity_Code">@item.Amount</td>
+                                    <td style="width:670px;" id="User_Entity_Code">@item.EffectivityDate.ToString("MM/dd/yyyy")</td>
+                                    <td style="max-width:75px; padding-left:5px; padding-right:5px; margin:auto;" align="center">
+                                        <div class="row justify-content-center">
+                                            <a href="@Url.Action("EntityTypeCharge", "Wallet", new { id = item.TransactionEntityTypeID })" class="btn btn-warning btn-md">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+<!-- ./wrapper -->
+<script>
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_ul_vehicle").css("display", "block");
+    $("#entity_type_charge_list").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+</script>

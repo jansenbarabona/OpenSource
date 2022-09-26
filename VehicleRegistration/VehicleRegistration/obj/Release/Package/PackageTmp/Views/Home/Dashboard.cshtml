@@ -1,0 +1,1832 @@
+﻿﻿@using VehicleRegistration.Tools
+@using VehicleRegistration.Models
+
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    /*.bg-info {
+        opacity: 0.5;
+    }*/
+    div.row, div.content-header, div.container-fluid {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    div.card-header.border-0.ui-sortable-handle {
+        background-color: #26A8BD;
+    }
+    /*img.img-thumbnail{
+        border-style:none;
+        border:0px
+    }*/
+    nav.main-header.navbar.navbar-expand.navbar-primary.navbar-dark {
+        margin-bottom: 0px;
+    }
+
+    svg#86385494-26be-4c3c-b508-57452eff5c21.rounded.float-right {
+        margin-top: 0px;
+        padding-top: 0px;
+    }
+
+    /*div.progress-marker::before {
+        width: 35px;
+        height: 35px;
+    }
+
+    div.progress-marker::after {
+        margin-top: 3px;
+    }*/
+
+    p.progress-title {
+        font-weight: 600;
+        margin: 0px;
+        font-size: 16px;
+    }
+
+    span.ico-circle {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    div.col {
+        padding-left: 20px;
+    }
+
+    h6.card-title {
+        line-height: 19px;
+        font-size: 16px;
+        color: #A4A8AB;
+        padding-top: 5px;
+        padding-bottom: 15px;
+    }
+
+    p.card-text {
+        line-height: 32px;
+        font-size: 32px;
+        color: #495057;
+    }
+
+    div.card-body {
+        background-color: #E5EAF8;
+    }
+
+    div.progress-text.hover:hover,
+    div.progress-marker.hover:hover {
+        color: #2196F3;
+    }
+</style>
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.2/css/adminlte.min.css" rel="stylesheet" />
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>*@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+    @*<link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">*@
+    <link href="~/favicon.ico" rel="icon">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- style css  -->
+    <link href="~/scripts/Dashboard/css/main.min.css" rel="stylesheet" />
+    <link href="~/scripts/Admin_temp/fontawesome-free/css/all.min.css" rel="stylesheet" />
+
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    @*<!-- Tempusdominus Bbootstrap 4 -->
+        <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+        <!-- iCheck -->
+        <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+        <!-- JQVMap -->
+        <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="dist/css/adminlte.min.css">
+        <!-- overlayScrollbars -->
+        <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+        <!-- Daterange picker -->
+        <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+        <!-- summernote -->
+        <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">*@
+
+
+    <script>
+        $("#topnav_dashboard").toggleClass("active");
+    </script>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed" style="margin-top:0px;">
+    <div class="wrapper">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6" style="color:#343a40; margin-left:10px; ">
+                        <h1 class="m-0 text-dark" style="font-weight:bold;">Dashboard</h1>
+                    </div><!-- /.col -->
+
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+        <!-- Main content -->
+        @*DATABRIDGE*@
+        @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.DataBridgeAsia)
+        {
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="card col" style="background: #E5EAF8;border-radius: 20px; margin:10px;">
+                            <div class="row">
+
+                                <div class="col" style="margin:60px;margin-left:0px; margin-bottom:30px; ">
+
+                                    <ul class="list-ico ">
+                                        <li><h2 style="font-weight:bold;color:#628DFB;">Welcome @CurrentUser.Details.FirstName @CurrentUser.Details.LastName!</h2></li>
+                                        <li>
+                                            <p>
+                                                @*<span class="ion-ios-location"></span>*@Lorem Ipsum is simply dummy text of the printing and
+                                                @*typesetting industry. Lorem Ipsum has been the industry's*@
+                                            </p>
+                                        <li>
+                                            <button type="button" style="margin-left:10px;" class="btn btn-primary ">Get Started</button>
+                                    </ul>
+
+                                </div>
+                                <!-- content-image -->
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col" style="padding:0px;">
+                                            <img style="width:230px; height:220px; margin-top:10px; padding:0px;" class="rounded float-right" src="~/scripts/Img/svg/proud.svg" />
+                                        </div>
+                                        <div class="col" style="padding:0px; margin:0px;">
+                                            <img style="width:270px; height:250px; margin-right:30px; padding:0px;" class="rounded float-right" src="~/scripts/Img/svg/programming.svg" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="row">*@
+
+                        </div>
+                    </div>
+                </div><!-- /.first-row -->
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <a href="@Url.Action("DealerStatusReport", "Reports")">
+
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>@ViewBag.DataBridge_DealerActiveCount</h3>
+
+                                    <p>Dealer Total Active Batch</p>
+
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-archive"></i>
+                                </div>
+                                @*<a class="small-box-footer*@
+                                @*<a href="@Url.Action("DealerStatusReport", "Reports")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+
+                            </div>
+                        </a>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <a href="@Url.Action("LTOStatusReport", "Reports")">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>@ViewBag.DataBridge_LTOActiveCount</h3>
+
+                                    <p>LTO Total Active Batch</p>
+
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-archive"></i>
+                                </div>
+                                @*<a class="small-box-footer">*@
+                                    @*<a href="@Url.Action("LTOStatusReport", "Reports")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                            </div>
+                        </a>
+
+                    </div>
+                </div>   <!-- /.row -->
+                <!-- Collapse buttons -->
+                <div class="text-center" style="margin-top:10px;">
+                    <button type="button" style="border-radius:20px; width:250px;" class="btn btn-primary" data-toggle="collapse" data-target=".multi-collapse"
+                            aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">
+                        More Details
+                    </button>
+                    @*<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#demo">Simple collapsible</button>*@
+                </div>
+                @*<div>*@
+
+                @*<button type="button" class="btn " data-card-widget="collapse">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    @*<button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse"
+                            aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2" style="border-radius:20%;">
+                        More Details
+                    </button>*@
+                @*</div>*@
+                <!--/ Collapse buttons -->
+                <!-- Collapsible content -->
+
+                <div class="row">
+                    <div class="col-sm-2 s">
+                        <div class="card">
+                            <div class="collapse multi-collapse" id="multiCollapseExample1">
+                                <div class="card-body">
+                                    <h6 class="card-title" @*style="color:#628DFB"*@>Special title treatment</h6>
+                                    <p class="card-text">1111</p>
+
+                                    @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 s">
+                        <div class="card">
+                            <div class="collapse multi-collapse" id="multiCollapseExample2">
+                                <div class="card-body">
+                                    <h6 class="card-title" @*style="color:#628DFB"*@>Special title treatment</h6>
+                                    <p class="card-text">1001</p>
+                                    @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 s">
+                        <div class="card">
+                            <div class="collapse multi-collapse" id="multiCollapseExample3">
+                                <div class="card-body">
+                                    <h6 class="card-title" @*style="color:#628DFB"*@>Special title treatment</h6>
+                                    <p class="card-text">1002</p>
+                                    @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 s">
+                        <div class="card">
+                            <div class="collapse multi-collapse" id="multiCollapseExample4">
+                                <div class="card-body">
+                                    <h6 class="card-title" @*style="color:#628DFB"*@>Special title treatment</h6>
+                                    <p class="card-text">1003</p>
+                                    @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 s">
+                        <div class="card">
+                            <div class="collapse multi-collapse" id="multiCollapseExample5">
+                                <div class="card-body">
+                                    <h6 class="card-title" @*style="color:#628DFB"*@>Special title treatment</h6>
+                                    <p class="card-text">1004</p>
+                                    @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 s">
+                        <div class="card">
+                            <div class="collapse multi-collapse" id="multiCollapseExample6">
+                                <div class="card-body">
+                                    <h6 class="card-title" @*style="color:#628DFB"*@>Special title treatment</h6>
+                                    <p class="card-text">1005</p>
+                                    @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+                @*<div class="row">*@
+                @*<div class="col-lg-3 col-6">
+
+                        <a href="@Url.Action("ForLTO", "VehicleInfo")">
+                            <div style="cursor: pointer;" class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>@ViewBag.DealerSubmissionCount</h3>
+
+                                    <p>Awaiting Submission</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-android-send"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>*@
+                <!-- ./col -->
+                @*<div class="col-lg-3 col-6">
+
+                        <a href="@Url.Action("ForLTO_Submitted", "VehicleInfo")">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>@ViewBag.DealerSubmittedCount</h3>
+
+                                    <p>Submitted</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-ios-paper-outline"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>*@
+                <!-- ./col -->
+                @*<div class="col-lg-3 col-6">
+
+                        <a href="@Url.Action("ForLTO_Payment", "VehicleInfo")">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>@ViewBag.DealerForPaymentCount</h3>
+
+                                    <p>Payment</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-money-bill"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>*@
+                <!-- ./col -->
+                @*<div class="col-lg-3 col-6">
+
+                            <a href="@Url.Action("ForLTO_Processed", "VehicleInfo")">
+
+                                <div class="small-box bg-info">
+                                    <div class="inner">
+                                        <h3>@ViewBag.DealerPendingCompletionCount</h3>
+
+                                        <p>LTO Confimation</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-clipboard-list"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>*@
+                @*<div class="row">
+                    <div class="col-lg-3 col-6">
+
+                        <a href="@Url.Action("ForLTO_Completed", "VehicleInfo")">
+
+                            <div class="small-box bg-success">
+                                <div class="inner">
+                                    <h3>@ViewBag.DealerCompletedCount</h3>
+
+                                    <p>Completed</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-clipboard-check"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>*@
+
+                @*<div class="col-lg-3 col-6">
+
+                        <a href="@Url.Action("ForLTO_ForPickUp", "VehicleInfo")">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>@ViewBag.DealerForPickUpCount</h3>
+
+                                    <p>OR/CR Pickup</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-receipt"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>*@
+                <!-- ./col -->
+                @*<div class="col-lg-3 col-6">
+
+                        <a href="@Url.Action("ForLTO_Received", "VehicleInfo")">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>@ViewBag.DealerReceivedCount</h3>
+
+                                    <p>Received OR/CR</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-file-archive"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>*@
+
+                @*<div class="col-lg-3 col-6">
+
+                        <a href="@Url.Action("ForLTO_Rejected", "VehicleInfo")">
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3>@ViewBag.DealerRejectedCount</h3>
+
+                                    <p>Rejected</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-minus-circle"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>*@
+
+                @*</div>*@<!-- ./row -->
+                <!--/ Collapsible content -->
+            </section>
+        }
+    </div>
+    @*/////////////////////////////////////////////////////////////////////////////////////////////*@
+    @*Main Dealer*@
+    @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Dealer)
+    {
+        <section class="content">
+            <div class="container-fluid">
+                @*<div class="row">
+            <div class="card col" style="background: #E5EAF8;border-radius: 20px; margin:10px;">
+                <div class="row">
+
+                    <div class="col" style="margin:60px;margin-left:30px; margin-bottom:30px; ">
+
+                        <ul class="list-ico ">
+                            <li>
+                                <h2 style="font-weight:bold;color:#628DFB;">
+                                    Welcome @CurrentUser.Details.FirstName @CurrentUser.Details.LastName!
+                                </h2>
+                            </li>
+                            <li>
+                                <p>
+                                    @ViewBag.EntityName
+                                </p>
+                            <li>
+                        </ul>
+
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col" style="padding:0px; margin:0px;">
+                                <img style="width:280px; height:250px; margin-right:30px; padding:0px;" class="rounded float-right" src="~/scripts/Img/svg/Dealer_car_Motor v2.svg" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>*@<!-- /.first-row -->
+                @*///////////////////old row //////////////////////*@
+                @if (CurrentUser.Details.UploadVersion == 2)
+                {
+                    using (Html.BeginForm("VehicleInfo_templateV2", "VehicleInfo", FormMethod.Post))
+                    {
+                        <strong style="font-weight: bold; padding-left:10px;color:#343A40;">Requirements from you, the registering agent.</strong>
+                        <span style="font-weight: normal; font-size:14px; padding-left:10px;color:#343A40; float:right; margin-right:20px">
+                            Click this link to download the latest version of your VehicleInfo-Sheet.
+                            <button class="fab-excel" type="submit" name="btnSubmit" title="Excel Template">
+                                <i class="far fa-file-excel"></i>
+                            </button>
+                        </span>
+                    }
+                }
+                else
+                {
+                    using (Html.BeginForm("VehicleInfo_template", "VehicleInfo", FormMethod.Post))
+                    {
+                        <strong style="font-weight: bold; padding-left:10px;color:#343A40;">Requirements from you, the registering agent.</strong>
+                        <span style="font-weight: normal; font-size:14px; padding-left:10px;color:#343A40; float:right; margin-right:20px">
+                            Click this link to download the latest version of your VehicleInfo-Sheet.
+                            <button class="fab-excel" type="submit" name="btnSubmit" title="Excel Template">
+                                <i class="far fa-file-excel"></i>
+                            </button>
+                        </span>
+                    }
+                }
+
+                <div class="card" style="background: #E5EAF8;border-radius: 20px;padding-bottom:15px; padding-top:5px;">
+                    <div class="row">
+                        <ul class="progress-tracker progress-tracker--text progress-tracker--center" style="margin-top:10px;">
+                            <li class="progress-step is-active">
+                                <a href="@Url.Action("AllocatedVehicle", "VehicleInfo")">
+                                    <div class="progress-marker hover"></div>
+                                    <div class="progress-text hover" rel="tooltip" title="More info">
+                                        <p class="progress-title">@ViewBag.Allocated</p>
+                                        <p class="progress-title">Allocated Vehicles</p>
+                                        @*<a href="@Url.Action("AllocatedVehicle", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="progress-step is-active">
+                                <a href="@Url.Action("Index", "VehicleInfo")">
+                                    <div class="progress-marker hover"></div>
+                                    <div class="progress-text hover" rel="tooltip" title="More info">
+                                        <p class="progress-title">@ViewBag.VehicleNumber</p>
+                                        <p class="progress-title">Total Inventory</p>
+                                        @*<a href="@Url.Action("Index", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="progress-step is-active">
+                                <a href="@Url.Action("ForCSR", "VehicleInfo")">
+                                    <div class="progress-marker hover"></div>
+                                    <div class="progress-text hover" rel="tooltip" title="More info">
+                                        <p class="progress-title">@ViewBag.VehiclesForCSR</p>
+                                        <p class="progress-title">Vehicles for CSR</p>
+                                        @*<a href="@Url.Action("ForCSR", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="progress-step is-active">
+                                <a href="@Url.Action("ForInvoice", "VehicleInfo")">
+                                    <div class="progress-marker hover"></div>
+                                    <div class="progress-text hover" rel="tooltip" title="More info">
+                                        <p class="progress-title">@ViewBag.VehiclesNotSold</p>
+                                        <p class="progress-title">Vehicles for Invoice</p>
+                                        @*<a href="@Url.Action("ForInvoice", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="progress-step is-active">
+                                <a href="@Url.Action("ForCOC", "VehicleInfo")">
+
+                                    <div class="progress-marker hover"></div>
+                                    <div class="progress-text hover" rel="tooltip" title="More info">
+                                        <p class="progress-title">@ViewBag.VehiclesForCOC</p>
+                                        <p class="progress-title">Vehicles for COC</p>
+                                        @*<a href="@Url.Action("ForCOC", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="progress-step is-active">
+                                <a href="@Url.Action("ForPNP", "VehicleInfo")">
+
+                                    <div class="progress-marker hover"></div>
+                                    <div class="progress-text hover" rel="tooltip" title="More info">
+                                        <p class="progress-title">@ViewBag.VehiclesForPNP</p>
+                                        <p class="progress-title">Vehicles for PNP</p>
+                                        @*<a href="@Url.Action("ForPNP", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li class="progress-step is-active">
+                                <a href="@Url.Action("ForLTO", "VehicleInfo")">
+
+                                    <div class="progress-marker hover"></div>
+                                    <div class="progress-text hover" rel="tooltip" title="More info">
+                                        <p class="progress-title">@ViewBag.DealerSubmissionCount</p>
+                                        <p class="progress-title">Awaiting Submission</p>
+                                        @*<a href="@Url.Action("ForLTO", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                                    </div>
+                                </a>
+                            </li>
+
+
+                            @*<li class="progress-step is-active">
+                        <div class="progress-marker"></div>
+                        <div class="progress-text">
+                            <p class="progress-title">@ViewBag.Vehicleofclients</p>
+                            <p class="progress-title">Number of Clients</p>
+                            <a href="@Url.Action("Index", "Customer")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </li>*@
+                        </ul>
+
+                    </div><!-- /.2nd-row -->
+                    @*<div class="card card-white card-outline" style="border-top:2px solid; color:#fff"></div>*@
+
+
+                </div><!-- /.card -->
+                <div class="mbg-3 h-auto pl-0 pr-0 no-border ">
+                    @*<div class="card-header-title fsize-2 text-capitalize font-weight-normal" style="margin-left:8px; margin-bottom:10px;">LTO Details</div>*@
+                    <h6 style="font-weight: bold; padding-left:10px;color:#343A40; padding-top:15px;">LTO response based on your inputs</h6>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <a href="@Url.Action("ForLTO", "VehicleInfo")">
+                            <div style="cursor: pointer;" class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>@ViewBag.DealerSubmissionCount</h3>
+
+                                    <p>Awaiting Submission</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-android-send"></i>
+                                </div>
+                                @*<a href="@Url.Action("ForLTO", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                            </div>
+                        </a>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <a href="@Url.Action("ForLTO_Submitted", "VehicleInfo")">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>@ViewBag.DealerSubmittedCount</h3>
+
+                                    <p>Submitted</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-ios-paper-outline"></i>
+                                </div>
+                                @*<a href="@Url.Action("ForLTO_Submitted", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                            </div>
+                        </a>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <a href="@Url.Action("ForLTO_Payment", "VehicleInfo")">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>@ViewBag.DealerForPaymentCount</h3>
+
+                                    <p>Payment</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-money-bill"></i>
+                                </div>
+                                @*<a href="@Url.Action("ForLTO_Payment", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                            </div>
+                        </a>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <a href="@Url.Action("ForLTO_Processed", "VehicleInfo")">
+
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>@ViewBag.DealerPendingCompletionCount</h3>
+
+                                    <p>LTO Confimation</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-clipboard-list"></i>
+                                </div>
+                                @*<a href="@Url.Action("ForLTO_Processed", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                            </div>
+                        </a>
+                    </div>
+                    <!-- ./col -->
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <a href="@Url.Action("ForLTO_Completed", "VehicleInfo")">
+
+                            <div class="small-box bg-success">
+                                <div class="inner">
+                                    <h3>@ViewBag.DealerCompletedCount</h3>
+
+                                    <p>Completed</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-clipboard-check"></i>
+                                </div>
+                                @*<a href="@Url.Action("ForLTO_Completed", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                            </div>
+                        </a>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <a href="@Url.Action("ForLTO_ForPickUp", "VehicleInfo")">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>@ViewBag.DealerForPickUpCount</h3>
+
+                                    <p>OR/CR Pickup</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-receipt"></i>
+                                </div>
+                                @*<a href="@Url.Action("ForLTO_ForPickUp", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                            </div>
+                        </a>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <a href="@Url.Action("ForLTO_Received", "VehicleInfo")">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>@ViewBag.DealerReceivedCount</h3>
+
+                                    <p>Received OR/CR</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-file-archive"></i>
+                                </div>
+                                @*<a href="@Url.Action("ForLTO_Received", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                            </div>
+                        </a>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <a href="@Url.Action("ForLTO_Rejected", "VehicleInfo")">
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3>@ViewBag.DealerRejectedCount</h3>
+
+                                    <p>Rejected</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-minus-circle"></i>
+                                </div>
+                                @*<a href="@Url.Action("ForLTO_Rejected", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                            </div>
+                        </a>
+                    </div>
+                    <!-- ./col -->
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <a href="@Url.Action("ForLTO_DIY_Rejected", "VehicleInfo")">
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3>@ViewBag.DealerDIYRejectedCount</h3>
+
+                                    <p>Assessment Rejected</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-minus-circle"></i>
+                                </div>
+                                @*<a href="@Url.Action("ForLTO_Rejected", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                            </div>
+                        </a>
+                    </div>
+                    <!-- ./col -->
+                </div>
+            </div>
+        </section>
+    }
+    @*/////////////////////////////////////////////////////////////////////////////////////////////*@
+    @*MAI Admin*@
+    @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.MAI)
+    {
+
+        <section class="content">
+            <div class="container-fluid">
+
+                @if (CurrentUser.Details.UploadVersion == 2)
+                {
+                    using (Html.BeginForm("VehicleInfo_templateV2", "VehicleInfo", FormMethod.Post))
+                    {
+                        <strong style="font-weight: bold; padding-left:10px;color:#343A40;">Requirements from you, the registering agent.</strong>
+                        <span style="font-weight: normal; font-size:14px; padding-left:10px;color:#343A40; float:right; margin-right:20px">
+                            Click this link to download the latest version of your VehicleInfo-Sheet.
+                            <button class="fab-excel" type="submit" name="btnSubmit" title="Excel Template">
+                                <i class="far fa-file-excel"></i>
+                            </button>
+                        </span>
+                    }
+                }
+                else
+                {
+                    using (Html.BeginForm("VehicleInfo_template", "VehicleInfo", FormMethod.Post))
+                    {
+                        <strong style="font-weight: bold; padding-left:10px;color:#343A40;">Requirements from you, the registering agent.</strong>
+                        <span style="font-weight: normal; font-size:14px; padding-left:10px;color:#343A40; float:right; margin-right:20px">
+                            Click this link to download the latest version of your VehicleInfo-Sheet.
+                            <button class="fab-excel" type="submit" name="btnSubmit" title="Excel Template">
+                                <i class="far fa-file-excel"></i>
+                            </button>
+                        </span>
+                    }
+                }
+                <!-- Small boxes (Stat box) -->
+                @*<div class="row">
+            <div class="card col" style="background: #E5EAF8;border-radius: 20px;">
+                <div class="row">
+                    <div class="col" style="margin:60px;margin-left:30px; margin-bottom:30px; ">
+                        <ul class="list-ico ">
+                            <li><h2 style="font-weight:bold;color:#628DFB;">Welcome @CurrentUser.Details.FirstName @CurrentUser.Details.LastName!</h2></li>
+                            <li>
+                                <p>
+                                   </p>
+                            <li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col" style="padding:0px; margin:0px;">
+                                <img style="width:280px; height:250px; margin-right:30px;" class="rounded float-right" src="~/scripts/Img/svg/MAI_electric_car.svg" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>*@<!-- /.first-row -->
+                @*<h6 style="font-weight: bold; padding-left:10px;color:#343A40;">Requirements from you, the registering agent.</h6>*@
+                <div class="card" style="background: #E5EAF8;border-radius: 20px;">
+                    <div class="row">
+                        <ul class="progress-tracker progress-tracker--text progress-tracker--center" style="margin-top:10px;">
+                            @*<li class="progress-step is-active">
+                        <div class="progress-marker"></div>
+                        <div class="progress-text">
+                            <p class="progress-title" style="font-size:20px; margin:0px;">@ViewBag.MAIVehicleAllocation</p>
+                            <p class="progress-title">Vehicles for Allocation</p>
+                            <a href="@Url.Action("ForAllocate", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </li>*@
+                            <li class="progress-step is-active">
+                                <a href="@Url.Action("Index", "VehicleInfo")">
+
+                                    <div class="progress-marker hover"></div>
+                                    <div class="progress-text hover" rel="tooltip" title="More info">
+
+                                        <p class="progress-title" style="font-size:20px; margin:0px;">@ViewBag.MAIVehicleNumber</p>
+                                        <p class="progress-title">Number of Vehicles</p>
+                                        @*<a href="@Url.Action("Index", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="progress-step is-active">
+                                <a href="@Url.Action("ForBOC", "VehicleInfo")">
+                                    <div class="progress-marker hover"></div>
+                                    <div class="progress-text hover" rel="tooltip" title="More info">
+                                        <p class="progress-title" style="font-size:20px; margin:0px;">@ViewBag.MAIBOC</p>
+                                        <p class="progress-title">Number of Vehicles for COP</p>
+                                        @*<a href="@Url.Action("ForBOC", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="progress-step is-active">
+                                <a href="@Url.Action("ForSOE", "VehicleInfo")">
+                                    <div class="progress-marker hover" @*data-text="@ViewBag.MAIVehicleAllocation" style="font-size:20px;"*@></div>
+                                    <div class="progress-text hover" rel="tooltip" title="More info">
+                                        <p class="progress-title" style="font-size:20px; margin:0px;">@ViewBag.MAIForSOE</p>
+                                        <p class="progress-title">Vehicles for SOE</p>
+                                        @*<a href="@Url.Action("ForSOE", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="progress-step is-active">
+                                <a href="@Url.Action("ForSOC", "VehicleInfo")">
+                                    <div class="progress-marker hover" @*data-text="@ViewBag.MAIVehicleAllocation" style="font-size:20px;"*@></div>
+                                    <div class="progress-text hover" rel="tooltip" title="More info">
+                                        <p class="progress-title" style="font-size:20px; margin:0px;">@ViewBag.MAIForSOC</p>
+                                        <p class="progress-title">Vehicles for SOC</p>
+                                        @*<a href="@Url.Action("ForSOC", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="progress-step is-active">
+                                <a href="@Url.Action("ForLTO_CSR", "VehicleInfo")">
+                                    <div class="progress-marker hover"></div>
+                                    <div class="progress-text hover" rel="tooltip" title="More info">
+                                        <p class="progress-title" style="font-size:20px; margin:0px;">@ViewBag.MAISubmissionCount</p>
+                                        <p class="progress-title">Awaiting Submission</p>
+                                        @*<a href="@Url.Action("ForLTO_CSR", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                                    </div>
+                                </a>
+                            </li>
+                            @*<li class="progress-step is-active">
+                        <a href="@Url.Action("ForDealers", "VehicleInfo")">
+                            <div class="progress-marker hover"></div>
+                            <div class="progress-text hover" rel="tooltip" title="More info">
+                                <p class="progress-title" style="font-size:20px; margin:0px;">@ViewBag.MAIForDealer</p>
+                                <p class="progress-title">Vehicles Assign to Dealer</p>
+                            </div>
+                        </a>
+                    </li>*@
+                        </ul>
+
+                    </div><!-- /.2nd-row -->
+                    @*<div class="card card-white card-outline" style="border-top:2px solid; color:#fff"></div>*@
+                </div><!-- /.card -->
+                @*<div class="card" style="background-color:transparent; border-radius:0px; border:none;">*@
+                <h6 style="font-weight: bold; padding-left:10px;color:#343A40; padding-top:15px;">LTO response based on your inputs</h6>
+
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <a href="@Url.Action("ForLTO_CSR", "VehicleInfo")">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>@ViewBag.MAISubmissionCount</h3>
+
+                                    <p>Awaiting Submission</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-android-send"></i>
+                                </div>
+                                @*<a href="@Url.Action("ForLTO_CSR", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                            </div>
+                        </a>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <a href="@Url.Action("ForCSR_Submitted", "VehicleInfo")">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>@ViewBag.MAISubmittedCount</h3>
+
+                                    <p>Submitted</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-ios-paper-outline"></i>
+                                </div>
+                                @*<a href="@Url.Action("ForCSR_Submitted", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                            </div>
+                        </a>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <a href="@Url.Action("ForLTO_Payment", "VehicleInfo")">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>@ViewBag.MAIForPaymentCount</h3>
+
+                                    <p>Payment</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-money-bill"></i>
+                                </div>
+                                @*<a href="@Url.Action("ForLTO_Payment", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                            </div>
+                        </a>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <a href="@Url.Action("ForLTO_Processed", "VehicleInfo")">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>@ViewBag.MAIPendingCompletionCount</h3>
+
+                                    <p>LTO Confimation</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-clipboard-list"></i>
+                                </div>
+                                @*<a href="@Url.Action("ForLTO_Processed", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                            </div>
+                        </a>
+                    </div>
+                    <!-- ./col -->
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <a href="@Url.Action("ForLTO_Completed", "VehicleInfo")">
+                            <div class="small-box bg-success">
+                                <div class="inner">
+                                    <h3>@ViewBag.MAICompletedCount</h3>
+
+                                    <p>Completed</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-clipboard-check"></i>
+                                </div>
+                                @*<a href="@Url.Action("ForLTO_Completed", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                            </div>
+                        </a>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <a href="@Url.Action("ForLTO_ForPickUp", "VehicleInfo")">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>@ViewBag.MAIForPickUpCount</h3>
+                                    @*@if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.MAI)
+                            {*@
+                                    <p>CSR Pickup</p>
+                                    @*}
+                            else
+                            {
+                                <p>OR/CR Pickup</p>
+                            }*@
+
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-receipt"></i>
+                                </div>
+                                @*<a href="@Url.Action("ForLTO_ForPickUp", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                            </div>
+                        </a>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <a href="@Url.Action("ForLTO_Received", "VehicleInfo")">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>@ViewBag.MAIReceivedCount</h3>
+
+                                    @*@if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.MAI)
+                            {*@
+                                    <p>Received CSR</p>
+                                    @*}
+                            else
+                            {
+                                <p>Received OR/CR</p>
+                            }*@
+
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-file-archive"></i>
+                                </div>
+                                @*<a href="@Url.Action("ForLTO_Received", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                            </div>
+                        </a>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <a href="@Url.Action("ForLTO_Rejected", "VehicleInfo")">
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3>@ViewBag.MAIRejectedCount</h3>
+
+                                    <p>Rejected</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-minus-circle"></i>
+                                </div>
+                                @*<a href="@Url.Action("ForLTO_Rejected", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                            </div>
+                        </a>
+                    </div>
+                    <!-- ./col -->
+                </div>
+
+                <h6 style="font-weight: bold; padding-left:10px;color:#343A40;">Vehicle Assignment.</h6>
+                <div class="card" style="background: #E5EAF8;border-radius: 20px;">
+                    <div class="row">
+                        <ul class="progress-tracker progress-tracker--text progress-tracker--center" style="margin-top:10px;">
+                            <li class="progress-step is-active">
+                                <a href="@Url.Action("ForCSR", "VehicleInfo")">
+                                    <div class="progress-marker hover"></div>
+                                    <div class="progress-text hover" rel="tooltip" title="More info">
+                                        <p class="progress-title" style="font-size:20px; margin:0px;">@ViewBag.MAIForCSRCount</p>
+                                        <p class="progress-title">Vehicles for CSR</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="progress-step is-active">
+                                <a href="@Url.Action("ForPNP", "VehicleInfo")">
+                                    <div class="progress-marker hover"></div>
+                                    <div class="progress-text hover" rel="tooltip" title="More info">
+                                        <p class="progress-title" style="font-size:20px; margin:0px;">@ViewBag.MAIForPNPCount</p>
+                                        <p class="progress-title">Vehicles for PNP</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="progress-step is-active">
+                                <a href="@Url.Action("ForDealers", "VehicleInfo")">
+                                    <div class="progress-marker hover"></div>
+                                    <div class="progress-text hover" rel="tooltip" title="More info">
+                                        <p class="progress-title" style="font-size:20px; margin:0px;">@ViewBag.MAIForDealer</p>
+                                        <p class="progress-title">Vehicles Assign to Dealer</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div><!-- /.2nd-row -->
+                    @*<div class="card card-white card-outline" style="border-top:2px solid; color:#fff"></div>*@
+                </div><!-- /.card -->
+            </div>
+
+            @*</div>*@<!-- ./container -->
+        </section>
+
+    }
+
+    @*<div id="detailscard" class="card"  style="background: #E5EAF8;border-radius: 20px; margin-left:15px; margin-right:17px;">
+
+            <div id="detailscard" class="invoice p-3 mb-3" style="background: none;border:none;">
+                <!-- title row -->
+                <div class="row">
+                    <div class="col-12" style="background: #E5EAF8;">
+                        <h4>
+                            <i class="fas fa-globe"></i> DataBridge Asia Inc.
+
+                        </h4>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- info row -->
+            </div>
+            <div class="row">
+                <div class="col">
+                    <ul class="list-ico ">
+                        <li><h6 style="font-weight:bold">Contact Details:</h6></li>
+                        <li><span class="ion-ios-location"></span> Bitspace, 6th floor, PDCP Bank Centre, Rufino corner Leviste Street, Salcedo Village, Makati City, Metro Manila, Philippines 1227</li>
+                        <li style="margin-bottom:5px;"><span class="ion-ios-telephone"></span> (632) 8892-5462 </li>
+
+                    </ul>
+                </div>
+                <div class="col">
+                    <ul class="list-ico">
+                        <li><h6 style="font-weight:bold">Affiliate Websites:</h6></li>
+                        <li><span class="fas fa-globe"></span> First Asia Venture Capital Inc. - <a href="http://www.firstasia.com.ph/" style="color:#0645AD;">http://www.firstasia.com.ph/</a></li>
+                        <li><span class="fas fa-globe"></span> Brainsparks - <a href="https://www.brainsparks.ph/" style="color:#0645AD;">https://www.brainsparks.ph/</a></li>
+                    </ul>
+                </div>
+                <div class="socials" style="margin:15px;">
+                    <ul>
+                        <li><a href=""><span class="ico-circle"><i class="ion-social-facebook"></i></span></a></li>
+                        <li><a href=""><span class="ico-circle"><i class="ion-social-instagram"></i></span></a></li>
+                        <li><a href=""><span class="ico-circle"><i class="ion-social-twitter"></i></span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>*@
+    @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.LTO)
+    {
+        <style>
+            .content-wrapper {
+                background: #fff;
+            }
+        </style>
+        <script>
+            var objdetailscard = document.getElementById("detailscard");
+            objdetailscard.remove();
+            //document.getElementById("home_content").style.background = "white";
+            function myFunction() {
+                document.getElementById('home_content').className = "content-wrapper";
+            }
+        </script>
+                    <section class="content">
+                        <div class="container-fluid">
+                            <!-- Small boxes (Stat box) -->
+                            <div class="row">
+                                <div class="card col" style="background: #FFFDFD;border-radius: 20px;">
+                                    <div class="row">
+                                        <div class="col" style="margin:60px;margin-left:30px; margin-bottom:30px; ">
+                                            <ul class="list-ico ">
+                                                <li><h2 style="font-weight:bold;color:#628DFB;">Welcome @CurrentUser.Details.FirstName @CurrentUser.Details.LastName!</h2></li>
+                                                <li>
+                                                    <p>
+                                                        @*typesetting industry. Lorem Ipsum has been the industry's*@
+                                                    </p>
+                                                <li>
+                                            </ul>
+
+                                        </div>
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col" style="padding:0px; margin:0px;">
+                                                    <img style="width:320px; height:250px; margin-right:30px;" class="rounded float-right" src="~/scripts/Img/svg/LTO.svg" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*<div class="row">
+
+                                        </div>*@
+                                </div>
+                            </div><!-- /.first-row -->
+                            @*<div class="row">
+                                    <div class="col-12">
+                                        <div class="card card-primary card-tabs">
+                                            <div class="card-header p-0 pt-1">
+                                                <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active" id="Registration-tab" data-toggle="tab" href="#Registration_content" role="tab">Registration Process</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" id="Wallet-tab" data-toggle="tab" href="#CSR_content" role="tab" aria-controls="Wallet_content" aria-selected="false">CSR Process</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="tab-content" id="custom-tabs-one-tabContent">
+                                            <div class="tab-pane fade show active" id="Registration_content" role="tabpanel">
+
+                                            </div>
+                                            <div class="tab-pane fade" id="CSR_content" role="tabpanel">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>*@
+
+                            @if (CurrentUser.Details.LTOUserTypeID == (int)LTOUserTypeEnum.VehicleRegistration)
+                            {
+                                <div class="row">
+                                    @if (CurrentUser.Details.SubReferenceID == 3)
+                                    {
+                                        <div class="col-lg-3 col-6">
+                                            <!-- small box -->
+                                            <a href="@Url.Action("SubmittedBatch", "LTO")">
+
+                                                <div class="small-box bg-info">
+                                                    <div class="inner">
+                                                        <h3>@ViewBag.LTOSubmittedCount</h3>
+
+                                                        <p>Submitted</p>
+                                                    </div>
+                                                    <div class="icon">
+                                                        <i class="fas fa-file"></i>
+                                                    </div>
+                                                    @*<a href="@Url.Action("SubmittedBatch", "LTO")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                                                </div>
+                                            </a>
+                                        </div>
+                    <!-- ./col -->
+                                        <div class="col-lg-3 col-6">
+                                            <!-- small box -->
+                                            <a href="@Url.Action("AssessBatch", "LTO")">
+
+                                                <div class="small-box bg-info">
+                                                    <div class="inner">
+                                                        <h3>@ViewBag.LTOAssessmentCount</h3>
+
+                                                        <p>Assessment</p>
+                                                    </div>
+                                                    <div class="icon">
+                                                        <i class="fas fa-people-carry"></i>
+
+                                                    </div>
+                                                    @*<a href="@Url.Action("AssessBatch", "LTO")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                                                </div>
+                                            </a>
+                                        </div>
+                    <!-- ./col -->
+                                    }
+                                    <div class="col-lg-3 col-6">
+                                        <!-- small box -->
+                                        <a href="@Url.Action("PaymentBatch", "LTO")">
+
+                                            <div class="small-box bg-info">
+                                                <div class="inner">
+                                                    <h3>@ViewBag.LTOPaidCount</h3>
+
+                                                    <p>Paid</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fas fa-hand-holding-usd"></i>
+                                                </div>
+                                                @*<a href="@Url.Action("PaymentBatch", "LTO")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <!-- ./col -->
+                                    <div class="col-lg-3 col-6">
+                                        <!-- small box -->
+                                        <a href="@Url.Action("CompletedBatch", "LTO")">
+
+                                            <div class="small-box bg-info">
+                                                <div class="inner">
+                                                    <h3>@ViewBag.LTOCompletedCount</h3>
+
+                                                    <p>Completed</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="ion ion-stats-bars"></i>
+                                                </div>
+                                                @*<a href="@Url.Action("CompletedBatch", "LTO")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>*@
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <!-- ./col -->
+
+                                </div> <!-- ./ row cards -->
+                            }
+                            else if (CurrentUser.Details.LTOUserTypeID == (int)LTOUserTypeEnum.CSR)
+                            {
+                                <div class="row">
+                                    <div class="col-lg-3 col-6">
+                                        <!-- small box -->
+                                        <a href="@Url.Action("CSRSubmittedBatch", "LTO")">
+
+                                            <div class="small-box bg-info">
+                                                <div class="inner">
+                                                    <h3>@ViewBag.LTOCSRSubmittedCount</h3>
+
+                                                    <p>Submitted</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fas fa-file"></i>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <!-- ./col -->
+                                    <div class="col-lg-3 col-6">
+                                        <!-- small box -->
+                                        <a href="@Url.Action("CSRAssessBatch", "LTO")">
+
+                                            <div class="small-box bg-info">
+                                                <div class="inner">
+                                                    <h3>@ViewBag.LTOCSRAssessmentCount</h3>
+
+                                                    <p>Assessment</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fas fa-people-carry"></i>
+
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <!-- ./col -->
+                                    <div class="col-lg-3 col-6">
+                                        <!-- small box -->
+                                        <a href="@Url.Action("CSRPaymentBatch", "LTO")">
+
+                                            <div class="small-box bg-info">
+                                                <div class="inner">
+                                                    <h3>@ViewBag.LTOCSRPaidCount</h3>
+                                                    <p>Paid</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fas fa-hand-holding-usd"></i>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <!-- ./col -->
+                                    <div class="col-lg-3 col-6">
+                                        <!-- small box -->
+                                        <a href="@Url.Action("CSRCompletedBatch", "LTO")">
+
+                                            <div class="small-box bg-info">
+                                                <div class="inner">
+                                                    <h3>@ViewBag.LTOCSRCompletedCount</h3>
+
+                                                    <p>Completed</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="ion ion-stats-bars"></i>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <!-- ./col -->
+                                </div> <!-- ./ row cards -->
+                            }
+
+
+
+                        </div><!-- ./container -->
+                    </section>
+
+    }
+    @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.PNP)
+    {
+        <style>
+            .content-wrapper {
+                background: #fff;
+            }
+        </style>
+        <script>
+            var objdetailscard = document.getElementById("detailscard");
+            objdetailscard.remove();
+            //document.getElementById("home_content").style.background = "white";
+            function myFunction() {
+                document.getElementById('home_content').className = "content-wrapper";
+            }
+        </script>
+                    <section class="content">
+                        <div class="container-fluid">
+                            <!-- Small boxes (Stat box) -->
+                            <div class="row">
+                                <div class="card col" style="background: #FFFDFD;border-radius: 20px;">
+                                    <div class="row">
+                                        <div class="col" style="margin:60px;margin-left:30px; margin-bottom:30px; ">
+                                            <ul class="list-ico ">
+                                                <li><h2 style="font-weight:bold;color:#628DFB;">Welcome @CurrentUser.Details.FirstName @CurrentUser.Details.LastName!</h2></li>
+                                                <li>
+                                                    <p>
+                                                        @*typesetting industry. Lorem Ipsum has been the industry's*@
+                                                    </p>
+                                                <li>
+                                            </ul>
+
+                                        </div>
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col" style="padding:0px; margin:0px;">
+                                                    <img style="width:320px; height:250px; margin-right:30px;" class="rounded float-right" src="~/scripts/Img/pnp_logo2.png" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*<div class="row">
+
+                                        </div>*@
+                                </div>
+                            </div><!-- /.first-row -->
+                            <div class="row">
+                                <div class="col-lg-3 col-6">
+                                    <!-- small box -->
+                                    <div class="small-box bg-info">
+                                        <div class="inner">
+                                            <h3>@ViewBag.PNPApprovalCount</h3>
+
+                                            <p>Approval</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="fas fa-hand-holding-usd"></i>
+                                        </div>
+                                        <a href="@Url.Action("ApprovalList", "PNP")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                    </div>
+                                </div>
+                                <!-- ./col -->
+                                <div class="col-lg-3 col-6">
+                                    <!-- small box -->
+                                    <div class="small-box bg-success">
+                                        <div class="inner">
+                                            <h3>@ViewBag.PNPCompletedCount</h3>
+
+                                            <p>Completed</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="fas fa-people-carry"></i>
+
+                                        </div>
+                                        <a href="@Url.Action("CompletedList", "PNP")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                    </div>
+                                </div>
+                                <!-- ./col -->
+                            </div> <!-- ./ row cards -->
+                        </div><!-- ./container -->
+                    </section>
+
+    }
+
+    @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Insurance)
+    {
+        <style>
+            .content-wrapper {
+                background: #fff;
+            }
+        </style>
+        <script>
+            var objdetailscard = document.getElementById("detailscard");
+            objdetailscard.remove();
+            //document.getElementById("home_content").style.background = "white";
+            function myFunction() {
+                document.getElementById('home_content').className = "content-wrapper";
+            }
+        </script>
+        <section class="content">
+            <div class="container-fluid">
+                <!-- Small boxes (Stat box) -->
+                <div class="row">
+                    <div class="card col" style="background: #FFFDFD;border-radius: 20px;">
+                        <div class="row">
+                            <div class="col" style="margin:60px;margin-left:30px; margin-bottom:30px; ">
+                                <ul class="list-ico ">
+                                    <li><h2 style="font-weight:bold;color:#628DFB;">Welcome @CurrentUser.Details.FirstName @CurrentUser.Details.LastName!</h2></li>
+                                    <li>
+                                        <p>
+                                            @*typesetting industry. Lorem Ipsum has been the industry's*@
+                                        </p>
+                                    <li>
+                                        <button type="button" style="margin-left:10px;" class="btn btn-primary ">Get Started</button>
+                                </ul>
+
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col" style="padding:0px; margin:0px;">
+                                        <img style="width:530px; height:300px; margin-right:30px;" class="rounded float-right" src="~/scripts/Img/svg/Insurance_car.svg" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="row">
+
+                            </div>*@
+                    </div>
+                </div><!-- /.first-row -->
+                <div class="row">
+                    @*<div class="col-lg-3 col-6">
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h3>@ViewBag.PNPApprovalCount</h3>
+
+                                <p>Approval</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-hand-holding-usd"></i>
+                            </div>
+                            <a href="@Url.Action("ApprovalList", "PNP")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>*@
+                    
+                    @*<div class="col-lg-3 col-6">
+                        
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>@ViewBag.PNPCompletedCount</h3>
+
+                                <p>Completed</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-people-carry"></i>
+
+                            </div>
+                            <a href="@Url.Action("CompletedList", "PNP")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>*@
+                    
+                </div> <!-- ./ row cards -->
+            </div><!-- ./container -->
+        </section>
+
+    }
+    <!-- /.row -->
+    @*<div class="row no-print">
+            <div class="col-12">
+                <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+                <button type="button" class="btn btn-success float-right">
+                    <i class="far fa-credit-card"></i> Submit
+                    Payment
+                </button>
+                <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                    <i class="fas fa-download"></i> Generate PDF
+                </button>
+            </div>
+        </div>*@
+    @*</div>*@
+
+    @*</div>*@
+
+
+    <footer style="background:none; border:none;" class="main-footer">
+        <strong>Copyright © 2020 <a href="http://DataBridgeAsiaInc.com">DataBridgeAsiaInc.com</a>.</strong> All rights
+        reserved.
+        <div class="float-right d-none d-sm-inline-block">
+            <b>Version</b> 1.0.0
+        </div>
+    </footer>
+    <!-- /.card-body -->
+    @*////////////////////////// end //////////////////////////////////////*@
+    @*<div class="section" id="carousel">
+            <div class="container">
+                <div class="title">
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-md-12">
+
+                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner" role="listbox">
+                                <div class="carousel-item active">
+                                    <img class="d-block" src="~/scripts/Home_temp/img/car.jpg" alt="First slide">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>Nature, United States</h5>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block" src="~/scripts/Home_temp/img/car-dealer.jpg" alt="Second slide">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>Somewhere Beyond, United States</h5>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block" src="~/scripts/Home_temp/img/car1.jpg"" alt="Third slide">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>Yellowstone National Park, United States</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                <i class="now-ui-icons arrows-1_minimal-left"></i>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                <i class="now-ui-icons arrows-1_minimal-right"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+
+
+    @*<!-- Main row -->
+        <div class="row">
+            <!-- Left col -->
+            <section class="col-lg-7 connectedSortable">
+                <!-- Custom tabs (Charts with tabs)-->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-chart-pie mr-1"></i>
+                            Sales
+                        </h3>
+                        <div class="card-tools">
+                            <ul class="nav nav-pills ml-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div><!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="tab-content p-0">
+                            <!-- Morris chart - Sales -->
+                            <div class="chart tab-pane active" id="revenue-chart"
+                                 @*style="position: relative; height: 300px;">*@
+    @*<canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>*@
+
+    <!-- /.row -->
+    <!-- Main row -->
+    @*<div class="row">
+                <!-- Left col -->
+                <section class="col-lg-7 connectedSortable">
+                    <!-- Custom tabs (Charts with tabs)-->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-chart-pie mr-1"></i>
+                                Sales
+                            </h3>
+                            <div class="card-tools">
+                                <ul class="nav nav-pills ml-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div><!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="tab-content p-0">
+                                <!-- Morris chart - Sales -->
+                                <div class="chart tab-pane active" id="revenue-chart"
+                                     style="position: relative; height: 300px;">
+                                    <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>
+                                </div>
+                                <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
+                                    <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>
+                                </div>
+                            </div>
+                        </div><!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                    <!-- /.card -->
+                </section>
+                <!-- /.Left col -->
+                <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                <section class="col-lg-5 connectedSortable">
+                    <!-- solid sales graph -->
+                    <div class="card bg-gradient-info">
+                        <div class="card-header border-0">
+                            <h3 class="card-title">
+                                <i class="fas fa-th mr-1"></i>
+                                Sales Graph
+                            </h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card -->
+                <!-- /.card -->
+            </section>
+            <!-- /.Left col -->
+            <!-- right col (We are only adding the ID to make the widgets sortable)-->
+            <section class="col-lg-5 connectedSortable">
+                <!-- solid sales graph -->
+                <div class="card bg-gradient-info">
+                    <div class="card-header border-0">
+                    </div>
+                    <div class="card-body">
+                        <canvas class="chart" id="line-chart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer bg-transparent">
+                        <div class="row">
+                        </div>
+                        <a href="@Url.Action("Index", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <a href="@Url.Action("Index", "VehicleInfo")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>*@
+    @*</section>
+            }
+            <!-- /.content -->
+            <!-- /.control-sidebar -->
+        </div>*@
+    <!-- ./wrapper -->
+    @*<!-- jQuery -->
+        <script src="plugins/jquery/jquery.min.js"></script>
+        <!-- jQuery UI 1.11.4 -->
+        <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+        <script>
+            $.widget.bridge('uibutton', $.ui.button)
+        </script>
+        <!-- Bootstrap 4 -->
+        <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>*@
+
+    <!-- ChartJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
+
+    @*<!-- Sparkline -->
+        <script src="plugins/sparklines/sparkline.js"></script>
+        <!-- JQVMap -->
+        <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+        <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+        <!-- jQuery Knob Chart -->
+        <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+        <!-- daterangepicker -->
+        <script src="plugins/moment/moment.min.js"></script>
+        <script src="plugins/daterangepicker/daterangepicker.js"></script>
+        <!-- Tempusdominus Bootstrap 4 -->
+        <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+        <!-- Summernote -->
+        <script src="plugins/summernote/summernote-bs4.min.js"></script>
+        <!-- overlayScrollbars -->
+        <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="dist/js/adminlte.js"></script>
+        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+        <script src="dist/js/pages/dashboard.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="dist/js/demo.js"></script>*@
+
+</body>
+
+</html>
+
+<script src="~/scripts/Introjs/js/intro.min.js"></script>
+<script>
+    //collapse for databridge more details
+    //$('.collapse').collapse(show)
+    //$('.multi - collapse').collapse(hide)
+    //.multi - collapse
+    //$('#demo').collapse({
+    //    toggle: true
+    //})
+</script>
+<style>
+    div#home_content.content-wrapper.pace-primary {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    button.fab-excel {
+        z-index: 1;
+        width: 30px;
+        height: 30px;
+        background: -webkit-linear-gradient(left,#498C66,#227446);
+        border-radius: 50%;
+        box-shadow: 0 6px 10px 0 #666;
+        font-size: 16px;
+        /*font-weight:800;*/
+        line-height: 24px;
+        color: white;
+        text-align: center;
+        /*position: fixed;*/
+        right: 25px;
+        /*top:85px;*/
+        /*top:105px;*/
+        border: 0px;
+        border-style: none;
+        transition: all 0.1s ease-in-out;
+    }
+
+    /*button.fab-edit:hover {
+                box-shadow: 0 6px 14px 0 #666;
+                transform: scale(1.05);
+            }*/
+</style>

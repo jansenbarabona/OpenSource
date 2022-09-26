@@ -1,0 +1,141 @@
+﻿@using VehicleRegistration.Models
+@model  List<vwVehicleListModel>
+
+<!-- Main content -->
+<table id="tbl_list" class="table table-bordered table-striped table-hover" style="width:100%; table-layout:auto;">
+    <thead>
+        <tr>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Variant</th>
+            <th>Year</th>
+            <th style="min-width:100px">Engine #</th>
+            <th style="min-width:100px">Body #</th>
+            <th style="min-width:100px">Reference #</th>
+            <th style="min-width:100px">CSR Image</th>
+            <th style="min-width:100px">Invoice Image</th>
+            <th style="min-width:100px">PNP Image</th>
+        </tr>
+    </thead>
+    <tbody id="vehiclelist_tbody">
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+        <tr @*class="rowclick" style="cursor: pointer" data-href="@Url.Action("VehicleInfo", new { id = Model[i].VehicleID })"*@>
+            <td style="width:20%">
+                @Html.DisplayFor(o => Model[i].VehicleMakeName)
+                @Html.HiddenFor(o => Model[i].VehicleID, new { id = "VehicleID" })
+            </td>
+            <td style="width: 20%">
+                @Html.DisplayFor(o => Model[i].VehicleModelName)
+            </td>
+            <td>
+                @Html.DisplayFor(o => Model[i].Variant)
+            </td>
+            <td>
+                @Html.DisplayFor(o => Model[i].Year)
+            </td>
+            <td style="min-width:100px">
+                @Html.DisplayFor(o => Model[i].EngineNumber)
+            </td>
+            <td style="min-width:100px">
+                @Html.DisplayFor(o => Model[i].BodyIDNumber)
+            </td>
+            <td style="min-width:100px">
+                @Html.DisplayFor(o => Model[i].PNPReceiptReferenceNumber)
+            </td>
+            <td style="min-width:100px">
+                <div class="row justify-content-center">
+                    <a class="csr_image_open input-group-prepend" href="javascript:;">
+                        <span class="input-group-text bg-green"><i class="fa fa-image"></i></span>
+                    </a>
+                </div>
+            </td>
+            <td style="min-width:100px;">
+                <div class="row justify-content-center">
+                    <a class="invoice_image_open input-group-prepend" href="javascript:;">
+                        <span class="input-group-text bg-green"><i class="fa fa-image"></i></span>
+                    </a>
+                </div>
+            </td>
+            <td style="min-width:100px">
+                <div class="row justify-content-center">
+                    <a class="pnp_image_open input-group-prepend" href="javascript:;">
+                        <span class="input-group-text bg-green"><i class="fa fa-image"></i></span>
+                    </a>
+                </div>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<style>
+    td {
+        font-size: 14px;
+    }
+</style>
+<script>
+
+    //$('table').on('click', 'tbody tr', function (evt) {
+    //    var $cell = $(evt.target).closest('td'),
+    //        msg;
+
+    //    if ($cell.index() > 0)
+    //        window.location = $(this).data("href");
+
+    //});
+
+    $(".csr_image_open").on("click", function (e) {
+        $.ajax({
+            url: '@Url.Action("GetCSRFile", "GetData")',
+            type: "GET",
+            dataType: "JSON",
+            cache: false,
+            data: { "VehicleID": $(this).closest("tr").find("#VehicleID").val() },
+            success: function (response) {
+                jQuery.fancybox.open({
+                    src: response,
+                    type: 'iframe',
+                    opts: {
+                        caption: 'Certificate Of StockReport'
+                    }
+                });
+            }
+        });
+    });
+    $(".invoice_image_open").on("click", function (e) {
+        $.ajax({
+            url: '@Url.Action("GetInvoiceFile", "GetData")',
+            type: "GET",
+            dataType: "JSON",
+            cache: false,
+            data: { "VehicleID": $(this).closest("tr").find("#VehicleID").val() },
+            success: function (response) {
+                jQuery.fancybox.open({
+                    src: response,
+                    type: 'iframe',
+                    opts: {
+                        caption: 'Invoice Receipt'
+                    }
+                });
+            }
+        });
+    });
+    $(".pnp_image_open").on("click", function (e) {
+        $.ajax({
+            url: '@Url.Action("GetPNPFile", "GetData")',
+            type: "GET",
+            dataType: "JSON",
+            cache: false,
+            data: { "VehicleID": $(this).closest("tr").find("#VehicleID").val() },
+            success: function (response) {
+                jQuery.fancybox.open({
+                    src: response,
+                    type: 'iframe',
+                    opts: {
+                        caption: 'PNP Receipt'
+                    }
+                });
+            }
+        });
+    });
+</script>

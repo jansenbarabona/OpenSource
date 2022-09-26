@@ -1,0 +1,96 @@
+﻿@using VehicleRegistration.Models
+@model VehicleMakeModel
+@{
+    ViewBag.Title = "Vehicle_Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Back" onclick="location.href='@Url.Action("Index", "VehicleMake")'">
+                    <i class="far fa-times-circle"></i>
+                    @*<i class="far fa-times-circle"></i>*@
+                </button>
+            </div>
+            <h6><i class="nav-icon fas fa-car-side"></i> Vehicle Make Registration Form   <small></small></h6>
+        </div>
+        <!-- /.card-header -->
+        <article class="card-body mx-auto">
+            @using (Html.BeginForm("Vehicle_Register", "VehicleMake", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <!-- Div start-->
+                <div class="row">
+                    @Html.HiddenFor(m => m.VehicleMakeID)
+                    <!---Entity-->
+                    @*<div class="form-group col-lg-4">
+                                @Html.LabelFor(m => m.VehicleMakeID)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-sitemap"></i> </span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.VehicleMakeID, new { placeholder = "ID", @class = "form-control", type = "id" })
+
+                                </div>
+                        </div>*@ <!-- form-group// -->
+                    <!--Role-->
+                    <div class="form-group col-lg-12">
+                        @Html.LabelFor(m => m.VehicleMakeName)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fas fa-car-side"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.VehicleMakeName, new { placeholder = "Vehicle name", @class = "form-control", type = "vehiclename" })
+
+                        </div>
+                    </div> <!-- form-group// -->
+
+
+
+                </div>
+
+
+                if (ViewBag.Edit == false)
+                {
+                    <center>
+                        <div class="form-group">
+                            <button type="submit" name="submit" value="Create" class="btn btn-primary btn-block" style="width:350px;"> Create </button>
+                        </div>
+                    </center>
+                }
+                else
+                {
+                    <center>
+                        <div class="form-group row">
+                            <button type="button" data-toggle="modal" data-target="#modal-delete" class="btn btn-danger btn-block col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width:250px;"> Delete </button>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+                            <button type="button" data-toggle="modal" data-target="#modal-save" class="btn btn-success btn-block col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width:250px;"> Save </button>
+                        </div>
+                    </center>
+                }
+
+                @Html.Partial("_Confirmation")
+            }
+        </article>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+<script type="text/javascript">
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_ul_vehicle").css("display", "block");
+    $("#vehicle_make").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+    $("#myaccount").on("click", function () {
+        $(this).dropdown("toggle");
+    });
+</script>
+<!-- /.content -->

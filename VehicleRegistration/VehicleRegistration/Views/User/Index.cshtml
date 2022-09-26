@@ -1,0 +1,111 @@
+﻿@using VehicleRegistration.Models
+@model IEnumerable<vwUserList>
+@{
+    ViewBag.Title = "DataBridge User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    /*margin:0px;
+        height:10px;*/
+    /*max-height:10px;*/
+</style>
+
+<!-- Main content -->
+<section class="content">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6><i class="nav-icon fas fa-users-cog"></i> User Administration   <small></small></h6>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            @*<input type="button" class="btn btn-info btn-block" name="btnSubmit" value="Upload" onclick="location.href='@Url.Action("User_Register", "User")'" />
+                                <input type="button" class="btn btn-info btn-block b" name="btnSubmit" value="Create New" onclick="location.href='@Url.Action("User_Register", "User")'" />*@
+
+                        </div>
+                    </div>
+                    @*<div class="overlay dark">
+                        <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                        </div>*@
+                        <!-- /.card-header -->
+                        <div class="fab" type="button" name="btnSubmit" data-toggle="tooltip" title="Create New" onclick="location.href='@Url.Action("User_Register", "User")'"> + </div>
+                        <div class="card-body">
+                            <table id="MAI_list_tbl" class="table table-bordered table-striped table-hover"style="max-width:100%;">
+                                <thead>
+                                    <tr>
+
+                                        <th style="width:50px;">Code</th>
+                                        <th style="width:120px;">Entity</th>
+                                        <th style="width:125px;">Role</th>
+                                        <th style="width:280px;">Email</th>
+                                        <th style="width:145px;">Last Name</th>
+                                        <th style="width:145px;">First Name</th>
+                                        <th style="width:50px;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr style="font-size:14px; ">
+                                            <td style="max-width:75px;" id="User_Code">@item.UserID</td>
+                                            <td style="max-width:100px;" id="User_Entity_Code">@item.UserEntityName</td>
+                                            <td style="max-width:250px;" id="User_Role_code">@item.UserRoleName</td>
+                                            <td style="max-width:200px;" id="User_Email">@item.EmailAddress</td>
+                                            <td style="max-width:130px;" id="User_LName">@item.LastName</td>
+                                            <td style="max-width:125px;" id="User_FName">@item.FirstName</td>
+
+                                            <td  title="Edit" style="max-width:100px;">
+                                                <div class="row"  style="align-items:center">
+                                                    <a href="@Url.Action("User_Register", new { id = item.UserID })" >
+                                                        <i class="fa fa-edit" ></i>
+                                                    </a>
+                                                    @*<button type="submit" name="submit" value="Edit" class="mai_edit btn btn-warning btn-md">
+                                            <i class="fa fa-edit"></i>
+                                        </button>*@
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+   
+    <!-- /.row -->
+</section>
+
+<!-- /.content -->
+<!-- ./wrapper -->
+<script>
+    /////// Tool Tip ///////
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+        $("[rel='tooltip']").tooltip();
+    })
+    $("#left_nav_mai").toggleClass("menu-open");
+
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#all_user").toggleClass("active");
+
+    $("#left_nav_admin").toggleClass("active");
+    $("#all_user").toggleClass("active");
+    
+
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#all_user").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+    //$("#content_header").attr("class", "nav-icon fas fa-users-cog");
+    //$("#content_header").text(" User Admins");
+</script>

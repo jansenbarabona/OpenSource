@@ -1,0 +1,1935 @@
+﻿@using VehicleRegistration.Models
+﻿@using VehicleRegistration.Tools
+@model VehicleInfoModel
+
+@{
+    ViewBag.Title = "VehicleInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    div.sub-button.tl:before {
+        content: "";
+    }
+
+    button.fab-m1 {
+        z-index: 1;
+        width: 48px;
+        height: 48px;
+        background-color: #007BFF;
+        border-radius: 50%;
+        box-shadow: 0 4px 8px 0 #666;
+        font-size: 24px;
+        font-weight: 800;
+        line-height: 52px;
+        color: white;
+        text-align: center;
+        position: fixed;
+        right: 25px;
+        bottom: 25px;
+        transition: all 0.1s ease-in-out;
+        border: 0px;
+    }
+
+        button.fab-m1:hover {
+            box-shadow: 0 6px 14px 0 #666;
+            transform: scale(1.05);
+        }
+
+    button.fab-m2 {
+        z-index: 1;
+        width: 48px;
+        height: 48px;
+        background-color: #28A745;
+        border-radius: 50%;
+        box-shadow: 0 4px 8px 0 #666;
+        font-size: 24px;
+        font-weight: 800;
+        line-height: 52px;
+        color: white;
+        text-align: center;
+        position: fixed;
+        right: 80px;
+        bottom: 25px;
+        transition: all 0.1s ease-in-out;
+        border: 0px;
+    }
+
+        button.fab-m2:hover {
+            box-shadow: 0 6px 14px 0 #666;
+            transform: scale(1.05);
+        }
+</style>
+@using (Html.BeginForm("VehicleInfo", "VehicleInfo", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(o => o.VehicleID)
+    <section class="content">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Back" onclick="location.href='@Url.Action("Index", "VehicleInfo")'">
+                        <i class="far fa-times-circle"></i>
+                    </button>
+                </div>
+                <h6><i class="nav-icon far fa-copy"></i> Vehicle Info</h6>
+            </div>
+        </div>
+        @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Dealer || CurrentUser.Details.UserEntityID == (int)UserEntityEnum.MAI)
+        {
+            <div class="fullwidth">
+                @*<h6 class="stat">
+                        Your Status <button type="button" class="btn btn-Help" data-toggle="tooltip" data-placement="top" title="Tooltip on top wanna help and tips just call my name">
+                            ?
+                        </button>
+                    </h6>*@
+                @*//vehicle info mai and dealer*@
+                <ul class="progress-tracker progress-tracker--text progress-tracker--center">
+                    @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.MAI)
+                    {
+                        <li class="progress-step
+
+                    @if (Model.BOCCertificateOfPayment != null)
+                    { <text>is-complete</text>} ">
+                            <div class="progress-marker" @*data-text="1" data-toggle="tooltip" title="Step 1" *@></div>
+                            <div class="btn-boc" data-toggle="tooltip" title="Insert Certificate of Payment Info" data-placement="bottom">
+                                <a class="btn btn-app
+                           @if (Model.BOCCertificateOfPayment != null || (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Dealer && Model.Assigned == false))
+                           {
+                               <text>disabled</text>
+                           }
+                           " style="cursor:pointer; margin: 10px;" data-toggle="modal" data-target="#modal-BOC">
+                                    <i class="fas fa-building"></i>
+                                    COP
+                                </a>
+                            </div>
+                            @if (Model.BOCCertificateOfPayment != null)
+                            {
+                                <a class="btn btn-success" data-fancybox data-type="iframe" data-src="@Model.BOCImage" data-caption="&lt;b&gt;BOC Certificate of Payment" href="javascript:;">
+                                    Certificate of Payment
+                                </a>
+
+                            }
+                            else if (Model.BOCCertificateOfPayment == null)
+                            {
+                                <button type="button" class="btn btn-danger btnupload" rel="tooltip" title="no files found" data-uploadfile="BOC">
+                                    BOC Certificate of Payment
+                                </button>
+                                @Html.TextBoxFor(o => o.BOCFile, new
+                           {
+                               type = "file",
+                               hidden = true,
+                               @class = "fileupload",
+                               accept = ".jpg,.jpeg,.png,.pdf"
+                           })
+                                @Html.ValidationMessageFor(o => o.BOCFile, "", new { @class = "" })
+                            }
+                        </li>
+                        <li class="progress-step
+                    @if (Model.StencilOfEngine != null)
+                    { <text>is-complete</text>} ">
+                            <div class="progress-marker " @*data-text="2" data-toggle="tooltip" title="Step 2" *@></div>
+                            <div data-toggle="tooltip" title="Upload Stencil of Engine" data-placement="bottom">
+                                <a class="btn btn-app
+                            @if (Model.StencilOfEngine != null || (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Dealer && Model.Assigned == false))
+                           {
+                               <text>disabled</text>
+                           }
+                            " style="cursor:pointer; margin: 10px;" id="btn_SOE">
+                                    <i class="fas fa-tenge"></i>
+                                    SOE
+                                </a>
+                            </div>
+                            @if (Model.StencilOfEngine != null)
+                            {
+                                <a class="btn btn-success" href="@Model.SOEImage" data-fancybox data-caption="&lt;b&gt;Stencil Of Engine Image">
+                                    Stencil Of Engine Number
+                                </a>
+                            }
+                            else if (Model.StencilOfEngine == null)
+                            {
+                                <button type="button" class="btn btn-danger btnupload" data-uploadfile="SOE">
+                                    Stencil Of Engine Number
+                                </button>
+                                @Html.TextBoxFor(o => o.SOEFile, new
+                           {
+                               type = "file",
+                               hidden = true,
+                               @class = "fileupload",
+                               data_uploadfile = "SOE",
+                               accept = ".jpg,.jpeg,.png,.pdf"
+                           })
+                                @Html.ValidationMessageFor(o => o.SOEFile, "", new { @class = "" })
+                            }
+                        </li>
+                        <li class="progress-step
+                    @if (Model.StencilOfChasis != null)
+                    { <text>is-complete</text>} ">
+                            <div class="progress-marker" @*data-text="3" data-toggle="tooltip" title="Step 3" *@></div>
+                            <div data-toggle="tooltip" title="Upload Stencil of Chassis" data-placement="bottom">
+                                <a class="btn btn-app
+                            @if (Model.StencilOfChasis != null || (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Dealer && Model.Assigned == false))
+                           {
+                               <text>disabled</text>
+                           }
+                            " style="cursor:pointer; margin: 10px;" id="btn_SOC">
+
+                                    <i class="fas fa-barcode"></i>
+                                    SOC
+                                </a>
+                            </div>
+                            @if (Model.StencilOfChasis != null)
+                            {
+                                <a class="btn btn-success" href="@Model.SOCImage" data-fancybox data-caption="&lt;b&gt;Stencil Of Chassis Image">
+                                    Stencil Of Chassis Number
+                                </a>
+                            }
+                            else if (Model.StencilOfChasis == null)
+                            {
+                                <button type="button" class="btn btn-danger btnupload" data-uploadfile="SOC">
+                                    Stencil Of Chassis Number
+                                </button>
+                                @Html.TextBoxFor(o => o.SOCFile, new
+                           {
+                               type = "file",
+                               hidden = true,
+                               @class = "fileupload",
+                               data_uploadfile = "SOC",
+                               accept = ".jpg,.jpeg,.png,.pdf"
+                           })
+                                @Html.ValidationMessageFor(o => o.SOCFile, "", new { @class = "" })
+                            }
+                        </li>
+
+
+
+                    }
+
+                    <li class="progress-step
+                    @if (Model.CertificateOfStockReport != null)
+                    { <text>is-complete</text>} ">
+                        <div class="progress-marker" @*data-text="4" data-toggle="tooltip" title="Step 4" *@></div>
+                        <div data-toggle="tooltip" title="Insert CSR Info" data-placement="bottom">
+                            <a class="btn btn-app @if ((Model.LTOSubmitted && CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Dealer) || (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.MAI && ((ViewBag.MAICSR_Received && Model.Assigned) || (Model.BOCCertificateOfPayment == null || Model.StencilOfEngine == null || Model.StencilOfChasis == null))))
+                           {
+                               <text>disabled</text>
+                           }
+                            " style="cursor:pointer; margin: 10px;"
+                               @if ((!Model.LTOSubmitted && CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Dealer) || (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.MAI && ViewBag.MAICSR_Received && !Model.Assigned)) { <text> data-toggle="modal" data-target="#modal-CSR" </text>   }>
+                                <i class="far fa-handshake nav-icon"></i>
+                                @*style="cursor:pointer; margin: 10px;"
+                                    @if (!Model.LTOSubmitted) { <text> data-toggle="modal" data-target="@if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.MAI)
+                                    {
+                                    <text>#modal-CSRSubmit</text>
+                                    }
+                                    else if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Dealer)
+                                    {
+                                        <text>#modal-CSR</text>
+                                    }" </text>    }>
+                                     <i class="far fa-handshake nav-icon"></i>*@
+                                CSR
+                            </a>
+                        </div>
+                        @if (Model.CertificateOfStockReport != null)
+                        {
+                            <a id="csr_image" class="btn btn-success" style="width:205px;" href="javascript:;">
+                                Certificate of Stock Report
+                            </a>
+                        }
+                        else if (Model.CertificateOfStockReport == null)
+                        {
+                            <button type="button" class="btn btn-danger" style="width:205px;">
+                                Certificate of Stock Report
+                            </button>
+                        }
+                    </li>
+
+                    @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.MAI)
+                    {
+                        <li class="progress-step @if (Model.PNPClearance != null || Model.AutoPNP == true) { <text>is-complete</text>} else if(Model.CertificateOfStockReport != null){ <text>is-option</text>} ">
+                            <div class="progress-marker"></div>
+                            <div data-toggle="tooltip" title="Upload PNP Clearance" data-placement="bottom">
+                                <a class="btn btn-app
+                            @if ((Model.PNPClearance != null || Model.AutoPNP == true ) || Model.Assigned == true || Model.CertificateOfStockReport == null)
+                           {
+                               <text>disabled</text>
+                           }
+                            " style="cursor:pointer; margin: 10px;"
+                                   @if (Model.PNPClearance != null || Model.Assigned == false || Model.AutoPNP == false) { <text> data-toggle="modal" data-target="#modal-PNP" title="PNP" </text>   }>
+
+                                    <i class="fas fa-barcode"></i>
+                                    PNP
+                                </a>
+                            </div>
+                            @if (Model.PNPClearance != null/* || Model.PNPReceipt != null*/)
+                            {
+
+                                <a id="pnp_image" class="btn btn-success" style="width:200px;" href="javascript:;">
+                                    PNP
+                                </a>
+                            }
+                            else if (Model.PNPClearance == null && Model.PNPReceipt == null)
+                            {
+                                <button type="button" class="btn btn-danger" style="width:200px;">
+                                    PNP
+                                </button>
+                            }
+                        </li>
+
+                        <li class="progress-step
+                    @if (Model.DealerID != null && Model.DealerBranchID != null && Model.Assigned == true)
+                    { <text>is-complete</text>} ">
+                            <div class="progress-marker" @*data-text="A" data-toggle="tooltip" title="Assign" *@></div>
+                            <div data-toggle="tooltip" title="Dealer Assign" data-placement="bottom">
+                                <a class="btn btn-app
+                           @if (Model.Assigned == true || Model.CertificateOfStockReport == null)
+                           {
+                               <text>disabled</text>
+                           }
+                           " style="cursor:pointer; margin: 10px;" data-toggle="modal" data-target="#modal-dealer">
+                                    <i class="fas fa-car"></i>
+                                    Dealer Assignment
+                                </a>
+                            </div>
+
+                        </li>
+                    }
+                    @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Dealer)
+                    {
+                        <li class="progress-step
+                    @if (ViewBag.HasInvoice == true)
+                    { <text>is-complete</text>} ">
+                            <div class="progress-marker" @*data-text="5" data-toggle="tooltip" title="Step 5" *@></div>
+                            <div data-toggle="tooltip" title="Invoice" data-placement="bottom">
+                                <a class="btn btn-app
+                               @if (Model.LTOSubmitted || Model.CertificateOfStockReport == null)
+                               {
+                                   <text>disabled</text>
+                               }" style="cursor:pointer; margin: 10px;"
+                                   @if (!Model.LTOSubmitted) { <text> data-toggle="modal" data-target="#modal-invoice" </text>    @*<text>data-toggle="modal" data-target="#@if ((ViewBag.HasInvoice == true || Model.Assigned == false) && CurrentUser.Details.UserRoleID == (int)UserRoleEnum.User ){<text>modal-invoice-info</text>}else {<text>modal-invoice</text>}"</text>*@   }>
+                                    <i class="fas fa-dollar-sign"></i>
+                                    Invoice
+                                </a>
+                            </div>
+                            @if (Model.InvoiceInfo.InvoiceByte != null)
+                            {
+
+                                <a id="invoice_image" class="btn btn-success" style="width:200px;" href="javascript:;">
+                                    Sales Invoice
+                                </a>
+                            }
+                            else if (Model.InvoiceInfo.InvoiceByte == null)
+                            {
+                                <button type="button" class="btn btn-danger" style="width:200px;">
+                                    Sales Invoice
+                                </button>
+                            }
+                        </li>
+                        <li class="progress-step
+                    @if (Model.CertificateOfConformity != null)
+                    { <text>is-complete</text>} ">
+                            <div class="progress-marker" @*data-text="6" data-toggle="tooltip" title="Step 6" *@></div>
+                            <div data-toggle="tooltip" title="Apply for COC" data-placement="bottom">
+                                <a class="btn btn-app
+                               @if (Model.CertificateOfConformity != null || ViewBag.HasInvoice == false)
+                               {
+                                   <text>disabled</text>
+                               }
+                               " style="cursor:pointer; margin: 10px;"
+                                   @if (!Model.LTOSubmitted && Model.CertificateOfConformity == null && ViewBag.HasInvoice == true) { <text> data-toggle="modal" data-target="#modal-COC" title="Get COC" </text>   }>
+                                    <i class="fas fa-hand-holding-heart"></i>
+                                    COC
+                                </a>
+                            </div>
+                            @if (Model.CertificateOfConformity != null)
+                            {
+
+                                <a id="coc_image" class="btn btn-success" style="width:200px;" href="javascript:;">
+                                    Certificate of Cover
+                                </a>
+                            }
+                            else if (Model.CertificateOfConformity == null)
+                            {
+                                <button type="button" class="btn btn-danger" style="width:200px;">
+                                    Certificate of Cover
+                                </button>
+                            }
+                        </li>
+                        <li class="progress-step
+                    @if (Model.PNPClearance != null || Model.AutoPNP == true)
+                    { <text>is-complete</text>} ">
+                            <div class="progress-marker" @*data-text="7" data-toggle="tooltip" title="Step 7" *@></div>
+                            <div data-toggle="tooltip" title="Upload PNP Clearance" data-placement="bottom">
+                                <a class="btn btn-app
+                            @if (Model.LTOSubmitted ||Model.PNPClearance != null || Model.PNPReceipt != null || Model.AutoPNP == true || Model.CertificateOfConformity == null)
+                           {
+                               <text>disabled</text>
+                           }
+                            " style="cursor:pointer; margin: 10px;"
+                                   @if (!Model.LTOSubmitted || Model.PNPClearance == null || Model.PNPReceipt == null || Model.AutoPNP == false || Model.CertificateOfConformity != null) { <text> data-toggle="modal" data-target="#modal-PNP" title="PNP" </text>  }>
+
+                                    <i class="fas fa-barcode"></i>
+                                    PNP
+                                </a>
+                            </div>
+                            @if (Model.PNPClearance != null/* || Model.PNPReceipt != null*/)
+                            {
+
+                                <a id="pnp_image" class="btn btn-success" style="width:200px;" href="javascript:;">
+                                    PNP
+                                </a>
+                            }
+                            else if (Model.PNPReceipt != null)
+                            {
+
+                                <a id="pnp_image" class="btn btn-success" @*data-fancybox data-type="iframe" data-src="@Model.PNPReceiptImage" *@ href="javascript:;">
+                                    PNP
+                                </a>
+                            }
+                            else if (Model.PNPClearance == null && Model.PNPReceipt == null)
+                            {
+                                <button type="button" class="btn btn-danger" style="width:200px;">
+                                    PNP
+                                </button>
+                            }
+                        </li>
+
+                        <li class="progress-step
+                    @if (ViewBag.HasInvoice == true && Model.LTOSubmitted)
+                    { <text>is-complete</text>} ">
+                            <div class="progress-marker" @*data-text="F" data-toggle="tooltip" title="Finish" *@></div>
+                            <div data-toggle="tooltip" title="Register Vehicle" data-placement="bottom">
+                                <a class="btn btn-app disabled
+                                      @if ((Model.PNPClearance == null && Model.PNPReceipt == null) || Model.LTOSubmitted)
+                                          {
+
+                                          }
+                                   " style="cursor:pointer; margin: 10px"
+                                   @*@if (!Model.LTOSubmitted && ViewBag.HasInvoice= =true && Model.LTOSubmitted)
+                                   {<text>data-toggle="modal" title="LTO Registration" data-target="#modal-LTO"</text>}*@>
+                                    <i class="fas fa-car-side"></i>
+                                    LTO
+                                </a>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+
+
+        <div class="row">
+
+            @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.MAI)
+            {
+                <div class="add-button" type="button">
+                    <div class="sub-button tl" data-toggle="tooltip" title="Edit" onclick="location.href='@Url.Action("Vehicle", "VehicleInfo", new { id = Model.VehicleID })'">
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    @if (CurrentUser.Details.UserRoleID == (int)UserRoleEnum.Administrator)
+                    {
+                        if ((Model.CertificateOfConformity != null || ViewBag.HasInvoice == false) && (Model.DealerID != null && Model.DealerBranchID != null && Model.Assigned == true))
+                        {
+                            <div class="sub-button tr" data-toggle="tooltip" title="Pull Out" id="btn_pullout">
+                                <i class="fas fa-undo-alt"></i>
+                            </div>
+
+                            <div class="sub-button br" data-toggle="tooltip" title="Pull Out Report" id="pullout_report">
+                                <button id="btn_pullout_report" type="submit" name="submit" value="pulloutReport" hidden></button>
+                                <i class="fas fa-undo-alt"></i>
+                            </div>
+                        }
+                    }
+
+                    <div class="sub-button bl" data-toggle="tooltip" title="@if (Model.DealerID != null && Model.DealerBranchID != null)
+                    {
+                        <text>Re-Allocate</text>
+                    }
+                    else
+                    {
+                        <text>Allocate</text>
+                    }" id="btn_allocate">
+                        <i class="far fa-handshake nav-icon"></i>
+                    </div>
+                </div>
+            }
+            else if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Dealer)
+            {
+                <div class="fab-edit" type="button" name="btnSubmit" data-toggle="tooltip" title="Edit" onclick="location.href='@Url.Action("Vehicle", "VehicleInfo", new { id = Model.VehicleID })'">
+                    <i class="fas fa-pencil-alt"></i>
+                </div>
+            }
+        </div>
+
+        @if (Model.IsSubmitted)
+        {
+            <div class="card" style="margin-top:15px;">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 style="color: #40A2E2; font-family: Arial, Helvetica, sans-serif;">
+                                <b>Batch Info</b>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="card card-primary card-outline"></div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <b>Reference No:</b>
+                                </div>
+                                <div class="col-8">
+                                    @Model.BatchReferenceNo
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <b>Description:</b>
+                                </div>
+                                <div class="col-8">
+                                    @Model.BatchDescription
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            if (Model.IsBatchCompleted == false && Model.IsPaid && CurrentUser.Details.UserEntityID == (int)UserEntityEnum.LTO)
+            {
+                if (Model.isCompleted == false)
+                {
+                    <button class="fab-m1" type="button" data-toggle="modal" data-target="#modal-complete">
+                        <i class="fas fa-check-circle" data-toggle="tooltip" title="Complete"></i>
+                    </button>
+                }
+                if (Model.isRejected == false && Model.isCompleted == false)
+                {
+                    <button class="fab-m2" type="button" data-toggle="modal" data-target="#modal-reject">
+                        <i class="fas fa-ban" data-toggle="tooltip" title="Reject Batch"></i>
+                    </button>
+                }
+
+
+            }
+        }
+
+        @if (Model.DealerID != null && Model.DealerBranchID != null)
+        {
+            <div class="card" style="margin-top:15px;">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 style="color: #40A2E2; font-family: Arial, Helvetica, sans-serif;">
+                                <b>
+                                    @if (Model.Assigned == true)
+                                    {
+                                        <text>Assigned To</text>
+                                    }
+                                    else
+                                    {
+                                        <text>Allocated To</text>
+                                    }
+                                </b>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="card card-primary card-outline"></div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <b>Dealer:</b>
+                                </div>
+                                <div class="col-8">
+                                    @Model.DealerName
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <b>Branch:</b>
+                                </div>
+                                <div class="col-8">
+                                    @Model.DealerBranchName
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="card" style="margin-top:15px;">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        @*<a href="#!" disabled="disabled" style="pointer-events: none;cursor: default;">
+                                <span class="circle">3</span>
+                                <span class="label">Vehicle Info</span>ID #: @Model.VehicleID
+                            </a>*@
+                        <h5 style="color: #40A2E2; font-family: Arial, Helvetica, sans-serif;"><b>Vehicle Info</b> ID #: @Model.VehicleID</h5>
+                    </div>
+                </div>
+                <div class="card card-primary card-outline"></div>
+                @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Dealer)
+                {
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Make:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.VehicleMakeName
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Model:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.VehicleModelName
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Body:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.VehicleBodyTypeName
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Engine Number:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.EngineNumber
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Chassis Number:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.ChassisNumber
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Color:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.VehicleColorName
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Gross Vehicle Weight:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.GrossVehicleWeight
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Make:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.VehicleMakeName
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Model:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.VehicleModelName
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Body:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.VehicleBodyTypeName
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Engine Number:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.EngineNumber
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Chassis Number:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.ChassisNumber
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Body ID No:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.BodyIDNumber
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Color:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.VehicleColorName
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Aircon Type:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.AirconType
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Fuel Type:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.VehicleFuelName
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Conduction Sticker Number:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.ConductionSticker
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Piston Displacement:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.PistonDisplacement
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Cylinders:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.Cylinders
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Year:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.Year
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Gross Vehicle Weight:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.GrossVehicleWeight
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>No of Front Tires:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.FrontTiresNumber
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>No of Rear Tires:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.RearTiresNumber
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-1 text-right">
+                                <b>Remarks:</b>
+                            </div>
+                            <div class="col-11">
+                                @Model.Remarks
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        @*<div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 style="color: #40A2E2; font-family: Arial, Helvetica, sans-serif;"><b>BOC Certification</b></h5>
+                        </div>
+                    </div>
+                    <div class="card card-primary card-outline"></div>
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>CP1 NO.:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.CPNumber
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Date Issued:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @if (Model.DateIssued1 != null)
+                                        {
+                                            @Model.DateIssued1.Value.ToString("MM/dd/yyyy")
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>CP2 No:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.CPNumber2
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Date Issued:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @if (Model.DateIssued2 != null)
+
+                                        {
+                                            @Model.DateIssued2.Value.ToString("MM/dd/yyyy")
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h5 style="color: #40A2E2; font-family: Arial, Helvetica, sans-serif;"><b>CSR Info</b></h5>
+                    </div>
+                </div>
+                <div class="card card-primary card-outline"></div>
+                @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Dealer)
+                {
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>CSR Number:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.CSRNumber
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Accredited MAI:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.MAIName
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row" style="text-align:left">
+                                    <div class="col-4 text-right">
+                                        <b>Address:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.Address
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Accreditation Number:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.AccreditationNumber
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Transaction Number:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.TransactionID
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>CSR Number:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.CSRNumber
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Item Type:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.ItemType
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Report Entry ID:</b>
+                                    </div>
+                                    <div class="col-8">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Report Date:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.ReportDate
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>BIR-CCMV:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.BIRCCMV
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Date Issued:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @if (Model.DateIssued3 != null)
+                                        {
+                                            @Model.DateIssued3.Value.ToString("MM/dd/yyyy")
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Tax Type:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.TaxType
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Tax Amount:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.TaxAmount
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+
+        @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Dealer || CurrentUser.Details.UserEntityID == (int)UserEntityEnum.LTO || CurrentUser.Details.UserEntityID == (int)UserEntityEnum.DataBridgeAsia)
+        {
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 style="color: #40A2E2; font-family: Arial,Helvetica, sans-serif;"><b>Invoice Info</b></h5>
+                        </div>
+                    </div>
+                    <div class="card card-primary card-outline"></div>
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Customer:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.InvoiceInfo.CustomerFullName
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Cost of Vehicle:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.InvoiceInfo.VehicleCost
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Invoice Number:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.InvoiceInfo.InvoiceNumber
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Invoice Date:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.InvoiceInfo.InvoiceDate
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Preferred Ending Plate Number:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.InvoiceInfo.PreferredEndingPlateNumber
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Encumbered:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @if (Model.InvoiceInfo.Encumbered)
+                                    {
+                                    <text>Yes</text>
+                                    }
+                                    else
+                                    {
+                                    <text>No</text>
+                                    }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>Financial Institution:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.InvoiceInfo.FinancialInstitution
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+         @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Dealer || CurrentUser.Details.UserEntityID == (int)UserEntityEnum.LTO || CurrentUser.Details.UserEntityID == (int)UserEntityEnum.DataBridgeAsia)
+         {
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h5 style="color: #40A2E2; font-family:Arial,Helvetica, sans-serif;"><b>COC Info</b></h5>
+                    </div>
+                </div>
+                <div class="card card-primary card-outline"></div>
+                <div class="post">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-4 col-lg-4">
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <b>COC Number:</b>
+                                </div>
+                                <div class="col-8">
+                                    @Model.InvoiceInfo.COC
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-4">
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <b>COC Authentication:</b>
+                                </div>
+                                <div class="col-8">
+                                    @if (Model.InvoiceInfo.COCAuthenticationCode == null && Model.InvoiceInfo.COC != null)
+                                    {
+                                        <button type="submit" name="submit" id="coc_authentication" value="coc_authentication" class="btn btn-primary">Authenticate</button>
+                                    }
+                                    @Model.InvoiceInfo.COCAuthenticationCode
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>COC Policy Number:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.InvoiceInfo.COCPolicyNumber
+                                    </div>
+                                </div>
+                            </div>*@
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-4 col-lg-4">
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <b>Inception Date:</b>
+                                </div>
+                                <div class="col-8">
+                                    @if (Model.COCInfo.InceptionDate != null)
+
+                                    {
+                                        @Model.COCInfo.InceptionDate.Value.ToString("MM/dd/yyyy")
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-4">
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <b>Expiry Date:</b>
+                                </div>
+                                <div class="col-8">
+                                    @if (Model.COCInfo.ExpiryDate != null)
+
+                                    {
+                                        @Model.COCInfo.ExpiryDate.Value.ToString("MM/dd/yyyy")
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>COC Verified:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @if (Model.CoCVerified)
+                                        {
+                                            <text>Yes</text>
+                                        }
+                                        else
+                                        {
+                                            <text>No</text>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            @if (!Model.CoCVerified)
+                            {
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                    <div class="row">
+                                        <div class="col-4 text-right">
+                                            <b>COC Verification Button:</b>
+                                        </div>
+                                        <div class="col-8">
+                                            <button type="submit" name="submit" id="coc_verification" value="coc_verification" class="btn btn-primary">Verify</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }*@
+                    </div>
+                </div>
+            </div>
+        </div>
+         }
+
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h5 style="color: #40A2E2; font-family: Arial,Helvetica, sans-serif;"><b>PNP Info</b></h5>
+                    </div>
+                </div>
+                <div class="card card-primary card-outline"></div>
+                <div class="post">
+                    <div class="row">
+                        @if (Model.AutoPNP == true)
+                        {
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>PNP Reference #:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.PNPReceiptReferenceNumber
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 text-right">
+                                        <b>HPG Control Number:</b>
+                                    </div>
+                                    <div class="col-8">
+                                        @Model.HPGControlNumber
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" id="image_card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h5 style="color: #40A2E2; font-family: Arial, Helvetica, sans-serif;"><b>Images</b></h5>
+                    </div>
+                </div>
+                @*//filehere*@
+                <div class="card card-primary card-outline"></div>
+                @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.MAI)
+                {
+                    <script>
+                        var objimage_card = document.getElementById("image_card");
+                        objimage_card.remove();
+                    </script>
+                }
+                @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.Dealer)
+                {
+                    <script>
+                        var objimage_card = document.getElementById("image_card");
+                        objimage_card.remove();
+                    </script>
+                }
+                @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.LTO || CurrentUser.Details.UserEntityID == (int)UserEntityEnum.DataBridgeAsia)
+                {
+
+                    @*if (Model.BOCCertificateOfPayment != null)
+                         {
+                             <a class="btn btn-success" data-fancybox data-type="iframe" data-src="@Model.BOCImage" data-caption="&lt;b&gt;BOC Certificate of Payment" href="javascript:;">
+                                 Certificate of Payment
+                             </a>
+
+                         }
+                         else if (Model.BOCCertificateOfPayment == null)
+                         {
+                             <button type="button" class="btn btn-danger btnupload" data-uploadfile="BOC">
+                                 BOC Certificate of Payment
+                             </button>
+                             @Html.TextBoxFor(o => o.BOCFile, new
+                        {
+                            type = "file",
+                            hidden = true,
+                            @class = "fileupload",
+                            accept = ".jpg,.jpeg,.png,.pdf"
+                        })
+                             @Html.ValidationMessageFor(o => o.BOCFile, "", new { @class = "" })
+                         }
+
+
+                         if (Model.StencilOfEngine != null)
+                         {
+                             <a class="btn btn-success" href="@Model.SOEImage" data-fancybox data-caption="&lt;b&gt;Stencil Of Engine Image">
+                                 Stencil Of Engine Image
+                             </a>
+                         }
+                         else if (Model.StencilOfEngine == null)
+                         {
+                             <button type="button" class="btn btn-danger btnupload" data-uploadfile="SOE">
+                                 Stencil Of Engine Image
+                             </button>
+                             @Html.TextBoxFor(o => o.SOEFile, new
+                        {
+                            type = "file",
+                            hidden = true,
+                            @class = "fileupload",
+                            data_uploadfile = "SOE",
+                            accept = ".jpg,.jpeg,.png,.pdf"
+                        })
+                             @Html.ValidationMessageFor(o => o.SOEFile, "", new { @class = "" })
+                         }
+
+                         if (Model.StencilOfChasis != null)
+                         {
+                             <a class="btn btn-success" href="@Model.SOCImage" data-fancybox data-caption="&lt;b&gt;Stencil Of Chasis Image">
+                                 Stencil Of Chasis Image
+                             </a>
+                         }
+                         else if (Model.StencilOfChasis == null)
+                         {
+                             <button type="button" class="btn btn-danger btnupload" data-uploadfile="SOC">
+                                 Stencil Of Chasis Image
+                             </button>
+                             @Html.TextBoxFor(o => o.SOCFile, new
+                        {
+                            type = "file",
+                            hidden = true,
+                            @class = "fileupload",
+                            data_uploadfile = "SOC",
+                            accept = ".jpg,.jpeg,.png,.pdf"
+                        })
+                             @Html.ValidationMessageFor(o => o.SOCFile, "", new { @class = "" })
+                         }*@
+
+                if (Model.CertificateOfStockReport != null)
+                {
+                    <a id="csr_image" class="btn btn-success" href="javascript:;">
+                        Certificate of Stock Report
+                    </a>
+                }
+                else if (Model.CertificateOfStockReport == null)
+                {
+                    <button type="button" class="btn btn-danger">
+                        Certificate of Stock Report
+                    </button>
+                }
+
+                if (Model.InvoiceInfo.InvoiceByte != null)
+                {
+
+                    <a id="invoice_image" class="btn btn-success" href="javascript:;">
+                        Sales Invoice
+                    </a>
+                    }
+                    else if (Model.InvoiceInfo.InvoiceByte == null)
+                    {
+                        <button type="button" class="btn btn-danger">
+                            Sales Invoice
+                        </button>
+                    }
+
+                    if (Model.CertificateOfConformity != null)
+                    {
+
+                        <a id="coc_image" class="btn btn-success" href="javascript:;">
+                            Certificate of Cover
+                        </a>
+                    }
+                    else if (Model.CertificateOfConformity == null)
+                    {
+                        <button type="button" class="btn btn-danger">
+                            Certificate of Cover
+                        </button>
+                    }
+
+                    if (Model.PNPClearance != null/* || Model.PNPReceipt != null*/)
+                    {
+
+                        <a id="pnp_image" class="btn btn-success" href="javascript:;">
+                            PNP
+                        </a>
+                    }
+                    else if (Model.PNPReceipt != null)
+                    {
+
+                        <a id="pnp_image" class="btn btn-success" @*data-fancybox data-type="iframe" data-src="@Model.PNPReceiptImage" *@ href="javascript:;">
+                            PNP
+                        </a>
+                    }
+                    else if (Model.PNPClearance == null && Model.PNPReceipt == null)
+                    {
+                        <button type="button" class="btn btn-danger">
+                            PNP
+                        </button>
+                    }
+
+                }
+
+            </div>
+        </div>
+        <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Back to top" rel="tooltip" data-placement="left">
+            <i class="fas fa-chevron-circle-up"></i>
+        </a>
+    </section>
+
+    <div class="modal fade" id="modal-image">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><label id="lblModalTitle">Modal Title</label></h4>
+                </div>
+                <div class="modal-body" style="height:500px;">
+                    <center>
+                        <embed id="imgModal" src="//:0" style="width:100%; height:450px;" />
+                    </center>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-CSRSubmit">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><label id="lblModalTitle">Are you sure you want to submit for CSR?</label></h4>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" id="btn_lto" name="submit" value="CSR" class="btn btn-primary">CSR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*<div class="modal fade" id="modal-COC">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"><label id="lblModalTitle">Are you sure you want to get COC?</label></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group col-12">
+                                @Html.LabelFor(m => m.DealerInsuranceID)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-id-card"></i> </span>
+                                    </div>
+                                    @Html.DropDownListFor(m => m.DealerInsuranceID, new SelectList(Model.DealerInsuranceList, "InsuranceID", "InsuranceName"), "Select Insurance Company", new { @class = "form-control select2" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" id="btn_lto" name="submit" value="COC" class="btn btn-primary">Get COC</button>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+{
+    Html.RenderPartial("_Modal_PNP", Model.PNPInfo, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "PNPInfo" } });
+}
+
+{
+    Html.RenderPartial("_Modal_BOC", Model.BOCInfo, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "BOCInfo" } });
+}
+
+
+{
+    Html.RenderPartial("_Modal_CSR", Model.CSRInfo, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "CSRInfo" } });
+}
+
+{
+    Html.RenderPartial("_Modal_Dealer", Model.DealerInfo, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "DealerInfo" } });
+}
+
+{
+    Html.RenderPartial("_Modal_LTO", Model.BatchHeader, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "BatchHeader" } });
+}
+
+{
+    Html.RenderPartial("_Modal_PullOut");
+}
+//{
+//    Html.RenderPartial("_Modal_Allocate", Model.DealerInfo, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "DealerInfo" } });
+//}
+
+
+    <div id="modal-SOE-Confirmation" class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Are you sure you want to save?</h4>
+                </div>
+                <div id="modal-body-boc-confirmation" class="modal-body">
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <label id="lbl_FileHeader"></label>: <label id="lbl_File"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" name="submit" value="upload" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    if (Model.IsBatchCompleted == false && Model.IsPaid && CurrentUser.Details.UserEntityID == (int)UserEntityEnum.LTO)
+    {
+        <div class="modal fade" id="modal-reject">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"><label id="lblModalTitle">Are you sure you want to reject?</label></h4>
+                    </div>
+                    <div id="modal-body-final-assess" class="modal-body">
+
+                        <div class="row">
+                            <div class="form-group col-12">
+                                @Html.LabelFor(m => m.RejectedRemarks)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-sticky-note"></i> </span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.RejectedRemarks,
+                   new
+                   {
+                       placeholder = "Remarks",
+                       @class = "form-control"
+                   })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.RejectedRemarks, "", new { @class = "" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                        <button type="submit" name="submit" value="Reject" class="btn btn-primary">Reject</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal-complete">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"><label id="lblModalTitle">Are you sure you want to complete?</label></h4>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                        <button type="submit" name="submit" value="Complete" class="btn btn-primary">Complete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+
+@using (Html.BeginForm("VehicleInfo", "VehicleInfo", null, FormMethod.Post, new { enctype = "multipart/form-data", id = "coctest" }))
+{
+    @Html.AntiForgeryToken()
+
+    Html.RenderPartial("_Modal_COC", Model.COCInfo, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "COCInfo" } });
+    @Html.HiddenFor(o => o.VehicleID)
+}
+<div class="modal fade" id="modal-invoice">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="text-align:center">Invoice</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @{
+                    Html.RenderPartial("_DealerInvoice", Model.InvoiceInfo);
+                }
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+<div id="modal-invoice-info" class="modal fade">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="text-align:center">Invoice Information</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @{
+                    Html.RenderPartial("_DealerInvoiceInfo", Model.InvoiceInfo);
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<style>
+    div#ui-datepicker-div.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all {
+        z-index: 2051 !important;
+    }
+
+    h6.stat {
+        padding: 0px;
+        margin: 0px 0px 5px 40px;
+    }
+
+    /*div.btn-boc{
+        color:blue;
+
+        width:50px;
+        height:50px;
+        border-radius:50%;
+    }*/
+</style>
+<script>
+    // main user
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#vehicle_info").toggleClass("active");
+    // mai admin user share
+    $("#left_nav_mai").toggleClass("menu-open");
+    $("#mai_users").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+    $('.imagemodal').click(function () {
+        var data = $(this).data("imagename")
+        $('#lblModalTitle').text(data)
+        var img = $(this).data("image")
+        $("#imgModal").attr('src', img)
+    });
+
+    //$('#btn_PNP').click(function () {
+    //    $('#PNPFile').click();
+    //})
+
+    //$("#PNPFile").on("change", function () {
+    //    $("#uploadfile").click();
+    //});
+
+    //$('.btnupload').click(function () {
+    //    var data = $(this).data("uploadfile")
+    //    var btnclickname = data + 'File'
+    //    $('#' + btnclickname).click();
+    //})
+
+    $("#pullout_report").click(function(){
+        $("#btn_pullout_report").click();
+    });
+
+    $('#btn_SOE').click(function () {
+        $("#SOEFile").click()
+    })
+
+    $('#btn_SOC').click(function () {
+        $("#SOCFile").click()
+    })
+
+    //$('#btn_PNP').click(function () {
+    //    $("#PNPFile").click()
+    //})
+
+    $("#btn_allocate").click(function () {
+        $("#modal-dealer").modal("show");
+        $("#dealer-submit").val("Allocate");
+    });
+
+    $(".fileupload").on("change", function () {
+        var data = $(this).data("uploadfile")
+        var File = data + "File"
+        var Header = ""
+        switch (data) {
+            case "SOE": Header = "Stencil of Engine"
+                break;
+            case "SOC": Header = "Stencil of Chassis"
+                break;
+                //case "PNP": Header = "PNP Clearance"
+                //    break;
+        }
+        $("#lbl_FileHeader").text(Header)
+        $("#lbl_File").text($('#' + File).val().replace('C:\\fakepath\\', ''))
+        $("#modal-SOE-Confirmation").modal("show")
+        //$("#uploadfile").click();
+    });
+
+    $("#btn_pullout").click(function () {
+        $("#modal-Pull_Out-Confirmation").modal("show");
+    });
+
+    @*//COCVerification
+    var addAntiForgeryToken = function (data) {
+        data.__RequestVerificationToken = $("[name='__RequestVerificationToken']").val();
+        return data;
+    };
+
+    $("#coc_verification").click(function () {
+        $.ajax({
+            url: '@Url.Action("CoCVerification", "VehicleInfo")',
+            type: "POST",
+            dataType: "JSON",
+            cache: false,
+            data: addAntiForgeryToken({
+                COCNumber: "@Model.COCNo"
+            }),
+            success: function (response) {
+                alert(response);
+
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+    });*@
+
+
+    //Images
+    $("#csr_image").on("click", function (e) {
+        $.ajax({
+            url: '@Url.Action("GetCSRFile", "GetData")',
+            type: "GET",
+            dataType: "JSON",
+            cache: false,
+            data: { "VehicleID": @Model.VehicleID },
+            success: function (response) {
+                jQuery.fancybox.open({
+                    src: response,
+                    type: 'iframe',
+                    opts: {
+                        caption: 'Certificate of Stock Report'
+                    }
+                });
+            }
+        });
+    });
+    $("#invoice_image").on("click", function (e) {
+        $.ajax({
+            url: '@Url.Action("GetInvoiceFile", "GetData")',
+            type: "GET",
+            dataType: "JSON",
+            cache: false,
+            data: { "VehicleID": @Model.VehicleID },
+            success: function (response) {
+                jQuery.fancybox.open({
+                    src: response,
+                    type: 'iframe',
+                    opts: {
+                        caption: 'Invoice Receipt'
+                    }
+                });
+            }
+        });
+    });
+    $("#coc_image").on("click", function (e) {
+        $.ajax({
+            url: '@Url.Action("GetCOCFile", "GetData")',
+            type: "GET",
+            dataType: "JSON",
+            cache: false,
+            data: { "VehicleID": @Model.VehicleID },
+            success: function (response) {
+                jQuery.fancybox.open({
+                    src: response,
+                    type: 'iframe',
+                    opts: {
+                        caption: 'Certificate of Cover'
+                    }
+                });
+            }
+        });
+    });
+    $("#pnp_image").on("click", function (e) {
+        $.ajax({
+            url: '@Url.Action("GetPNPFile", "GetData")',
+            type: "GET",
+            dataType: "JSON",
+            cache: false,
+            data: { "VehicleID": @Model.VehicleID },
+            success: function (response) {
+                jQuery.fancybox.open({
+                    src: response,
+                    type: 'iframe',
+                    opts: {
+                        caption: 'PNP Image'
+                    },
+                    iframe: {
+                        scrolling: 'auto',
+                        preload: false
+                    },
+                });
+            }
+        });
+    });
+</script>

@@ -1,0 +1,85 @@
+﻿@using VehicleRegistration.Models
+@using VehicleRegistration.Tools
+@model IEnumerable<vwVehicleListModel>
+
+
+@{
+    ViewBag.Title = "List Of Allocated Vehicle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6 ><i class="nav-icon far fa-copy"></i> List Of Allocated Vehicle  <small> </small></h6>
+                </div>
+                <!-- /.card-header -->
+                @*<div class="add-button" type="button" name="btnSubmit">
+                    <div class="sub-button tl" data-toggle="tooltip"  title="Create new" type="button" name="btnSubmit" onclick="location.href='@Url.Action("Vehicle", "VehicleInfo")'"></div>
+                    <div class="sub-button bl" data-toggle="tooltip" title="Upload .xlsx" name="btnUpload" onclick="location.href='@Url.Action("UploadVehicleInfo", "VehicleInfo")'"> <i class="fas fa-paperclip"></i></div>
+                </div>*@
+
+                <div class="card-body">
+                    <table id="allocated_list_tbl" class="table table-bordered table-striped table-hover"  style="max-width:100%;">
+                        <thead>
+                            <tr>
+                                @if (CurrentUser.Details.IsMain == true && CurrentUser.Details.UserRoleID == (int)UserRoleEnum.Administrator)
+                                {
+                                    <th style="width:230px;">Branch</th>
+                                }
+                                <th style="width:200px;">Engine #</th>
+                                <th style="width:200px;">Chasis #</th>
+                                <th style="width:230px;">Make</th>
+                                <th style="width:240px;">Model</th>
+                                <th style="width:230px;">Variant</th>
+                                <th style="width:200px;">Year</th>
+                                <th style="width:80px;">Date</th>
+                                <th style="width:100px;">Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr class="rowclick" style="cursor: pointer" data-href="@Url.Action("VehicleInfo", new { id = item.VehicleID })">
+                                @if (CurrentUser.Details.IsMain == true && CurrentUser.Details.UserRoleID == (int)UserRoleEnum.Administrator)
+                                {
+                                    <th style="width:230px;">@item.DealerBranchName</th>
+                                }
+                                <td style="max-width:200px;">@item.EngineNumber</td>
+                                <td style="max-width:200px;">@item.ChassisNumber</td>
+                                <td style="max-width:250px;">@item.VehicleMakeName</td>
+                                <td style="max-width:250px;">@item.VehicleModelName</td>
+                                <td style="max-width:250px;">@item.Variant</td>
+                                <td style="max-width:250px;">@item.YearOfMake</td>
+                                <td style="max-width:80px;">@item.CreatedDate.ToShortDateString()</td>
+                                <td style="max-width:100px;">
+                                    <div class="row" style="align-items:center">
+                                        <a href="@Url.Action("Vehicle", new { id = item.VehicleID })">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+<!-- ./wrapper -->
+<script>
+    $(".rowclick").click(function () {
+        window.location = $(this).data("href");
+    });
+</script>

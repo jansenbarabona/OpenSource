@@ -1,0 +1,65 @@
+﻿@using VehicleRegistration.Models
+@model List<DealerStatusReportTableModel>
+
+<!-- Main content -->
+<table id="tbl_rprt_list" class="table table-bordered table-striped table-hover" style="width:100%; table-layout:auto;">
+    <thead>
+        <tr>
+            <th style="width:16%">Dealer</th>
+            <th style="width:16%">Branch Name</th>
+            <th style="width:14%">Submitted</th>
+            <th style="width:14%">Payment</th>
+            <th style="width:14%">LTO Confirmation</th>
+            <th style="width:14%">Completed</th>
+            <th style="width:14%">OR/CR Pickup</th>
+            <th style="width:14%">Total</th>
+
+        </tr>
+    </thead>
+    <tbody id="vehiclelist_tbody">
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+        <tr>
+            <td style="width:16%">
+                @Html.DisplayFor(o => Model[i].DealerName)
+            </td>
+            <td style="width:16%">
+                @Html.DisplayFor(o => Model[i].DealerBranchName)
+            </td>
+            <td style="width:14%">
+                <a href="javascript:void(0);" onclick="BatchList('@Model[i].DealerID', '@Model[i].DealerBranchID','Submitted' ,'Submitted', '@Model[i].DealerName', '@Model[i].DealerBranchName');">
+                    @Html.DisplayFor(o => Model[i].TotalSubmitted)
+                </a>
+            </td>
+            <td style="width: 14%">
+                <a href="javascript:void(0);" onclick="BatchList('@Model[i].DealerID', '@Model[i].DealerBranchID','Payment' ,'Payment', '@Model[i].DealerName', '@Model[i].DealerBranchName');">
+                    @Html.DisplayFor(o => Model[i].TotalPayment)
+                </a>
+            </td>
+            <td style="width:14%">
+                <a href="javascript:void(0);" onclick="BatchList('@Model[i].DealerID', '@Model[i].DealerBranchID','Confirmation' ,'LTO Confirmation', '@Model[i].DealerName', '@Model[i].DealerBranchName');">
+                    @Html.DisplayFor(o => Model[i].TotalConfirmation)
+                </a>
+            </td>
+            <td style="width:14%">
+                <a href="javascript:void(0);" onclick="BatchList('@Model[i].DealerID', '@Model[i].DealerBranchID','Completed' ,'Completed', '@Model[i].DealerName', '@Model[i].DealerBranchName');">
+                    @Html.DisplayFor(o => Model[i].TotalCompleted)
+                </a>
+            </td>
+            <td style="width:14%">
+                <a href="javascript:void(0);" onclick="BatchList('@Model[i].DealerID', '@Model[i].DealerBranchID','Pickup' ,'OR/CR Pickup', '@Model[i].DealerName', '@Model[i].DealerBranchName');">
+                    @Html.DisplayFor(o => Model[i].TotalPickup)
+                </a>
+            </td>
+            <td style="width:14%">
+                @Html.DisplayFor(o => Model[i].TotalActive)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<style>
+    td {
+        font-size: 14px;
+    }
+</style>

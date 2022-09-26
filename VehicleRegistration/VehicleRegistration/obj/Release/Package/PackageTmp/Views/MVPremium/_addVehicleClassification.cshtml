@@ -1,0 +1,71 @@
+﻿@using VehicleRegistration.Models
+@model List<addVehicleClassification>
+
+<table id="add-classification_list_tbl" class="table table-bordered table-striped table-hover" style="table-layout:auto;width:100%; max-height:150px;">
+    <thead>
+        <tr>
+            <th style="width:20%">
+                <center>
+                    <div data-toggle="tooltip" title="Check all" class="icheck-success d-inline">
+                        @Html.CheckBox("add_check_all", false)
+                        <label for="add_check_all"></label>
+                    </div>
+                </center>
+            </th>
+            <th style="width:80%;">Classification Name</th>
+        </tr>
+    </thead>
+    <tbody id="add-tbody">
+        @if (Model != null)
+        {
+            for (int i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+                    <td style="width:25px;">
+                        <center>
+                            <div class="icheck-success d-inline">
+                                @Html.CheckBoxFor(o => Model[i].addIsChecked,
+                               new
+                               {
+                                   id = "add_" + i,
+                                   @class = "add_checkbox_all",
+                                   Name = "addVehicleClassificationList[" + i + "].addIsChecked"
+                               })
+                                <label for="add_@i"></label>
+                            </div>
+                        </center>
+                    </td>
+                    <td style="width:100%;" id="dealer_name">
+                        @Html.DisplayFor(o => Model[i].addVehicleClassificationName)
+                        @Html.HiddenFor(o => Model[i].addVehicleClassificationName,
+                       new
+                       {
+                           Name = "addVehicleClassificationList[" + i + "].addVehicleClassificationName"
+                       })
+                        @Html.HiddenFor(o => Model[i].addVehicleClassificationID,
+                       new
+                       {
+                           Name = "addVehicleClassificationList[" + i + "].addVehicleClassificationID"
+                       })
+                    </td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
+
+<script>
+    $(document).on('shown.bs.modal', '.modal', function (e) {
+        all_table.columns.adjust();
+    });
+
+    $("#add_check_all").on("click", function () {
+        if ($(this).is(":checked")) {
+            $(".add_checkbox_all").prop("checked", true);
+        }
+        else {
+            $(".add_checkbox_all").prop("checked", false);
+        }
+    });
+</script>

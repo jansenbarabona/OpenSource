@@ -1,0 +1,190 @@
+﻿@using VehicleRegistration.Models
+@using VehicleRegistration.Tools
+@model DealerModel
+@{
+    ViewBag.Title = "DealerInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="content">
+
+    @using (Html.BeginForm("DealerInfo", "Dealer", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(o => o.DealerID)
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Back" onclick="location.href='@Url.Action("Index", "Dealer")'">
+                                <i class="far fa-times-circle"></i>
+                            </button>
+                        </div>
+                        <h6><i class="nav-icon far fa-copy"></i> Dealer Profile Information</h6>
+                    </div>    <!-- /.header -->
+
+                    <div class="card-body ">
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="mx-auto">
+                                    @*<img src="~/Logos/wheeltek.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"style="height: 50px; width: 50px;">*@
+
+                                    <img src="~/Scripts/Home_temp/img/homepage_Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="height: 50px; width: 50px;">
+
+                                </div>
+                            </div>
+                            <div class="row" style="margin-bottom:20px;">
+                                <div class="mx-auto">
+                                    @*<b>@Model.MAITypeName</b>
+                                        <b>@Model.MAIName</b>*@
+                                    <b>Detail Information</b>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="row">
+                                <div class="col-sm-4">
+
+                                    <b>Code Number:</b> @Model.DealerID
+                                </div>
+                                <div class="col-sm-4">
+                                    @*<b>Make:</b> @Model.DealerName*@
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="row">
+                                @*<div class="col-sm">
+                                        <b>Make:</b> @Model.MAITypeName
+                                    </div>*@
+                                <div class="col-sm">
+
+                                    <b>Name:</b> @Model.DealerName
+                                </div>
+                                <div class="col-sm">
+                                    <b> Email: <span class="fas fa-envelope"></span></b> @Model.EmailAddress
+                                </div>
+                                <div class="col-sm">
+                                    <b> Business Phone: <span class="fas fa-fax"></span></b> @Model.BusinessPhone
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="row">
+                                <div class="col-sm">
+
+                                    <b>Mobile Phone: <span class="fas fa-mobile-alt"></span></b> @Model.MobilePhone
+                                </div>
+                                <div class="col-sm">
+                                    <b> Fax Number: <span class="fas fa-fax"></span></b> @Model.FaxNumber
+                                </div>
+                                <div class="col-sm">
+                                    <b>Website: <span class="fas fa-globe"></span></b> @Model.Website
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="row">
+                                @*<div class="col-sm-4">
+
+                                        <b>Website: <span class="fas fa-globe"></span></b> @Model.Website
+                                    </div>*@
+                                <div class="col-sm-12">
+                                    <b>Address: <span class="fas fa-map-marked-alt"></span></b> @Model.Address
+                                </div>
+
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="row ">
+                                <div class="col-sm">
+                                    <b>Province: <span class="fas fa-location-arrow"></span></b> @Model.SelectedProvinceID
+
+                                </div>
+                                <div class="col-sm">
+
+                                    <b>City: <span class="fas fa-map-marker-alt"></span></b> @Model.CityName
+                                </div>
+                                <div class="col-sm">
+                                    <b>@Html.LabelFor(o => o.BarangayName)</b> @Model.BarangayName
+                                </div>
+
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <b>Zip Code:</b> @Model.ZipCode
+                                </div>
+                                <div class="col-sm">
+                                    <b>Logo: <span class="fas fa-globe"></span></b> @Model.Logo
+                                </div>
+                                <div class="col-sm">
+                                    <b>Notes: <span class="fas fa-comment-alt"></span></b>
+                                    <p class="col-sm">@Model.Notes</p>
+                                </div>
+                            </div>
+                            <a href="@Url.Action("DealerForm", new { id = Model.DealerID,  })" class="btn btn-sm btn-primary">
+                                <i class="fas fa-user"></i> Edit Profile
+                            </a>
+                        </div>
+                    </div> <!-- /.card-body -->
+                </div>    <!-- /.card -->
+            </div>     <!-- /.col-12 -->
+        </div> <!-- /.row -->
+    }
+    @if (ViewBag.Edit == true)
+    {
+        <div class="row">
+            <div class="col-12 col-sm-12 col-lg-12">
+                <div class="card card-primary card-tabs">
+                    <div class="card-header p-0 pt-1">
+                        <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="Insurance-tab" data-toggle="tab" href="#Insurance_content" role="tab" aria-controls="Insurance_content" aria-selected="true">My Insurance</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="Wallet-tab" data-toggle="tab" href="#Wallet_content" role="tab" aria-controls="Wallet_content" aria-selected="false">My Wallet</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="Charge-tab" data-toggle="tab" href="#EntityCharge_content" role="tab" aria-controls="EntityCharge_content" aria-selected="false">My Default Charges</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="custom-tabs-one-tabContent">
+                            <div class="tab-pane fade show active" id="Insurance_content" role="tabpanel" aria-labelledby="Insurance-tab">
+                                <table id="InsuranceDealer_list_tbl" class="table table-bordered table-striped table-hover" style="max-width:100%;width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:100%;">Insurance Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.vwDealerInsuranceModelList.Count > 0)
+                                        {
+
+                                            foreach (var item in Model.vwDealerInsuranceModelList)
+                                            {
+                                                <tr>
+                                                    <td style="max-width:100%;" id="insurancedealer" data-insuranceid="@item.InsuranceID">@item.InsuranceName</td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="Wallet_content" role="tabpanel" aria-labelledby="Wallet-tab">
+                                @{
+                                    Html.RenderPartial("_TransactionHistory", Model.WalletDetail);
+                                }
+                            </div>
+                            <div class="tab-pane fade" id="EntityCharge_content" role="tabpanel" aria-labelledby="Charge-tab">
+                                @{
+                                    Html.RenderPartial("_EntityChargeList", Model.EntityTransaction);
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+    }
+
+</section><!-- /.Section -->

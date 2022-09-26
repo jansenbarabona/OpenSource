@@ -1,0 +1,334 @@
+﻿@using VehicleRegistration.Tools@{ViewBag.Title = "Home Page";}<!DOCTYPE html>
+
+
+<html lang="en">
+<head>
+    <title>Databridge Online Registration System</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DataBridge Asia Inc.">
+    <meta name="author" content="DataBridge Asia Inc.">
+    <link rel="shortcut icon" href="~/favicon.ico">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+    <!-- FontAwesome JS-->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/js/all.min.js"></script>
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css">
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="~/scripts/Front-Index-Theme/css/index-theme.min.css">
+</head>
+<body>
+    <header class="header fixed-top">
+        <div class="branding">
+            <div class="container-fluid position-relative">
+                <nav class="navbar navbar-expand-lg">
+                    <div class="site-logo">
+                        <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                            <img class="logo-icon mr-2" style="width: 40px; height: 40px;" src="~/scripts/Home_temp/img/homepage_Logo.png" alt="logo">@*<span class="logo-text">DataBridge<span class="text-alt">*@ <small style="color:#3E4450;">Databridge</small>@*</span></span>*@
+                        </a>
+                    </div>
+                    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                        <span> </span>
+                        <span> </span>
+                        <span> </span>
+                    </button>
+                    <div class="collapse navbar-collapse py-3 py-lg-0" id="navigation">
+                        @*<ul class="social-list list-inline mt-3 mt-lg-0 mb-lg-0 d-none d-xl-flex ml-lg-3 mr-lg-3">
+                            <li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fab fa-slack fa-fw"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fab fa-product-hunt fa-fw"></i></a></li>
+                        </ul>*@
+                        <!--//social-list-->
+                        <ul class="navbar-nav ml-lg-auto">
+                            <li class="nav-item mr-lg-4">
+                                <a class="nav-link" href="@Url.Action("Index","Home")">Home</a>
+                            </li>
+                            <li class="nav-item mr-lg-4 active">
+                                <a class="nav-link" href="@Url.Action("Pricing","Home")">Pricing</a>
+                            </li>
+                            <li class="nav-item mr-lg-4">
+                                <a class="nav-link" href="docs-page.html">Documentation</a>
+                            </li>
+                            <li class="nav-item mr-lg-4">
+                                <a class="nav-link" href="@Url.Action("About","Home")">About</a>
+                            </li>
+                            <li class="nav-item mr-lg-4">
+                                <a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a>
+                            </li>
+                            <li class="nav-item mr-lg-4">
+                            <li id="login"> @{String LoginDesc = "Login"; if (CurrentUser.Details != null) { LoginDesc = "Dashboard"; }@Html.ActionLink(LoginDesc, "Login", "User", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "btn btn-primary text-whit" })}</li>
+
+                                @*<a class="nav-link" href="login.html">Login</a>
+                            </li>*@
+                            @*<li class="nav-item mr-lg-0 mt-3 mt-lg-0">
+                                <a class="btn btn-primary text-white" href="signup.html">Sign up</a>
+                            </li>*@
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <!--//container-->
+        </div>
+        <!--//branding-->
+    </header>
+    <!--//header-->
+
+    <div class="page-header py-5 text-center position-relative">
+       
+        <div class="container">
+            <h1 class="page-heading single-col-max mx-auto">Load your Wallet!</h1>
+            <div class="page-intro single-col-max mx-auto">this is sample Pricing page only 30 day FREE trial with all plans.</div>
+        </div>
+    </div>
+    <!--//page-header-->
+    <div class="page-content py-5">
+        <section class="plans-section mb-5 pb-5">
+            <div class="container">
+                <div class="plan-switch text-center mb-4" id="plan-switch">
+                    <ul class="radio-switch mx-auto shadow-sm">
+                        <li class="radio-switch-item">
+                            <input type="radio" class="radio-switch-input sr-only" id="radio1" name="radioSwitch" data-plan-cost="plan-cost-monthly" checked>
+                            <label for="radio1" class="radio-switch-label">Monthly</label>
+                        </li>
+                        <li class="radio-switch-item">
+                            <input type="radio" class="radio-switch-input sr-only" id="radio2" data-plan-cost="plan-cost-yearly" name="radioSwitch">
+                            <label for="radio2" class="radio-switch-label">Yearly</label>
+                            <div aria-hidden="true" class="radio-switch-marker"></div>
+                        </li>
+                    </ul>
+                    <!--//radio-switch-->
+                    <div class="mb-5 plan-switch-intro">Switch to yearly plans and save!</div>
+                </div>
+                <div class="plan-items row justify-content-center" id="plan-items">
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="item shadow rounded">
+                            <div class="plan-header text-center">
+                                <h3 class="plan-title">Personal</h3>
+                                <div class="plan-cost">
+                                    <div class="plan-cost-monthly">
+                                        <span class="currency">₱</span>
+                                        <span class="number">0</span>
+                                        <span class="unit">/month</span>
+                                    </div>
+                                    <div class="plan-cost-yearly" style="display: none">
+                                        <span class="currency">₱</span>
+                                        <span class="number">0</span>
+                                        <span class="unit">/year</span>
+                                    </div>
+                                </div>
+                                <!--//plan-cost-->
+                                <div class="plan-cta">
+                                    <a class="btn-primary btn" href="#">Get Started</a>
+                                </div>
+                            </div>
+                            <!--//plan-header-->
+                            <div class="plan-content">
+                                <div class="plan-intro">Extra plan info goes here lorem ipsum dolor sit amet.</div>
+                                <ul class="plan-desc list-unstyled">
+                                    <li>Feature Lorem<a tabindex="0" class="theme-icon-holder info-popover-trigger" data-toggle="popover" data-content="You can use popover to give more info about the feature." data-trigger="hover"><i class="fas fa-info"></i></a></li>
+                                    <li>Feature tempus</li>
+                                    <li>Feature ipsum</li>
+                                </ul>
+                            </div>
+                            <!--//plan-content-->
+                        </div>
+                        <!--//item-->
+                    </div>
+                    <!--//col-->
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="item shadow rounded">
+                            <div class="plan-header text-center">
+                                <h3 class="plan-title">Pro</h3>
+                                <div class="plan-cost">
+                                    <div class="plan-cost-monthly">
+                                        <span class="currency">₱</span>
+                                        <span class="number">9</span>
+                                        <span class="unit">/month</span>
+                                    </div>
+                                    <div class="plan-cost-yearly" style="display:none">
+                                        <span class="currency">₱</span>
+                                        <span class="number">99</span>
+                                        <span class="unit">/year</span>
+                                    </div>
+                                </div>
+                                <!--//plan-cost-->
+                                <div class="plan-cta">
+                                    <a class="btn-primary btn" href="#">Get Started</a>
+                                </div>
+                            </div>
+                            <!--//plan-header-->
+                            <div class="plan-content">
+                                <div class="plan-intro">Extra plan info goes here lorem ipsum dolor sit amet.</div>
+                                <ul class="plan-desc list-unstyled">
+                                    <li>Feature Lorem <a tabindex="0" class="theme-icon-holder info-popover-trigger" data-toggle="popover" data-content="You can use popover to give more info about the feature." data-trigger="hover"><i class="fas fa-info"></i></a></li>
+                                    <li>Feature tempus <a tabindex="0" class="theme-icon-holder info-popover-trigger" data-toggle="popover" data-content="You can use popover to give more info about the feature." data-trigger="hover"><i class="fas fa-info"></i></a></li>
+                                    <li>Feature consectetur<a tabindex="0" class="theme-icon-holder info-popover-trigger" data-toggle="popover" data-content="You can use popover to give more info about the feature." data-trigger="hover"><i class="fas fa-info"></i></a></li>
+                                    <li>Feature nulla nunc<a tabindex="0" class="theme-icon-holder info-popover-trigger" data-toggle="popover" data-content="You can use popover to give more info about the feature." data-trigger="hover"><i class="fas fa-info"></i></a></li>
+                                    <li>Feature vitae leo<a tabindex="0" class="theme-icon-holder info-popover-trigger" data-toggle="popover" data-content="You can use popover to give more info about the feature." data-trigger="hover"><i class="fas fa-info"></i></a></li>
+                                </ul>
+                            </div>
+                            <!--//plan-content-->
+                        </div>
+                        <!--//item-->
+                    </div>
+                    <!--//col-->
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="item shadow rounded">
+                            <div class="plan-header text-center">
+                                <h3 class="plan-title">Team</h3>
+                                <div class="plan-cost">
+                                    <div class="plan-cost-monthly">
+                                        <span class="currency">₱</span>
+                                        <span class="number">99</span>
+                                        <span class="unit">/month</span>
+                                    </div>
+                                    <div class="plan-cost-yearly" style="display:none">
+                                        <span class="currency">₱</span>
+                                        <span class="number">800</span>
+                                        <span class="unit">/year</span>
+                                    </div>
+                                </div>
+                                <!--//plan-cost-->
+                                <div class="plan-cta">
+                                    <a class="btn-primary btn" href="#">Get Started</a>
+                                </div>
+                            </div>
+                            <!--//plan-header-->
+                            <div class="plan-content">
+                                <div class="plan-intro">Extra plan info goes here lorem ipsum dolor sit amet.</div>
+                                <ul class="plan-desc list-unstyled">
+                                    <li>Feature Lorem <a tabindex="0" class="theme-icon-holder info-popover-trigger" data-toggle="popover" data-content="You can use popover to give more info about the feature." data-trigger="hover"><i class="fas fa-info"></i></a></li>
+                                    <li>Feature tempus<a tabindex="0" class="theme-icon-holder info-popover-trigger" data-toggle="popover" data-content="You can use popover to give more info about the feature." data-trigger="hover"><i class="fas fa-info"></i></a></li>
+                                    <li>Feature Ipsum<a tabindex="0" class="theme-icon-holder info-popover-trigger" data-toggle="popover" data-content="You can use popover to give more info about the feature." data-trigger="hover"><i class="fas fa-info"></i></a></li>
+                                    <li>Feature consectetur<a tabindex="0" class="theme-icon-holder info-popover-trigger" data-toggle="popover" data-content="You can use popover to give more info about the feature." data-trigger="hover"><i class="fas fa-info"></i></a></li>
+                                    <li>Feature nulla nunc<a tabindex="0" class="theme-icon-holder info-popover-trigger" data-toggle="popover" data-content="You can use popover to give more info about the feature." data-trigger="hover"><i class="fas fa-info"></i></a></li>
+                                    <li>Feature vitae leo<a tabindex="0" class="theme-icon-holder info-popover-trigger" data-toggle="popover" data-content="You can use popover to give more info about the feature." data-trigger="hover"><i class="fas fa-info"></i></a></li>
+                                    <li>Feature sit amet<a tabindex="0" class="theme-icon-holder info-popover-trigger" data-toggle="popover" data-content="You can use popover to give more info about the feature." data-trigger="hover"><i class="fas fa-info"></i></a></li>
+                                </ul>
+                            </div>
+                            <!--//plan-content-->
+                        </div>
+                        <!--//item-->
+                    </div>
+                    <!--//col-->
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="item shadow rounded">
+                            <div class="plan-header text-center">
+                                <h3 class="plan-title">Enterprise</h3>
+                                <div class="plan-cost">
+                                    <span class="number"><i class="far fa-building"></i></span>
+                                </div>
+                                <!--//plan-cost-->
+                                <div class="plan-cta">
+                                    <a class="btn-primary btn" href="#">Contact Us</a>
+                                </div>
+                            </div>
+                            <!--//plan-header-->
+                            <div class="plan-content">
+                                <div class="plan-intro">Extra plan info goes here lorem ipsum dolor sit amet.</div>
+                                <ul class="plan-desc list-unstyled">
+                                    <li>Feature Lorem <a tabindex="0" class="theme-icon-holder info-popover-trigger" data-toggle="popover" data-content="You can use popover to give more info about the feature." data-trigger="hover"><i class="fas fa-info"></i></a></li>
+                                    <li>Feature tempus<a tabindex="0" class="theme-icon-holder info-popover-trigger" data-toggle="popover" data-content="You can use popover to give more info about the feature." data-trigger="hover"><i class="fas fa-info"></i></a></li>
+                                    <li>Feature Ipsum<a tabindex="0" class="theme-icon-holder info-popover-trigger" data-toggle="popover" data-content="You can use popover to give more info about the feature." data-trigger="hover"><i class="fas fa-info"></i></a></li>
+                                    <li>Feature consectetur<a tabindex="0" class="theme-icon-holder info-popover-trigger" data-toggle="popover" data-content="You can use popover to give more info about the feature." data-trigger="hover"><i class="fas fa-info"></i></a></li>
+                                    <li>Feature nulla nunc<a tabindex="0" class="theme-icon-holder info-popover-trigger" data-toggle="popover" data-content="You can use popover to give more info about the feature." data-trigger="hover"><i class="fas fa-info"></i></a></li>
+                                    <li>Feature vitae leo<a tabindex="0" class="theme-icon-holder info-popover-trigger" data-toggle="popover" data-content="You can use popover to give more info about the feature." data-trigger="hover"><i class="fas fa-info"></i></a></li>
+                                    <li>Feature sit amet<a tabindex="0" class="theme-icon-holder info-popover-trigger" data-toggle="popover" data-content="You can use popover to give more info about the feature." data-trigger="hover"><i class="fas fa-info"></i></a></li>
+                                    <li>Feature adipiscing<a tabindex="0" class="theme-icon-holder info-popover-trigger" data-toggle="popover" data-content="You can use popover to give more info about the feature." data-trigger="hover"><i class="fas fa-info"></i></a></li>
+                                    <li>Feature aptent taciti sociosqu<a tabindex="0" class="theme-icon-holder info-popover-trigger" data-toggle="popover" data-content="You can use popover to give more info about the feature." data-trigger="hover"><i class="fas fa-info"></i></a></li>
+                                </ul>
+                            </div>
+                            <!--//plan-content-->
+                        </div>
+                        <!--//item-->
+                    </div>
+                    <!--//col-->
+                </div>
+                <!--//row-->
+            </div>
+            <!--//container-fluid-->
+        </section>
+        <!--//plans-section-->
+    </div>
+    <!--//page-content-->
+    <section class="cta-section text-center py-5 position-relative">
+        <div class="theme-bg-shapes-right"></div>
+        <div class="theme-bg-shapes-left"></div>
+        <div class="container">
+            <h3 class="mb-2 mb-3">Get Started in No Time</h3>
+            <div class="section-intro mb-3 single-col-max mx-auto">DataBridge Asia Inc. makes it super easy to get your software project online, so you can start promoting or selling your digital product to your audience.</div>
+            <div class="pt-3 text-center">
+                <a class="btn btn-secondary mb-3" href="@Url.Action("Pricing","Home")">Get Started<i class="fas fa-arrow-alt-circle-right ml-2"></i></a>
+            </div>
+        </div>
+    </section>
+    <!--//cta-section-->
+    <div class="container">
+        <hr>
+    </div>
+    <footer class="footer">
+        @*<div class="container py-5 mb-3">
+            <div class="row">
+                <div class="footer-col col-lg-2">
+                </div>
+                <!--//footer-col-->
+                <div class="footer-col col">
+                    <h4 class="col-heading">Developers</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">APIs</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                <!--//footer-col-->
+                <div class="footer-col col">
+                    <h4 class="col-heading">Resources</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="docs-page.html#section-1">Docs</a></li>
+                        <li><a href="#">Freebies</a></li>
+                        <li><a href="docs-page.html#item-1-4">Affliates</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                <!--//footer-col-->
+                <div class="footer-col col">
+                    <h4 class="col-heading">DataBridge</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="docs-page.html#item-1-1">About Us</a></li>
+                        <li><a href="docs-page.html#item-1-4">Contact Us</a></li>
+                        <li><a href="">Privacy</a></li>
+                        <li><a href="">Terms of Services</a></li>
+                    </ul>
+                </div>
+                <!--//footer-col-->
+            </div>
+            <!--//row-->
+        </div>*@
+        <!--//container-->
+        @*<div class="container">
+            <hr>
+        </div>*@
+        <!--//newsletter-section-->
+        @*<div class="footer-bottom text-center pb-5">
+            <ul class="social-list list-unstyled pt-4 mb-0">
+                <li class="list-inline-item"><a href="#"><i class="fab fa-facebook fa-fw"></i></a></li>
+                <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+                <li class="list-inline-item"><a href="#"><i class="fab fa-instagram fa-fw"></i></a></li>
+            </ul>
+            
+        </div>*@<!--//social-list-->
+    </footer>
+    <!-- Javascript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="~/scripts/Front-Index-Theme/js/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- Page Specific JS -->
+    <script src="~/scripts/Front-Index-Theme/js/pricing.min.js"></script>
+
+</body>
+</html>

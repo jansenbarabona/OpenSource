@@ -1,0 +1,130 @@
+﻿@using VehicleRegistration.Tools
+@using VehicleRegistration.Models
+@model VRReportModel
+
+@{
+    ViewBag.Title = "Vehicle Registration Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div align="right">
+    @Html.ActionLink("Export to Excel...", "ExportToExcel", new { DateFrom = ViewBag.DateFrom, DateTo = ViewBag.DateTo, DealerBranchID = ViewBag.DealerBranchID })
+</div>
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="nav-icon fas fa-file-signature"></i> Vehicle Registration Report  <small> </small></h6>
+                </div>
+
+                @using (Html.BeginForm("VehicleRegistrationReport", "Dealer", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="card-body">
+                        <div class="check btn-info" id="btn_report" type="button" name="btnSubmit" data-toggle="tooltip" title="Download Report"
+                             @*data-toggle="modal" data-target=".bd-example-modal-xl"*@><i class="fas fa-car"></i></div>
+
+                        <div class="row">
+                            @if (CurrentUser.Details.UserEntityID == (int)UserEntityEnum.DataBridgeAsia)
+                            {
+                                <div class="form-group col-lg-4">
+                                    @Html.LabelFor(m => m.SelectedDealerID)
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fas fa-truck-pickup"></i> </span>
+                                        </div>
+                                        @Html.DropDownListFor(m => m.SelectedDealerID,
+                                     new SelectList(Model.DealerList, "DealerID", "DealerName"), "Select Dealer", new { @class = "form-control select2" })
+                                    </div>
+                                    @Html.ValidationMessageFor(m => m.SelectedDealerID, "", new { @class = "" })
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    @Html.LabelFor(m => m.SelectedDealerBranchID)
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fas fa-truck-pickup"></i> </span>
+                                        </div>
+                                        @Html.DropDownListFor(m => m.DealerBranchID,
+                                     new SelectList(Model.DealerBranchList, "DealerBranchID", "DealerBranchName"), "Select Branch", new { @class = "form-control select2" })
+                                    </div>
+                                    @Html.ValidationMessageFor(m => m.SelectedDealerBranchID, "", new { @class = "" })
+                                </div>
+                            }
+                            </div>
+                        <div class="row">
+                            <div class="form-group col-lg-4">
+                                @Html.LabelFor(m => m.DateFrom)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-car"></i> </span>
+                                    </div>
+                                    @Html.EditorFor(m => m.DateFrom, new { htmlAttributes = new { @class = "form-control", placeholder = "Date Submitted From", @type = "date" } })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.DateFrom, "", new { @class = "" })
+                            </div>
+                            <div class="form-group col-lg-4">
+                                @Html.LabelFor(m => m.DateTo)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-car"></i> </span>
+                                    </div>
+                                    @Html.EditorFor(m => m.DateTo, new { htmlAttributes = new { @class = "form-control", placeholder = "Date Submitted To", @type = "date" } })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.DateTo, "", new { @class = "" })
+                            </div> 
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                }
+               
+            </div>
+            <!-- /.card -->
+            <iframe id="report_viewer" frameborder="0"
+                    scrolling="no" seamless="seamless" marginheight="0" marginwidth="0" role="document" style="width: 100%; margin: 0%; height: 720px;" aria-label="PDF document" title="PDF document"></iframe>
+        </div>
+    </div>
+    <!-- /.col -->
+
+</section>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        @if (ViewBag.Path != null)
+        {
+            <text>$('#report_viewer').attr('src', '@Url.Content("~/Reports/VRTempFiles/"+ ViewBag.Path)');</text>
+
+        }
+
+
+    });
+
+    $("#btn_report").on("click", function () {
+        if (jQuery("form").valid()) {
+            $("form").submit();
+        }
+    });
+
+    $("#SelectedDealerID").on('change', function () {
+         $.ajax({
+            url: '@Url.Action("GetBranch", "Dealer")',
+            type: "GET",
+            dataType: "JSON",
+            cache: false,
+             data: { "DealerCode": this.value },
+            success: function (response) {
+                $("#DealerBranchID").find("option:gt(0)").remove();
+                $.each(response, function (index, value) {
+                    var o = new Option(value.DealerBranchName, value.DealerBranchID);
+                    $("#DealerBranchID").append($(o));
+                });
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+    })
+
+</script>

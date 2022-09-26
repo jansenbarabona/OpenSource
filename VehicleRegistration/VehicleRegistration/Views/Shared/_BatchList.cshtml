@@ -1,0 +1,77 @@
+﻿@using VehicleRegistration.Models
+@model List<LTOBatchHeader>
+
+    <table id="tbl_list" class="table table-bordered table-striped table-hover" style="width:100%; table-layout:auto;">
+        <thead>
+            <tr>
+                @if (ViewBag.EntityType == "MAI")
+                {
+                    <th style="width:15%">MAI Name</th>
+                }
+                else if (ViewBag.EntityType == "Databridge")
+                {
+
+                }
+                else
+                {
+                    <th style="width:15%">Dealer Name</th>
+                    if (ViewBag.IsMain == true && ViewBag.IsAdmin == true)
+                    {
+                        <th style="width:15%">Dealer Branch Name</th>
+                    }
+                }
+                <th style="width:15%">Batch Number</th>
+                <th style="width:25%">Description</th>
+                <th style="width:15%">Date & Time</th>
+                <th style="width:5%">Count</th>
+                <th style="width:25%">Remarks</th>
+            </tr>
+        </thead>
+        <tbody id="Header_vehiclelist_tbody">
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+            <tr style="cursor: pointer">
+                @Html.HiddenFor(o => Model[i].BatchID)
+                @if (ViewBag.EntityType != "Databridge")
+                {
+                    <td style="width:15%">
+                        @Html.DisplayFor(o => Model[i].EntityName)
+                    </td>
+                    if (ViewBag.IsMain == true && ViewBag.IsAdmin == true)
+                    {
+                        <th style="width:15%">
+                            @Html.DisplayFor(o => Model[i].SubEntityName)
+                        </th>
+                    }
+                }
+                <td style="width:15%" class="col_batchreference">
+                    @Html.DisplayFor(o => Model[i].ReferenceNo)
+                </td>
+                <td style="width:25%">
+                    @Html.DisplayFor(o => Model[i].BatchDescription)
+                </td>
+                <td style="width:15%">
+                    @Html.DisplayFor(o => Model[i].DateSubmitted)
+                </td>
+                <td style="width:5%">
+                    @Html.DisplayFor(o => Model[i].BatchCount)
+                </td>
+                @if (ViewBag.DIYRejected == true)
+                {
+                    <th style="width:25%">
+                        <label id="Remarks" hidden>@Html.DisplayFor(o => Model[i].Remarks)</label>
+                        <center>
+                            <button type="button" id="message_btn" class="btn btn-success" style="padding:2.5px">Open</button>
+                        </center>
+                    </th>
+                }
+                else
+                {
+                    <td style="width:25%">
+                        @Html.DisplayFor(o => Model[i].Remarks)
+                    </td>
+                }
+            </tr>
+            }
+        </tbody>
+    </table>

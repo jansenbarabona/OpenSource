@@ -1,0 +1,146 @@
+﻿@using VehicleRegistration.Models
+@model LTOSubmittedBatch
+<style>
+    #batch_filter_adjust {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        margin-left: 7.5px;
+    }
+
+    /*nav.main-header.navbar.navbar-expand-md.navbar-primary.navbar-dark {
+        background: #7B0303;
+    }*/
+</style>
+
+@{
+    ViewBag.Title = "LTO Submitted Batch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("ForLTO_Submitted", "VehicleInfo", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6><i class="nav-icon fas fa-file-signature"></i>Submitted to LTO - Batch List  <small> </small></h6>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row" style="margin-top:5px">
+                            <div class="col">
+                                <div id="getBatchList">
+
+                                    @{
+                                        Html.RenderPartial("_BatchList", Model.BatchList);
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header row">
+                        <h6 class="col-6"><i class="nav-icon fas fa-file-signature"></i> Vehicle List  <small> </small></h6>
+                        <div class="col-6">
+                            <h6>
+                                Batch Reference: <label id="lbl_batchreference"></label>
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="VehicleListTable">
+                            @{
+                                Html.RenderPartial("_BatchDetails", Model.VehicleList, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "VehicleList" } });
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+                                }
+<script>
+    var addAntiForgeryToken = function (data) {
+        data.__RequestVerificationToken = $("[name='__RequestVerificationToken']").val();
+        return data;
+    };
+
+    $("#SelectedDealerID").on("change", function () {
+        $('#spinnerDiv').show();
+        $('#tbl_VehicleList').find('tbody').empty();
+        $.ajax({
+            url: '@Url.Action("GetBatchList", "LTO")',
+            type: "POST",
+            data: addAntiForgeryToken({ "DealerID": $("#SelectedDealerID").val() }),
+            cache: false,
+            async: true,
+            success: function (response) {
+                $("#getBatchList").html(response);
+
+                $("#tbl_list").DataTable({
+                    "scrollX": true,
+                    "scrollY": true,
+                    "info": false,
+                    "lengthChange": false,
+                    "order": [],
+                    "dom":
+                        "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                });
+                $('#spinnerDiv').hide();
+
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+                $('#spinnerDiv').hide();
+            }
+        });
+    });
+
+    $('#Header_vehiclelist_tbody tr').click(function (event) {
+        $('#spinnerDiv').show();
+        $("#lbl_batchreference").text($(this).find('td.col_batchreference').text().trim());
+        $.ajax({
+            url: '@Url.Action("GetVehicleList", "LTO")',
+            type: "POST",
+            data: addAntiForgeryToken({ "BatchID": $(this).find('input[type=hidden]').val() }),
+            cache: false,
+            async: true,
+            success: function (response) {
+                $("#VehicleListTable").html(response);
+
+                $("#tbl_VehicleList").DataTable({
+                    "scrollX": true,
+                    "scrollY": true,
+                    "info": false,
+                    "lengthChange": false,
+                    "order": [],
+                    "dom":
+                        "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                });
+                $('#spinnerDiv').hide();
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+                $('#spinnerDiv').hide();
+            }
+        });
+    });
+</script>

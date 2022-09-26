@@ -1,0 +1,65 @@
+﻿@using VehicleRegistration.Models
+@model CompanyListReportModel
+
+@{
+    ViewBag.Title = "Company List Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="nav-icon fas fa-file-signature"></i> Company List  <small> </small></h6>
+                </div>
+
+                @using (Html.BeginForm("CompanyListReport", "Reports", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="card-body">
+                        <div class="check btn-info" id="btn_report" type="button" name="btnSubmit" data-toggle="tooltip" title="Download Report"><i class="fas fa-car"></i></div>
+                        <div class="row">
+                            <div class="form-group col-lg-4">
+                                @Html.LabelFor(m => m.SelectedEntityID)
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-truck-pickup"></i> </span>
+                                    </div>
+                                    @Html.DropDownListFor(m => m.SelectedEntityID,
+               new SelectList(Model.EntityList, "EntityID", "EntityName"), "Select Entity", new { @class = "form-control select2" })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.SelectedEntityID, "", new { @class = "" })
+                            </div> <!-- Entity form-group// -->
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                }
+            </div>
+            <!-- /.card -->
+            <iframe id="report_viewer" frameborder="0"
+                    scrolling="no" seamless="seamless" marginheight="0" marginwidth="0" role="document" style="width: 100%; margin: 0%; height: 720px;" aria-label="PDF document" title="PDF document"></iframe>
+        </div>
+    </div>
+    <!-- /.col -->
+
+</section>
+
+
+<script>
+
+    $(document).ready(function () {
+        @if (ViewBag.Path != null)
+        {
+            <text>$('#report_viewer').attr('src', '@Url.Content("~/Reports/VRTempFiles/"+ ViewBag.Path)');</text>
+
+        }
+    });
+
+    $("#btn_report").on("click", function () {
+        if (jQuery("form").valid()) {
+            $("form").submit();
+        }
+    });
+
+</script>

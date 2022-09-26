@@ -1,0 +1,302 @@
+﻿@using VehicleRegistration.Models
+@model LTOSubmittedBatch
+<style>
+    #batch_filter_adjust {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        margin-left: 7.5px;
+    }
+
+  
+</style>
+
+@{
+    ViewBag.Title = "Rejected Batch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("ForLTO_Rejected", "VehicleInfo", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <section class="content">
+
+        <div class="add-button" type="button" name="btnSubmit">
+            <div >
+                <div class="sub-button bl" id="btn_reprocess" data-toggle="tooltip" title="Reprocess Batch"><i class="fas fa-recycle"></i></div>
+            </div>
+            <div >
+                <div class="sub-button tl" id="btn_cancel" data-toggle="tooltip" title="Cancel Batch"><i class="fas fa-trash-alt"></i></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6><i class="nav-icon fas fa-file-signature"></i>Rejected Batch List  <small> </small></h6>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row" style="margin-top:5px">
+                            <div class="col">
+                                <div id="getBatchList">
+
+                                    @{
+                                        Html.RenderPartial("_BatchList", Model.BatchList);
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header row">
+                        <h6 class="col-6"><i class="nav-icon fas fa-file-signature"></i> Vehicle List  <small> </small></h6>
+                        <div class="col-6">
+                            <h6>
+                                Batch Reference: <label id="lbl_batchreference"></label>
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="VehicleListTable">
+                            @{
+                                Html.RenderPartial("_BatchDetails", Model.VehicleList, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "VehicleList" } });
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @Html.HiddenFor(m => m.SelectedBatchReferenceNo)
+        @Html.HiddenFor(m => m.SelectedBatchID)
+    </section>
+
+    <div class="modal fade" id="modal-cancel">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><label id="lblModalTitle">Are you sure you want to cancel?</label></h4>
+                </div>
+                <div id="modal-body-final-assess" class="modal-body">
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <h5>
+                                Reference: <label class="lbl_ref"></label>
+                            </h5>
+                        </div>
+                        <div class="form-group col-6">
+                            <h5>
+                                Description: <label class="lbl_desc"></label>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <h5>
+                                Date & Time: <label class="lbl_date"></label>
+                            </h5>
+                        </div>
+                        <div class="form-group col-6">
+                            <h5>
+                                Count: <label class="lbl_count"></label>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-12">
+                            @Html.LabelFor(m => m.CancelledRemarks)
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fas fa-sticky-note"></i> </span>
+                                </div>
+                                @Html.TextBoxFor(m => m.CancelledRemarks,
+               new
+               {
+                   placeholder = "Remarks",
+                   @class = "form-control"
+               })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.CancelledRemarks, "", new { @class = "" })
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    <button type="submit" name="submit" value="Cancel" class="btn btn-primary">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-reprocess">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><label id="lblModalTitle">Are you sure you want to re-process?</label></h4>
+                </div>
+                <div id="modal-body-final-assess" class="modal-body">
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <h5>
+                                Reference: <label class="lbl_ref"></label>
+                            </h5>
+                        </div>
+                        <div class="form-group col-6">
+                            <h5>
+                                Description: <label class="lbl_desc"></label>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <h5>
+                                Date & Time: <label class="lbl_date"></label>
+                            </h5>
+                        </div>
+                        <div class="form-group col-6">
+                            <h5>
+                                Count: <label class="lbl_count"></label>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-12">
+                            @Html.LabelFor(m => m.ReprocessRemarks)
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fas fa-sticky-note"></i> </span>
+                                </div>
+                                @Html.TextBoxFor(m => m.ReprocessRemarks,
+               new
+               {
+                   placeholder = "Remarks",
+                   @class = "form-control"
+               })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.ReprocessRemarks, "", new { @class = "" })
+                        </div>
+                    </div>
+                    @*<div class="row">
+                            <div class="col-6"></div>
+                            <div class="form-group col-6">
+                                <h5>
+                                    Sum: <label class="lbl_sum"></label>
+                                </h5>
+                            </div>
+                        </div>*@
+                    @*<div id="VehicleListTable">
+                            @{
+                                Html.RenderPartial("_BatchDetails", Model.VehicleList);
+                            }
+                        </div>*@
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    <button type="submit" name="submit" value="Reprocess" class="btn btn-primary">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+                                }
+<script>
+    var addAntiForgeryToken = function (data) {
+        data.__RequestVerificationToken = $("[name='__RequestVerificationToken']").val();
+        return data;
+    };
+
+    $("#SelectedDealerID").on("change", function () {
+        $('#spinnerDiv').show();
+        $('#tbl_VehicleList').find('tbody').empty();
+        $.ajax({
+            url: '@Url.Action("GetBatchList", "LTO")',
+            type: "POST",
+            data: addAntiForgeryToken({ "DealerID": $("#SelectedDealerID").val() }),
+            cache: false,
+            async: true,
+            success: function (response) {
+                $("#getBatchList").html(response);
+
+                $("#tbl_list").DataTable({
+                    "scrollX": true,
+                    "scrollY": true,
+                    "info": false,
+                    "lengthChange": false,
+                    "order": [],
+                    "dom":
+                        "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                });
+                $('#spinnerDiv').hide();
+
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+                $('#spinnerDiv').hide();
+            }
+        });
+    });
+
+    $('#Header_vehiclelist_tbody tr').click(function (event) {
+        $('#spinnerDiv').show();
+        $("#lbl_batchreference").text($(this).find('td.col_batchreference').text().trim());
+        $("#SelectedBatchID").val($(this).find('input[type=hidden]').val());
+        $("#SelectedBatchReferenceNo").val($(this).find('td.col_batchreference').text().trim());
+        $(".lbl_ref").text($(this).find("td:eq(1)").text());
+        $(".lbl_desc").text($(this).find("td:eq(2)").text());
+        $(".lbl_date").text($(this).find("td:eq(3)").text());
+        $(".lbl_count").text($(this).find("td:eq(4)").text());
+        $.ajax({
+            url: '@Url.Action("GetRejectedVehicleList", "LTO")',
+            type: "POST",
+            data: addAntiForgeryToken({ "BatchID": $(this).find('input[type=hidden]').val() }),
+            cache: false,
+            async: true,
+            success: function (response) {
+                $("#VehicleListTable").html(response);
+
+                $("#tbl_VehicleList").DataTable({
+                    "scrollX": true,
+                    "scrollY": true,
+                    "info": false,
+                    "lengthChange": false,
+                    "order": [],
+                    "dom":
+                        "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                });
+                $('#spinnerDiv').hide();
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+                $('#spinnerDiv').hide();
+            }
+        });
+    });
+
+    $("#btn_reprocess").on('click', function () {
+        if ($("#SelectedBatchID").val() != 0 && $("#SelectedBatchReferenceNo").val() != "")
+            $("#modal-reprocess").modal("show")
+        else
+            toastr.warning("Please click one batch to Re-Process");
+    });
+    $("#btn_cancel").on('click', function () {
+        if ($("#SelectedBatchID").val() != 0 && $("#SelectedBatchReferenceNo").val() != "")
+            $("#modal-cancel").modal("show")
+        else
+            toastr.warning("Please click one batch to cancel");
+    });
+</script>

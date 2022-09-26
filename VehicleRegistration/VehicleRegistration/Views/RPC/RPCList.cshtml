@@ -1,0 +1,141 @@
+﻿@using VehicleRegistration.Models
+@model  RPCModel
+@{
+    ViewBag.Title = "Region, Province & City";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="nav-icon fas fa-shipping-fast"></i> Region, Province & City List<small></small></h6>
+                </div>
+                <div class="fab" type="button" name="btnSubmit" data-toggle="tooltip" title="Create New" onclick="location.href='@Url.Action("RPC", "RPC", new { Edit = false,RPCtype = Model.RPCtype })'"> + </div>
+                <!-- RPC -->
+                <div class="card-body">
+                    <table id="rpc_list_tbl" class="table-rpc table table-bordered table-striped table-hover" style="max-width:100%; width:100%;">
+                        <thead>
+                            <tr>
+                                <th style="width:75px;">Code</th>
+                                @if (!(Model.RPCtype == "Barangay"))
+                                {
+                                    <th style="width:250px;">Number</th>
+                                }
+                                <th style="width:250px;">Name</th>
+                                <th style="width:100px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @switch (Model.RPCtype)
+                            {
+                                case "Region":
+                                    foreach (var item in Model.RegionList)
+                                    {
+                                        <tr>
+                                            <td style="max-width:75px; " id="region_code">@item.RegionID</td>
+                                            <td style="max-width:250px; " id="region_number">@item.RegionNumber</td>
+                                            <td style="max-width:250px; " id="region_name">@item.RegionName</td>
+                                            <td style="max-width:100px; padding-left:5px; padding-right:5px; margin:auto;" align="center">
+                                                <div class="row justify-content-center">
+                                                    <a href="@Url.Action("RPC", new { Edit = true,RPCtype = Model.RPCtype, RPCCode = item.RegionID })" class="btn btn-warning btn-sm">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                    break;
+                                case "Province":
+                                    foreach (var item in Model.ProvinceList)
+                                    {
+                                        <tr>
+                                            <td style="max-width:75px; " id="province_code">@item.ProvinceID</td>
+                                            <td style="max-width:250px; " id="province_number">@item.ProvinceNumber</td>
+                                            <td style="max-width:250px; " id="province_name">@item.ProvinceName</td>
+                                            <td style="max-width:100px; padding-left:5px; padding-right:5px; margin:auto;" align="center">
+                                                <div class="row justify-content-center">
+                                                    <a href="@Url.Action("RPC", new { Edit = true,RPCtype = Model.RPCtype, RPCCode = item.ProvinceID })" class="btn btn-warning btn-sm">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                    break;
+                                case "City":
+                                    foreach (var item in Model.CityList)
+                                    {
+                                        <tr>
+                                            <td style="max-width:75px; " id="city_code">@item.CityID</td>
+                                            <td style="max-width:250px; " id="city_name">@item.CityNumber</td>
+                                            <td style="max-width:250px; " id="city_name">@item.CityName</td>
+                                            <td style="max-width:100px; padding-left:5px; padding-right:5px; margin:auto;" align="center">
+                                                <div class="row justify-content-center">
+                                                    <a href="@Url.Action("RPC", new { Edit = true,RPCtype = Model.RPCtype, RPCCode = item.CityID })" class="btn btn-warning btn-sm">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                    break;
+                                case "Barangay":
+                                    foreach (var item in Model.BarangayList)
+                                    {
+                                        <tr>
+                                            <td style="max-width:75px; " id="barangay_code">@item.BarangayID</td>
+                                            <td style="max-width:250px; " id="barangay_name">@item.BarangayName</td>
+                                            <td style="max-width:100px; padding-left:5px; padding-right:5px; margin:auto;" align="center">
+                                                <div class="row justify-content-center">
+                                                    <a href="@Url.Action("RPC", new { Edit = true,RPCtype = Model.RPCtype, RPCCode = item.BarangayID })" class="btn btn-warning btn-sm">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                    break;
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /RPC -->
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+<script>
+    $(document).ready(function () {
+        $(".has-treeview").toggleClass("menu-open");
+        $("#left_nav_ul_rpc").css("display", "block");
+        ///// automatic open navbar after login ///////
+        $("#left_nav_dbinc").toggleClass("menu-open");
+        $("#left_nav_admin_insurance").toggleClass("menu-open");
+        $("#left_nav_dlr").toggleClass("menu-open");
+        $("#left_nav_mai").toggleClass("menu-open");
+        ///// end automatic open navbar after login ///////
+        @switch (Model.RPCtype)
+        {
+            case "Region":
+                <text>$("#region_list").toggleClass("active");</text>
+                break;
+            case "Province":
+                <text>$("#province_list").toggleClass("active");</text>
+                break;
+            case "City":
+                <text>$("#city_list").toggleClass("active");</text>
+                break;
+            case "Barangay":
+                <text>$("#city_list").toggleClass("active");</text>
+                break;
+        }
+    });
+</script>

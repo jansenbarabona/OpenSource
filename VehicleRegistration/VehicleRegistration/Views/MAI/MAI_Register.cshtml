@@ -1,0 +1,396 @@
+﻿@using VehicleRegistration.Models
+@model MAIModel
+@{
+    ViewBag.Title = "MAI_Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Main content -->
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Back" onclick="location.href='@Url.Action("Index", "MAI")'">
+                    <i class="far fa-times-circle"></i>
+                    @*<i class="far fa-times-circle"></i>*@
+                </button>
+            </div>
+            <h6><i class="nav-icon fas fa-paste"></i> MAI Registration Form   <small></small></h6>
+        </div>
+        <!-- /.card-header -->
+
+        <article class="card-body mx-auto">
+
+            @using (Html.BeginForm("MAI_Register", "MAI", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.SelectedMAITypeID)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-building"></i></span>
+                            </div>
+                            @Html.DropDownListFor(m => m.SelectedMAITypeID,
+                           new SelectList(Model.MAITypeList, "MAITypeID", "MAITypeName"), "Select Type", new { @class = "form-control select2" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.SelectedMAITypeID, "", new { @class = "" })
+                    </div> <!-- form-group end.// -->
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.MAIID)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                            </div>
+                            @Html.HiddenFor(m => m.MAIID,
+                           new
+                           {
+                               @class = "form-control"
+                           })
+                            @Html.TextBoxFor(m => m.MAIName,
+                           new
+                           {
+                               placeholder = "Full Name",
+                               @class = "form-control"
+                           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.MAIName, "", new { @class = "" })
+                    </div>
+                    <!-- form-group// -->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.EmailAddress)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.EmailAddress, new { placeholder = "Email Address", @class = "form-control", type = "email" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.EmailAddress2)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.EmailAddress2, new { placeholder = "Email Address", @class = "form-control", type = "email" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.EmailAddress2, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.AccreditationNumber)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.AccreditationNumber,
+                           new
+                           {
+                               placeholder = "Accreditation Number",
+                               @class = "form-control"
+                           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.AccreditationNumber, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.BusinessPhone)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.BusinessPhone,
+                           new
+                           {
+                               placeholder = "Business Phone",
+                               @class = "form-control"
+                           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.BusinessPhone, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.MobilePhone)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-mobile-alt"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.MobilePhone,
+                           new
+                           {
+                               placeholder = "Mobile Phone",
+                               @class = "form-control"
+                           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.MobilePhone, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.FaxNumber)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-fax"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.FaxNumber,
+                           new
+                           {
+                               placeholder = "Fax Number",
+                               @class = "form-control"
+                           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.FaxNumber, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.TIN)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-fax"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.TIN,
+                           new
+                           {
+                               placeholder = "TIN",
+                               @class = "form-control"
+                           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.TIN, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                    <div class="form-group col-12">
+                        @Html.LabelFor(m => m.Address)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-map-marked-alt"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.Address,
+                           new
+                           {
+                               placeholder = "Address",
+                               @class = "form-control"
+                           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.SelectedProvinceID)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+                            </div>
+                            @Html.DropDownListFor(m => m.SelectedProvinceID,
+                           new SelectList(Model.ProvinceList, "ProvinceID", "ProvinceName"), "Select Province", new { @class = "form-control select2" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.SelectedProvinceID, "", new { @class = "" })
+                    </div> <!-- form-group end.// -->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.SelectedCityID)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+                            </div>
+                            @Html.DropDownListFor(m => m.SelectedCityID,
+                           new SelectList(Model.CityList, "CityID", "CityName"), "Select City", new { @class = "form-control select2" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.SelectedCityID, "", new { @class = "" })
+                    </div> <!-- form-group end.// -->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.BarangayID)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+                            </div>
+                            @Html.DropDownListFor(m => m.BarangayID,
+                           new SelectList(Model.BarangayList, "BarangayID", "BarangayName"), "Select Barangay", new { @class = "form-control select2" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.BarangayID, "", new { @class = "" })
+                    </div> <!-- form-group end.// -->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.ZipCode)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-map-marked-alt"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.ZipCode,
+                           new
+                           {
+                               placeholder = "Zip Code",
+                               @class = "form-control"
+                           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.ZipCode, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.LogoFile)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-image"></i> </span>
+                            </div>
+                            <div class="custom-file">
+                                @Html.TextBoxFor(m => m.LogoFile,
+                           new
+                           {
+                               placeholder = "Choose logo",
+                               @class = "custom-file-input",
+                               type = "file",
+                               accept = ".jpg,.jpeg,.png,.pdf"
+                           })
+                                @Html.HiddenFor(m => m.Logo,
+                           new
+                           {
+                               @for = "LogoFile",
+                               @class = "custom-file-input",
+                           })
+                                @Html.LabelFor(m => m.LogoFile, Model.Logo,
+                           new
+                           {
+                               @class = "custom-file-label",
+                           })
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.LogoFile, "", new { @class = "" })
+                        @*<input type="file"/>*@
+                    </div> <!-- form-group// -->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.Website)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.Website,
+                           new
+                           {
+                               placeholder = "Website",
+                               @class = "form-control"
+                           })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Website, "", new { @class = "" })
+                    </div> <!-- form-group// -->
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.Notes)
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-sticky-note"></i> </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.Notes,
+                           new
+                           {
+                               placeholder = "Notes",
+                               @class = "form-control"
+                           })
+                        </div>
+                    </div> <!-- form-group// -->
+                </div>
+                if (ViewBag.Edit == false)
+                {
+                    <center>
+                        <div class="form-group">
+                            <center>
+                                <button type="submit" name="submit" value="Create" class="btn btn-primary btn-block" style="width:250px;"> Create Account </button>
+                            </center>
+                        </div>
+                    </center>
+                }
+                else
+                {
+                    <center>
+                        <div class="form-group row">
+                            <button type="button" data-toggle="modal" data-target="#modal-delete" class="btn btn-danger btn-block col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width:250px;"> Delete Account </button>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+                            <button type="button" data-toggle="modal" data-target="#modal-save" class="btn btn-success btn-block col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width:250px;"> Save Account </button>
+                        </div>
+                    </center>
+                }
+
+                @Html.Partial("_Confirmation")
+            }
+        </article>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
+
+    @if (ViewBag.Edit == true)
+    {
+        <div class="row">
+            <div class="col-12 col-sm-12 col-lg-12">
+                <div class="card card-primary card-tabs">
+                    <div class="card-header p-0 pt-1">
+                        <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="Wallet-tab" data-toggle="pill" href="#Wallet_content" role="tab" aria-controls="Wallet_content" aria-selected="false">My Wallet</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="Charge-tab" data-toggle="tab" href="#EntityCharge_content" role="tab" aria-controls="EntityCharge_content" aria-selected="false">My Default Charges</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="custom-tabs-one-tabContent">
+                            <div class="tab-pane fade show active" id="Wallet_content" role="tabpanel" aria-labelledby="Wallet-tab">
+                                @{
+                                    Html.RenderPartial("_TransactionHistory", Model.WalletDetail);
+                                }
+                            </div>
+                            <div class="tab-pane fade" id="EntityCharge_content" role="tabpanel" aria-labelledby="Charge-tab">
+                                @{
+                                    Html.RenderPartial("_EntityChargeList", Model.EntityTransaction);
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+    }
+</section>
+<script type="text/javascript">
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#mai").toggleClass("active");
+    ///// automatic open navbar after login ///////
+    $("#left_nav_dbinc").toggleClass("menu-open");
+    $("#left_nav_admin_insurance").toggleClass("menu-open");
+    $("#left_nav_dlr").toggleClass("menu-open");
+    $("#left_nav_mai").toggleClass("menu-open");
+    ///// end automatic open navbar after login ///////
+    //$("#content_header").attr("class", "nav-icon fas fa-paste");
+    //$("#content_header").text(" MAI Form");
+
+    //CASCADING DROPDOWNLIST
+    $('#SelectedProvinceID').on('change', function () {
+        $.ajax({
+            url: '@Url.Action("GetProvinceCity", "MAI")',
+            type: "GET",
+            dataType: "JSON",
+            cache: false,
+            data: { "ProviceCode": this.value },
+            success: function (response) {
+                $("#SelectedCityID").find("option:gt(0)").remove();
+                $.each(response, function (index, value) {
+                    var o = new Option(value.CityName, value.CityID);
+                    $("#SelectedCityID").append($(o));
+                });
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+    });
+    $('#SelectedCityID').on('change', function () {
+        $.ajax({
+            url: '@Url.Action("GetCityBarangay", "GetData")',
+            type: "GET",
+            dataType: "JSON",
+            cache: false,
+            data: { "CityCode": this.value },
+            success: function (response) {
+                $("#BarangayID").find("option:gt(0)").remove();
+                $.each(response, function (index, value) {
+                    var o = new Option(value.BarangayName, value.BarangayID);
+                    $("#BarangayID").append($(o));
+                });
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+    });
+</script>
+<!-- /.content -->

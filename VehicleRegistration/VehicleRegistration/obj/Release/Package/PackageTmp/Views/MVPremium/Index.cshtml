@@ -1,0 +1,195 @@
+﻿@using VehicleRegistration.Models
+@model  MVPremiumModel
+@{
+    ViewBag.Title = "MV Premium";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #adjust {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        margin-left: 7.5px;
+    }
+
+    nav.main-header.navbar.navbar-expand-md.navbar-primary.navbar-dark {
+        background: #7B0303;
+    }
+</style>
+
+@using (Html.BeginForm("Index", "MVPremium", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6><i class="nav-icon fas fa-hand-holding-heart"></i>MV Premium<small> </small></h6>
+                    </div>
+                    <!-- /.card-header -->
+
+                    <article class="card-body">
+                        <center>
+                            <div class="form-group col-lg-4">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            @Html.LabelFor(m => m.VehicleTypeID):
+                                        </span>
+                                    </div>
+                                    @Html.DropDownListFor(m => m.VehicleTypeID, new SelectList(Model.VehicleTypeList, "VehicleTypeID", "VehicleName"), "Select Type", new { @class = "form-control select2" })
+                                </div>
+                            </div> <!-- form-group// -->
+                        </center>
+                    </article>
+
+                    <div class="fab" type="button" data-toggle="modal" data-target="#modal-classification_list" name="btnSubmit" title="Add New"> + </div>
+                    <div class="card-body">
+
+                        <div class="row" id="adjust">
+                            <div class="col-sm-12 col-md-3 col-lg-3">
+                                <div class="input-group">
+                                    <button type="button" id="btn_delete" class="delete_item btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top:5px">
+                            <div class="col">
+                                <div id="delete_table">
+                                    @{
+                                        Html.RenderPartial("_deletevehicleclassification", Model.vwVehicleClassificationList, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "vwVehicleClassificationList" } });
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+
+    @*Dealer List*@
+                                <div class="modal fade" id="modal-classification_list">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" style="text-align:center">List of Vehicle Classification</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div id="add_table">
+                                                    @{
+                                                        Html.RenderPartial("_addVehicleClassification", Model.addVehicleClassificationList, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "addVehicleClassificationList" } });
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer justify-content-between">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary" id="btn_add" >Add</button>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+
+
+                                @Html.Partial("_Confirmation")
+                                                        }
+
+<script>
+    $("#btn_delete").on("click", function () {
+        if ($("#delete-tbody input[type=checkbox]:checked").length > 0) {
+            $("#modal-delete").modal("show");
+        } else {
+            toastr.warning("Please check atleast one classification type!");
+        }
+    });
+
+    $("#btn_add").on("click", function () {
+        if ($("#add-tbody input[type=checkbox]:checked").length > 0) {
+            $("#modal-create").modal("show");
+        } else {
+            toastr.warning("Please check atleast one classification type!");
+        }
+    });
+
+    var addAntiForgeryToken = function (data) {
+        data.__RequestVerificationToken = $("[name='__RequestVerificationToken']").val();
+        return data;
+    };
+
+    $("#VehicleTypeID").on("change", function () {
+        $('#spinnerDiv').show();
+        $.ajax({
+            url: '@Url.Action("GetDeleteVehicleClassificationList", "MVPremium")',
+            type: "POST",
+            data: addAntiForgeryToken({ "VehicleTypeID": $("#VehicleTypeID").val() }),
+            cache: false,
+            async: true,
+            success: function (response) {
+                $("#delete_table").html(response);
+
+                $("#delete-classification_list_tbl").DataTable({
+                    "scrollX": true,
+                    "scrollY": true,
+                    "info": false,
+                    "lengthChange": false,
+                    "order": [],
+                    "dom":
+                        "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                });
+                //$('#spinnerDiv').hide();
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+                $('#spinnerDiv').hide();
+            }
+        });
+        $.ajax({
+            url: '@Url.Action("GetAddVehicleClassificationList", "MVPremium")',
+            type: "POST",
+            data: addAntiForgeryToken({ "VehicleTypeID": $("#VehicleTypeID").val() }),
+            cache: false,
+            async: true,
+            success: function (response) {
+                $("#add_table").html(response);
+
+                var add_table = $("#add-classification_list_tbl").DataTable({
+                    "scrollX": true,
+                    "scrollY": true,
+                    "info": false,
+                    "lengthChange": false,
+                    "order": [],
+                    "dom":
+                        "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'p><'col-sm-12 col-md-7'i>>",
+                });
+
+                $(document).on('shown.bs.modal', '.modal', function (e) {
+                    add_table.columns.adjust();
+                });
+
+                $('#spinnerDiv').hide();
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+                $('#spinnerDiv').hide();
+            }
+        });
+    });
+
+</script>
