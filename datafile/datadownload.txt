@@ -1,0 +1,10 @@
+https://www.google.com/search?q=download+html+file+from+url+javascript+and+autorun&oq=download+html+file+from+url+javascript+and+autorun&aqs=chrome..69i57j33i160l2.30344j1j7&sourceid=chrome&ie=UTF-8
+https://stackoverflow.com/questions/156686/how-to-start-automatic-download-of-a-file-in-internet-explorer
+https://itnext.io/how-to-download-files-with-javascript-d5a69b749896
+https://itnext.io/how-to-download-files-with-javascript-d5a69b749896
+
+https://www.sanwebcorner.com/2017/07/auto-start-download-file-using.html
+https://javascript.plainenglish.io/how-to-download-a-file-using-javascript-fec4685c0a22
+https://stackoverflow.com/questions/3749231/download-file-using-javascript-jquery
+https://codesource.io/how-to-download-file-in-javascript/
+https://jsonplaceholder.typicode.com/todos/1
